@@ -7,7 +7,7 @@ RM = rm -f
 SED = sed
 VIEW = okular
 
-LATEX2PDF = pdflatex -interaction=batchmode
+LATEX2PDF = pdflatex -interaction=nonstopmode
 XSLTPROC = xsltproc
 PROJ = resume
 
