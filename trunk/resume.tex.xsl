@@ -24,7 +24,9 @@
   \end{document}
   </xsl:template>
   <!-- Meta -->
-  <xsl:template match="Period"><xsl:value-of select = "@From" />---<xsl:value-of select = "@To" /></xsl:template>
+  <xsl:template match="Period">\raggedleft{<xsl:value-of select = "@From" />\,---\hbox to 1em {}}\\
+  \raggedright{<xsl:value-of select = "@To" />}</xsl:template>
+  
   <xsl:template match = '/Document/Meta'><xsl:apply-templates /></xsl:template>
   <xsl:template match = '/Document/Meta/Personal'><xsl:apply-templates /></xsl:template>
   <xsl:template match = '//Meta/Title'>\title{<xsl:value-of select = '.' />}</xsl:template>
@@ -39,9 +41,15 @@
   <xsl:template match = '//Personal/Photo'>\photo[<xsl:value-of select = '@width' />]{<xsl:value-of select = '.' />}</xsl:template>
   
 
-  <xsl:template match = '/Document/*'>\section{<xsl:value-of select = 'name()' />}<xsl:apply-templates /></xsl:template>
-  <xsl:template match = '/Document/*/*'>\subsection{<xsl:value-of select = 'name()' />}<xsl:apply-templates /></xsl:template>
-  
+  <xsl:template match = '/Document/*'>
+    \section{<xsl:value-of select = 'name()' />}<xsl:apply-templates /></xsl:template>
+  <xsl:template match = '/Document/*/*'>
+    \subsection{<xsl:value-of select = 'name()' />}<xsl:apply-templates /></xsl:template>
+  <xsl:template match = '/Document/*//Entry'><xsl:choose>
+    <xsl:when test = '@type'>\cvline{<xsl:value-of select = '@type' />}</xsl:when>
+    <xsl:otherwise>\cvlistitem</xsl:otherwise></xsl:choose>{<xsl:value-of select = '.' />
+  }</xsl:template>
+    
   <xsl:template match = '//Education/Entry'>\cventry{<xsl:apply-templates select = 'Period' />}{<xsl:value-of select = 'Degree' />}{<xsl:value-of select = 'Institution' />}{<xsl:value-of select = 'City' />}{\textit{<xsl:value-of select = 'Grade' />}}{<xsl:value-of select = 'Description' />}</xsl:template>
   
   <xsl:template match = '//Education/Thesis'>
