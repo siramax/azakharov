@@ -34,7 +34,7 @@
     table.languages td.name { padding-right: 2em; }
     table.subsection td.period { white-space: nowrap }
     table.subsection span.techs { font-style: italic; }
-    
+    table strong { font-size: 115%; }
     <!-- theme -->
     .picture { border-color: lime }
     h1 { color: lime; border-color: lime  }
@@ -90,6 +90,9 @@
     </table>
   </xsl:template>
   
+  <xsl:template match = '/Document/Strengths'><h1><xsl:value-of select = 'name()' /></h1><ul><xsl:apply-templates /></ul></xsl:template>
+  <xsl:template match = '//Strengths/Entry'><li><xsl:apply-templates /></li></xsl:template>
+  
   <xsl:template match = '//Education/Entry'>
     <xsl:apply-templates select = 'Period' />, <strong><xsl:value-of select = 'Degree' /></strong>,
       <xsl:value-of select = 'Institution' />, 
@@ -109,9 +112,13 @@
   
   <xsl:template match = '//Experience//Entry'><tr><td class='period'><xsl:apply-templates select = 'Period' /></td>
   <td><strong><xsl:value-of select = '@Job' /></strong>, <xsl:value-of select = 'Employer/Name' />, 
-    <xsl:value-of select = 'Employer/City' />, <em><xsl:value-of select = 'Employer/Description' /></em> <br />
-    <xsl:apply-templates select = 'Description' /><br />
+    <xsl:value-of select = 'Employer/City' />, <em><xsl:value-of select = 'Employer/Description' /></em>
+    <ul><xsl:apply-templates select = 'Description' /></ul>
+    <xsl:apply-templates select="Achievement[@lang='en']" /><br />
     <span class = 'techs'>Key technologies and languages: <xsl:value-of select = 'Techs' /></span></td></tr></xsl:template>
+    
+  <xsl:template match = '//Achievement'><li><xsl:value-of select = '.' /></li></xsl:template>
+    
   <xsl:template match = '//Languages'><h1>Languages</h1><table class = 'languages'><xsl:apply-templates /></table></xsl:template>
   <xsl:template match = '//Language'><tr><td class='name'><xsl:value-of select = '@name' /></td>
   	<td class='skill'><xsl:value-of select = '@skill' /></td><td><xsl:value-of select = '.' /></td></tr></xsl:template>

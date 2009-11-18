@@ -59,8 +59,12 @@
 \cvline{description}{\small <xsl:value-of select = 'Description' />}
   </xsl:template>
   
+  <xsl:template match = '//Achievement'>\cvlistitem{<xsl:value-of select = '.' />}</xsl:template>
+  
   <xsl:template match = '//Experience//Entry'>\cventry{<xsl:apply-templates select = 'Period' />}{<xsl:value-of select = '@Job' />}{<xsl:value-of select = 'Employer/Name' />}%
-    {<xsl:value-of select = 'Employer/City' />}{<xsl:copy-of select = 'Employer/Description' />}{<xsl:apply-templates select = 'Description' />\newline{}Key technologies and languages: <xsl:value-of select = 'Techs' />}</xsl:template>
+    {<xsl:value-of select = 'Employer/City' />}{<xsl:copy-of select = 'Employer/Description' />}{<xsl:apply-templates select = 'Description' />\newline{}
+    <xsl:apply-templates select="Achievement[@lang='en']" />\newline{}
+    Key technologies and languages: <xsl:value-of select = 'Techs' />}</xsl:template>
     
   <xsl:template match = '//Language'>\cvlanguage{<xsl:value-of select = '@name' />}%
     {<xsl:value-of select = '@skill' />}{<xsl:value-of select = '.' />}</xsl:template>
