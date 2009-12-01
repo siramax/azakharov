@@ -21,10 +21,10 @@ XML2HTML_XSLT = $(PROJ).html.xsl
 
 .PHONY: all pdf xml
 
-pdf:
+pdf: $(TARGET_TEX)
 	$(Q)$(LATEX2PDF) $(TARGET_TEX)
 
-tex:
+$(TARGET_TEX):
 	$(Q)( $(SED) 's!C#!C\\#!' $(PROJ).xml | $(XSLTPROC) --output $(TARGET_TEX) $(XML2TEX_XSLT) -)
 
 ttex:
@@ -33,10 +33,10 @@ ttex:
 html:
 	$(Q)$(XSLTPROC) --output $(TARGET_HTML) $(XML2HTML_XSLT) $(PROJ).xml
 
-all: tex pdf html
+all: pdf html
 	$(VIEW) $(TARGET_PDF) &
 
 clean:
 	$(RM) *.log *.out *~ *.aux \
 	*.4ct *.4tc *.bbl *.blg *.dvi *.idv *.lg *.tmp *.xref \
-	$(TARGET_HTML) $(TARGET_PDF)
+	$(TARGET_TEX) $(TARGET_HTML) $(TARGET_PDF)
