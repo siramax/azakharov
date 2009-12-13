@@ -211,13 +211,12 @@ opportunity for advancement.
     </Group>
     <Group type = 'Programming languages'>
       <Entry type = 'C/C++'>STL, GCC, Boost, wxWidgets, Qt, Win32 API, GDI, WinSock, libxml, MySQL++, gSOAP, CppUnit, OpenSSL</Entry>
-      <Entry type = 'C#'>.NET 2.0, WinForms</Entry>
-      <Entry type = 'Visual Basic'></Entry>
-      <Entry type = 'Java'>JSF, RichFaces</Entry>
       <Entry type = 'PHP'>Drupal, Joomla, WordPress, DataLife Engine, Xaraya</Entry>
       <Entry type = 'JavaScript'>DOM, AJAX, JQuery, ExtJS</Entry>
+      <Entry type = 'Java'>JSF, RichFaces</Entry>
+      <Entry type = 'C#'>.NET 2.0, WinForms</Entry>
       <Entry type = 'SQL'>MySQL, SQLite, T-SQL</Entry>
-      <Entry type = 'VBA'>MS Word, MS Excel, MS Access, MS Outlook</Entry>
+      <Entry type = 'Visual Basic'>VBA, MS Word, MS Excel, MS Access, MS Outlook</Entry>
       <Entry type = 'Markup'>XHTML, CSS, XML, XSL</Entry>
       <Entry type = 'GNU'>BASH, SSH, sed, awk, \LaTeXe</Entry>
       <Entry type = 'Scripting'>BASH, Python, Groovy</Entry>
