@@ -2,7 +2,7 @@
 <xsl:stylesheet 
   xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="text" media-type="text/x-tex" />
-  
+    <xsl:param name = "lang" >en</xsl:param>
   <xsl:template match = "*[ @xlink:role = 'locator' ]">
     <xsl:choose>
       <xsl:when test = 'text()'> \href{<xsl:value-of select = "@xlink:href" />}{<xsl:value-of select = "." />} </xsl:when>
@@ -15,10 +15,12 @@
 \documentclass[11pt,a4paper]{moderncv}
 %\renewcommand*{\addresssymbol}{\CircledA}
 \moderncvtheme[green]{classic}
+%\usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
+%\usepackage[russian]{babel}
+
 \usepackage[scale=0.9]{geometry}
 \usepackage{url}
-%\clubpenalty[0]
 \addtolength{\parskip}{-5pt}
 \AtBeginDocument{\recomputelengths}
   <xsl:apply-templates select = '/Document/Meta' />
@@ -30,7 +32,7 @@
   <xsl:template match="Period">\raggedleft{<xsl:value-of select = "@From" />\,---\hbox to 1em {}}\\
   \raggedright{<xsl:value-of select = "@To" />}</xsl:template>
   
-  <xsl:template match = '/Document/Meta'><xsl:apply-templates /></xsl:template>
+  <xsl:template match = '/Document/Meta'><xsl:apply-templates select = "*[@lang=$lang]" /></xsl:template>
   <xsl:template match = '/Document/Meta/Personal'><xsl:apply-templates /></xsl:template>
   <xsl:template match = '//Meta/Title'>\title{\today <xsl:value-of select = '.' />}</xsl:template>
   <xsl:template match = '//Personal/FirstName'>\firstname{<xsl:value-of select = '.' />}</xsl:template>
@@ -70,7 +72,7 @@
   
   <xsl:template match = '//Experience//Entry'>\cventry{<xsl:apply-templates select = 'Period' />}{<xsl:value-of select = '@Job' />}{<xsl:value-of select = 'Employer/Name' />}%
     {<xsl:value-of select = 'Employer/City' />}{<xsl:copy-of select = 'Employer/Description' />}{<xsl:apply-templates select = 'Description' />\newline{}
-    <xsl:apply-templates select="Achievement[@lang='en']" />}<xsl:comment>\newline{}
+    <xsl:apply-templates select="Achievement[@lang=$lang]" />}<xsl:comment>\newline{}
     Key technologies and languages: <xsl:value-of select = 'Techs' /></xsl:comment></xsl:template>
     
   <!-- <xsl:template match = '/Document/Languages'>

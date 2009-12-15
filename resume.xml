@@ -3,12 +3,22 @@
 <Document 
   xmlns:xlink="http://www.w3.org/1999/xlink" >
   <Meta>
-    <Title></Title>
-    <Personal>
+    <Title lang = "en"></Title>
+    <Personal lang = "en">
       <FirstName>Andrey</FirstName>
       <FamilyName>Zakharov</FamilyName>
       <Photo width='85pt'>Andrey.jpg</Photo>
       <Address>Russia, Volgograd</Address>
+      <Phone type='cell'>+7(905)339 76 60</Phone>
+      <Email>aazaharov81@gmail.com</Email>
+      <Extra type='skype'>andrey-zaharov</Extra>
+    </Personal>
+
+    <Personal lang = "ru">
+      <FirstName>Андрей</FirstName>
+      <FamilyName>Захаров</FamilyName>
+      <Photo width='85pt'>Andrey.jpg</Photo>
+      <Address>Россия, г.Волгоград</Address>
       <Phone type='cell'>+7(905)339 76 60</Phone>
       <Email>aazaharov81@gmail.com</Email>
       <Extra type='skype'>andrey-zaharov</Extra>
@@ -49,7 +59,7 @@ opportunity for advancement.
   
   <Experience>
     <Vocational>
-      <Entry Job = 'Software Engineer'>
+      <Entry Job = 'Senior Software Engineer'>
         <Period From = "Jul 2008" To = "present" />
         <Job>Senior Software Engineer</Job>
         <Employer>

@@ -38,7 +38,7 @@ $(PROJ).%:
 	@$(XSLTPROC) --output $(@:$*=$(PROJ_LANG).$*) $@.xsl $(PROJ).xml
 
 $(TARGET_TEX):
-	@( $(SED) 's!C#!C\\#!' $(PROJ).xml | $(XSLTPROC) --output $(TARGET_TEX) $(XML2TEX_XSLT) -)
+	( $(SED) 's!C#!C\\#!' $(PROJ).xml | $(XSLTPROC) --output $(TARGET_TEX) $(XML2TEX_XSLT) -)
 
 clean:
 	$(RM) *.log *.out *~ *.aux \
