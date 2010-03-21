@@ -1,0 +1,36 @@
+# Purpose: Shows overall information about
+#          processes in system, such as
+#           top, io, net
+# possible update time - 5-10 secs
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+#
+default_color white
+default_outline_color 000000
+draw_outline yes
+draw_shades no
+color1 A6FF00
+color2 ffd700
+color3 FF5900
+
+use_xft yes
+font Lucida Grande:size=12
+gap_y 60
+#gap_x 310
+#alignment bottom_right
+default_gauge_size 50 25
+default_graph_size 0 35
+#minimum_size 120
+#${acpitemp}° ${hddtemp /dev/sda}°
+#${cpugauge}${cpugraph cpu1 10,0 A6FF00 FF5900 -t}
+#${offset 50}${voffset -20}${cpugraph cpu2 10,0 A6FF00 FF5900 -t}${goto 20}CPU
+#${memgauge}${memperc}% mem used
+#${loadavg 2}
+# TODO colors by value
+TEXT
+$alignc$uptime_short
+CPU: ${goto 50}${execp ~/scripts/conky/colorize $(acpi --without-battery --without-ac-adapter --without-cooling --hide-empty --thermal | awk '{ printf "%d",$4 }') 50 60 70 }°C${color}
+GPU: ${goto 50}${execp ~/scripts/conky/colorize $(nvidia-settings --no-config --query gpucoretemp | awk '/[0-9]+/ { printf "%d", $4 }') 50 60 70}°C${color}
+HDD: ${goto 50}${execp ~/scripts/conky/colorize $(hddtemp /dev/sda --numeric) 50 60 70}°C

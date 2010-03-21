@@ -1,0 +1,25 @@
+#
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+text_buffer_size 5014
+#
+# fonts & colors
+default_color ffd700
+default_outline_color 000000
+draw_outline yes
+draw_shades no
+color1 A6FF00
+color2 FF5900
+use_xft yes
+font Lucida Grande:size=10
+
+update_interval 300
+minimum_size 300
+#maximum_size 400, 280
+gap_x 505
+gap_y 225
+
+TEXT
+${if_up wlan0}${execpi 3600 conkyForecast --locale=ru --location=RSXX0117 --template=$HOME/scripts/conky/conkyForecast.template}${endif}${voffset -115}

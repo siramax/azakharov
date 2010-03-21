@@ -1,0 +1,33 @@
+#
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+text_buffer_size 5014
+
+#
+# fonts & colors
+default_color ffd700
+default_outline_color 000000
+draw_outline yes
+draw_shades no
+color1 A6FF00
+color2 FF5900
+use_xft yes
+font Lucida Grande:size=9
+short_units yes
+
+template1 ${if_mounted \2}${color1}\1/${color2}${fs_type \2}${color3}:${goto 100}${fs_size \2}/${fs_free \2}${goto 190}${color}${fs_bar \2}${else}${voffset -10}${endif}
+gap_x 5
+gap_y 1
+#half of screen 1280
+maximum_width 635
+
+TEXT
+${template1 root /}
+${template1 ACER /media/ACER}
+${template1 BOOT /media/BOOT}
+${template1 Disk /media/disk}
+${template1 sda5 /media/sda5}
+${template1 cdrom /media/cdrom}
+${if_up wlan0}${execpi 3600 ~/scripts/conky/conky-rss.sh 'http://bash.org.ru/rss/' 7 | fold --spaces --width=130}${else}${font DejaVu Sans Mono:size=9}${execpi 3600 gawk 'match($0, /<keybind key="([^"]+)">/, a) {k = a[1]} k != "" && match($0, /<(command|execute|menu)>([^<]+)<\/(command|execute|menu)>/, a) {printf "$\{color1\}%26s$\{color\} %s\n", k, a[2]} /<\/keybind>/ {k = ""}' ~/.config/openbox/rc.xml | sort --key=3 | fold -w150}${font}${endif}

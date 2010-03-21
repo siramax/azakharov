@@ -1,0 +1,31 @@
+# Purpose: be fast and cheap as much as possible
+#  update every 0.5 - 1 sec
+#  only that needs to be operative should be shown here:
+# loadavg, netstat speeds, connection?
+# no graphs, no bars. pure performance
+
+# window
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+
+# colors & fonts
+default_color ffd700
+default_outline_color 000000
+draw_outline yes
+draw_shades no
+color1 A6FF00
+color2 FF5900
+use_xft yes
+font Lucida Grande:size=12
+
+# size & position
+minimum_size 360
+gap_y 5
+short_units yes
+#${font DejaVu Sans Mono:size=8}${color2}${top cpu 1} ${top name 1} ${top pid 1} ${alignr}${top_io pid 1} ${top_io name 1} ${top_io io_perc 1}
+#${top cpu 2} ${top name 2} ${top pid 2} ${alignr}${top_io pid 2} ${top_io name 2} ${top_io io_perc 2}
+#${top cpu 3} ${top name 3} ${top pid 3} ${alignr}${top_io pid 3} ${top_io name 3} ${top_io io_perc 3}${font}
+TEXT
+${font PizzaDude Bullets:size=14}S${font}${color1}${voffset -1}${downspeed wlan0}${goto 100}$loadavg${goto 250}${voffset -2}${color}${font PizzaDude Bullets:size=14}M${font}${color1}${voffset -1}${upspeed wlan0}

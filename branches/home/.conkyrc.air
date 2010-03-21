@@ -1,0 +1,38 @@
+#
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+
+#
+# fonts & colors
+default_color ffd700
+default_outline_color 000000
+draw_outline no
+draw_shades no
+color1 A6FF00
+color2 FF5900
+color3 121212
+use_xft yes
+font Lucida Grande:size=12
+
+#
+# size & position
+border_width 1
+border_inner_margin 0
+border_outer_margin 0
+minimum_size 210 210
+maximum_width 1280
+alignment tl
+gap_x 5
+gap_y 5
+
+# -- Lua load -- #
+lua_load ~//scripts/conky/clock.lua
+lua_draw_hook_pre draw_clock
+
+update_interval 30
+double_buffer yes
+TEXT
+${voffset 80}${alignc}${color3}${font URW Gothic L:size=13}${time %a %d %b}
+${voffset 10}${alignc}${color3}${font URW Gothic L:size=16}${time %H:%M}
