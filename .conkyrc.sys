@@ -1,0 +1,120 @@
+#
+# Purpose: Shows overall information about
+#          processes in system, such as
+#           top, io, net
+# possible update time - 5-10 secs
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+
+border_inner_margin 1
+border_outer_margin 0
+#background yes
+border_width 0
+cpu_avg_samples 2
+default_color ffd700
+default_outline_color black
+default_shade_color white
+draw_borders no
+draw_graph_borders no
+draw_outline yes
+draw_shades no
+double_buffer yes
+
+minimum_size 5 5
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+short_units yes
+
+
+#stippled_borders 0
+uppercase no
+use_spacer right
+show_graph_scale no
+show_graph_range no
+use_xft yes
+font DejaVu Sans Mono:size=9
+#gap_x 14
+if_up_strictness address
+maximum_width 250
+default_bar_size 0 3
+#Colours
+color1 008FCC
+color2 b2b2b2
+color3 0000ff
+color4 8b1a1a
+color5 8b8b18
+color6 518B18
+color7 188B18
+color8 ffff00
+color9 ff0000
+
+# develop
+#${font OpenLogos:size=12}u${font DejaVu Sans Mono:size=8}${color #cd5c5c}$sysname $kernel $machine $color $uptime
+#${font Inconsolata:size=12}${execpi 3600 cal | grep -w $(date +%d) | sed s/$(date +%d)/$\{color\ red\}$(date +%d)$\{color\}/}
+#${offset 135}${voffset -22}${color2}${font URW Gothic L:size=18}${time %S}
+
+# ${color green}${font PizzaDude Bullets:size=18}i${font DejaVu Sans:size=18}${color blue}$memperc% ${membar 4}${color2}${font}
+#${if_up wlan0}${wireless_essid wlan0} ${color green}%${wireless_link_qual_perc wlan0} ${color}${addr wlan0}${hr 2}
+#${color yellow}${font PizzaDude Bullets:size=15}O${font} ${voffset -6}${upspeed wlan0}${color}k/s ${offset -60}${color yellow}${upspeedgraph wlan0 25,0 adff2f ffff00}
+#${color green}${font PizzaDude Bullets:size=15}U${font} ${voffset -6}${downspeed wlan0}${color}k/s ${offset -60}${downspeedgraph wlan0 25,0 adff2f 00ff00}
+#${else}${color red}${font PizzaDude Bullets:size=18}5${font}   Сеть недоступна. ${endif}${font}${color}
+# ${if_up wlan0}${color1}${font Sawasdee:style=bold:size=14}Wireless Network$font${color3}${voffset 1}${hr 0}$color
+# ${voffset -4}${wireless_link_bar 3,250 wlan0}
+# ${voffset -4}${color2}SSID:$color${goto 50}${wireless_essid wlan0} ${goto 131}${color2}Уровень: $color${goto 180}${wireless_link_qual wlan0}/${wireless_link_qual_max wlan0}
+# ${color2}Local:$color${goto 50}${addr wlan0}    ${color2}${goto 131}Public:$color${goto 180}${execi 300 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
+# ${downspeedgraph wlan0 61,123 003300 6ddd00}${alignr}${upspeedgraph wlan0 61,123 330000 e3170d}$color
+# ${voffset -71}${color2}Down: $color${goto 50}${downspeedf wlan0} k/s${goto 131}${color2}Up: $color${goto 180}${upspeedf wlan0} k/s
+# ${color2}Total:$color${goto 50}${totaldown wlan0} ${goto 131}${color2}Total:$color${goto 180}${totalup wlan0}
+# ${else}${color1}${font Sawasdee:style=bold:size=14}Ethernet$font${color3}${voffset 1}${hr 0}$color
+# ${downspeedgraph eth0 75,123 003300 6ddd00}${alignr}${upspeedgraph eth0 75,123 330000 e3170d}$color
+# ${voffset -85}${color2}Local:$color${goto 50}${addr eth0}    ${color2}${goto 131}Public:$color${goto 180}${execi 300 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
+# ${color2}Down: $color${goto 50}${downspeedf eth0} k/s${goto 131}${color2}Up: $color${goto 180}${upspeedf eth0} k/s
+# ${color2}Total:$color${goto 50}${totaldown eth0} ${goto 131}${color2}Total:$color${goto 180}${totalup eth0}
+# ${endif}
+#${font FreeMono:size=12}${color2}${alignc}${pre_exec ~/scripts/calen.sh semana}${color}
+#${execpi 3600 DJS=`date +%_d`; cal | sed '1d' | sed '/./!d' | sed 's/$/ /' | fold -w 21 | sed -n '/^.\{21\}/p' | sed 's/^/${alignc} /' | sed /" $DJS "/s/" $DJS "/" "'${color yellow}'"$DJS"'${color}'" "/}${color1}${font URW Gothic L:size=13}
+#${voffset -30}${alignc}${time %A, %B %Y}$font$color
+#$nodename ${color green}${uptime_short}$color${hr 2}$font
+#${color green}${font PizzaDude Bullets:size=18}Z${font mono:size=10}${color #ffd700}${voffset -30}
+
+#${if_existing /proc/net/route wlan0}${wireless_essid wlan0} ${color green}%${wireless_link_qual_perc wlan0} ${color}${addr wlan0}${hr 2}
+#${color gold}${font PizzaDude Bullets:size=15}N${font mono:size=10}${color}${voffset -6}   Upload: ${alignr}${totalup wlan0}${color darkgreen}
+#${font PizzaDude Bullets:size=15}T${font mono:size=10}${color}${voffset -6}   Download: ${alignr}${totaldown wlan0}
+#${else}${color red}${font PizzaDude Bullets:size=18}5${font}   Сеть недоступна. $endif
+
+# of io
+template1 ${if_match ${top io_perc \1} > 0}${color\2} ${top_io pid \1}.${top_io name \1} ${top io_read \1} ${top io_write \1}${else}${voffset -12}${endif}
+# mem
+template2 ${color\2}${top_mem pid \1}.${top_mem name \1} ${top_mem mem \1} ${top_mem mem_vsize \1}
+
+# cpu
+template3 ${if_match ${top cpu \1} > 0}${color\2}${top pid \1}.${top name \1} ${top cpu \1}${endif}
+
+# time
+template4 ${color\2}${top_time pid \1}.${top_time name \1} ${top_time time \1}
+TEXT
+${cpubar cpu1}${goto 0}${cpugraph cpu1 20,0 00ff00 ff0000 -t}${voffset -10}${goto 120}${freq_g 1}GHz ${cpu cpu1}%
+${cpubar cpu2}${goto 0}${cpugraph cpu2 20,0 ff0000 00ff00 -t}${voffset -10}${goto 120}${freq_g 2}GHz ${cpu cpu2}%
+#${voffset 5}${processes}/${color1}${running_processes}${color}
+${voffset 5}${template3 1 4}
+${template3 2 5}
+${template3 3 6}
+${template3 4 7}${color}
+$memperc% $membar
+${template2 1 4}
+${template2 2 5}
+${template2 3 6}
+${template2 4 7}${color}
+$uptime_short${if_empty $battery_time}${else}${color8}${font Webdings:size=12}~${font}${color}$battery_time $battery_bar${endif}
+${template4 1 4}
+${template4 2 5}
+${template4 3 6}
+${template4 4 7}${color}
+${diskio sda}${voffset -5}${goto 0}${diskiograph /dev/sda 20,0 00ff00 ff0000 -t}
+${template1 1 4}
+${template1 2 5}
+${template1 3 6}
+${template1 4 7}${color}
