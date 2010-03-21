@@ -86,7 +86,7 @@ color9 ff0000
 #${else}${color red}${font PizzaDude Bullets:size=18}5${font}   Сеть недоступна. $endif
 
 # of io
-template1 ${if_match ${top io_perc \1} > 0}${color\2} ${top_io pid \1}.${top_io name \1} ${top io_read \1} ${top io_write \1}${else}${voffset -12}${endif}
+template1 ${if_match ${top io_perc \1} > 0}${color\2} ${top_io pid \1}.${top_io name \1} ${top io_read \1} ${top io_write \1}${else}${voffset -14}${endif}
 # mem
 template2 ${color\2}${top_mem pid \1}.${top_mem name \1} ${top_mem mem \1} ${top_mem mem_vsize \1}
 

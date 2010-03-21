@@ -1,0 +1,118 @@
+#
+# Checking and applying patches against trunk or specified sources
+# @author Andrey Zakharov /2010/
+#
+.PHONY : all clean trunk-prepare trunk-clean trunk-update clean vs_pack run
+
+.NOTPARALLEL :
+
+.PRECIOUS : %.patch %.patch.log %.build.log
+
+#
+#defaults
+#
+include Mk.params
+PARAM ?= "--dry-run -f"
+TRUNK ?= ~/src/openttd/svn.openttd.org/trunk
+MODE ?= alone # or patchpack
+PATCHDIR ?= $(shell pwd)
+PATCHMAP ?= ${PATCHDIR}/Mk.patchtable
+PATCHES ?= rating_town_label station-build-gui_v5.1 openttd-cargodist-minipack harder_game IB
+# TimeOut in secs
+HTTP_TO ?= 30
+DNS_TO ?= 2
+
+#
+# Utils
+#
+
+# revision
+# TODO as file REVISION.txt
+REV := r$(shell cd ${TRUNK} && svnversion -n)
+
+original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
+
+#
+# gets the number of ignorable prefixes in unified patch
+#
+# 1. find "--- PATH"
+# 2. see if this available
+# 3. p++ goto 1
+find_ignorable_prefix = $$(\
+	for f in `awk '/^---(.*)$$/ { print $$2 }' ${PATCHDIR}/$<`; do \
+	  i=0; f2c="$$f"; \
+	  if [ -r "${TRUNK}/$$f2c" ]; then echo $$i; exit 0; fi; \
+	  while [ -n "$$f2c" ]; do \
+	      i=`expr $$i + 1`; \
+	      nf2c=`echo $$f2c | sed 's!^[^/]*/!!'`; \
+	      if [ x"$$nf2c" = x"$$f2c" ]; then echo 0; exit 1; fi; \
+	      f2c=$$nf2c; \
+	      if [ -r "${TRUNK}/$$f2c" ]; then echo $$i; exit 0; fi; \
+	  done; \
+	done; )
+
+# do it better by GNU make itself TODO
+
+all : vs_pack_${REV}.patch
+	@echo "==> $@ DONE"
+
+vs_pack_${REV}.patch : $(addsuffix .patched, $(PATCHES) )
+ifeq (${MODE},patchpack)
+	@echo "==> Buildin $*..."
+	( cd $(TRUNK); ./configure )
+	( $(MAKE) -C $(TRUNK) clean )
+	( $(MAKE) -C $(TRUNK) all > $@.build.log )
+	@echo "==> Buildin $* DONE"
+endif
+	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
+	@echo "==> $@ DONE"
+
+%.patch.log : %.patch
+	@echo "==> Patchin $*..."
+	@( test -f $< )
+	@( patch --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="${PATCHDIR}/$<" > $@ ) || \
+		( cat $@ && false )
+	@echo "==> Patchin $* DONE"
+
+%.build.log : %.patch.log
+	@echo "==> Buildin $*..."
+	( $(MAKE) -C $(TRUNK) clean all > $@ )
+	@echo "==> Buildin $* DONE"
+
+#%_$(REV).patch : %.patch trunk-prepare
+ifeq (${MODE},alone)
+%.patched : trunk-prepare %.build.log
+	@echo "==> Saving $@..."
+	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
+else
+%.patched : %.patch.log 
+	@echo "==> Patched $@..."
+endif
+
+# Refresh patch file from its URL
+%.patch :
+	@echo "==> Refreshing $*..."
+	@( awk '/^$*/ { print $$2 }' ${PATCHMAP} )
+	wget --output-document="$@" \
+		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
+		$(shell awk '/^$*/ { print $$2 }' ${PATCHMAP})
+
+trunk-prepare : trunk-clean trunk-update
+	@( echo "trunk prepared." )
+
+trunk-clean : 
+	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
+	( cd $(TRUNK) && svn -R revert . )
+#deep clean
+	( cd $(TRUNK) && svn stat | grep ^? | grep -v 'nbproject\|Makefile-trunk.mk' | xargs rm -rf )
+	@echo $(REV)
+
+trunk-update : 
+	( cd $(TRUNK) && svn update )
+#    RVER=$(svnversion -n)
+
+clean : 
+	( rm *.log || true )
+
+run :
+	$(MAKE) run -C $(TRUNK)
