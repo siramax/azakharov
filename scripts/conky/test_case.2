@@ -1,0 +1,17 @@
+#ITERATE=10000 bash ./test_case.2|bash -x ../bench_times
+cmd=conky\ -c\ %s\ -o\ -u\ 0\ -i\ $ITERATE\ %s\ 2\>/dev/null
+ITERATE=${1:-10000}
+
+#cmd_axis1="./conky.min ./conky.xft ./conky.color ./conky.font ./conky.customcolor"
+#cmd_axis2=" :-b"
+
+cmd_axis1="$HOME/.conkyrc.hot $HOME/.conkyrc.net $HOME/.conkyrc.air $HOME/.conkyrc.fast ./conky.min "
+cmd_axis2="-b"
+
+for ax1 in $cmd_axis1; do
+    
+    IFS=:
+    for ax2 in $cmd_axis2; do
+        printf "$cmd\n" $ax1 $ax2
+    done
+done
