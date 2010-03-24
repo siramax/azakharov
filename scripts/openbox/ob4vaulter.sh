@@ -183,7 +183,7 @@ case "$1" in
 # TODO Locale!
         ob_subpipe_menu Desktop "$txtDesktop" "$SELF desktop"
         #use open box built-in menu
-        ob_subpipe_menu client-list-combined-menu
+        ob_subpipe_menu client-list-combined-menu "❖ "
         ob_subpipe_menu ssh "$txtSSH" "$HOME/scripts/openbox/ssh.sh"
         ob_subpipe_menu time `date` "$SELF cal"
         ob_menu_item 0 "$txtWallpaper" "$HOME/scripts/set.random.wallpaper.sh"
