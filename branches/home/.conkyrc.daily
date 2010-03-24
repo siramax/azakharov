@@ -21,7 +21,7 @@ template1 ${if_mounted \2}${color1}\1/${color2}${fs_type \2}${color3}:${goto 100
 gap_x 5
 gap_y 1
 #half of screen 1280
-maximum_width 635
+maximum_width 570
 
 TEXT
 ${template1 root /}
@@ -30,4 +30,4 @@ ${template1 BOOT /media/BOOT}
 ${template1 Disk /media/disk}
 ${template1 sda5 /media/sda5}
 ${template1 cdrom /media/cdrom}
-${if_up wlan0}${execpi 3600 ~/scripts/conky/conky-rss.sh 'http://bash.org.ru/rss/' 7 | fold --spaces --width=130}${else}${font DejaVu Sans Mono:size=9}${execpi 3600 gawk 'match($0, /<keybind key="([^"]+)">/, a) {k = a[1]} k != "" && match($0, /<(command|execute|menu)>([^<]+)<\/(command|execute|menu)>/, a) {printf "$\{color1\}%26s$\{color\} %s\n", k, a[2]} /<\/keybind>/ {k = ""}' ~/.config/openbox/rc.xml | sort --key=3 | fold -w150}${font}${endif}
+${if_up wlan0}${execpi 3600 ~/scripts/conky/conky-rss.sh 'http://bash.org.ru/rss/' 7 | fold --spaces --width=130}${else}${font DejaVu Sans Mono:size=9}${execpi 3600 gawk 'match($0, /<keybind key="([^"]+)">/, a) {k = a[1]} k != "" && match($0, /<(command|execute|menu)>([^<]+)<\/(command|execute|menu)>/, a) {printf "$\{color1\}%26s$\{color\} %s\n", k, a[2]} /<\/keybind>/ {k = ""}' ~/.config/openbox/rc.xml | sort --key=3 | fold --spaces --width=130}${font}${endif}
