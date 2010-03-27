@@ -17,9 +17,9 @@ font Lucida Grande:size=10
 
 update_interval 300
 minimum_size 300
-#maximum_size 400, 280
+maximum_width 280
 alignment top_right
-gap_x 505
+gap_x 530
 gap_y 225
 
 TEXT

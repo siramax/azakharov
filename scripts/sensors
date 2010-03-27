@@ -1,0 +1,5 @@
+#!/bin/sh
+# purpose - monitor temp sensors in webmin's historical RRD tool
+/usr/bin/sensors -A
+printf "%-13s%+.1f°C  (crit = +110.0°C)\n" "hdd:" $( hddtemp /dev/sda --numeric )
+printf "%-13s%+.1f°C  (crit = +110.0°C)\n" "gpu:" $( sudo -u vaulter nvidia-settings --ctrl-display=:0 --no-config --query gpucoretemp | awk '/[0-9]+/ { printf "%+.2f", $4 }' )
