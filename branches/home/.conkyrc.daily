@@ -21,7 +21,7 @@ template1 ${if_mounted \2}${color1}\1/${color2}${fs_type \2}${color3}:${goto 100
 gap_x 5
 gap_y 1
 #half of screen 1280
-maximum_width 570
+maximum_width 520
 
 TEXT
 ${template1 root /}

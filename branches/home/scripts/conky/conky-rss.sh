@@ -41,7 +41,7 @@ XML
 uri=$1                          # URI of RSS Feed
 lines=${2:-5}                   # Number of headlines
 titlenum=${3:-2}                # Number of extra titles
-timeout=5                       # Timeout for wget in secs
+timeout=50                      # Timeout for wget in secs
 #
 #Script start
 #Require a uri, as a minimum
