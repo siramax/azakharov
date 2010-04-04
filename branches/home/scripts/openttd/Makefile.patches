@@ -12,7 +12,7 @@
 #defaults
 #
 include Mk.params
-PARAM ?= "--dry-run -f"
+PARAM ?= "--dry-run"
 TRUNK ?= ~/src/openttd/svn.openttd.org/trunk
 MODE ?= alone # or patchpack
 PATCHDIR ?= $(shell pwd)
@@ -59,25 +59,50 @@ all : vs_pack_${REV}.patch
 vs_pack_${REV}.patch : $(addsuffix .patched, $(PATCHES) )
 ifeq (${MODE},patchpack)
 	@echo "==> Buildin $*..."
+ifeq ($(findstring --dry-run,${PARAM}),)
 	( cd $(TRUNK); ./configure )
 	( $(MAKE) -C $(TRUNK) clean )
 	( $(MAKE) -C $(TRUNK) all > $@.build.log )
+else
+	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
+	@echo "PARAM=\"\" $(MAKE) all"
+endif
 	@echo "==> Buildin $* DONE"
 endif
 	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
 	@echo "==> $@ DONE"
 
+
+
+##
+# Patchworks
+#
 %.patch.log : %.patch
 	@echo "==> Patchin $*..."
 	@( test -f $< )
-	@( patch --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="${PATCHDIR}/$<" > $@ ) || \
+ifeq ($(findstring --dry-run,${PARAM}),)
+	@( patch $(PARAM) --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="${PATCHDIR}/$<" > $@ ) || \
 		( cat $@ && false )
+else
+	@( patch $(PARAM) --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="${PATCHDIR}/$<" )
+endif
 	@echo "==> Patchin $* DONE"
+
+
+
 
 %.build.log : %.patch.log
 	@echo "==> Buildin $*..."
+ifeq ($(findstring --dry-run,${PARAM}),)
 	( $(MAKE) -C $(TRUNK) clean all > $@ )
+else
+	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
+	@echo "PARAM=\"\" $(MAKE) all"
+endif
 	@echo "==> Buildin $* DONE"
+
+
+
 
 #%_$(REV).patch : %.patch trunk-prepare
 ifeq (${MODE},alone)
@@ -89,6 +114,9 @@ else
 	@echo "==> Patched $@..."
 endif
 
+
+
+
 # Refresh patch file from its URL
 %.patch :
 	@echo "==> Refreshing $*..."
@@ -97,6 +125,17 @@ endif
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
 		$(shell awk '/^$*/ { print $$2 }' ${PATCHMAP})
 
+sweep : $(addsuffix .sweep, $(PATCHES) )
+	@( echo Done )
+
+%.sweep :
+	@echo "==> Sweeping $*..."
+	( rm $*.patch || true )
+
+
+##
+# Cleaning & sweeping
+#
 trunk-prepare : trunk-clean trunk-update
 	@( echo "trunk prepared." )
 

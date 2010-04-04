@@ -23,4 +23,4 @@ gap_x 530
 gap_y 225
 
 TEXT
-${if_up wlan0}${execpi 3600 conkyForecast --locale=ru --location=RSXX0117 --template=$HOME/scripts/conky/conkyForecast.template}${endif}${voffset -115}
+${if_gw wlan0}${execpi 3600 conkyForecast --locale=ru --location=RSXX0117 --template=$HOME/scripts/conky/conkyForecast.template}${endif}${voffset -115}
