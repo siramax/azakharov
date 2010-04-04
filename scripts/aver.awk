@@ -1,4 +1,4 @@
-#
+##
 # Andrey Zakharov 2010-03-04
 # Average the columns
 # input text template:
@@ -41,16 +41,17 @@ $1 !~ /^[0-9.]+/ {
     cmd = $0
 
     # init array of sums, and print previous
-    for ( i = 2; i < columns; i++ ) {
+    for ( i = 2; i <= columns; i++ ) {
 
-        if ( sum[ i ] ) {
+        #if ( sum[ i ] ) {
             printf "%f,\t", sum[ i ] / lines;
-            if ( ! sum[ i + 1 ] ) printf "\n";
-        }
+            #if ( sum[ i + 1 ] == "" ) printf "\n";
+        #}
 
         sum[ i ] = 0.0;
     }
 
+    printf "\n";
     lines = 0;
 
 }
@@ -58,7 +59,7 @@ $1 !~ /^[0-9.]+/ {
 # for any row with stat numbers
 /^[0-9,.\s\t%]+$/ { 
 
-    for ( i = 2; i < columns; i++ ) {
+    for ( i = 2; i <= columns; i++ ) {
         sum[ i ] = sum[ i ] + $i;
     }
 
@@ -73,7 +74,7 @@ END {
     }
 
     # print averages
-    for ( i = 2; i < columns; i++ ) {
+    for ( i = 2; i <= columns; i++ ) {
 
 #        if ( sum[ i ] ) {
         printf "%f,\t", sum[ i ] / lines;

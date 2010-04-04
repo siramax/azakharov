@@ -204,7 +204,7 @@ case "$1" in
         UID=$USER simple_check "openvpn" "lxterm -title \"Sperasoft VPN\" -e '/bin/sh -c \"cd /home/vaulter/.openvpn/config/; cat /home/vaulter/Desktop/vpn.txt; sudo openvpn client.ovpn\"'" \
         "pkill openvpn" "Sperasoft VPN"
         ob_menu_item 0 "CS 1.6 /todo move to desktop/" "x-terminal-emulator -e \"~/bin/cs.sh\""
-
+        ob_menu_item 0 "Sleeeeep" "powersave --suspend-to-ram"
         ob_menu_sep
         ob_menu_item 0 "$txtEditThisMenu" "kate $SELF"
         ;;

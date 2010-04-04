@@ -12,8 +12,8 @@
 LOG=./BENCHMARK-$$.csv
 AVERAGE_AWK_SCRIPT=`dirname $0`/aver.awk
 # Serious
-REST_TIME=5             # in sec (5-60), to reduce influence from previous test
-MAXTEST=5               # to reduce error, do cmd multiple times
+REST_TIME=${RESTTIME:-5}             # in sec (5-60), to reduce influence from previous test
+MAXTEST=${NUMTEST:-5}               # to reduce error, do cmd multiple times
 # Quick 
 #ITERATE=100
 #REST_TIME=0

@@ -23,6 +23,6 @@ short_units yes
 
 TEXT
 ${if_gw wlan0}${color2}Send-Q ${totaldown wlan0}${color}
-${exec netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $3 } END { for ( s in sum ) printf "%7d %s\n", sum[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }
+${execi 5 netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $3 } END { for ( s in sum ) printf "%7d %s\n", sum[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }
 ${color2}Recv-Q ${totalup wlan0}${color}
-${exec netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $2 } END { for ( s in sum ) printf "%7d %s\n", sum[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }${endif}
+${execi 5 netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $2 } END { for ( s in sum ) printf "%7d %s\n", sum[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }${endif}
