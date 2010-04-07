@@ -1,0 +1,75 @@
+#
+# Purpose: Shows overall information about
+#          processes in system, such as
+#           top, io, net
+# possible update time - 5-10 secs
+own_window yes
+#own_window_class Conky
+own_window_transparent yes
+#own_window_type desktop
+
+border_inner_margin 1
+border_outer_margin 0
+#background yes
+border_width 0
+default_color ffd700
+default_outline_color black
+default_shade_color white
+draw_borders no
+draw_graph_borders no
+draw_outline yes
+draw_shades no
+double_buffer yes
+
+update_interval 2
+ 
+cpu_avg_samples 2
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+short_units yes
+
+
+#stippled_borders 0
+uppercase no
+use_spacer right
+show_graph_scale no
+show_graph_range no
+use_xft yes
+font DejaVu Sans Mono:size=9
+#gap_x 14
+if_up_strictness address
+default_bar_size 0 3
+#Colours
+color1 008FCC
+color2 b2b2b2
+color3 0000ff
+color4 8b1a1a
+color5 8b8b18
+color6 518B18
+color7 188B18
+color8 ffff00
+color9 ff0000
+lua_load ~/scripts/conky/rings.lua
+lua_draw_hook_pre ring_stats
+minimum_size 250 800
+maximum_width 250
+# develop
+
+# of io
+template1 ${color\2} ${top_io pid \1}.${top_io name \1} ${top io_read \1} ${top io_write \1}
+
+# mem
+template2 ${color\2}${top_mem pid \1}.${top_mem name \1} ${top_mem mem \1} ${top_mem mem_vsize \1}
+
+# cpu
+template3 ${if_match ${top cpu \1} > 0}${color\2}${top pid \1}.${top name \1} ${top cpu \1}${endif}
+
+# time
+template4 ${color\2}${top_time pid \1}.${top_time name \1} ${top_time time \1}
+
+
+# ${if_match ${cpu} > 0}${endif} FOR call CPU func to init cpuNUM for lua scripts
+TEXT
+${if_match ${cpu} > 0}${endif}
+
