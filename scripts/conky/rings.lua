@@ -20,8 +20,8 @@ Changelog:
 settings_table = {
     {   name = 'cpu', arg = 'cpu1',
         max         = 100,
-        bg_colour   = 0x000000,
-        bg_alpha    = 0.1,
+        bg_colour   = 0x707070,
+        bg_alpha    = 0.025,
         fg_colour   = 0xffffff,
         fg_alpha    = 0.2,
         x = 125, y = 125,
@@ -32,8 +32,8 @@ settings_table = {
     },
     {   name = 'cpu', arg = 'cpu2',
         max         = 100,
-        bg_colour   = 0x000000,
-        bg_alpha    = 0.1,
+        bg_colour   = 0x707070,
+        bg_alpha    = 0.025,
         fg_colour   = 0xffffff,
         fg_alpha    = 0.2,
         x = 125, y = 125,
@@ -48,12 +48,20 @@ settings_table = {
         bg_alpha    = 0.1,
         fg_colour_end = 0x000000,
         fg_colour   = 0xffffff,
-        fg_alpha    = 0.1,
+        fg_alpha    = 0.2,
         x = 125, y = 125,
         radius      = 50,
         thickness   = 100,
         start_angle = 0,
         end_angle   = 360,
+        textx      = 5, texty = 18,
+        font_family = "DejaVu Sans Mono",
+        font_size   = 10,
+        margin_top  = 0,
+        text_color_begin    = 0xff0000,
+        text_color_end      = 0x00ff00,
+        line_color          = 0xffff00,
+        line_side           = 1, -- right
     },
     {   name = 'freq', arg='1',
         max         = 2000,
@@ -68,7 +76,7 @@ settings_table = {
         end_angle   = 180,
         period      = 3,
     },
-    {   name='freq', arg='2',
+    {   name = 'freq', arg='2',
         max         = 2000,
         -- bg_colour   = 0x00ff00,
         bg_alpha    = 0.1,
@@ -83,10 +91,10 @@ settings_table = {
     },
     {   name        = 'memperc', arg = '',
         max         = 100,
-        bg_colour   = 0x000000,
-        bg_alpha    = 0.1,
+        bg_colour   = 0x707070,
+        bg_alpha    = 0.025,
         fg_colour   = 0xffffff,
-        fg_alpha    = 0.1,
+        fg_alpha    = 0.2,
         x = 125, y = 365,
         radius      = 120,
         thickness   = 10,
@@ -94,10 +102,10 @@ settings_table = {
         end_angle   = -90,
         period      = 60,
     },
-    {   name='swapperc', arg='',
+    {   name = 'swapperc', arg='',
         max         = 100,
         bg_colour   = 0x000000,
-        bg_alpha    = 0.1,
+        bg_alpha    = 0.01,
         fg_colour   = 0xffffff,
         fg_alpha    = 0.1,
         x = 125, y = 365,
@@ -119,6 +127,10 @@ settings_table = {
         thickness   = 100,
         start_angle = 0,
         end_angle   = -360,
+        textx       = 130, texty = 260,
+        font_family = "DejaVu Sans Mono",
+        font_size   = 10,
+        line_side   = 0, --left
     },
     {   name='fs_used_perc', arg='/',
         max         = 100,
@@ -149,7 +161,7 @@ settings_table = {
     {   name='battery_percent', arg='BAT0',
         max         = 100,
         bg_colour   = 0x000000,
-        bg_alpha    = 0.1,
+        bg_alpha    = 0.01,
         fg_colour   = 0xffffff,
         fg_alpha    = 0.1,
         x = 125, y = 365 + 240,
@@ -172,6 +184,8 @@ settings_table = {
         end_angle   = 180 + 155,
         period      = 5, -- it can parsed by conky each 600 times, cache it!
         textx = 125 - 20, texty = 365 + 240 + 80,
+        font_size   = 16,
+        font_family = "Lucida Grande",
     },
     {   name='exec', arg='/usr/bin/nvidia-settings --no-config --query gpucoretemp | awk \'/[0-9]+/ { printf "%d", $4 }\'',
         max         = 110,
@@ -186,6 +200,8 @@ settings_table = {
         end_angle   = 180 + 155,
         period      = 5, -- it can parsed by conky each 600 times, cache it!
         textx = 125 - 20, texty = 365 + 240 + 60,
+        font_size   = 16,
+        font_family = "Lucida Grande",
     },
     {   name='exec', arg='acpi --without-battery --without-ac-adapter --without-cooling --hide-empty --thermal | awk \'{ printf "%d",$4 }\'',
         max         = 110,
@@ -200,6 +216,8 @@ settings_table = {
         end_angle   = 180 + 155,
         period      = 5, -- it can parsed by conky each 600 times, cache it!
         textx = 125 - 20, texty = 365 + 240 + 40,
+        font_size   = 16,
+        font_family = "Lucida Grande",
     },
 }
  
@@ -209,23 +227,28 @@ function rgb_to_r_g_b(colour,alpha)
     return ((colour / 0x10000) % 0x100) / 255., ((colour / 0x100) % 0x100) / 255., (colour % 0x100) / 255., alpha
 end
 
-function draw_text( cr, t, pt )
+function draw_text( cr, t, pt, sx, sy )
+
+    local family = pt[ 'font_family' ] or "Sans"
+    local fontsize = pt[ 'font_size' ] or 12.0
+
     local te = cairo_text_extents_t:create()
 
-    cairo_select_font_face ( cr, "Sans", 
+    cairo_select_font_face ( cr, family, 
         CAIRO_FONT_SLANT_NORMAL,
         CAIRO_FONT_WEIGHT_NORMAL );
 
-    cairo_set_font_size( cr, 20.0 );
-    cairo_text_extents( cr, pt[ 'cached' ], te );
+    cairo_set_font_size( cr, fontsize );
+    cairo_text_extents( cr, t, te );
 
-    local x, y =
-        pt[ 'textx' ] - ( te.width / 2 + te.x_bearing ),
-        pt[ 'texty' ] - ( te.height / 2 + te.y_bearing );
+    local x, y = 
+        sx or pt[ 'textx' ] - ( te.width / 2 + te.x_bearing ),
+        sy or pt[ 'texty' ] - ( te.height / 2 + te.y_bearing );
 
     cairo_move_to ( cr, x, y );
-    cairo_show_text ( cr, pt[ 'cached' ] );
+    cairo_show_text ( cr, t );
     cairo_stroke( cr )
+    -- print( fontsize / te.height ) 1.3 max
 --     cairo_move_to (cr, 70.0, 165.0);
 --     cairo_text_path (cr, "void");
 --     cairo_set_source_rgb (cr, 0.5, 0.5, 1);
@@ -233,6 +256,7 @@ function draw_text( cr, t, pt )
 --     cairo_set_source_rgb (cr, 0, 0, 0);
 --     cairo_set_line_width (cr, 2.56);
 --    cairo_stroke (cr);
+    return te
 end
 
 --[[ draw sliced rings by top values 
@@ -243,14 +267,13 @@ function draw_top_ring( cr, pt )
     local val, ring = 0, {}
     --shallow copy
     for k, v in pairs( pt ) do ring[ k ] = v; end
-    local min_angle, max_angle = 
-        pt[ 'start_angle' ] * ( 2 * math.pi / 360 ),
-        pt[ 'end_angle' ] * ( 2 * math.pi / 360 )  --grades
-    local min_alpha, max_alpha  = pt[ 'fg_alpha' ], 0
+    local min_angle, max_angle  = pt[ 'start_angle' ], pt[ 'end_angle' ]
+    local min_alpha, max_alpha  = pt[ 'fg_alpha' ], 0.025
     local min, max              = 1, 10 -- TODO
-    ring[ 'in_radians' ] = true
-
+    local textext
+    local texty             = pt[ 'texty' ]
     
+    --ring[ 'in_radians' ] = true
 
     for i = min, max  do
         ring[ 'fg_alpha' ] =
@@ -258,21 +281,48 @@ function draw_top_ring( cr, pt )
         ring[ 'start_angle' ] = min_angle
         ring[ 'end_angle' ] = max_angle + min_angle
         val = conky_parse(
-                string.format( '${%s %s %d}', ring['name'], ring['arg'], i ) ) 
-        
+                string.format( '${%s %s %d}', ring['name'], ring['arg'], i ) 
+        )
 
         if ( val ) then
-            val = tonumber( val ) / 100 -- TODO max
-            min_angle = draw_ring( cr, val, ring )
+            val = tonumber( val )
+
+            if ( val ) then -- TODO max, TODO bunch of arcs
+                min_angle = draw_ring( cr, val / 100, ring )  * ( 360 / 2 / math.pi)
+
+                if ( ring[ 'textx' ] ) then --get text pos
+
+                    texty = pt[ 'texty' ] + i * ( 1.3 * pt[ 'font_size' ] + (pt[ 'margin_top' ] or 0) )
+                    textext = draw_text( cr,
+                        conky_parse( string.format( "${%s pid %d} ${%s name %d}", ring['name'], i, ring['name'], i ) ),
+                        ring, pt[ 'textx' ], texty )
+
+                    -- threshhold
+
+                    if ( math.abs( min_angle - ring[ 'start_angle' ] ) > 5 ) then
+                        draw_note_line( cr,
+                            ( ring[ 'line_side' ] == 1 ) and ( --right side
+                                ring[ 'textx' ] + textext.width + (--[[last letter]]ring[ 'font_size' ] / 1.3) 
+                            ) or ( --left side
+                                ring[ 'textx' ]
+                            ),
+                            texty, ring,
+                            ( min_angle + ring[ 'start_angle' ] ) / 2  -- bisectrix
+                        )
+                    end
+                end
+            end
         end
         --[[print( i,  
-            ring[ 'start_angle' ] * ( 360 / 2 / math.pi), 
-tonumber( conky_parse( string.format( '${%s cpu %d}', ring['name'], i ) ) ) / 100,
-            ring[ 'end_angle' ] * ( 360 / 2 / math.pi) )]]
+            ring[ 'start_angle' ], -- * ( 360 / 2 / math.pi),
+tonumber( conky_parse( string.format( '${%s cpu %d}', ring['name'], i ) ) ),
+            ring[ 'end_angle' ]-- * ( 360 / 2 / math.pi) 
+        )]]
     end
     --print( pt[ 'fg_alpha' ] )
 end
 
+--[[ low level draw ring ]]
 function draw_ring( cr, t, pt )
     local w, h = conky_window.width, conky_window.height
  
@@ -283,8 +333,8 @@ function draw_ring( cr, t, pt )
 
     local bgc, bga, fgc, fga = pt['bg_colour'], pt['bg_alpha'], pt['fg_colour'], pt['fg_alpha']
  
-    local angle_0 = sa * ( ( pt[ 'in_radians' ] and 1 ) or ( 2 * math.pi / 360 ) ) - math.pi / 2
-    local angle_f = ea * ( ( pt[ 'in_radians' ] and 1 ) or ( 2 * math.pi / 360 ) ) - math.pi / 2
+    local angle_0 = ( 2 * math.pi * sa / 360 ) - math.pi / 2
+    local angle_f = ( 2 * math.pi * ea / 360 ) - math.pi / 2
     local t_arc = t * ( angle_f - angle_0 )
 
     --print( angle_0, angle_f, t, t_arc )
@@ -293,7 +343,7 @@ function draw_ring( cr, t, pt )
     if ( bgc ) then
         -- Draw background ring
         if ( angle_f > angle_0 ) then
-            cairo_arc(cr,xc,yc,ring_r,angle_0,angle_f)
+            cairo_arc( cr, xc, yc, ring_r, angle_0, angle_f )
         else -- reverse angles
             cairo_arc_negative( cr, xc, yc, ring_r, angle_0, angle_f )
         end
@@ -312,13 +362,35 @@ function draw_ring( cr, t, pt )
         cairo_arc_negative(cr, xc, yc, ring_r, angle_0, angle_0 + t_arc  )
     end
 
-    cairo_set_source_rgba(cr,rgb_to_r_g_b(fgc,fga))
+    cairo_set_source_rgba( cr, rgb_to_r_g_b( fgc, fga ) )
     cairo_stroke( cr )
 
     return angle_0 + t_arc + ( math.pi / 2 )
 end
 
---[[ low level draw ring ]]
+--[[ with small circle at the top
+    @param sx/sy - start coordinats
+    @param pt - ring
+    @param an - bisectrix ]]
+function draw_note_line( cr, sx, sy, pt, an )
+    local sets = {
+        circle_radius = 2,
+        offset_from_edge = 0.95,
+    }
+
+    local angle = ( 2 * math.pi * an / 360 ) - math.pi / 2
+    local r = ( pt[ 'thickness' ] /2 + pt[ 'radius' ] ) * sets[ 'offset_from_edge' ]
+    local ex, ey = r * math.cos( angle ) + pt[ 'x' ], r * math.sin( angle ) + pt[ 'y' ]
+
+    cairo_move_to           ( cr, sx, sy );
+    cairo_set_line_width    ( cr, 1.0 );
+    cairo_line_to           ( cr, ex, ey );
+    cairo_arc               ( cr, ex, ey, 2.0, 0, 2 * math.pi );
+    cairo_stroke            ( cr );
+    --cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
+
+    
+end
 
 
 function trim (s)
