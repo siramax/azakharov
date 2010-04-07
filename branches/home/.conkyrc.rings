@@ -21,7 +21,7 @@ draw_outline yes
 draw_shades no
 double_buffer yes
 
-update_interval 2
+update_interval 5
  
 cpu_avg_samples 2
 net_avg_samples 2
