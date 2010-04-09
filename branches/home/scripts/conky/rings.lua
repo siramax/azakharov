@@ -45,10 +45,10 @@ settings_table = {
     {   name = 'top', arg = 'cpu', -- max top
         max         = 100,
         --bg_colour   = 0x000000,
-        bg_alpha    = 0.1,
+        bg_alpha    = 0.01,
         fg_colour_end = 0x000000,
         fg_colour   = 0xffffff,
-        fg_alpha    = 0.2,
+        fg_alpha    = 0.1,
         x = 125, y = 125,
         radius      = 50,
         thickness   = 100,
@@ -272,14 +272,35 @@ function draw_top_ring( cr, pt )
     local min, max              = 1, 10 -- TODO
     local textext
     local texty             = pt[ 'texty' ]
+    local linemx            = 0 --text and and line break
+    local bcolor_r, bcolor_g, bcolor_b, ecolor_r, ecolor_g, ecolor_b
     
-    --ring[ 'in_radians' ] = true
+    if ( pt[ 'text_color_begin' ] ) then
+        bcolor_r, bcolor_g, bcolor_b = rgb_to_r_g_b( pt[ 'text_color_begin' ] )
+        ecolor_r, ecolor_g, ecolor_b = rgb_to_r_g_b( pt[ 'text_color_end' ] )
+    end
 
+    -- [[ first turn - draw all what we need, and calculate max text width ]]
     for i = min, max  do
-        ring[ 'fg_alpha' ] =
+        ring[ i ] = {}
+        ring[ i ][ 'fg_alpha' ] = 
             ( ( i - min ) * ( max_alpha - min_alpha ) / ( max - min ) ) + min_alpha
-        ring[ 'start_angle' ] = min_angle
-        ring[ 'end_angle' ] = max_angle + min_angle
+        if ( bcolor_r ) then
+-- I DONT LIKE THIS
+            ring[ i ][ 'color' ] =
+                0x10000 * math.floor( 255 * (( ( i - min ) * ( ecolor_r - bcolor_r ) / ( max - min ) ) + bcolor_r )) +
+                0x100 * math.floor( 255 * (( ( i - min ) * ( ecolor_g - bcolor_g ) / ( max - min ) ) + bcolor_g )) + 
+                math.floor(255 * (( ( i - min ) * ( ecolor_b - bcolor_b ) / ( max - min ) ) + bcolor_b ))
+--print(      i, ring[ i ][ 'color' ], tonumber( ring[ i ][ 'color' ], 16 ) )
+            ring[ 'fg_colour' ] = ring[ i ][ 'color' ]
+        end
+        ring[ i ][ 'start_angle' ] = min_angle
+        ring[ i ][ 'end_angle' ] = max_angle + min_angle
+
+        ring[ 'fg_alpha' ]      = ring[ i ][ 'fg_alpha' ]
+        ring[ 'start_angle' ]   = ring[ i ][ 'start_angle' ]
+        ring[ 'end_angle' ]     = ring[ i ][ 'end_angle' ]
+
         val = conky_parse(
                 string.format( '${%s %s %d}', ring['name'], ring['arg'], i ) 
         )
@@ -289,27 +310,24 @@ function draw_top_ring( cr, pt )
 
             if ( val ) then -- TODO max, TODO bunch of arcs
                 min_angle = draw_ring( cr, val / 100, ring )  * ( 360 / 2 / math.pi)
+                ring[ i ][ 'bis_angle' ] = ( min_angle + ring[ i ][ 'start_angle' ] ) / 2
 
-                if ( ring[ 'textx' ] ) then --get text pos
+                if ( pt[ 'textx' ] ) then --get text pos
 
-                    texty = pt[ 'texty' ] + i * ( 1.3 * pt[ 'font_size' ] + (pt[ 'margin_top' ] or 0) )
+                    ring[ i ][ 'texty' ] = pt[ 'texty' ] + i * ( 1.3 * pt[ 'font_size' ] + (pt[ 'margin_top' ] or 0) )
                     textext = draw_text( cr,
                         conky_parse( string.format( "${%s pid %d} ${%s name %d}", ring['name'], i, ring['name'], i ) ),
-                        ring, pt[ 'textx' ], texty )
+                        ring, pt[ 'textx' ], ring[ i ][ 'texty' ] )
 
-                    -- threshhold
 
-                    if ( math.abs( min_angle - ring[ 'start_angle' ] ) > 5 ) then
-                        draw_note_line( cr,
-                            ( ring[ 'line_side' ] == 1 ) and ( --right side
-                                ring[ 'textx' ] + textext.width + (--[[last letter]]ring[ 'font_size' ] / 1.3) 
-                            ) or ( --left side
-                                ring[ 'textx' ]
-                            ),
-                            texty, ring,
-                            ( min_angle + ring[ 'start_angle' ] ) / 2  -- bisectrix
-                        )
+                    ring[ i ][ 'textendx' ] = ring[ 'textx' ] + textext.width + (--[[last letter]]ring[ 'font_size' ] / 1.3)
+
+                    -- calculate max width of text labels
+                    if ( ring[ i ][ 'textendx' ] > linemx ) then
+                        linemx = ring[ i ][ 'textendx' ]
+                     --   print( i, linemx );
                     end
+
                 end
             end
         end
@@ -318,8 +336,27 @@ function draw_top_ring( cr, pt )
 tonumber( conky_parse( string.format( '${%s cpu %d}', ring['name'], i ) ) ),
             ring[ 'end_angle' ]-- * ( 360 / 2 / math.pi) 
         )]]
+    end --for min,max
+    
+    --[[second chanse to draw lines ]]
+    for i = min, max  do
+        
+        -- threshhold
+        if ( math.abs( ring[ i ][ 'bis_angle' ] - ring[ i ][ 'start_angle' ] ) > 5 ) then
+
+            ring[ 'fg_colour' ] = ring[ i ][ 'color' ]
+            ring[ 'fg_alpha' ] = ring[ i ][ 'fg_alpha' ]
+            if ( ring[ 'line_side' ] == 1 ) then --right side
+                draw_note_line( cr,
+                    ring[ i ][ 'textendx' ], ring[ i ][ 'texty' ], 
+                    linemx, ring, ring[ i ][ 'bis_angle' ] )
+            else --left side
+                draw_note_line( cr,
+                    ring[ 'textx' ], ring[ i ][ 'texty' ], 
+                    ring[ 'textx' ], ring, ring[ i ][ 'bis_angle' ] )
+            end
+        end
     end
-    --print( pt[ 'fg_alpha' ] )
 end
 
 --[[ low level draw ring ]]
@@ -372,7 +409,7 @@ end
     @param sx/sy - start coordinats
     @param pt - ring
     @param an - bisectrix ]]
-function draw_note_line( cr, sx, sy, pt, an )
+function draw_note_line( cr, sx, sy, mx, pt, an )
     local sets = {
         circle_radius = 2,
         offset_from_edge = 0.95,
@@ -382,10 +419,16 @@ function draw_note_line( cr, sx, sy, pt, an )
     local r = ( pt[ 'thickness' ] /2 + pt[ 'radius' ] ) * sets[ 'offset_from_edge' ]
     local ex, ey = r * math.cos( angle ) + pt[ 'x' ], r * math.sin( angle ) + pt[ 'y' ]
 
+    cairo_set_line_width    ( cr, 0.33 );
+    if ( pt[ 'line_color' ] ) then
+        cairo_set_source_rgba   ( cr, rgb_to_r_g_b( pt[ 'line_color' ], pt[ 'fg_alpha' ] ) ) 
+    end
     cairo_move_to           ( cr, sx, sy );
-    cairo_set_line_width    ( cr, 1.0 );
+    cairo_line_to           ( cr, mx, sy );
     cairo_line_to           ( cr, ex, ey );
+    cairo_stroke            ( cr );
     cairo_arc               ( cr, ex, ey, 2.0, 0, 2 * math.pi );
+    cairo_fill              ( cr )
     cairo_stroke            ( cr );
     --cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
 
