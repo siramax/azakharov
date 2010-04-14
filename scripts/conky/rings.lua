@@ -43,12 +43,14 @@ settings_table = {
         end_angle   = 180,
     },
     {   name = 'top', arg = 'cpu', -- max top
+        top_items   = 10,
         max         = 100,
         --bg_colour   = 0x000000,
         bg_alpha    = 0.01,
         fg_colour_end = 0x000000,
         fg_colour   = 0xffffff,
         fg_alpha    = 0.1,
+        fg_alpha_end    = 0.025,
         x = 125, y = 125,
         radius      = 50,
         thickness   = 100,
@@ -58,9 +60,9 @@ settings_table = {
         font_family = "DejaVu Sans Mono",
         font_size   = 10,
         margin_top  = 0,
-        text_color_begin    = 0xff0000,
+        text_color_begin    = 0x8b1a1a,
         text_color_end      = 0x00ff00,
-        line_color          = 0xffff00,
+        line_color          = 0x188b18,
         line_side           = 1, -- right
     },
     {   name = 'freq', arg='1',
@@ -171,7 +173,7 @@ settings_table = {
         end_angle   = 180,
         period      = 5 -- it can parsed by conky each 600 times, cache it!
     },    
-    {   name='exec', arg='/usr/sbin/hddtemp /dev/sda --numeric',
+--[[    {   name='exec', arg='/usr/sbin/hddtemp /dev/sda --numeric',
         max         = 110,
         bg_colour   = 0x000000,
         bg_alpha    = 0.1,
@@ -218,14 +220,11 @@ settings_table = {
         textx = 125 - 20, texty = 365 + 240 + 40,
         font_size   = 16,
         font_family = "Lucida Grande",
-    },
+    },]]
 }
  
-require 'cairo'
- 
-function rgb_to_r_g_b(colour,alpha)
-    return ((colour / 0x10000) % 0x100) / 255., ((colour / 0x100) % 0x100) / 255., (colour % 0x100) / 255., alpha
-end
+require'cairo'
+require'conky'
 
 function draw_text( cr, t, pt, sx, sy )
 
@@ -257,6 +256,52 @@ function draw_text( cr, t, pt, sx, sy )
 --     cairo_set_line_width (cr, 2.56);
 --    cairo_stroke (cr);
     return te
+end
+
+--[[input: sets,
+    output: sets[ rings ][ 0..max ] ]]
+function calculate_top_rings( sets )
+
+    local min_angle, max_angle  = sets.start_angle or 0, sets.end_angle or 360
+    local min_alpha, max_alpha  = sets.fg_alpha, sets.fg_alpha_end or 0.025
+    local min, max              = 1, sets.top_items
+    local bc, ec                = {}, {}    --begin, end gradient colors
+    local grade_alpha = merilo( min, max, min_alpha, max_alpha )
+
+    if ( sets[ 'text_color_begin' ] ) then
+        bc.r, bc.g, bc.b = rgb_to_r_g_b( sets[ 'text_color_begin' ] )
+        ec.r, ec.g, ec.b = rgb_to_r_g_b( sets[ 'text_color_end' ] )
+        local grade_color = { 
+            r = merilo( min, max, bc.r, ec.r ), 
+            g = merilo( min, max, bc.g, ec.g ), 
+            b = merilo( min, max, bc.b, ec.b ),
+        }
+    end
+
+    local rings = {}
+    --shallow copy
+    for k, v in pairs( sets ) do rings[ k ] = v; end
+
+-- TODO background ring here
+
+    for i = min, max  do
+        rings[ i ] = {}
+        rings[ i ][ 'fg_alpha' ] = grade_alpha( i )
+
+        if ( grade_color ) then
+            rings[ i ].color.r = grade_color.r( i )
+            rings[ i ].color.g = grade_color.g( i )
+            rings[ i ].color.b = grade_color.b( i )
+        end
+-- calc angles    
+
+        rings[ i ][ 'start_angle' ] = min_angle
+        rings[ i ][ 'end_angle' ] = max_angle + min_angle
+
+        ring[ 'fg_alpha' ]      = ring[ i ][ 'fg_alpha' ]
+        ring[ 'start_angle' ]   = ring[ i ][ 'start_angle' ]
+        ring[ 'end_angle' ]     = ring[ i ][ 'end_angle' ]
+    end
 end
 
 --[[ draw sliced rings by top values 
@@ -342,7 +387,7 @@ tonumber( conky_parse( string.format( '${%s cpu %d}', ring['name'], i ) ) ),
     for i = min, max  do
         
         -- threshhold
-        if ( math.abs( ring[ i ][ 'bis_angle' ] - ring[ i ][ 'start_angle' ] ) > 5 ) then
+        if ( ring[ i ][ 'bis_angle' ] and math.abs( ring[ i ][ 'bis_angle' ] - ring[ i ][ 'start_angle' ] ) > 5 ) then
 
             ring[ 'fg_colour' ] = ring[ i ][ 'color' ]
             ring[ 'fg_alpha' ] = ring[ i ][ 'fg_alpha' ]
