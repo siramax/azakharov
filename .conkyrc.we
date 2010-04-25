@@ -16,7 +16,7 @@ use_xft yes
 font Lucida Grande:size=10
 
 update_interval 300
-minimum_size 300
+minimum_size 300 400
 maximum_width 280
 alignment top_right
 gap_x 530

@@ -8,6 +8,9 @@ own_window_class Conky
 own_window_transparent yes
 own_window_type desktop
 
+lua_load ~/scripts/conky/top.lua
+lua_draw_hook_pre main
+
 border_inner_margin 1
 border_outer_margin 0
 #background yes
@@ -39,6 +42,7 @@ font DejaVu Sans Mono:size=9
 #gap_x 14
 if_up_strictness address
 maximum_width 250
+minimum_size 250 310
 default_bar_size 0 3
 #Colours
 color1 008FCC
@@ -52,11 +56,7 @@ color8 ffff00
 color9 ff0000
 
 # develop
-#${font OpenLogos:size=12}u${font DejaVu Sans Mono:size=8}${color #cd5c5c}$sysname $kernel $machine $color $uptime
-#${font Inconsolata:size=12}${execpi 3600 cal | grep -w $(date +%d) | sed s/$(date +%d)/$\{color\ red\}$(date +%d)$\{color\}/}
-#${offset 135}${voffset -22}${color2}${font URW Gothic L:size=18}${time %S}
 
-# ${color green}${font PizzaDude Bullets:size=18}i${font DejaVu Sans:size=18}${color blue}$memperc% ${membar 4}${color2}${font}
 #${if_up wlan0}${wireless_essid wlan0} ${color green}%${wireless_link_qual_perc wlan0} ${color}${addr wlan0}${hr 2}
 #${color yellow}${font PizzaDude Bullets:size=15}O${font} ${voffset -6}${upspeed wlan0}${color}k/s ${offset -60}${color yellow}${upspeedgraph wlan0 25,0 adff2f ffff00}
 #${color green}${font PizzaDude Bullets:size=15}U${font} ${voffset -6}${downspeed wlan0}${color}k/s ${offset -60}${downspeedgraph wlan0 25,0 adff2f 00ff00}
@@ -74,11 +74,7 @@ color9 ff0000
 # ${color2}Down: $color${goto 50}${downspeedf eth0} k/s${goto 131}${color2}Up: $color${goto 180}${upspeedf eth0} k/s
 # ${color2}Total:$color${goto 50}${totaldown eth0} ${goto 131}${color2}Total:$color${goto 180}${totalup eth0}
 # ${endif}
-#${font FreeMono:size=12}${color2}${alignc}${pre_exec ~/scripts/calen.sh semana}${color}
-#${execpi 3600 DJS=`date +%_d`; cal | sed '1d' | sed '/./!d' | sed 's/$/ /' | fold -w 21 | sed -n '/^.\{21\}/p' | sed 's/^/${alignc} /' | sed /" $DJS "/s/" $DJS "/" "'${color yellow}'"$DJS"'${color}'" "/}${color1}${font URW Gothic L:size=13}
-#${voffset -30}${alignc}${time %A, %B %Y}$font$color
-#$nodename ${color green}${uptime_short}$color${hr 2}$font
-#${color green}${font PizzaDude Bullets:size=18}Z${font mono:size=10}${color #ffd700}${voffset -30}
+
 
 #${if_existing /proc/net/route wlan0}${wireless_essid wlan0} ${color green}%${wireless_link_qual_perc wlan0} ${color}${addr wlan0}${hr 2}
 #${color gold}${font PizzaDude Bullets:size=15}N${font mono:size=10}${color}${voffset -6}   Upload: ${alignr}${totalup wlan0}${color darkgreen}
@@ -95,26 +91,17 @@ template3 ${if_match ${top cpu \1} > 0}${color\2}${top pid \1}.${top name \1} ${
 
 # time
 template4 ${color\2}${top_time pid \1}.${top_time name \1} ${top_time time \1}
+#${goto 0}${cpugraph cpu1 20,0 00ff00 ff0000 -t}${voffset -10}
+#${goto 0}${cpugraph cpu2 20,0 ff0000 00ff00 -t}${voffset -10}
 TEXT
-${cpubar cpu1}${goto 0}${cpugraph cpu1 20,0 00ff00 ff0000 -t}${voffset -10}${goto 120}${freq_g 1}GHz ${cpu cpu1}%
-${cpubar cpu2}${goto 0}${cpugraph cpu2 20,0 ff0000 00ff00 -t}${voffset -10}${goto 120}${freq_g 2}GHz ${cpu cpu2}%
-#${voffset 5}${processes}/${color1}${running_processes}${color}
-${voffset 5}${template3 1 4}
-${template3 2 5}
-${template3 3 6}
-${template3 4 7}${color}
-$memperc% $membar
-${template2 1 4}
-${template2 2 5}
-${template2 3 6}
-${template2 4 7}${color}
+${goto 150}${freq_g 1}GHz ${cpu cpu1}%
+${goto 150}${freq_g 2}GHz ${cpu cpu2}%
+
+${voffset 100}$memperc%
+${voffset 120}${diskio sda}${voffset -5}${goto 0}${diskiograph /dev/sda 20,0 00ff00 ff0000 -t}
 $uptime_short${if_empty $battery_time}${else}${color8}${font Webdings:size=12}~${font}${color}$battery_time $battery_bar${endif}
 ${template4 1 4}
 ${template4 2 5}
 ${template4 3 6}
 ${template4 4 7}${color}
-${diskio sda}${voffset -5}${goto 0}${diskiograph /dev/sda 20,0 00ff00 ff0000 -t}
-${template1 1 4}
-${template1 2 5}
-${template1 3 6}
-${template1 4 7}${color}
+

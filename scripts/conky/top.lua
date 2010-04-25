@@ -6,23 +6,24 @@
 ]]
 
 require'cairo'
-require'print_r'
+--require'print_r'
 
 settings_table = {
     {   name = 'top', arg = 'cpu', -- max top
         items       = 5,
         max         = 100,
-        x = 100, y = 50, -- 5 margin
-        radius      = 25,
-        thickness   = 45,
+        x = 100, y =  100, -- 5 margin
+        clip = { 5, 5, -5, .5 }, --the next level :)
+        radius      = 400,
+        thickness   = 798,
         start_angle = 0,
-        end_angle   = 360,
-        bg          = { color = 0x000000, alpha    = 0.05, }, --TODO pie as shape
+        end_angle   = -180,
+        --bg          = { color = 0x000000, alpha    = 0.05, }, --TODO pie as shape
         fg          = {
-            color = { 0xffffff, 0x000000 },--gradient
-            alpha = { 0.5, 0.025 }
+            color = { 0xffffff, 0x00ff00 },--gradient
+            alpha = { 0.1, 0.025 }
         },
-        text = {
+        --[[text = {
             x = 5, y = 0,
             font = {
                 family = "DejaVu Sans Mono",
@@ -31,21 +32,23 @@ settings_table = {
             color = { 0x8b1a1a, 0x7f7f00, }, --TODO more checkpoints :)
             --margin = { 0, 0, 0, 0 }, --as CSS: top, right, bottom, left
             mask = "${top pid %d} ${top name %d}" --REQUIRED
-        },
+        },]]
+
         line_color          = 0x188b18,
         line_side           = 1, -- right
     },
     {   name = 'top_mem', arg = 'mem', -- max top
         items = 5,
-        bg      = { color   = 0x000000, alpha    = 0.05, },
+        --bg      = { color   = 0x000000, alpha    = 0.05, },
         fg      = { color   = { 0xffffff, 0x000000 },
                     alpha   = { 0.5, 0.025 }, },
-        x = 100, y = 150,
-        radius      = 25,
-        thickness   = 45,
+        x = 100, y =  100, -- 5 margin
+        clip = { 5, 0.5, -5, -5 },
+        radius      = 400,
+        thickness   = 800,
         start_angle = 0,
-        end_angle   = -360,
-        text        = {
+        end_angle   = 180,
+        --[[text        = {
             mask = "${top_mem pid %d} ${top_mem name %d}",
             x = 110, y = 100,
             font = {
@@ -53,13 +56,13 @@ settings_table = {
                 size   = 12.0,
             },
             color = { 0x7f7f00, 0x007f7f },
-        },
+        },]]
         line_side   = 0, --left
-    },
+    },--[[
     {   name = 'top_io', arg = 'io_perc',
         items = 5,
         max     = 100,
-        --[[x = 100, y = 250,
+        x = 100, y = 250,
         radius      = 25,
         thickness   = 45,
         start_angle = 0,
@@ -68,34 +71,60 @@ settings_table = {
         fg          = {
             color = { 0xffffff, 0x000000 },--gradient
             alpha = { 0.05, 0.025 }
-        },]]
+        },
         text = {
             x = 5, y = 200, 
             color = { 0x007f7f, 0x00ff00 },
             mask = "${top_io pid %d} ${top_io name %d} ${top_io io_read %d} ${top_io io_write %d}",
             font = { family = "DejaVu Sans Mono", size   = 10.0, },
         },
-    },
+    },]]
 }
 
+--[[     Just a shrinker    ]]
 merilo = function( mini, maxi, minp, maxp )
 
-    local empty = function() 
+    local empty = function()
         return minp
     end
 
     local mer = function( i )
         return ( ( i - mini ) * ( maxp - minp ) / ( maxi - mini ) ) + minp
     end
-
+    --to avoid devision by zero
     if ( mini ~= maxi ) then    return mer 
     else                        return empty    end
+end
+
+--[[ 
+    Relative to absolute
+    @param w, h - width and height of real window 
+    @return function ]]
+rel2abs = function( w, h )
+    --[[ abstract solver of relative in absolute ]]
+    local get = function( r, a, r0 )
+        if r < 0 then
+            return a + r
+        elseif r < 1 then
+            return a * r
+        else
+            return r --+ r0
+        end
+    end
+
+    local solve = function( x1, y1, x2, y2 )
+        --print( x, y, "= ",  get( x, w ), get( y, h ) )
+        return get( x1, w, 0 ), get( y1, h, 0 ), get( x2, w, x1 ), get( y2, h, y1 )
+    end
+
+    return solve
 end
 
 rgb_to_r_g_b = function ( colour,alpha )
     return ((colour / 0x10000) % 0x100) / 255., ((colour / 0x100) % 0x100) / 255., (colour % 0x100) / 255., alpha
 end
 
+--[[ just to hold path functions with angles ]]
 pie = function( sa, ea )
     local self = { astart = sa, aend = ea }
         rad2grd = merilo( 0, 2 * math.pi, 0, 360 )
@@ -104,7 +133,7 @@ pie = function( sa, ea )
         return ( self.astart + self.aend ) / 2
     end
     
-    path = function( ctx, xc, yc, ring_r, angle_0, t_arc ) --TODO as params of object
+    path = function( ctx, xc, yc, ring_r, angle_0, t_arc, bounds ) --TODO as params of object
 
         if ( self.aend > self.astart ) then
             cairo_arc(
@@ -112,6 +141,11 @@ pie = function( sa, ea )
         else -- reverse
             cairo_arc_negative(
                 ctx, xc, yc, ring_r, self.astart, self.aend  )
+        end
+        
+        if ( bounds ) then
+            local x1, x2, y1, y2
+            local s, e, r
         end
     end
 
@@ -186,11 +220,11 @@ function calculate_top( sets )
     local gra2rad, grade, grade_alpha, grade_color, min_angle, max_angle, current_angle
 
     if ( sets.start_angle ) then --will calc and draw ring
-        gra2rad = merilo( 0, 360, 0, 2 * math.pi )
-        min_angle, max_angle  =
-            ( gra2rad( sets.start_angle ) or 0 ) - math.pi / 2,
-            ( gra2rad( sets.end_angle or 360 ) ) - math.pi / 2
--------------------------------------V very need this 0 as min!
+        local gra2rad = merilo( 0, 360, 0, 2 * math.pi )
+        min_angle, max_angle  = --we will rotate the surface then
+            ( gra2rad( sets.start_angle ) or 0 ), -- math.pi / 2,
+            ( gra2rad( sets.end_angle or 360 ) ) -- math.pi / 2
+                                          --V very need this 0 as min!
         grade = merilo( 0, sets.max or 100, 0, max_angle - min_angle )
         rings.bg = pie( min_angle, max_angle )
         current_angle = min_angle
@@ -243,9 +277,8 @@ function calculate_top( sets )
     for i = iMin, iMax do
         rings[ i ] = {}
 
-        val = conky_parse(
-                string.format( '${%s %d}', prep, i )
-        )
+        val = conky_parse( string.format( '${%s %d}', prep, i ) )
+        --val = string.format( "%d", (iMax-i) * 19 )
 
         if ( val and #val ) then
             val = tonumber( val )
@@ -291,20 +324,119 @@ function calculate_top( sets )
                 end
 
                 if ( grade ) then-- calc angles
-                    rings[ i ].pie = pie( current_angle, current_angle + grade( val ) )
-                    current_angle = current_angle + grade( val )
+                    local valInRad = grade( val )
+                    rings[ i ].pie = pie( current_angle, current_angle + valInRad )
+                    current_angle = current_angle + valInRad
                 end
 
             end -- if valNum
         end -- if val
     end -- for i = iMin, iMax
 
+    rings.max_angle = current_angle
     return rings
 end
 
 function draw_top( cr, pt, rings )
+
+    cairo_save( cr )
     if ( pt.fg ) then
         cairo_set_line_width( cr, pt.thickness )
+    end
+
+    if ( pt.clip ) then --set up transform
+        local gra2rad = merilo( 0, 360, 0, 2 * math.pi )
+        local rad2gra = merilo( 0, 2 * math.pi, 0, 360 )
+        local radius = pt.radius + (pt.thickness / 2)
+
+        local x1, y1, x2, y2, dx, dy = --top, left, right, bottom
+            radius , radius, -radius , -radius, 
+            radius * math.cos(rings.max_angle),
+            radius * math.sin(rings.max_angle)
+
+        --pessimistic
+
+-- in 0based coordinates
+
+    -- for angles from 0 to 180
+
+        x1, y1 = 0, 0
+        local inGrad = rad2gra( rings.max_angle )
+        --cairo_translate( cr, radius, radius)
+        --print( inGrad, math.cos( rings.max_angle ), math.cos( math.pi/2 ) )
+    --print( conky_window, inGrad, conky_parse( '${updates}' ) )
+        x1 = dx
+        x2 = radius--[[ ( r*(1-cos) )]]
+
+        if ( inGrad < 90 ) then
+            y2 = dy
+        elseif ( inGrad < 180 ) then
+            y2 = radius
+        elseif ( inGrad < 270 ) then --more than 180
+            y1 = dy
+            x1 = -radius
+            y2 = radius
+        else -- about 360
+            y1 = -radius
+            x1 = -radius
+            y2 = radius
+        end
+
+        if ( rings.max_angle < 0 ) then
+            y1, y2 = y2, y1
+        end
+--[[
+        cairo_save( cr )
+        cairo_set_line_width( cr, 1 )
+        cairo_set_source_rgba( cr, 1,1,1,1 )
+        cairo_rectangle( cr, x1, y1, x2 - x1 , y2 - y1 )
+        cairo_stroke( cr )
+        cairo_restore( cr )
+        print( x1, y1, " x ", x2, y2 )]]
+        -- TODO this one time when loading (in production time).
+        local r2a = rel2abs( conky_window.height, conky_window.width )
+        local clip = {}
+        clip[ 1 ], clip[ 2 ], clip[ 3 ], clip[ 4 ] = r2a( pt.clip[ 1 ], pt.clip[ 2 ], pt.clip[ 3 ], pt.clip[ 4 ] )
+        --print( unpack( clip ) )
+--[[
+        cairo_save( cr )
+        cairo_set_line_width( cr, 1 )
+        cairo_set_source_rgba( cr, 1,1,1,1 )
+        cairo_rectangle(  cr, clip[2], clip[1], clip[4]-clip[2],  clip[3]-clip[1] )
+        cairo_stroke( cr )
+        cairo_restore( cr )]]
+        cairo_rectangle( cr, clip[2], clip[1], clip[4]-clip[2],  clip[3]-clip[1] )
+        cairo_clip( cr )
+        
+
+        clip = { clip[2], clip[1], clip[ 4 ], clip[ 3 ] } -- due to rotate -pi/2
+        if( rings.max_angle < 0 ) then
+            clip[ 1 ],clip[ 4 ] = 
+                clip[ 3 ] - (clip[4]-clip[2]),--ex - dy
+                clip[ 2 ] + (clip[3]-clip[1])--y + dx
+        else
+            clip[ 3 ],clip[ 4 ] = 
+                clip[ 1 ] + (clip[4]-clip[2]),--x + dy
+                clip[ 2 ] + (clip[3]-clip[1])--y + dx
+        end
+
+        local magnX, magnY, magn = 
+            (clip[ 3 ] - clip[ 1 ]) / (x2 - x1),
+            (clip[ 4 ] - clip[ 2 ]) / (y2 - y1),
+            1 --zoom
+        --print( (x2 - x1), (y2 - y1), clip[ 3 ] - clip[ 1 ], clip[ 4 ] - clip[ 2 ], magnX, magnY )
+        magn = math.min( magnX, magnY )
+
+        --cairo_translate( cr, pt.x , pt.y)
+        if ( rings.max_angle < 0 ) then
+            cairo_translate( cr, clip[ 3 ] , clip[ 2 ] + (x2)*magn )
+        else
+            cairo_translate( cr, clip[ 1 ] - (y1)*magn, clip[ 2 ] + (x2)*magn )
+        end
+
+        cairo_scale( cr, magn, magn )
+        cairo_rotate( cr, -math.pi/2 )
+
     end
     --draw bg
     if ( pt.bg ) then
@@ -339,7 +471,7 @@ function draw_top( cr, pt, rings )
             cairo_set_source_rgba( cr, fgc.r, fgc.g, fgc.b, fga )
 
             if ( ring.pie ) then
-                ring.pie.path( cr, pt.x, pt.y, pt.radius ) 
+                ring.pie.path( cr, 0, 0, pt.radius ) --pt.x, pt.y, 
                 cairo_stroke( cr )
             end
 
@@ -349,6 +481,7 @@ function draw_top( cr, pt, rings )
         end
     end
     --print( pt.thickness, rings.bg, pt.bg.color, pt.bg.alpha )
+    cairo_restore( cr )
     
 end
 
@@ -361,7 +494,7 @@ function conky_main()
         local end_arc = 0
 
         if ( pt[ 'name' ]:sub( 1, 3 ) == 'top' ) then
---print( "found TOP ", pt[ 'name' ], conky_parse( '${updates}' ) );
+-- print(cr, "found TOP ", pt[ 'name' ], conky_parse( '${updates}' ) );
             draw_top( cr, pt, calculate_top( pt ) )
         -- old simple cool rings
         else
@@ -393,12 +526,13 @@ function conky_main()
         conky_window.width,
         conky_window.height 
     )
- 
+ --print(         conky_window.width, conky_window.height )
     local cr = cairo_create( cs )
-    
  
     if tonumber( conky_parse( '${updates}' ) ) > 2 then -- HERE you MUST use in your conkyrc ${cpu} var to init cpu nums
+--
         for i in pairs( settings_table ) do
+
             setup_rings( cr, settings_table[ i ], update_num )
         end
     end
