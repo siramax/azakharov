@@ -15,7 +15,8 @@ use_xft yes
 font DejaVu Sans Mono:size=8
 #
 # 1280 / 3 ~= 426
-maximum_width 300
+maximum_width 200 
+minimum_size 300 150
 short_units yes
 #${execi 30 tail -n3 /var/log/messages | fold -w50}
 #bytes  connection         program

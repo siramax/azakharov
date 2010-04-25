@@ -43,7 +43,7 @@ settings_table = {
         end_angle   = 180,
     },
     {   name = 'top', arg = 'cpu', -- max top
-        top_items   = 10,
+        items       = 10,
         max         = 100,
         --bg_colour   = 0x000000,
         bg_alpha    = 0.01,
@@ -57,6 +57,14 @@ settings_table = {
         start_angle = 0,
         end_angle   = 360,
         textx      = 5, texty = 18,
+        text = {
+            x = 5, y = 18,
+            font_family = "DejaVu Sans Mono",
+            font_size   = 10,
+            color_begin    = 0x8b1a1a,
+            color_end      = 0x00ff00,
+        },
+
         font_family = "DejaVu Sans Mono",
         font_size   = 10,
         margin_top  = 0,
@@ -222,8 +230,9 @@ settings_table = {
         font_family = "Lucida Grande",
     },]]
 }
- 
+--package.cpath = "/home/vaulter/scripts/conky/?.so;" .. package.cpath 
 require'cairo'
+package.path = "/home/vaulter/scripts/conky/?.lua;" .. package.path
 require'conky'
 
 function draw_text( cr, t, pt, sx, sy )
@@ -260,47 +269,72 @@ end
 
 --[[input: sets,
     output: sets[ rings ][ 0..max ] ]]
-function calculate_top_rings( sets )
+function calculate_top( sets )
 
-    local min_angle, max_angle  = sets.start_angle or 0, sets.end_angle or 360
-    local min_alpha, max_alpha  = sets.fg_alpha, sets.fg_alpha_end or 0.025
-    local min, max              = 1, sets.top_items
-    local bc, ec                = {}, {}    --begin, end gradient colors
-    local grade_alpha = merilo( min, max, min_alpha, max_alpha )
+    local iMin, iMax              = 1, sets.items or top_items or 4;
 
-    if ( sets[ 'text_color_begin' ] ) then
-        bc.r, bc.g, bc.b = rgb_to_r_g_b( sets[ 'text_color_begin' ] )
-        ec.r, ec.g, ec.b = rgb_to_r_g_b( sets[ 'text_color_end' ] )
+    if ( sets.start_angle ) then --will calc and draw ring
+        local gra2rad = merilo( 0, 360, 0, 2 * math.pi )
+        local min_angle, max_angle  = 
+            ( gra2rad( sets.start_angle ) or 0 ) - math.pi / 2,
+            ( gra2rad( sets.end_angle or 360 ) ) - math.pi / 2
+
+        local grade = merilo( 0, sets.max, min_angle, max_angle )
+        local rings = {}
+
+    end
+
+    if ( sets.fg_alpha_end ) then --will calc and draw gradient alpha
+        local grade_alpha = merilo( iMin, iMax, sets.fg_alpha, sets.fg_alpha_end )
+    end
+
+    
+
+    if ( sets.text_color_begin ) then --begin, end gradient colors
+        local bc, ec                = {}, {}
+        bc.r, bc.g, bc.b = rgb_to_r_g_b( sets.text_color_begin )
+        ec.r, ec.g, ec.b = rgb_to_r_g_b( sets.text_color_end )
+
         local grade_color = { 
-            r = merilo( min, max, bc.r, ec.r ), 
-            g = merilo( min, max, bc.g, ec.g ), 
-            b = merilo( min, max, bc.b, ec.b ),
+            r = merilo( iMin, iMax, bc.r, ec.r ), 
+            g = merilo( iMin, iMax, bc.g, ec.g ), 
+            b = merilo( iMin, iMax, bc.b, ec.b ),
         }
     end
 
-    local rings = {}
     --shallow copy
-    for k, v in pairs( sets ) do rings[ k ] = v; end
+    --for k, v in pairs( sets ) do rings[ k ] = v; end
 
 -- TODO background ring here
+    local current_angle = min_angle
 
-    for i = min, max  do
+    for i = iMin, iMax  do
         rings[ i ] = {}
-        rings[ i ][ 'fg_alpha' ] = grade_alpha( i )
 
-        if ( grade_color ) then
-            rings[ i ].color.r = grade_color.r( i )
-            rings[ i ].color.g = grade_color.g( i )
-            rings[ i ].color.b = grade_color.b( i )
+        val = conky_parse(
+                string.format( '${%s %s %d}', sets.name, sets.arg, i ) 
+        )
+
+        if ( val ) then
+            val = tonumber( val )
+            rings[ i ].val = val
+
+            if ( grade_alpha ) then
+                rings[ i ].fg_alpha = grade_alpha( i )
+            end
+
+            if ( grade_color ) then
+                rings[ i ].color.r = grade_color.r( i )
+                rings[ i ].color.g = grade_color.g( i )
+                rings[ i ].color.b = grade_color.b( i )
+            end
+            
+            if ( grade ) then-- calc angles
+
+                rings[ i ].pie = pie( current_angle, current_angle + grade( val ) )
+                current_angle = current_angle + grade( val )
+            end
         end
--- calc angles    
-
-        rings[ i ][ 'start_angle' ] = min_angle
-        rings[ i ][ 'end_angle' ] = max_angle + min_angle
-
-        ring[ 'fg_alpha' ]      = ring[ i ][ 'fg_alpha' ]
-        ring[ 'start_angle' ]   = ring[ i ][ 'start_angle' ]
-        ring[ 'end_angle' ]     = ring[ i ][ 'end_angle' ]
     end
 end
 
