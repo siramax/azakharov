@@ -16,11 +16,11 @@ use_xft yes
 font Lucida Grande:size=10
 
 update_interval 300
-minimum_size 300 400
+minimum_size 300 200
 maximum_width 280
 alignment top_right
 gap_x 530
 gap_y 225
 
 TEXT
-${if_gw wlan0}${execpi 3600 conkyForecast --locale=ru --location=RSXX0117 --template=$HOME/scripts/conky/conkyForecast.template}${endif}${voffset -70}
+${if_gw wlan0}${execpi 3600 conkyForecast --locale=ru --location=RSXX0117 --template=$HOME/scripts/conky/conkyForecast.template}${endif}${voffset -40}
