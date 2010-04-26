@@ -28,4 +28,4 @@ short_units yes
 #${top cpu 2} ${top name 2} ${top pid 2} ${alignr}${top_io pid 2} ${top_io name 2} ${top_io io_perc 2}
 #${top cpu 3} ${top name 3} ${top pid 3} ${alignr}${top_io pid 3} ${top_io name 3} ${top_io io_perc 3}${font}
 TEXT
-${font PizzaDude Bullets:size=14}S${font}${color1}${voffset -1}${downspeed wlan0}${goto 100}$loadavg${goto 250}${voffset -2}${color}${font PizzaDude Bullets:size=14}M${font}${color1}${voffset -1}${upspeed wlan0}
+${font DejaVu Sans:size=14}⇘${font}${color1}${downspeed wlan0}${goto 100}$loadavg${goto 250}${voffset -6}${color}${font DejaVu Sans:size=14}⇗${font}${color1}${upspeed wlan0}

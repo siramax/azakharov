@@ -20,7 +20,7 @@ settings_table = {
         end_angle   = -180,
         --bg          = { color = 0x000000, alpha    = 0.05, }, --TODO pie as shape
         fg          = {
-            color = { 0xffffff, 0x00ff00 },--gradient
+            color = { 0xffffff, 0x000000 },--gradient
             alpha = { 0.1, 0.025 }
         },
         --[[text = {
@@ -33,7 +33,6 @@ settings_table = {
             --margin = { 0, 0, 0, 0 }, --as CSS: top, right, bottom, left
             mask = "${top pid %d} ${top name %d}" --REQUIRED
         },]]
-
         line_color          = 0x188b18,
         line_side           = 1, -- right
     },
@@ -41,7 +40,7 @@ settings_table = {
         items = 5,
         --bg      = { color   = 0x000000, alpha    = 0.05, },
         fg      = { color   = { 0xffffff, 0x000000 },
-                    alpha   = { 0.5, 0.025 }, },
+                    alpha   = { 0.1, 0.025 }, },
         x = 100, y =  100, -- 5 margin
         clip = { 5, 0.5, -5, -5 },
         radius      = 400,
