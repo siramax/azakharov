@@ -9,7 +9,7 @@ own_window_transparent yes
 own_window_type desktop
 
 lua_load ~/scripts/conky/top.lua
-lua_draw_hook_pre main
+lua_draw_hook_pre draw_hook_pre
 
 #background yes
 
@@ -83,10 +83,10 @@ color9 ff0000
 #template1 ${if_match ${top io_perc \1} > 0}${color\2} ${top_io pid \1}.${top_io name \1} ${top io_read \1} ${top io_write \1}${else}${voffset -14}${endif}
 template1 ${color\2} ${top_io pid \1}.${top_io name \1} ${top io_read \1} ${top io_write \1}
 # mem
-template2 ${alignr}${color\2}${top_mem pid \1}.${top_mem name \1} ${top_mem mem \1} ${top_mem mem_vsize \1}
+template2 ${alignr}${lua_parse top_colour top_mem \1}${top_mem pid \1}.${top_mem name \1} ${top_mem mem \1} ${top_mem mem_vsize \1}
 
 # cpu
-template3 ${if_match ${top cpu \1} > 0}${color\2}${top pid \1}.${top name \1} ${top cpu \1}${endif}
+template3 ${lua_parse top_colour top \1}${top pid \1}.${top name \1} ${top cpu \1}
 
 # time
 template4 ${color\2}${top_time pid \1}.${top_time name \1} ${top_time time \1}
@@ -97,8 +97,8 @@ template4 ${color\2}${top_time pid \1}.${top_time name \1} ${top_time time \1}
 #${template4 3 6}
 #${template4 4 7}${color}
 TEXT
-${template3 1 1}${color}${goto 250}${freq_g 1}GHz ${cpu cpu1}%
-${template3 2 1}${color}${goto 250}${freq_g 2}GHz ${cpu cpu2}%
+${template3 1 1}${color}${goto 540}${freq_g 1}GHz ${cpu cpu1}%
+${template3 2 1}${color}${goto 540}${freq_g 2}GHz ${cpu cpu2}%
 ${template3 3 1}
 ${template3 4 1}${color}
 ${goto 650}${voffset -60}$memperc%${template2 1 1}
