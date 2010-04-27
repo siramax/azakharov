@@ -1,6 +1,13 @@
 --[[
-    Top pies for conky
-    @author Andrey Zakharov /Vaulter/ 2010
+    Enlarged top pies and for conky
+--! @author Andrey Zakharov /Vaulter/ 2010
+
+        Copyright (c) 2010 Andrey Zakharov, all rights reserved.
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
     TODO some declarative mechanizm to set substracts from basic top pie chart.
     this will be usefull for showing CPU's %s, or growing semicircles for each core, etc. (swap, text labels)
 ]]
@@ -20,7 +27,8 @@ settings_table = {
         end_angle   = -180,
         --bg          = { color = 0x000000, alpha    = 0.05, }, --TODO pie as shape
         fg          = {
-            color = { 0xffffff, 0x000000 },--gradient
+            color = { 0xbb1a1a, 0x1abb1a },--gradient
+            color_by_value = 1 or true, --not by pos
             alpha = { 0.1, 0.025 }
         },
         --[[text = {
@@ -34,12 +42,12 @@ settings_table = {
             mask = "${top pid %d} ${top name %d}" --REQUIRED
         },]]
         line_color          = 0x188b18,
-        line_side           = 1, -- right
+        line_side           = 1 or true, -- right
     },
     {   name = 'top_mem', arg = 'mem', -- max top
         items = 5,
         --bg      = { color   = 0x000000, alpha    = 0.05, },
-        fg      = { color   = { 0xffffff, 0x000000 },
+        fg      = { color   = { 0xbb1a1a, 0x1abb1a },
                     alpha   = { 0.1, 0.025 }, },
         x = 100, y =  100, -- 5 margin
         clip = { 5, 0.5, -5, -5 },
@@ -80,7 +88,7 @@ settings_table = {
     },]]
 }
 
---[[     Just a shrinker    ]]
+--!     Just a shrinker
 merilo = function( mini, maxi, minp, maxp )
 
     local empty = function()
@@ -88,6 +96,7 @@ merilo = function( mini, maxi, minp, maxp )
     end
 
     local mer = function( i )
+        --print( i,  mini, maxi, minp, maxp )
         return ( ( i - mini ) * ( maxp - minp ) / ( maxi - mini ) ) + minp
     end
     --to avoid devision by zero
@@ -95,11 +104,27 @@ merilo = function( mini, maxi, minp, maxp )
     else                        return empty    end
 end
 
---[[ 
-    Relative to absolute
-    @param w, h - width and height of real window 
-    @return function ]]
+-- TODO shrink any complex table
+colour_merilo = function( iMin, iMax, minc, maxc )
+    local bc, ec                = {}, {}
+    bc.r, bc.g, bc.b = rgb_to_r_g_b( minc )
+    ec.r, ec.g, ec.b = rgb_to_r_g_b( maxc )
+
+    local grd = {
+        r = merilo( iMin, iMax, bc.r, ec.r ),
+        g = merilo( iMin, iMax, bc.g, ec.g ),
+        b = merilo( iMin, iMax, bc.b, ec.b )
+    }
+
+    grd.rgb = function( x ) return r_g_b_to_rgb( grd.r( x ), grd.g( x ), grd.b( x ) ) end
+
+    return grd --for legacy
+end
+--! Relative to absolute
+--!  @param w, h - width and height of real window 
+--!  @return function
 rel2abs = function( w, h )
+
     --[[ abstract solver of relative in absolute ]]
     local get = function( r, a, r0 )
         if r < 0 then
@@ -119,7 +144,12 @@ rel2abs = function( w, h )
     return solve
 end
 
-rgb_to_r_g_b = function ( colour,alpha )
+--! Take the RGB components r, g, b, and return an RGB integer
+r_g_b_to_rgb = function ( r, g, b )
+    return ((math.floor(r * 255. + 0.5) * 0x10000) + (math.floor(g * 255. + 0.5) * 0x100) + math.floor(b * 255. + 0.5)) % 0xffffff 
+    -- no bit shifting operator in Lua afaik
+end
+rgb_to_r_g_b = function ( colour, alpha )
     return ((colour / 0x10000) % 0x100) / 255., ((colour / 0x100) % 0x100) / 255., (colour % 0x100) / 255., alpha
 end
 
@@ -156,7 +186,7 @@ pie = function( sa, ea )
     }
 end
 
---[[ 
+--[[
     @param cr
     @param t - TODO
     @param sets -  table with fields x, y, label, font
@@ -210,13 +240,16 @@ draw_text = function ( cr, t, sets, sx, sy )
 --    cairo_stroke (cr);
     return te
 end
---[[input: sets,
-    output: sets[ rings ][ 0..max ] ]]
-function calculate_top( sets )
+
+--[[
+    @param sets,
+    @return sets[ rings ][ 0..max ] ]]
+calculate_top = function ( sets )
 
     local iMin, iMax              = 1, sets.items or top_items or 4;
     local rings = {}
     local gra2rad, grade, grade_alpha, grade_color, min_angle, max_angle, current_angle
+    local color_by_value = sets.fg and sets.fg.color_by_value or false
 
     if ( sets.start_angle ) then --will calc and draw ring
         local gra2rad = merilo( 0, 360, 0, 2 * math.pi )
@@ -231,38 +264,25 @@ function calculate_top( sets )
 
     if ( sets.fg ) then
 
+
         if ( sets.fg.alpha and "table" == type( sets.fg.alpha ) ) then --will calc and draw gradient alpha
             grade_alpha = merilo( iMin, iMax, sets.fg.alpha[ 1 ], sets.fg.alpha[ 2 ] )
         else
-            grade_alpha = merilo( iMin, iMin, sets.fg.alpha ) --TODO
+            grade_alpha = function() return sets.fg.alpha end --TODO
         end
 
         if ( sets.fg.color and "table" == type( sets.fg.color ) ) then
-            local bc, ec                = {}, {}
-            bc.r, bc.g, bc.b = rgb_to_r_g_b( sets.fg.color[ 1 ] )
-            ec.r, ec.g, ec.b = rgb_to_r_g_b( sets.fg.color[ 2 ] )
-
-            grade_color = { 
-                r = merilo( iMin, iMax, bc.r, ec.r ), 
-                g = merilo( iMin, iMax, bc.g, ec.g ), 
-                b = merilo( iMin, iMax, bc.b, ec.b ),
-            }
+            grade_color = color_by_value and 
+                colour_merilo( 0, sets.max, sets.fg.color[ 2 ], sets.fg.color[ 1 ] ) --NOTE reverse
+                    or
+                colour_merilo( iMin, iMax, sets.fg.color[ 1 ], sets.fg.color[ 2 ] )
         end
     end
 
     if ( sets.text ) then
 
         if ( sets.text.color and "table" == type( sets.text.color ) ) then
-
-            local bc, ec                = {}, {}
-            bc.r, bc.g, bc.b = rgb_to_r_g_b( sets.text.color[ 1 ] )
-            ec.r, ec.g, ec.b = rgb_to_r_g_b( sets.text.color[ 2 ] )
-
-            grade_text_color = { 
-                r = merilo( iMin, iMax, bc.r, ec.r ), 
-                g = merilo( iMin, iMax, bc.g, ec.g ), 
-                b = merilo( iMin, iMax, bc.b, ec.b ),
-            }
+            grade_text_color = colour_merilo( iMin, iMax, sets.text.color[ 1 ], sets.text.color[ 2 ] )
         end
     end
 
@@ -282,7 +302,7 @@ function calculate_top( sets )
         if ( val and #val ) then
             val = tonumber( val )
 
-                if ( val ) then --not nil
+            if ( val ) then --not nil
                 rings[ i ].val = val
 
                 if ( grade_alpha ) then
@@ -290,12 +310,13 @@ function calculate_top( sets )
                 end
 
                 if ( grade_color ) then
+                    local x = color_by_value and val or i
                     rings[ i ].color = {
-                        r = grade_color.r( i ),
-                        g = grade_color.g( i ),
-                        b = grade_color.b( i )
+                        r = grade_color.r( x ),
+                        g = grade_color.g( x ),
+                        b = grade_color.b( x )
                     }
-
+--for c = 0,100,10 do print (color_by_value,x,c, grade_color.r( c ), grade_color.g( c ), grade_color.b( c )) end
                 elseif ( text_color ) then
                     rings[ i ].color = text_color
                 end
@@ -336,7 +357,7 @@ function calculate_top( sets )
     return rings
 end
 
-function draw_top( cr, pt, rings )
+draw_top = function ( cr, pt, rings )
 
     cairo_save( cr )
     if ( pt.fg ) then
@@ -485,9 +506,9 @@ function draw_top( cr, pt, rings )
 end
 
 
-function conky_main()
+conky_draw_hook_pre = function ()
 
-    local function setup_rings( cr, pt, update_num )
+    local setup_rings = function ( cr, pt, update_num )
         local str=''
         local value = 0
         local end_arc = 0
@@ -534,5 +555,42 @@ function conky_main()
 
             setup_rings( cr, settings_table[ i ], update_num )
         end
+    end
+end
+
+--[[
+    @return conky's text
+    @param type (top|top_mem|...)
+    @param arg the top var number we want to use
+    ]]
+conky_top_colour = function ( type, arg )
+--template3 ${if_match ${top cpu \1} > 0}${color\2}${top pid \1}.${top name \1} ${top cpu \1}${endif}
+--template2 ${alignr}${color\2}${top_mem pid \1}.${top_mem name \1} ${top_mem mem \1} ${top_mem mem_vsize \1}
+    --TODO one time prepare, many times do
+    local metricsNames, metrics, num = { 'pid', 'name', 'cpu', 'mem', 'mem_vsize' }, {}, tonumber( arg )
+
+    for i, p in ipairs( metricsNames ) do 
+        metrics[ i ] = string.format( "${%s %s %i}", type, p, num )
+    end
+
+    --local str = conky_parse( string.format( '%s.%s %s %s %s', unpack( metrics ) ) )
+    local value, color = 0, {} --1 - start /coldest/, 2 - end /hotest/
+
+    if      ( "top" == type ) then                      --TODO lookup settings_table
+        value = tonumber( conky_parse( metrics[ 3 ] ))
+        color = settings_table[ 1 ].fg.color
+    elseif  ( "top_mem" == type ) then
+        value = tonumber( conky_parse( metrics[ 4 ] )) --CPU or MEM?
+        color = settings_table[ 2 ].fg.color
+    end
+
+    if ( value ) then
+    --very straight and forward, TODO thresholds
+        local gradient = colour_merilo( 0, 100, color[ 2 ], color[ 1 ] )
+
+        --for c = 0,100,10 do print (c, gradient.r( c ), gradient.g( c ), gradient.b( c ),gradient.rgb( c )) end
+        return string.format( "${color #%06x}", gradient.rgb( value ))
+    else
+        return "${color}"
     end
 end
