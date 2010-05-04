@@ -67,7 +67,8 @@ opportunity for advancement.
           <City>Volgograd branch</City>
           <Description>International outsourcing company</Description>
         </Employer>
-        <Description>Working as member of a team developing and maintaining distributed system of data collection and metric controls of company systems.</Description>
+        <Description>Working as member of a team developing and maintaining: 
+        distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application</Description>
         <Achievement lang = "ru">Улучшил скорость SOAP запросов web приложения к серверу</Achievement>
         <Achievement lang = "en">Improved speed of SOAP data exchange between web application and server</Achievement>
         
@@ -77,7 +78,7 @@ opportunity for advancement.
         <Achievement lang = "ru">Оптимизировал процесс сборки проекта под Linux</Achievement>
         <Achievement lang = "en">Optimized project building under Linux</Achievement>
         
-        <Techs>C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, MySQL, Tomcat.</Techs>
+        <Techs>C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat.</Techs>
       </Entry><!-- 
       <Entry Job = 'Freelancer'>
         <Period From = "Aug 2007" To = "Jul 2008" />
