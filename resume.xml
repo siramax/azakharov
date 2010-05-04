@@ -213,7 +213,7 @@ opportunity for advancement.
   
   <Skills>
     <Group type = 'Tools'>
-      <Entry type = 'OS'>MS Windows, Linux (Debian), FreeBSD, MSDOS, Apple DOS 3.3</Entry>
+      <Entry type = 'OS'>MS Windows, Linux (Debian), QNX, FreeBSD, MSDOS, Apple DOS 3.3</Entry>
       <Entry type = 'DBMS'>MySQL, MS SQL, SQLite, MS Access</Entry>
       <Entry type = 'Related Software'>MS Office, MS Visio, MS Project, SSH, Bash, Kile</Entry>
       <Entry type = 'Development software'>MS Visual Studio, Netbeans IDE, Eclipse IDE, code reviewer, JIRA, GDB, Borland Delphi</Entry>
@@ -229,7 +229,7 @@ opportunity for advancement.
       <Entry type = 'Visual Basic'>VBA, MS Word, MS Excel, MS Access, MS Outlook</Entry>
       <Entry type = 'Markup'>XHTML, CSS, XML, XSL</Entry>
       <Entry type = 'GNU'>BASH, SSH, sed, awk, \LaTeXe</Entry>
-      <Entry type = 'Scripting'>BASH, Python, Groovy</Entry>
+      <Entry type = 'Scripting'>BASH, Lua, Python, Groovy</Entry>
       <Entry type = 'Exotic'>Architecture and assembler MOStech 6502 (Apple II, etc.)</Entry>
     </Group>
     <!-- <Group type = 'Practical'>
