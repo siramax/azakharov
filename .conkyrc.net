@@ -18,12 +18,16 @@ font DejaVu Sans Mono:size=8
 maximum_width 200 
 minimum_size 300 150
 short_units yes
-#${execi 30 tail -n3 /var/log/messages | fold -w50}
-#bytes  connection         program
-#${exec netstat --tcp --numeric-hosts --program --timers 2>/dev/null | grep ESTABLISHED | sort --numeric --key=2 --reverse | head --lines=15 | awk '{ printf "%6d %-24s %s\n", $2,$5,$7 }'}
+
+lua_load ~/scripts/conky/network.lua
+lua_startup_hook        startup wlan0
+#lua_draw_hook_pre       draw_pre wlan0
 
 TEXT
-${if_gw wlan0}${color2}Send-Q ${totaldown wlan0}${color}
+${if_gw wlan0}${color2}${font Lucida Grande:size=12}Send-Q ${totaldown wlan0}${color} / ${upspeed wlan0}${font}
 ${execi 5 netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $3 } END { for ( s in sum ) printf "%7d %s\n", sum[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }
-${color2}Recv-Q ${totalup wlan0}${color}
-${execi 5 netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $2 } END { for ( s in sum ) printf "%7d %s\n", sum[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }${endif}
+${color2}${font Lucida Grande:size=12}Recv-Q ${totalup wlan0}${color} / ${downspeed wlan0}${font}
+${execi 5 netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $2 } END { for ( s in sum ) printf "%7d %s\n", sum[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }
+${exec iwlist wlan0 rate| awk 'BEGIN {FS="[ :]+"} /Current/ {byps = $5 / 8; print byps,$6}'}
+${lua tribar wlan0}
+${endif}

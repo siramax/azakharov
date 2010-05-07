@@ -174,17 +174,24 @@ case "$1" in
         shift
         m_desktop $* #shift
         ;;
-    
+    t | tools)
+        shift
+        
+        UID=$USER simple_check "ktorrent" "/usr/bin/ktorrent" "kquitapp --service org.ktorrent.ktorrent ktorrent" "KTorrent"
+        UID=$USER simple_check "skype" "/usr/bin/skype" "pkill -SIGINT skype" "Skype"
+        UID=$USER simple_check "plasma" "/usr/bin/plasma" "kquitapp plasma"
+        UID=$USER simple_check "openvpn" "lxterm -title \"Sperasoft VPN\" -e '/bin/sh -c \"cd /home/vaulter/.openvpn/config/; cat /home/vaulter/Desktop/vpn.txt; sudo openvpn client.ovpn\"'" \
+        "pkill openvpn" "Sperasoft VPN"
+        ;;
     *)
 #openttd 
 # ratings
 # land area
-# minimap zoom?
-# TODO Locale!
         ob_subpipe_menu Desktop "$txtDesktop" "$SELF desktop"
         #use open box built-in menu
         ob_subpipe_menu client-list-combined-menu "❖ "
         ob_subpipe_menu ssh "$txtSSH" "$HOME/scripts/openbox/ssh.sh"
+        ob_subpipe_menu Tools "$txtTools" "$SELF tools"
         ob_subpipe_menu time `date` "$SELF cal"
         ob_menu_item 0 "$txtWallpaper" "$HOME/scripts/set.random.wallpaper.sh"
 
@@ -198,15 +205,11 @@ case "$1" in
         # TODO bookmarks (google?)
         ob_subpipe_menu mainmenu "$txtMainMenu" "$OBMENUGEN --pipe"
 
-        UID=$USER simple_check "ktorrent" "/usr/bin/ktorrent" "kquitapp --service org.ktorrent.ktorrent ktorrent" "KTorrent"
-        UID=$USER simple_check "skype" "/usr/bin/skype" "pkill -SIGINT skype" "Skype"
-        UID=$USER simple_check "plasma" "/usr/bin/plasma" "kquitapp plasma"
-        UID=$USER simple_check "openvpn" "lxterm -title \"Sperasoft VPN\" -e '/bin/sh -c \"cd /home/vaulter/.openvpn/config/; cat /home/vaulter/Desktop/vpn.txt; sudo openvpn client.ovpn\"'" \
-        "pkill openvpn" "Sperasoft VPN"
-        ob_menu_item 0 "CS 1.6 /todo move to desktop/" "x-terminal-emulator -e \"~/bin/cs.sh\""
+        ob_menu_item 0 "CS 1.6 /todo move to desktop/" "x-terminal-emulator -e \"~/bin/scripts.sh\""
         ob_menu_item 0 "Sleeeeep" "powersave --suspend-to-ram"
         ob_menu_sep
         ob_menu_item 0 "$txtEditThisMenu" "kate $SELF"
+        ob_menu_item 0 "$txtEditWidgets" "kate `eval echo $HOME/.conkyrc*`"
         ;;
 esac
 
