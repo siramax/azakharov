@@ -1,0 +1,279 @@
+body {
+    background:#664117 url('i/investment-darker.jpg') repeat fixed; 
+    color:#111;
+    border-top:5px solid #504B35;
+    font-family:serif;
+}
+
+a {
+    color:#dcb073;
+    text-decoration:none;
+    -webkit-transition: all 2s ease-in-out;
+}
+
+a:hover {
+    color:#fdc417;
+    text-decoration:underline;
+    -webkit-transition: all 1s ease-in-out;
+}
+/* very dang #user-login-form */
+.form-text {
+    font-size: 200%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header, #navbar {
+
+    background:#664117 url('i/investment-darker.jpg') repeat fixed; /* explicit to hide beneath */
+}
+
+#header {
+
+}
+
+#navbar {
+
+}
+
+/* wuuuuh */
+
+#primary {
+    font-size: 150%;
+}
+#search-block-form .form-submit { font-size: 100% }
+#search-block-form { /* TODO */
+    font-size: 60%;
+}
+
+#navbar-inner {
+    margin: 0.3ex;
+}
+
+#main {
+
+}
+
+#content-area {
+    background:#d2a668 url('i/bgtile1.jpg') repeat;
+    border:0;
+    -moz-border-radius:         5px;
+    -khtml-border-radius:       5px;
+    -webkit-border-radius:      5px;
+    border-radius:5px;
+}
+  .sticky /* A sticky node (displayed before others in a list) */, .help
+  {
+    background: #FCFAF4;
+    border: 1px solid #5D380E;
+    color: #111;
+    opacity: 0,8;
+  }
+/* back to classic */
+   .help a, .messages a {
+        color: blue;
+    }
+/* so let's just use HTML5 and CSS3!
+fuck off dinos and embendded */
+input[type="password"],
+input[type="text"]  {
+    -moz-border-radius:         4px;
+    -khtml-border-radius:       4px;
+    -webkit-border-radius:      4px;
+    border-radius:              4px;
+    background-color:   #FCFAF4;
+    border:1px solid #5D380E;
+    height:1.3em;
+    opacity:0.8;
+    color: #5D380E;
+}
+
+input[type="password"] {/* TODO dynamic onkeyup!*/
+    border:1px solid #d2a668;
+    font-family: DejaVu Sans Mono, Terminal, mono;
+    font-size: 100%;
+}
+
+/* Modern! Geek! */
+input[type="submit"] {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #fef4e9;
+    border: solid 1px #9E8562;
+    background: #895E22;
+    background: -webkit-gradient(linear, left top, left bottom, from(#EAC794), to(#895E22));
+    background: -moz-linear-gradient(top,  #EAC794, #895E22 );
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#EAC794', endColorstr='#895E22');
+    -webkit-transition: all 1s ease-in-out;
+
+}
+input[type="submit"]:hover {
+    background: #D2A668;
+    background: -webkit-gradient(linear, left top, left bottom, from(#895E22), to(#9E8562));
+    background: -moz-linear-gradient(top,  #895E22,  #9E8562);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#895E22', endColorstr='#9E8562');
+    -webkit-transition: all 5s ease-in-out;
+    color: yellow;
+}
+input[type="submit"]:active {
+    color:  #34195D;
+    background: -webkit-gradient(linear,    left top, left bottom, from(    #658855), to(   #A6DD8C));
+    background: -moz-linear-gradient(       top,                            #658855,        #A6DD8C);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#658855', endColorstr='#faa51a');
+}
+
+#content-area a {
+    color:#5d380e;
+}
+#content-area a:hover {
+    color:#3E2E06;
+}
+.block-locale {
+    float: left;
+    margin: 0
+}
+
+.block-locale  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#navbar .block-search {
+    float:          right;
+    margin-bottom:  0;
+}
+
+/* webkit */
+.block-search input.form-text {
+    
+}
+
+#breadcrumb {
+/*	position: absolute; /* for tooltips */
+}
+
+#breadcrumb ul {
+	margin:0;
+}
+
+#breadcrumb li {
+   float: left;
+   padding-right: 2em;
+}
+
+#breadcrumb .menu a {
+   float: inherit;
+}
+
+#breadcrumb li.first {
+	list-style: none;
+}
+
+#breadcrumb .breadcrumb_separator {
+	display: block; float: left;
+	background: url( m/arrows.png ) no-repeat;
+	background-position: 0px -67px;
+	/* for none block useless... todo <img /> :( */
+	width: 16px; min-width: 16px;
+	height: 16px; min-height: 16px;  
+}
+
+/* resets in loaded DOM.. but
+ TODO move loaded menus... out of breadcrumb... */
+
+h1,h2,h3,h4,h5 {
+    font-family:serif;
+    text-transform:uppercase;
+    letter-spacing:-1px;
+    font-weight: normal;
+}
+
+
+.block h1, .block h2,.block h3,.block h4,.block h5 {
+    text-transform:none;
+}
+
+
+/* double arrows */
+#breadcrumb .breadcrumb_separator:hover {
+    background-position: 0px -84px;
+
+}
+
+/* expanded arrows 26, 71, 14 x 9 (wider)*/
+#breadcrumb .expanded:hover, #breadcrumb .expanded {
+    background-position: -26px -67px;
+
+}
+
+#breadcrumb .breadcrumb_separator ul.menu {
+    position: absolute;
+    min-width: 400px;
+    width: auto;
+    top: 16px;/*just below separ*/
+    left: auto;
+    overflow: visible;
+}
+
+#breadcrumb .menu li, #breadcrumb .menu li a {
+	color: inherit;
+}
+
+/* new design
+#breadcrumb .breadcrumb_separator {
+    background: url( m/arrows.png ) no-repeat;
+    background-position: 0px -67px;
+    }
+    
+    */
+
+/*  Geishi  */
+div.geshifilter {
+    background: black;
+    color: lightgreen;
+}
+
+.bash .de1, .bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash  {font-family:monospace;}
+.bash .imp {font-weight: bold; color: red;}
+.bash li, .bash .li1 {font-weight: normal; vertical-align:top;}
+.bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash .li2 {font-weight: bold; vertical-align:top;}
+.bash .kw1 {color: white; font-weight: bold;}
+.bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash .co0 {color: #666666; font-style: italic;}
+.bash .co1 {color: #800000;}
+.bash .co2 {color: #cccc00; font-style: italic;}
+.bash .co3 {color: white; font-weight: bold;}
+.bash .es1 {color: #000099; font-weight: bold;}
+.bash .es2 {color: #007800;}
+.bash .es3 {color: #007800;}
+.bash .es4 {color: #007800;}
+.bash .es5 {color: #780078;}
+.bash .es_h {color: #000099; font-weight: bold;}
+.bash .br0 {color: #7a0874; font-weight: bold;}
+.bash .sy0 {color: white; font-weight: bold;}
+.bash .st0 {color: #ffff00;}
+.bash .st_h {color: #ff0000;}
+.bash .nu0 {color: white;}
+.bash .re0 {color: #AAD2AA;}
+.bash .re1 {color: #AAD2AA;}
+.bash .re2 {color: #AAD2AA;}
+.bash .re4 {color: #55A555;}
+.bash .re5 {color: #660033;}
+.bash .ln-xtra, .bash li.ln-xtra, .bash div.ln-xtra {background-color: #ffc;}
+.bash span.xtra { display:block; }

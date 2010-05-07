@@ -1,7 +1,7 @@
 #!/bin/bash
 # RSS Display Script by Andrey Zakharov (admin@vaultsoft.ru) v0.1
 #
-# This script is designed to output story bodies for most any RSS Feed.
+# This script is designed to output story BODIES for most any RSS Feed.
 #
 # This script depends on wget, xsltproc, sed.  Please ensure it is installed and in your $PATH
 # Debian: apt-get install wget xsltproc sed
@@ -57,5 +57,6 @@ else
 s!&quot\;!"!g
 s!&lt\;!<!g
 s!&gt\;!>!g
+s!&amp\;!\&!g
 '
 fi

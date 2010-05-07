@@ -21,13 +21,13 @@ settings_table = {
         max         = 100,
         x = 100, y =  100, -- 5 margin
         clip = { 5, 5, -5, .5 }, --the next level :)
-        radius      = 400,
-        thickness   = 798,
+        radius      = 50,
+        thickness   = 100,
         start_angle = 0,
         end_angle   = -180,
         --bg          = { color = 0x000000, alpha    = 0.05, }, --TODO pie as shape
         fg          = {
-            color = { 0xbb1a1a, 0x1abb1a },--gradient
+            color = { 0xbb1a1a, 0x1abb1a },--gradient TODO source
             color_by_value = 1 or true, --not by pos
             alpha = { 0.1, 0.025 }
         },
@@ -297,7 +297,7 @@ calculate_top = function ( sets )
         rings[ i ] = {}
 
         val = conky_parse( string.format( '${%s %d}', prep, i ) )
-        --val = string.format( "%d", (iMax-i) * 19 )
+        --val = string.format( "%f", (iMax-i) * 10.5 )
 
         if ( val and #val ) then
             val = tonumber( val )
@@ -364,10 +364,12 @@ draw_top = function ( cr, pt, rings )
         cairo_set_line_width( cr, pt.thickness )
     end
 
+    local radius = pt.radius + (pt.thickness / 2)
+
     if ( pt.clip ) then --set up transform
         local gra2rad = merilo( 0, 360, 0, 2 * math.pi )
         local rad2gra = merilo( 0, 2 * math.pi, 0, 360 )
-        local radius = pt.radius + (pt.thickness / 2)
+
 
         local x1, y1, x2, y2, dx, dy = --top, left, right, bottom
             radius , radius, -radius , -radius, 
@@ -388,11 +390,11 @@ draw_top = function ( cr, pt, rings )
         x1 = dx
         x2 = radius--[[ ( r*(1-cos) )]]
 
-        if ( inGrad < 90 ) then
+        if ( math.abs(inGrad) < 90 ) then
             y2 = dy
-        elseif ( inGrad < 180 ) then
+        elseif ( math.abs(inGrad) < 180 ) then
             y2 = radius
-        elseif ( inGrad < 270 ) then --more than 180
+        elseif ( math.abs(inGrad) < 270 ) then --more than 180
             y1 = dy
             x1 = -radius
             y2 = radius
@@ -402,7 +404,7 @@ draw_top = function ( cr, pt, rings )
             y2 = radius
         end
 
-        if ( rings.max_angle < 0 ) then
+        if ( rings.max_angle < 0 and math.abs(inGrad) < 180 ) then --TODO better
             y1, y2 = y2, y1
         end
 --[[
@@ -425,8 +427,8 @@ draw_top = function ( cr, pt, rings )
         cairo_rectangle(  cr, clip[2], clip[1], clip[4]-clip[2],  clip[3]-clip[1] )
         cairo_stroke( cr )
         cairo_restore( cr )]]
-        cairo_rectangle( cr, clip[2], clip[1], clip[4]-clip[2],  clip[3]-clip[1] )
-        cairo_clip( cr )
+        --cairo_rectangle( cr, clip[2], clip[1], clip[4]-clip[2],  clip[3]-clip[1] )
+        --cairo_clip( cr )
         
 
         clip = { clip[2], clip[1], clip[ 4 ], clip[ 3 ] } -- due to rotate -pi/2
@@ -488,6 +490,15 @@ draw_top = function ( cr, pt, rings )
                 fgc.r, fgc.g, fgc.b, fga = rgb_to_r_g_b( 0xffffff, 1 ) 
             end
 
+            --source
+            
+            --[[ EAT CPU a lot
+            local radpat = cairo_pattern_create_radial( 0, 0, 0.9*radius,  0, 0, radius );
+            cairo_pattern_add_color_stop_rgba( radpat, 0, fgc.r, fgc.g, fgc.b, fga );
+            cairo_pattern_add_color_stop_rgba( radpat, 1, fgc.r, fgc.g, fgc.b, 0.1 * fga );
+            --cairo_pattern_add_color_stop_rgba( radpat, 0, 1, 0, 0, 1 );
+            --cairo_pattern_add_color_stop_rgba( radpat, 1, 0, 0, 1, 1 );
+            cairo_set_source (cr, radpat)]]
             cairo_set_source_rgba( cr, fgc.r, fgc.g, fgc.b, fga )
 
             if ( ring.pie ) then

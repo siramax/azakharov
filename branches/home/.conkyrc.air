@@ -28,7 +28,7 @@ gap_x 5
 gap_y 5
 
 # -- Lua load -- #
-lua_load ~//scripts/conky/clock.lua
+lua_load ~/scripts/conky/clock.lua
 lua_draw_hook_pre draw_clock
 
 update_interval 30
