@@ -30,7 +30,13 @@ stylesheets[all][]   = html-elements.css
 ; stylesheets[all][] = messages.css
 ; stylesheets[all][] = block-editing.css
 ; stylesheets[all][] = wireframes.css
-stylesheets[all][]   = vaultsoft_ru.css
+
+  ; Adding a nice clean stylesheet
+stylesheets[all][] = vaultsoft_ru-fresh.css
+
+stylesheets[all][]   = theme.css
+stylesheets[all][]   = geishi.css
+
 stylesheets[print][] = print.css
   ; To prevent stylesheets of a base theme or of a module from being included in
   ; our sub-theme, we specify it in our .info file (and we don't need to have a
@@ -39,8 +45,6 @@ stylesheets[print][] = print.css
 stylesheets[all][]   = zen.css
 
 
-  ; Adding a nice clean stylesheet
-stylesheets[all][] = vaultsoft_ru-fresh.css
 
   ; Set the conditional stylesheets that are processed by IE.
 

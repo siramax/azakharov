@@ -86,7 +86,6 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $styles; ?>
-  <?php print $scripts; ?>
 </head>
 <body class="<?php print $body_classes; ?>">
   <div id="page"><div id="page-inner">
@@ -94,8 +93,13 @@
     <?php if ($primary_links || $secondary_links || $navbar): ?>
       <div id="skip-to-nav"><a href="#navigation"><?php print t('Skip to Navigation'); ?></a></div>
     <?php endif; ?>
+
+
+<?php if ( $navbar || $left || $right ): ?>
+    <div id = "triggerView" class = "trigger animable hidden"></div>
+<?php endif; ?>
     <div id="main"><div id="main-inner" class="clear-block<?php if ($search_box || $primary_links || $secondary_links || $navbar) { print ' with-navbar'; } ?>">
-      <div id="content" class = "<?php if ($left) { print "with-sidebar-left"; }; if ($right) { print "with-sidebar-right"; };?> "><div id="content-inner">
+      <div id="content" class = "<?php if ($left) { print " with-sidebar-left "; }; if ($right) { print " with-sidebar-right "; };?> "><div id="content-inner">
         <?php if ($mission): ?>
           <div id="mission"><?php print $mission; ?></div>
         <?php endif; ?>
@@ -244,7 +248,8 @@
     <div id="closure-blocks" class="region region-closure"><?php print $closure_region; ?></div>
   <?php endif; ?>
 
-  <?php print $closure; ?>
+    <?php print $scripts; ?>
+    <?php print $closure; ?>
 
 </body>
 </html>

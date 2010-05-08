@@ -98,6 +98,7 @@
     bottom: 20px; /* footer */
 }
 
+
   #header-inner
   {
   }
@@ -199,9 +200,13 @@
     top: 72px; /* header + nav */
   }
 
-  #content.with-sidebar-left {
+#content.with-sidebar-left {
     left: 200px;
-    }
+}
+
+#content.with-sidebar-right {
+    right: 200px;
+}
 
   #navbar-inner
   {
@@ -246,7 +251,10 @@
     padding: 0 10px 0 0;
   }
   */
-
+#sidebar-left,   #sidebar-right, .vertical-region {
+    position: absolute;
+    bottom: 20px; /* footer */
+}
 /** sidebar-left **/
   #sidebar-left
   {
@@ -256,30 +264,27 @@
     margin-right: -200px; /* Negative value of #sidebar-left's width + left margin. */
     padding: 0; /* DO NOT CHANGE. Add padding or margin to #sidebar-left-inner. */
     width: 200px;
-    position: absolute;
-    bottom: 20px; /* footer */
-    
   }
 
   #sidebar-left-inner
   {
     margin: 0;
-    padding: 0.5em;
+    padding: 0;
   }
 
 /** sidebar-right **/
   #sidebar-right
   {
-    float: right;
-    width: 200px;
+    /*float: right;
     margin-left: -200px; /* Negative value of #sidebar-right's width + right margin. */
-    margin-right: 0;
+    width: 200px;
+    RIGHT: 0px;
     padding: 0; /* DO NOT CHANGE. Add padding or margin to #sidebar-right-inner. */
   }
 
   #sidebar-right-inner
   {
-    margin: 0 0 0 20px;
+    margin: 0;
     padding: 0;
   }
 
@@ -337,6 +342,10 @@
 
 #sidebar-left , #sidebar-right {
     overflow-x: hidden;
+}
+
+#content, #sidebar-left, #sidebar-right {
+    /*padding-top: 0.4em;*/
 }
   /*
   #page
