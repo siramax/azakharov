@@ -1,40 +1,95 @@
-body {
-    background:#664117 url('i/investment-darker.jpg') repeat fixed; 
-    color:#111;
-    border-top:5px solid #504B35;
-    font-family:serif;
+/* 
+@author Andrey Zakharov
+color theme:
+bg:
+    #664117
+    #d2a668
+    #FCFAF4
+
+fg:
+    #111
+    #dcb073 / #fdc417
+#504B35
+*/
+
+/*  This file used for 
+    common styles
+    across the site content too
+can (should) be not theme but UI specific!
+This file goes right after layout.css!
+Then theme.css!
+*/
+.hidden {
+    display: none;
 }
 
 a {
     color:#dcb073;
     text-decoration:none;
-    -webkit-transition: all 2s ease-in-out;
+    transition:         text-shadow 1s ease-in-out, color 1s ease-in-out; /* CSS3 */
+    -moz-transition:    text-shadow 1s ease-in-out, color 1s ease-in-out;  /* FF3.7+ */
+    -o-transition:      text-shadow 1s ease-in-out, color 1s ease-in-out;  /* Opera 10.5 */
+    -webkit-transition: text-shadow 1s ease-in-out, color 1s ease-in-out;  /* Saf3.2+, Chrome */
 }
 
 a:hover {
     color:#fdc417;
     text-decoration:underline;
-    -webkit-transition: all 1s ease-in-out;
 }
-/* very dang #user-login-form */
-.form-text {
-    font-size: 200%;
-    margin-left: auto;
-    margin-right: auto;
+
+
+h1,h2,h3,h4,h5 {
+    font-family:serif;
+    text-transform:uppercase;
+    
+    font-weight: bold;
 }
+
+/* cool stuff for header links */
+#primary .links li {
+    margin-top: 3px;
+    transition:         margin-top 1s ease-in-out;
+    -moz-transition:    margin-top 1s ease-in-out;
+    -o-transition:      margin-top 1s ease-in-out;
+    -webkit-transition: margin-top 1s ease-in-out;
+}
+#primary .links li:hover {
+    margin-top: 0px;    
+}
+#primary .links li:active {
+    margin-top: 5px;/*shift*/
+    transition:         margin-top 0.1s linear;
+    -moz-transition:    margin-top 0.1s linear;
+    -o-transition:      margin-top 0.1s linear;
+    -webkit-transition: margin-top 0.1s linear;
+}
+
+#primary a {
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);/* fuck IE  */
+}
+#primary a:hover {
+    text-shadow: 3px 5px 2px rgba(0, 0, 0, 0.4);
+}
+#primary a:active {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+    transition:         text-shadow 0.1s linear;
+    -moz-transition:    text-shadow 0.1s linear;
+    -o-transition:      text-shadow 0.1s linear;
+    -webkit-transition: text-shadow 0.1s linear;
+}
+
 
 #header, #navbar {
-
     background:#664117 url('i/investment-darker.jpg') repeat fixed; /* explicit to hide beneath */
 }
 
-#header {
-
+#navbar, #footer {/* SAME cascade*/
+    border-width: 1px;
+    border-color: #FCFAF4;
+    border-color: rgba( 252,250,244, 0.5 );
+    border-style: none;/* continue cascade below... */
 }
 
-#navbar {
-
-}
 
 /* wuuuuh */
 
@@ -50,96 +105,7 @@ a:hover {
     margin: 0.3ex;
 }
 
-#main {
 
-}
-
-#content-area {
-    background:#d2a668 url('i/bgtile1.jpg') repeat;
-    border:0;
-    -moz-border-radius:         5px;
-    -khtml-border-radius:       5px;
-    -webkit-border-radius:      5px;
-    border-radius:5px;
-}
-  .sticky /* A sticky node (displayed before others in a list) */, .help
-  {
-    background: #FCFAF4;
-    border: 1px solid #5D380E;
-    color: #111;
-    opacity: 0,8;
-  }
-/* back to classic */
-   .help a, .messages a {
-        color: blue;
-    }
-/* so let's just use HTML5 and CSS3!
-fuck off dinos and embendded */
-input[type="password"],
-input[type="text"]  {
-    -moz-border-radius:         4px;
-    -khtml-border-radius:       4px;
-    -webkit-border-radius:      4px;
-    border-radius:              4px;
-    background-color:   #FCFAF4;
-    border:1px solid #5D380E;
-    height:1.3em;
-    opacity:0.8;
-    color: #5D380E;
-}
-
-input[type="password"] {/* TODO dynamic onkeyup!*/
-    border:1px solid #d2a668;
-    font-family: DejaVu Sans Mono, Terminal, mono;
-    font-size: 100%;
-}
-
-/* Modern! Geek! */
-input[type="submit"] {
-    display: inline-block;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font: 14px/100% Arial, Helvetica, sans-serif;
-    padding: .5em 2em;
-    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-    -webkit-border-radius: .5em;
-    -moz-border-radius: .5em;
-    border-radius: .5em;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    color: #fef4e9;
-    border: solid 1px #9E8562;
-    background: #895E22;
-    background: -webkit-gradient(linear, left top, left bottom, from(#EAC794), to(#895E22));
-    background: -moz-linear-gradient(top,  #EAC794, #895E22 );
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#EAC794', endColorstr='#895E22');
-    -webkit-transition: all 1s ease-in-out;
-
-}
-input[type="submit"]:hover {
-    background: #D2A668;
-    background: -webkit-gradient(linear, left top, left bottom, from(#895E22), to(#9E8562));
-    background: -moz-linear-gradient(top,  #895E22,  #9E8562);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#895E22', endColorstr='#9E8562');
-    -webkit-transition: all 5s ease-in-out;
-    color: yellow;
-}
-input[type="submit"]:active {
-    color:  #34195D;
-    background: -webkit-gradient(linear,    left top, left bottom, from(    #658855), to(   #A6DD8C));
-    background: -moz-linear-gradient(       top,                            #658855,        #A6DD8C);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#658855', endColorstr='#faa51a');
-}
-
-#content-area a {
-    color:#5d380e;
-}
-#content-area a:hover {
-    color:#3E2E06;
-}
 .block-locale {
     float: left;
     margin: 0
@@ -159,6 +125,10 @@ input[type="submit"]:active {
 /* webkit */
 .block-search input.form-text {
     
+}
+/* TODO remain only for scripting */
+#content-top .block {
+    display: none;
 }
 
 #breadcrumb {
@@ -194,12 +164,6 @@ input[type="submit"]:active {
 /* resets in loaded DOM.. but
  TODO move loaded menus... out of breadcrumb... */
 
-h1,h2,h3,h4,h5 {
-    font-family:serif;
-    text-transform:uppercase;
-    letter-spacing:-1px;
-    font-weight: normal;
-}
 
 
 .block h1, .block h2,.block h3,.block h4,.block h5 {
@@ -245,35 +209,3 @@ div.geshifilter {
     background: black;
     color: lightgreen;
 }
-
-.bash .de1, .bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
-.bash  {font-family:monospace;}
-.bash .imp {font-weight: bold; color: red;}
-.bash li, .bash .li1 {font-weight: normal; vertical-align:top;}
-.bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
-.bash .li2 {font-weight: bold; vertical-align:top;}
-.bash .kw1 {color: white; font-weight: bold;}
-.bash .kw2 {color: #c20cb9; font-weight: bold;}
-.bash .kw3 {color: #7a0874; font-weight: bold;}
-.bash .co0 {color: #666666; font-style: italic;}
-.bash .co1 {color: #800000;}
-.bash .co2 {color: #cccc00; font-style: italic;}
-.bash .co3 {color: white; font-weight: bold;}
-.bash .es1 {color: #000099; font-weight: bold;}
-.bash .es2 {color: #007800;}
-.bash .es3 {color: #007800;}
-.bash .es4 {color: #007800;}
-.bash .es5 {color: #780078;}
-.bash .es_h {color: #000099; font-weight: bold;}
-.bash .br0 {color: #7a0874; font-weight: bold;}
-.bash .sy0 {color: white; font-weight: bold;}
-.bash .st0 {color: #ffff00;}
-.bash .st_h {color: #ff0000;}
-.bash .nu0 {color: white;}
-.bash .re0 {color: #AAD2AA;}
-.bash .re1 {color: #AAD2AA;}
-.bash .re2 {color: #AAD2AA;}
-.bash .re4 {color: #55A555;}
-.bash .re5 {color: #660033;}
-.bash .ln-xtra, .bash li.ln-xtra, .bash div.ln-xtra {background-color: #ffc;}
-.bash span.xtra { display:block; }

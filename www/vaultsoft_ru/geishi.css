@@ -1,0 +1,1305 @@
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+
+
+.actionscript .de1, .actionscript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.actionscript  {font-family:monospace;}
+.actionscript .imp {font-weight: bold; color: red;}
+.actionscript li, .actionscript .li1 {font-weight: normal; vertical-align:top;}
+.actionscript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.actionscript .li2 {font-weight: bold; vertical-align:top;}
+.actionscript .kw1 {color: #b1b100;}
+.actionscript .kw2 {color: #000000; font-weight: bold;}
+.actionscript .kw3 {color: #0066CC;}
+.actionscript .co1 {color: #808080; font-style: italic;}
+.actionscript .co2 {color: #808080; font-style: italic;}
+.actionscript .coMULTI {color: #808080; font-style: italic;}
+.actionscript .es0 {color: #000099; font-weight: bold;}
+.actionscript .br0 {color: #66cc66;}
+.actionscript .sy0 {color: #66cc66;}
+.actionscript .st0 {color: #ff0000;}
+.actionscript .nu0 {color: #cc66cc;}
+.actionscript .me1 {color: #006600;}
+.actionscript .ln-xtra, .actionscript li.ln-xtra, .actionscript div.ln-xtra {background-color: #ffc;}
+.actionscript span.xtra { display:block; }
+
+.actionscript3 .de1, .actionscript3 .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.actionscript3  {font-family:monospace;}
+.actionscript3 .imp {font-weight: bold; color: red;}
+.actionscript3 li, .actionscript3 .li1 {font-weight: normal; vertical-align:top;}
+.actionscript3 .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.actionscript3 .li2 {font-weight: bold; vertical-align:top;}
+.actionscript3 .kw1 {color: #0033ff; font-weight: bold;}
+.actionscript3 .kw2 {color: #6699cc; font-weight: bold;}
+.actionscript3 .kw3 {color: #339966; font-weight: bold;}
+.actionscript3 .kw4 {color: #9900cc; font-weight: bold;}
+.actionscript3 .kw5 {color: #004993;}
+.actionscript3 .kw6 {color: #004993;}
+.actionscript3 .kw7 {color: #004993;}
+.actionscript3 .kw8 {color: #004993;}
+.actionscript3 .co1 {color: #009900; font-style: italic;}
+.actionscript3 .co2 {color: #009966; font-style: italic;}
+.actionscript3 .coMULTI {color: #3f5fbf;}
+.actionscript3 .br0 {color: #000000;}
+.actionscript3 .sy0 {color: #000066; font-weight: bold;}
+.actionscript3 .st0 {color: #990000;}
+.actionscript3 .nu0 {color: #000000; font-weight:bold;}
+.actionscript3 .me0 {color: #000000;}
+.actionscript3 .ln-xtra, .actionscript3 li.ln-xtra, .actionscript3 div.ln-xtra {background-color: #ffc;}
+.actionscript3 span.xtra { display:block; }
+
+.apache .de1, .apache .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.apache  {font-family:monospace;}
+.apache .imp {font-weight: bold; color: red;}
+.apache li, .apache .li1 {font-weight: normal; vertical-align:top;}
+.apache .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.apache .li2 {font-weight: bold; vertical-align:top;}
+.apache .kw1 {color: #00007f;}
+.apache .kw2 {color: #0000ff;}
+.apache .kw3 {color: #000000; font-weight:bold;}
+.apache .co1 {color: #adadad; font-style: italic;}
+.apache .es0 {color: #000099; font-weight: bold;}
+.apache .br0 {color: #339933;}
+.apache .sy0 {color: #008000;}
+.apache .st0 {color: #7f007f;}
+.apache .nu0 {color: #ff0000;}
+.apache .ln-xtra, .apache li.ln-xtra, .apache div.ln-xtra {background-color: #ffc;}
+.apache span.xtra { display:block; }
+
+.applescript .de1, .applescript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.applescript  {font-family:monospace;}
+.applescript .imp {font-weight: bold; color: red;}
+.applescript li, .applescript .li1 {font-weight: normal; vertical-align:top;}
+.applescript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.applescript .li2 {font-weight: bold; vertical-align:top;}
+.applescript .kw1 {color: #0066ff;}
+.applescript .kw2 {color: #ff0033;}
+.applescript .kw3 {color: #ff0033; font-weight: bold;}
+.applescript .co1 {color: #808080; font-style: italic;}
+.applescript .co3 {color: #ff0000;}
+.applescript .coMULTI {color: #808080; font-style: italic;}
+.applescript .es0 {color: #000000; font-weight: bold;}
+.applescript .br0 {color: #000000;}
+.applescript .sy0 {color: #000000;}
+.applescript .st0 {color: #009900;}
+.applescript .nu0 {color: #000000;}
+.applescript .me1 {color: #006600;}
+.applescript .me2 {color: #006600;}
+.applescript .re0 {color: #339933;}
+.applescript .re4 {color: #0066ff;}
+.applescript .ln-xtra, .applescript li.ln-xtra, .applescript div.ln-xtra {background-color: #ffc;}
+.applescript span.xtra { display:block; }
+
+.apt_sources .de1, .apt_sources .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.apt_sources  {font-family:monospace;}
+.apt_sources .imp {font-weight: bold; color: red;}
+.apt_sources li, .apt_sources .li1 {font-weight: normal; vertical-align:top;}
+.apt_sources .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.apt_sources .li2 {font-weight: bold; vertical-align:top;}
+.apt_sources .kw1 {color: #00007f;}
+.apt_sources .kw2 {color: #b1b100;}
+.apt_sources .kw3 {color: #b16000;}
+.apt_sources .co1 {color: #adadad; font-style: italic;}
+.apt_sources .re0 {color: #009900;}
+.apt_sources .ln-xtra, .apt_sources li.ln-xtra, .apt_sources div.ln-xtra {background-color: #ffc;}
+.apt_sources span.xtra { display:block; }
+
+.awk .de1, .awk .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.awk  {font-family:monospace;}
+.awk .imp {font-weight: bold; color: red;}
+.awk li, .awk .li1 {font-weight: normal; vertical-align:top;}
+.awk .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.awk .li2 {font-weight: bold; vertical-align:top;}
+.awk .kw1 {color: #000000; font-weight: bold;}
+.awk .kw2 {color: #C20CB9; font-weight: bold;}
+.awk .kw3 {color: #4107D5; font-weight: bold;}
+.awk .kw4 {color: #07D589; font-weight: bold;}
+.awk .kw5 {color: #0BD507; font-weight: bold;}
+.awk .kw6 {color: #078CD5; font-weight: bold;}
+.awk .co1 {color:#808080;}
+.awk .es0 {color: #000099; font-weight: bold;}
+.awk .br0 {color: #7a0874; font-weight: bold;}
+.awk .sy0 {color:black;}
+.awk .sy1 {color:black;}
+.awk .sy2 {color:black;}
+.awk .sy3 {color:black;}
+.awk .sy4 {color:#C4C364;}
+.awk .sy5 {color:black;font-weight:bold;}
+.awk .st0 {color: #ff0000;}
+.awk .nu0 {color: #000000;}
+.awk .re0 {color:#000088;}
+.awk .ln-xtra, .awk li.ln-xtra, .awk div.ln-xtra {background-color: #ffc;}
+.awk span.xtra { display:block; }
+
+.bash .de1, .bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash  {font-family:monospace;}
+.bash .imp {font-weight: bold; color: red;}
+.bash li, .bash .li1 {font-weight: normal; vertical-align:top;}
+.bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash .li2 {font-weight: bold; vertical-align:top;}
+.bash .kw1 {color: white; font-weight: bold;}
+.bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash .co0 {color: #666666; font-style: italic;}
+.bash .co1 {color: #800000;}
+.bash .co2 {color: #cccc00; font-style: italic;}
+.bash .co3 {color: white; font-weight: bold;}
+.bash .es1 {color: #000099; font-weight: bold;}
+.bash .es2 {color: #007800;}
+.bash .es3 {color: #007800;}
+.bash .es4 {color: #007800;}
+.bash .es5 {color: #780078;}
+.bash .es_h {color: #000099; font-weight: bold;}
+.bash .br0 {color: #7a0874; font-weight: bold;}
+.bash .sy0 {color: white; font-weight: bold;}
+.bash .st0 {color: #ffff00;}
+.bash .st_h {color: #ff0000;}
+.bash .nu0 {color: white;}
+.bash .re0 {color: #AAD2AA;}
+.bash .re1 {color: #AAD2AA;}
+.bash .re2 {color: #AAD2AA;}
+.bash .re4 {color: #55A555;}
+.bash .re5 {color: #660033;}
+.bash .ln-xtra, .bash li.ln-xtra, .bash div.ln-xtra {background-color: #ffc;}
+.bash span.xtra { display:block; }
+
+.bibtex .de1, .bibtex .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bibtex  {font-family:monospace;}
+.bibtex .imp {font-weight: bold; color: red;}
+.bibtex li, .bibtex .li1 {font-weight: normal; vertical-align:top;}
+.bibtex .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bibtex .li2 {font-weight: bold; vertical-align:top;}
+.bibtex .kw1 {color: #C02020;}
+.bibtex .kw2 {color: #C02020;}
+.bibtex .kw3 {color: #C08020;}
+.bibtex .kw4 {color: #C08020;}
+.bibtex .co1 {color: #2C922C; font-style: italic;}
+.bibtex .es0 {color: #000000; font-weight: bold;}
+.bibtex .br0 {color: #E02020;}
+.bibtex .sy0 {color: #E02020;}
+.bibtex .st0 {color: #2020C0;}
+.bibtex .re1 {color: #2020C0;}
+.bibtex .re2 {color: #C08020;}
+.bibtex .re3 {color: #800000;}
+.bibtex .ln-xtra, .bibtex li.ln-xtra, .bibtex div.ln-xtra {background-color: #ffc;}
+.bibtex span.xtra { display:block; }
+
+.c .de1, .c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c  {font-family:monospace;}
+.c .imp {font-weight: bold; color: red;}
+.c li, .c .li1 {font-weight: normal; vertical-align:top;}
+.c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c .li2 {font-weight: bold; vertical-align:top;}
+.c .kw1 {color: #b1b100;}
+.c .kw2 {color: #000000; font-weight: bold;}
+.c .kw3 {color: #000066;}
+.c .kw4 {color: #993333;}
+.c .co1 {color: #666666; font-style: italic;}
+.c .co2 {color: #339933;}
+.c .coMULTI {color: #808080; font-style: italic;}
+.c .es0 {color: #000099; font-weight: bold;}
+.c .es1 {color: #000099; font-weight: bold;}
+.c .es2 {color: #660099; font-weight: bold;}
+.c .es3 {color: #660099; font-weight: bold;}
+.c .es4 {color: #660099; font-weight: bold;}
+.c .es5 {color: #006699; font-weight: bold;}
+.c .br0 {color: #009900;}
+.c .sy0 {color: #339933;}
+.c .st0 {color: #ff0000;}
+.c .nu0 {color: #0000dd;}
+.c .nu6 {color: #208080;}
+.c .nu8 {color: #208080;}
+.c .nu12 {color: #208080;}
+.c .nu16 {color:#800080;}
+.c .nu17 {color:#800080;}
+.c .nu18 {color:#800080;}
+.c .nu19 {color:#800080;}
+.c .me1 {color: #202020;}
+.c .me2 {color: #202020;}
+.c .ln-xtra, .c li.ln-xtra, .c div.ln-xtra {background-color: #ffc;}
+.c span.xtra { display:block; }
+
+.cmake .de1, .cmake .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cmake  {font-family:monospace;}
+.cmake .imp {font-weight: bold; color: red;}
+.cmake li, .cmake .li1 {font-weight: normal; vertical-align:top;}
+.cmake .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cmake .li2 {font-weight: bold; vertical-align:top;}
+.cmake .kw1 {color: #1f3f81; font-style: bold;}
+.cmake .kw2 {color: #1f3f81;}
+.cmake .kw3 {color: #077807; font-sytle: italic;}
+.cmake .co1 {color: #666666; font-style: italic;}
+.cmake .es0 {color: #000099; font-weight: bold;}
+.cmake .es1 {color: #b08000;}
+.cmake .es2 {color: #0000cd;}
+.cmake .sy0 {color: #197d8b;}
+.cmake .st0 {color: #912f11;}
+.cmake .re0 {color: #b08000;}
+.cmake .re1 {color: #0000cd;}
+.cmake .ln-xtra, .cmake li.ln-xtra, .cmake div.ln-xtra {background-color: #ffc;}
+.cmake span.xtra { display:block; }
+
+.cpp .de1, .cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp  {font-family:monospace;}
+.cpp .imp {font-weight: bold; color: red;}
+.cpp li, .cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp .kw1 {color: #0000ff;}
+.cpp .kw2 {color: #0000ff;}
+.cpp .kw3 {color: #0000dd;}
+.cpp .kw4 {color: #0000ff;}
+.cpp .co1 {color: #666666;}
+.cpp .co2 {color: #339900;}
+.cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp .es0 {color: #000099; font-weight: bold;}
+.cpp .es1 {color: #000099; font-weight: bold;}
+.cpp .es2 {color: #660099; font-weight: bold;}
+.cpp .es3 {color: #660099; font-weight: bold;}
+.cpp .es4 {color: #660099; font-weight: bold;}
+.cpp .es5 {color: #006699; font-weight: bold;}
+.cpp .br0 {color: #008000;}
+.cpp .sy0 {color: #008000;}
+.cpp .sy1 {color: #000080;}
+.cpp .sy2 {color: #000040;}
+.cpp .sy3 {color: #000040;}
+.cpp .sy4 {color: #008080;}
+.cpp .st0 {color: #FF0000;}
+.cpp .nu0 {color: #0000dd;}
+.cpp .nu6 {color: #208080;}
+.cpp .nu8 {color: #208080;}
+.cpp .nu12 {color: #208080;}
+.cpp .nu16 {color:#800080;}
+.cpp .nu17 {color:#800080;}
+.cpp .nu18 {color:#800080;}
+.cpp .nu19 {color:#800080;}
+.cpp .me1 {color: #007788;}
+.cpp .me2 {color: #007788;}
+.cpp .ln-xtra, .cpp li.ln-xtra, .cpp div.ln-xtra {background-color: #ffc;}
+.cpp span.xtra { display:block; }
+
+.cpp-qt .de1, .cpp-qt .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp-qt  {font-family:monospace;}
+.cpp-qt .imp {font-weight: bold; color: red;}
+.cpp-qt li, .cpp-qt .li1 {font-weight: normal; vertical-align:top;}
+.cpp-qt .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp-qt .li2 {font-weight: bold; vertical-align:top;}
+.cpp-qt .kw1 {color: #000000; font-weight:bold;}
+.cpp-qt .kw2 {color: #0057AE;}
+.cpp-qt .kw3 {color: #2B74C7;}
+.cpp-qt .kw4 {color: #0057AE;}
+.cpp-qt .kw5 {color: #22aadd;}
+.cpp-qt .co1 {color: #888888;}
+.cpp-qt .co2 {color: #006E28;}
+.cpp-qt .coMULTI {color: #888888; font-style: italic;}
+.cpp-qt .es0 {color: #000099; font-weight: bold;}
+.cpp-qt .es1 {color: #000099; font-weight: bold;}
+.cpp-qt .es2 {color: #660099; font-weight: bold;}
+.cpp-qt .es3 {color: #660099; font-weight: bold;}
+.cpp-qt .es4 {color: #660099; font-weight: bold;}
+.cpp-qt .es5 {color: #006699; font-weight: bold;}
+.cpp-qt .br0 {color: #006E28;}
+.cpp-qt .sy0 {color: #006E28;}
+.cpp-qt .st0 {color: #BF0303;}
+.cpp-qt .nu0 {color: #B08000;}
+.cpp-qt .nu6 {color: #208080;}
+.cpp-qt .nu8 {color: #208080;}
+.cpp-qt .nu12 {color: #208080;}
+.cpp-qt .nu16 {color:#800080;}
+.cpp-qt .nu17 {color:#800080;}
+.cpp-qt .nu18 {color:#800080;}
+.cpp-qt .nu19 {color:#800080;}
+.cpp-qt .me1 {color: #2B74C7;}
+.cpp-qt .me2 {color: #2B74C7;}
+.cpp-qt .me3 {color: #2B74C7;}
+.cpp-qt .ln-xtra, .cpp-qt li.ln-xtra, .cpp-qt div.ln-xtra {background-color: #ffc;}
+.cpp-qt span.xtra { display:block; }
+
+.css .de1, .css .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.css  {font-family:monospace;}
+.css .imp {font-weight: bold; color: red;}
+.css li, .css .li1 {font-weight: normal; vertical-align:top;}
+.css .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.css .li2 {font-weight: bold; vertical-align:top;}
+.css .kw1 {color: #000000; font-weight: bold;}
+.css .kw2 {color: #993333;}
+.css .co1 {color: #a1a100;}
+.css .co2 {color: #ff0000; font-style: italic;}
+.css .coMULTI {color: #808080; font-style: italic;}
+.css .es0 {color: #000099; font-weight: bold;}
+.css .br0 {color: #00AA00;}
+.css .sy0 {color: #00AA00;}
+.css .st0 {color: #ff0000;}
+.css .nu0 {color: #cc66cc;}
+.css .re0 {color: #cc00cc;}
+.css .re1 {color: #6666ff;}
+.css .re2 {color: #3333ff;}
+.css .re3 {color: #933;}
+.css .ln-xtra, .css li.ln-xtra, .css div.ln-xtra {background-color: #ffc;}
+.css span.xtra { display:block; }
+
+.d .de1, .d .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.d  {font-family:monospace;}
+.d .imp {font-weight: bold; color: red;}
+.d li, .d .li1 {font-weight: normal; vertical-align:top;}
+.d .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.d .li2 {font-weight: bold; vertical-align:top;}
+.d .kw1 {color: #b1b100;}
+.d .kw2 {color: #000000; font-weight: bold;}
+.d .kw3 {color: #aaaadd; font-weight: bold;}
+.d .kw4 {color: #993333;}
+.d .co1 {color: #808080; font-style: italic;}
+.d .co2 {color: #009933; font-style: italic;}
+.d .co3 {color: #009933; font-style: italic;}
+.d .co4 {color: #ff0000;}
+.d .co5 {color: #0040ff;}
+.d .coMULTI {color: #808080; font-style: italic;}
+.d .es0 {color: #000099; font-weight: bold;}
+.d .es1 {color: #000099; font-weight: bold;}
+.d .es2 {color: #660099; font-weight: bold;}
+.d .es3 {color: #660099; font-weight: bold;}
+.d .es4 {color: #660099; font-weight: bold;}
+.d .es5 {color: #006699; font-weight: bold;}
+.d .es6 {color: #666699; font-weight: bold; font-style: italic;}
+.d .br0 {color: #66cc66;}
+.d .sy0 {color: #66cc66;}
+.d .st0 {color: #ff0000;}
+.d .st_h {color: #ff0000;}
+.d .nu0 {color: #0000dd;}
+.d .nu6 {color: #208080;}
+.d .nu8 {color: #208080;}
+.d .nu12 {color: #208080;}
+.d .nu16 {color:#800080;}
+.d .nu17 {color:#800080;}
+.d .nu18 {color:#800080;}
+.d .nu19 {color:#800080;}
+.d .me1 {color: #006600;}
+.d .me2 {color: #006600;}
+.d .ln-xtra, .d li.ln-xtra, .d div.ln-xtra {background-color: #ffc;}
+.d span.xtra { display:block; }
+
+.delphi .de1, .delphi .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.delphi  {font-family:monospace;}
+.delphi .imp {font-weight: bold; color: red;}
+.delphi li, .delphi .li1 {font-weight: normal; vertical-align:top;}
+.delphi .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.delphi .li2 {font-weight: bold; vertical-align:top;}
+.delphi .kw1 {color: #000000; font-weight: bold;}
+.delphi .kw2 {color: #000000; font-weight: bold;}
+.delphi .kw3 {color: #000066;}
+.delphi .kw4 {color: #000066; font-weight: bold;}
+.delphi .co1 {color: #808080; font-style: italic;}
+.delphi .co2 {color: #008000; font-style: italic;}
+.delphi .coMULTI {color: #808080; font-style: italic;}
+.delphi .es0 {color: #ff0000; font-weight: bold;}
+.delphi .br0 {color: #000066;}
+.delphi .sy0 {color: #000066;}
+.delphi .sy1 {color: #000066;}
+.delphi .sy2 {color: #000066;}
+.delphi .sy3 {color: #000066;}
+.delphi .st0 {color: #ff0000;}
+.delphi .nu0 {color: #0000ff;}
+.delphi .me1 {color: #006600;}
+.delphi .re0 {color: #9ac;}
+.delphi .re1 {color: #ff0000;}
+.delphi .ln-xtra, .delphi li.ln-xtra, .delphi div.ln-xtra {background-color: #ffc;}
+.delphi span.xtra { display:block; }
+
+.diff .de1, .diff .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.diff  {font-family:monospace;}
+.diff .imp {font-weight: bold; color: red;}
+.diff li, .diff .li1 {font-weight: normal; vertical-align:top;}
+.diff .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.diff .li2 {font-weight: bold; vertical-align:top;}
+.diff .kw1 {color: #aaaaaa; font-style: italic;}
+.diff .re0 {color: #440088;}
+.diff .re1 {color: #991111;}
+.diff .re2 {color: #00b000;}
+.diff .re3 {color: #888822;}
+.diff .re4 {color: #888822;}
+.diff .re5 {color: #0011dd;}
+.diff .re6 {color: #440088;}
+.diff .re7 {color: #991111;}
+.diff .re8 {color: #00b000;}
+.diff .re9 {color: #888822;}
+.diff .ln-xtra, .diff li.ln-xtra, .diff div.ln-xtra {background-color: #ffc;}
+.diff span.xtra { display:block; }
+
+.div .de1, .div .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.div  {font-family:monospace;}
+.div .imp {font-weight: bold; color: red;}
+.div li, .div .li1 {font-weight: normal; vertical-align:top;}
+.div .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.div .li2 {font-weight: bold; vertical-align:top;}
+.div .kw1 {color: #0040b1;}
+.div .kw2 {color: #000000;}
+.div .kw3 {color: #000066; font-weight: bold;}
+.div .kw4 {color: #993333;}
+.div .co1 {color: #808080; font-style: italic;}
+.div .coMULTI {color: #808080; font-style: italic;}
+.div .br0 {color: #44aa44;}
+.div .sy0 {color: #44aa44;}
+.div .st0 {color: #ff0000;}
+.div .nu0 {color: #cc66cc;}
+.div .me0 {color: #202020;}
+.div .ln-xtra, .div li.ln-xtra, .div div.ln-xtra {background-color: #ffc;}
+.div span.xtra { display:block; }
+
+.dos .de1, .dos .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.dos  {font-family:monospace;}
+.dos .imp {font-weight: bold; color: red;}
+.dos li, .dos .li1 {font-weight: normal; vertical-align:top;}
+.dos .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.dos .li2 {font-weight: bold; vertical-align:top;}
+.dos .kw1 {color: #00b100; font-weight: bold;}
+.dos .kw2 {color: #000000; font-weight: bold;}
+.dos .kw3 {color: #b1b100; font-weight: bold;}
+.dos .kw4 {color: #0000ff; font-weight: bold;}
+.dos .co1 {color: #808080; font-style: italic;}
+.dos .es0 {color: #ff0000; font-weight: bold;}
+.dos .br0 {color: #66cc66;}
+.dos .sy0 {color: #33cc33;}
+.dos .sy1 {color: #33cc33;}
+.dos .st0 {color: #ff0000;}
+.dos .nu0 {color: #cc66cc;}
+.dos .re0 {color: #b100b1; font-weight: bold;}
+.dos .re1 {color: #448844;}
+.dos .re2 {color: #448888;}
+.dos .ln-xtra, .dos li.ln-xtra, .dos div.ln-xtra {background-color: #ffc;}
+.dos span.xtra { display:block; }
+
+.email .de1, .email .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.email  {font-family:monospace;}
+.email .imp {font-weight: bold; color: red;}
+.email li, .email .li1 {font-weight: normal; vertical-align:top;}
+.email .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.email .li2 {font-weight: bold; vertical-align:top;}
+.email .kw1 {color: #0000FF; font-weight: bold;}
+.email .kw2 {color: #000000; font-weight: bold;}
+.email .kw3 {color: #800000; font-weight: bold;}
+.email .kw4 {font-weight: bold;}
+.email .es0 {color: #000099; font-weight: bold;}
+.email .br0 {color: #66cc66;}
+.email .sy0 {color: #66cc66;}
+.email .st0 {color: #ff0000;}
+.email .nu0 {color: #cc66cc;}
+.email .sc0 {color: #000040;}
+.email .re1 {color: #000000; font-weight: bold;}
+.email .re2 {color: #0000FF;}
+.email .re3 {color: #008000;}
+.email .re4 {color: #0000FF; font-weight: bold;}
+.email .re5 {font-weight: bold;}
+.email .re6 {color: #400080;}
+.email .ln-xtra, .email li.ln-xtra, .email div.ln-xtra {background-color: #ffc;}
+.email span.xtra { display:block; }
+
+.gdb .de1, .gdb .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.gdb  {font-family:monospace;}
+.gdb .imp {font-weight: bold; color: red;}
+.gdb li, .gdb .li1 {font-weight: normal; vertical-align:top;}
+.gdb .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.gdb .li2 {font-weight: bold; vertical-align:top;}
+.gdb .kw0 {font-weight:bold;}
+.gdb .kw1 {font-weight:bold; color: #ff0000;}
+.gdb .br0 {font-weight:bold;}
+.gdb .st0 {color: #933;}
+.gdb .nu0 {color: #cc66cc;}
+.gdb .re0 {color: #000066; font-weight:bold;}
+.gdb .re1 {color: #006600;}
+.gdb .re2 {color: #000066;}
+.gdb .re3 {color: #0066FF; text-style:italic;}
+.gdb .re4 {color: #80B5FF; text-style:italic;}
+.gdb .re5 {color: #A3007D;}
+.gdb .re6 {color: #FF00BF;}
+.gdb .re7 {font-weight: bold;}
+.gdb .ln-xtra, .gdb li.ln-xtra, .gdb div.ln-xtra {background-color: #ffc;}
+.gdb span.xtra { display:block; }
+
+.groovy .de1, .groovy .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.groovy  {font-family:monospace;}
+.groovy .imp {font-weight: bold; color: red;}
+.groovy li, .groovy .li1 {font-weight: normal; vertical-align:top;}
+.groovy .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.groovy .li2 {font-weight: bold; vertical-align:top;}
+.groovy .kw1 {color: #b1b100;}
+.groovy .kw2 {color: #000000; font-weight: bold;}
+.groovy .kw3 {color: #aaaadd; font-weight: bold;}
+.groovy .kw4 {color: #993333;}
+.groovy .kw5 {color: #663399;}
+.groovy .kw6 {color: #CC0099;}
+.groovy .kw7 {color: #FFCC33;}
+.groovy .kw8 {color: #993399;}
+.groovy .kw9 {color: #993399; font-weight: bold;}
+.groovy .co1 {color: #808080; font-style: italic;}
+.groovy .co2 {color: #a1a100;}
+.groovy .co3 {color: #808080; font-style: italic;}
+.groovy .coMULTI {color: #808080; font-style: italic;}
+.groovy .es0 {color: #000099; font-weight: bold;}
+.groovy .br0 {color: #66cc66;}
+.groovy .sy0 {color: #66cc66;}
+.groovy .st0 {color: #ff0000;}
+.groovy .nu0 {color: #cc66cc;}
+.groovy .me1 {color: #006600;}
+.groovy .me2 {color: #006600;}
+.groovy .re0 {color: #0000ff;}
+.groovy .ln-xtra, .groovy li.ln-xtra, .groovy div.ln-xtra {background-color: #ffc;}
+.groovy span.xtra { display:block; }
+
+.html4strict .de1, .html4strict .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.html4strict  {font-family:monospace;}
+.html4strict .imp {font-weight: bold; color: red;}
+.html4strict li, .html4strict .li1 {font-weight: normal; vertical-align:top;}
+.html4strict .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.html4strict .li2 {font-weight: bold; vertical-align:top;}
+.html4strict .kw2 {color: #000000; font-weight: bold;}
+.html4strict .kw3 {color: #000066;}
+.html4strict .es0 {color: #000099; font-weight: bold;}
+.html4strict .br0 {color: #66cc66;}
+.html4strict .sy0 {color: #66cc66;}
+.html4strict .st0 {color: #ff0000;}
+.html4strict .nu0 {color: #cc66cc;}
+.html4strict .sc-1 {color: #808080; font-style: italic;}
+.html4strict .sc0 {color: #00bbdd;}
+.html4strict .sc1 {color: #ddbb00;}
+.html4strict .sc2 {color: #009900;}
+.html4strict .ln-xtra, .html4strict li.ln-xtra, .html4strict div.ln-xtra {background-color: #ffc;}
+.html4strict span.xtra { display:block; }
+
+.ini .de1, .ini .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.ini  {font-family:monospace;}
+.ini .imp {font-weight: bold; color: red;}
+.ini li, .ini .li1 {font-weight: normal; vertical-align:top;}
+.ini .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.ini .li2 {font-weight: bold; vertical-align:top;}
+.ini .co0 {color: #666666; font-style: italic;}
+.ini .sy0 {color: #000066; font-weight:bold;}
+.ini .st0 {color: #933;}
+.ini .re0 {color: #000066; font-weight:bold;}
+.ini .re1 {color: #000099;}
+.ini .re2 {color: #660066;}
+.ini .ln-xtra, .ini li.ln-xtra, .ini div.ln-xtra {background-color: #ffc;}
+.ini span.xtra { display:block; }
+
+.java .de1, .java .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java li, .java .li1 {font-weight: normal; vertical-align:top;}
+.java .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.java .li2 {font-weight: bold; vertical-align:top;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java .ln-xtra, .java li.ln-xtra, .java div.ln-xtra {background-color: #ffc;}
+.java span.xtra { display:block; }
+
+.java5 .de1, .java5 .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.java5  {font-family:monospace;}
+.java5 .imp {font-weight: bold; color: red;}
+.java5 li, .java5 .li1 {font-weight: normal; vertical-align:top;}
+.java5 .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.java5 .li2 {font-weight: bold; vertical-align:top;}
+.java5 .kw1 {color: #000000;  font-weight: bold;}
+.java5 .kw2 {color: #000000; font-weight: bold;}
+.java5 .kw3 {color: #006600; font-weight: bold;}
+.java5 .kw4 {color: #006600; font-weight: bold;}
+.java5 .kw5 {color: #003399; font-weight: bold;}
+.java5 .kw6 {color: #003399; font-weight: bold;}
+.java5 .kw7 {color: #003399; font-weight: bold;}
+.java5 .kw8 {color: #003399; font-weight: bold;}
+.java5 .kw9 {color: #003399; font-weight: bold;}
+.java5 .kw10 {color: #003399; font-weight: bold;}
+.java5 .kw11 {color: #003399; font-weight: bold;}
+.java5 .kw12 {color: #003399; font-weight: bold;}
+.java5 .kw13 {color: #003399; font-weight: bold;}
+.java5 .kw14 {color: #003399; font-weight: bold;}
+.java5 .kw15 {color: #003399; font-weight: bold;}
+.java5 .kw16 {color: #003399; font-weight: bold;}
+.java5 .kw17 {color: #003399; font-weight: bold;}
+.java5 .kw18 {color: #003399; font-weight: bold;}
+.java5 .kw19 {color: #003399; font-weight: bold;}
+.java5 .kw20 {color: #003399; font-weight: bold;}
+.java5 .kw21 {color: #003399; font-weight: bold;}
+.java5 .kw22 {color: #003399; font-weight: bold;}
+.java5 .kw23 {color: #003399; font-weight: bold;}
+.java5 .kw24 {color: #003399; font-weight: bold;}
+.java5 .kw25 {color: #003399; font-weight: bold;}
+.java5 .kw26 {color: #003399; font-weight: bold;}
+.java5 .kw27 {color: #003399; font-weight: bold;}
+.java5 .kw28 {color: #003399; font-weight: bold;}
+.java5 .kw29 {color: #003399; font-weight: bold;}
+.java5 .kw30 {color: #003399; font-weight: bold;}
+.java5 .kw31 {color: #003399; font-weight: bold;}
+.java5 .kw32 {color: #003399; font-weight: bold;}
+.java5 .kw33 {color: #003399; font-weight: bold;}
+.java5 .kw34 {color: #003399; font-weight: bold;}
+.java5 .kw35 {color: #003399; font-weight: bold;}
+.java5 .kw36 {color: #003399; font-weight: bold;}
+.java5 .kw37 {color: #003399; font-weight: bold;}
+.java5 .kw38 {color: #003399; font-weight: bold;}
+.java5 .kw39 {color: #003399; font-weight: bold;}
+.java5 .kw40 {color: #003399; font-weight: bold;}
+.java5 .kw41 {color: #003399; font-weight: bold;}
+.java5 .kw42 {color: #003399; font-weight: bold;}
+.java5 .kw43 {color: #003399; font-weight: bold;}
+.java5 .kw44 {color: #003399; font-weight: bold;}
+.java5 .kw45 {color: #003399; font-weight: bold;}
+.java5 .kw46 {color: #003399; font-weight: bold;}
+.java5 .kw47 {color: #003399; font-weight: bold;}
+.java5 .kw48 {color: #003399; font-weight: bold;}
+.java5 .kw49 {color: #003399; font-weight: bold;}
+.java5 .kw50 {color: #003399; font-weight: bold;}
+.java5 .kw51 {color: #003399; font-weight: bold;}
+.java5 .kw52 {color: #003399; font-weight: bold;}
+.java5 .kw53 {color: #003399; font-weight: bold;}
+.java5 .kw54 {color: #003399; font-weight: bold;}
+.java5 .kw55 {color: #003399; font-weight: bold;}
+.java5 .kw56 {color: #003399; font-weight: bold;}
+.java5 .kw57 {color: #003399; font-weight: bold;}
+.java5 .kw58 {color: #003399; font-weight: bold;}
+.java5 .kw59 {color: #003399; font-weight: bold;}
+.java5 .kw60 {color: #003399; font-weight: bold;}
+.java5 .kw61 {color: #003399; font-weight: bold;}
+.java5 .kw62 {color: #003399; font-weight: bold;}
+.java5 .kw63 {color: #003399; font-weight: bold;}
+.java5 .kw64 {color: #003399; font-weight: bold;}
+.java5 .kw65 {color: #003399; font-weight: bold;}
+.java5 .kw66 {color: #003399; font-weight: bold;}
+.java5 .kw67 {color: #003399; font-weight: bold;}
+.java5 .kw68 {color: #003399; font-weight: bold;}
+.java5 .kw69 {color: #003399; font-weight: bold;}
+.java5 .kw70 {color: #003399; font-weight: bold;}
+.java5 .kw71 {color: #003399; font-weight: bold;}
+.java5 .kw72 {color: #003399; font-weight: bold;}
+.java5 .kw73 {color: #003399; font-weight: bold;}
+.java5 .kw74 {color: #003399; font-weight: bold;}
+.java5 .kw75 {color: #003399; font-weight: bold;}
+.java5 .kw76 {color: #003399; font-weight: bold;}
+.java5 .kw77 {color: #003399; font-weight: bold;}
+.java5 .kw78 {color: #003399; font-weight: bold;}
+.java5 .kw79 {color: #003399; font-weight: bold;}
+.java5 .kw80 {color: #003399; font-weight: bold;}
+.java5 .kw81 {color: #003399; font-weight: bold;}
+.java5 .kw82 {color: #003399; font-weight: bold;}
+.java5 .kw83 {color: #003399; font-weight: bold;}
+.java5 .kw84 {color: #003399; font-weight: bold;}
+.java5 .kw85 {color: #003399; font-weight: bold;}
+.java5 .kw86 {color: #003399; font-weight: bold;}
+.java5 .kw87 {color: #003399; font-weight: bold;}
+.java5 .kw88 {color: #003399; font-weight: bold;}
+.java5 .kw89 {color: #003399; font-weight: bold;}
+.java5 .kw90 {color: #003399; font-weight: bold;}
+.java5 .kw91 {color: #003399; font-weight: bold;}
+.java5 .kw92 {color: #003399; font-weight: bold;}
+.java5 .kw93 {color: #003399; font-weight: bold;}
+.java5 .kw94 {color: #003399; font-weight: bold;}
+.java5 .kw95 {color: #003399; font-weight: bold;}
+.java5 .kw96 {color: #003399; font-weight: bold;}
+.java5 .kw97 {color: #003399; font-weight: bold;}
+.java5 .kw98 {color: #003399; font-weight: bold;}
+.java5 .kw99 {color: #003399; font-weight: bold;}
+.java5 .kw100 {color: #003399; font-weight: bold;}
+.java5 .kw101 {color: #003399; font-weight: bold;}
+.java5 .kw102 {color: #003399; font-weight: bold;}
+.java5 .kw103 {color: #003399; font-weight: bold;}
+.java5 .kw104 {color: #003399; font-weight: bold;}
+.java5 .kw105 {color: #003399; font-weight: bold;}
+.java5 .kw106 {color: #003399; font-weight: bold;}
+.java5 .kw107 {color: #003399; font-weight: bold;}
+.java5 .kw108 {color: #003399; font-weight: bold;}
+.java5 .kw109 {color: #003399; font-weight: bold;}
+.java5 .kw110 {color: #003399; font-weight: bold;}
+.java5 .kw111 {color: #003399; font-weight: bold;}
+.java5 .kw112 {color: #003399; font-weight: bold;}
+.java5 .kw113 {color: #003399; font-weight: bold;}
+.java5 .kw114 {color: #003399; font-weight: bold;}
+.java5 .kw115 {color: #003399; font-weight: bold;}
+.java5 .kw116 {color: #003399; font-weight: bold;}
+.java5 .kw117 {color: #003399; font-weight: bold;}
+.java5 .kw118 {color: #003399; font-weight: bold;}
+.java5 .kw119 {color: #003399; font-weight: bold;}
+.java5 .kw120 {color: #003399; font-weight: bold;}
+.java5 .kw121 {color: #003399; font-weight: bold;}
+.java5 .kw122 {color: #003399; font-weight: bold;}
+.java5 .kw123 {color: #003399; font-weight: bold;}
+.java5 .kw124 {color: #003399; font-weight: bold;}
+.java5 .kw125 {color: #003399; font-weight: bold;}
+.java5 .kw126 {color: #003399; font-weight: bold;}
+.java5 .kw127 {color: #003399; font-weight: bold;}
+.java5 .kw128 {color: #003399; font-weight: bold;}
+.java5 .kw129 {color: #003399; font-weight: bold;}
+.java5 .kw130 {color: #003399; font-weight: bold;}
+.java5 .kw131 {color: #003399; font-weight: bold;}
+.java5 .kw132 {color: #003399; font-weight: bold;}
+.java5 .kw133 {color: #003399; font-weight: bold;}
+.java5 .kw134 {color: #003399; font-weight: bold;}
+.java5 .kw135 {color: #003399; font-weight: bold;}
+.java5 .kw136 {color: #003399; font-weight: bold;}
+.java5 .kw137 {color: #003399; font-weight: bold;}
+.java5 .kw138 {color: #003399; font-weight: bold;}
+.java5 .kw139 {color: #003399; font-weight: bold;}
+.java5 .kw140 {color: #003399; font-weight: bold;}
+.java5 .kw141 {color: #003399; font-weight: bold;}
+.java5 .kw142 {color: #003399; font-weight: bold;}
+.java5 .kw143 {color: #003399; font-weight: bold;}
+.java5 .kw144 {color: #003399; font-weight: bold;}
+.java5 .kw145 {color: #003399; font-weight: bold;}
+.java5 .kw146 {color: #003399; font-weight: bold;}
+.java5 .kw147 {color: #003399; font-weight: bold;}
+.java5 .kw148 {color: #003399; font-weight: bold;}
+.java5 .kw149 {color: #003399; font-weight: bold;}
+.java5 .kw150 {color: #003399; font-weight: bold;}
+.java5 .kw151 {color: #003399; font-weight: bold;}
+.java5 .kw152 {color: #003399; font-weight: bold;}
+.java5 .kw153 {color: #003399; font-weight: bold;}
+.java5 .kw154 {color: #003399; font-weight: bold;}
+.java5 .kw155 {color: #003399; font-weight: bold;}
+.java5 .kw156 {color: #003399; font-weight: bold;}
+.java5 .kw157 {color: #003399; font-weight: bold;}
+.java5 .kw158 {color: #003399; font-weight: bold;}
+.java5 .kw159 {color: #003399; font-weight: bold;}
+.java5 .kw160 {color: #003399; font-weight: bold;}
+.java5 .kw161 {color: #003399; font-weight: bold;}
+.java5 .kw162 {color: #003399; font-weight: bold;}
+.java5 .kw163 {color: #003399; font-weight: bold;}
+.java5 .kw164 {color: #003399; font-weight: bold;}
+.java5 .kw165 {color: #003399; font-weight: bold;}
+.java5 .kw166 {color: #003399; font-weight: bold;}
+.java5 .co1 {color: #666666; font-style: italic;}
+.java5 .co2 {color: #006699;}
+.java5 .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java5 .coMULTI {color: #666666; font-style: italic;}
+.java5 .es0 {color: #000099; font-weight: bold;}
+.java5 .br0 {color: #009900;}
+.java5 .sy0 {color: #339933;}
+.java5 .st0 {color: #0000ff;}
+.java5 .nu0 {color: #cc66cc;}
+.java5 .me1 {color: #006633;}
+.java5 .me2 {color: #006633;}
+.java5 .ln-xtra, .java5 li.ln-xtra, .java5 div.ln-xtra {background-color: #ffc;}
+.java5 span.xtra { display:block; }
+
+.javascript .de1, .javascript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.javascript  {font-family:monospace;}
+.javascript .imp {font-weight: bold; color: red;}
+.javascript li, .javascript .li1 {font-weight: normal; vertical-align:top;}
+.javascript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.javascript .li2 {font-weight: bold; vertical-align:top;}
+.javascript .kw1 {color: #000066; font-weight: bold;}
+.javascript .kw2 {color: #003366; font-weight: bold;}
+.javascript .kw3 {color: #000066;}
+.javascript .co1 {color: #006600; font-style: italic;}
+.javascript .co2 {color: #009966; font-style: italic;}
+.javascript .coMULTI {color: #006600; font-style: italic;}
+.javascript .es0 {color: #000099; font-weight: bold;}
+.javascript .br0 {color: #009900;}
+.javascript .sy0 {color: #339933;}
+.javascript .st0 {color: #3366CC;}
+.javascript .nu0 {color: #CC0000;}
+.javascript .me1 {color: #660066;}
+.javascript .ln-xtra, .javascript li.ln-xtra, .javascript div.ln-xtra {background-color: #ffc;}
+.javascript span.xtra { display:block; }
+
+.jquery .de1, .jquery .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.jquery  {font-family:monospace;}
+.jquery .imp {font-weight: bold; color: red;}
+.jquery li, .jquery .li1 {font-weight: normal; vertical-align:top;}
+.jquery .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.jquery .li2 {font-weight: bold; vertical-align:top;}
+.jquery .kw1 {color: #000066; font-weight: bold;}
+.jquery .kw2 {color: #003366; font-weight: bold;}
+.jquery .kw3 {color: #000066;}
+.jquery .kw4 {color: #000066;}
+.jquery .kw5 {color: #000066;}
+.jquery .kw6 {color: #000066;}
+.jquery .kw7 {color: #000066;}
+.jquery .kw8 {color: #000066;}
+.jquery .kw9 {color: #000066;}
+.jquery .kw10 {color: #000066;}
+.jquery .kw11 {color: #000066;}
+.jquery .kw12 {color: #000066;}
+.jquery .co1 {color: #006600; font-style: italic;}
+.jquery .co2 {color: #009966; font-style: italic;}
+.jquery .coMULTI {color: #006600; font-style: italic;}
+.jquery .es0 {color: #000099; font-weight: bold;}
+.jquery .br0 {color: #009900;}
+.jquery .sy0 {color: #339933;}
+.jquery .sy1 {color: #000066;}
+.jquery .st0 {color: #3366CC;}
+.jquery .nu0 {color: #CC0000;}
+.jquery .me1 {color: #660066;}
+.jquery .ln-xtra, .jquery li.ln-xtra, .jquery div.ln-xtra {background-color: #ffc;}
+.jquery span.xtra { display:block; }
+
+.latex .de1, .latex .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.latex  {font-family:monospace;}
+.latex .imp {font-weight: bold; color: red;}
+.latex li, .latex .li1 {font-weight: normal; vertical-align:top;}
+.latex .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.latex .li2 {font-weight: bold; vertical-align:top;}
+.latex .kw1 {color: #800000;}
+.latex .co1 {color: #2C922C; font-style: italic;}
+.latex .es0 {color: #000000; font-weight: bold;}
+.latex .sy0 {color: #E02020; }
+.latex .st0 {color: #000000;}
+.latex .re1 {color: #8020E0; font-weight: normal;}
+.latex .re2 {color: #C08020; font-weight: normal;}
+.latex .re3 {color: #8020E0; font-weight: normal;}
+.latex .re4 {color: #800000; font-weight: normal;}
+.latex .re5 {color: #00008B; font-weight: bold;}
+.latex .re6 {color: #800000; font-weight: normal;}
+.latex .re7 {color: #0000D0; font-weight: normal;}
+.latex .re8 {color: #C00000; font-weight: normal;}
+.latex .re9 {color: #2020C0; font-weight: normal;}
+.latex .re10 {color: #800000; font-weight: normal;}
+.latex .re11 {color: #E00000; font-weight: normal;}
+.latex .re12 {color: #800000; font-weight: normal;}
+.latex .ln-xtra, .latex li.ln-xtra, .latex div.ln-xtra {background-color: #ffc;}
+.latex span.xtra { display:block; }
+
+.lua .de1, .lua .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.lua  {font-family:monospace;}
+.lua .imp {font-weight: bold; color: red;}
+.lua li, .lua .li1 {font-weight: normal; vertical-align:top;}
+.lua .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.lua .li2 {font-weight: bold; vertical-align:top;}
+.lua .kw1 {color: #b1b100;}
+.lua .co1 {color: #808080; font-style: italic;}
+.lua .coMULTI {color: #808080; font-style: italic;}
+.lua .es0 {color: #000099; font-weight: bold;}
+.lua .br0 {color: #66cc66;}
+.lua .sy0 {color: #66cc66;}
+.lua .st0 {color: #ff0000;}
+.lua .nu0 {color: #cc66cc;}
+.lua .me0 {color: #b1b100;}
+.lua .ln-xtra, .lua li.ln-xtra, .lua div.ln-xtra {background-color: #ffc;}
+.lua span.xtra { display:block; }
+
+.make .de1, .make .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.make  {font-family:monospace;}
+.make .imp {font-weight: bold; color: red;}
+.make li, .make .li1 {font-weight: normal; vertical-align:top;}
+.make .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.make .li2 {font-weight: bold; vertical-align:top;}
+.make .kw1 {color: #666622; font-weight: bold;}
+.make .kw2 {color: #990000;}
+.make .co1 {color: #339900; font-style: italic;}
+.make .co2 {color: #000099; font-weight: bold;}
+.make .es0 {color: #000099; font-weight: bold;}
+.make .br0 {color: #004400;}
+.make .sy0 {color: #004400;}
+.make .st0 {color: #CC2200;}
+.make .nu0 {color: #CC2200;}
+.make .re0 {color: #000088; font-weight: bold;}
+.make .re1 {color: #0000CC; font-weight: bold;}
+.make .re2 {color: #000088;}
+.make .ln-xtra, .make li.ln-xtra, .make div.ln-xtra {background-color: #ffc;}
+.make span.xtra { display:block; }
+
+.mxml .de1, .mxml .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.mxml  {font-family:monospace;}
+.mxml .imp {font-weight: bold; color: red;}
+.mxml li, .mxml .li1 {font-weight: normal; vertical-align:top;}
+.mxml .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.mxml .li2 {font-weight: bold; vertical-align:top;}
+.mxml .coMULTI {color: #808080; font-style: italic;}
+.mxml .es0 {color: #000099; font-weight: bold;}
+.mxml .br0 {color: #66cc66;}
+.mxml .sy0 {color: #66cc66;}
+.mxml .st0 {color: #ff0000;}
+.mxml .nu0 {color: #cc66cc;}
+.mxml .sc0 {color: #00bbdd;}
+.mxml .sc1 {color: #ddbb00;}
+.mxml .sc2 {color: #339933;}
+.mxml .sc3 {color: #000000;}
+.mxml .re0 {font-weight: bold; color: black;}
+.mxml .re1 {color: #7400FF;}
+.mxml .re2 {color: #7400FF;}
+.mxml .ln-xtra, .mxml li.ln-xtra, .mxml div.ln-xtra {background-color: #ffc;}
+.mxml span.xtra { display:block; }
+
+.mysql .de1, .mysql .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.mysql  {font-family:monospace;}
+.mysql .imp {font-weight: bold; color: red;}
+.mysql li, .mysql .li1 {font-weight: normal; vertical-align:top;}
+.mysql .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.mysql .li2 {font-weight: bold; vertical-align:top;}
+.mysql .kw1 {color: #990099; font-weight: bold;}
+.mysql .kw2 {color: #990099; font-weight: bold;}
+.mysql .kw3 {color: #9900FF; font-weight: bold;}
+.mysql .kw4 {color: #999900; font-weight: bold;}
+.mysql .kw5 {color: #999900; font-weight: bold;}
+.mysql .kw6 {color: #FF9900; font-weight: bold;}
+.mysql .kw7 {color: #FF9900; font-weight: bold;}
+.mysql .kw8 {color: #9900FF; font-weight: bold;}
+.mysql .kw9 {color: #9900FF; font-weight: bold;}
+.mysql .kw10 {color: #CC0099; font-weight: bold;}
+.mysql .kw11 {color: #CC0099; font-weight: bold;}
+.mysql .kw12 {color: #009900;}
+.mysql .kw13 {color: #000099;}
+.mysql .kw14 {color: #000099;}
+.mysql .kw15 {color: #000099;}
+.mysql .kw16 {color: #000099;}
+.mysql .kw17 {color: #000099;}
+.mysql .kw18 {color: #000099;}
+.mysql .kw19 {color: #000099;}
+.mysql .kw20 {color: #000099;}
+.mysql .kw21 {color: #000099;}
+.mysql .kw22 {color: #000099;}
+.mysql .kw23 {color: #000099;}
+.mysql .kw24 {color: #000099;}
+.mysql .kw25 {color: #000099;}
+.mysql .kw26 {color: #000099;}
+.mysql .kw27 {color: #00CC00;}
+.mysql .coMULTI {color: #808000; font-style: italic;}
+.mysql .co1 {color: #808080; font-style: italic;}
+.mysql .co2 {color: #808080; font-style: italic;}
+.mysql .es0 {color: #004000; font-weight: bold;}
+.mysql .es1 {color: #008080; font-weight: bold;}
+.mysql .br0 {color: #FF00FF;}
+.mysql .sy1 {color: #CC0099;}
+.mysql .sy2 {color: #000033;}
+.mysql .st0 {color: #008000;}
+.mysql .nu0 {color: #008080;}
+.mysql .ln-xtra, .mysql li.ln-xtra, .mysql div.ln-xtra {background-color: #ffc;}
+.mysql span.xtra { display:block; }
+
+.objc .de1, .objc .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.objc  {font-family:monospace;}
+.objc .imp {font-weight: bold; color: red;}
+.objc li, .objc .li1 {font-weight: normal; vertical-align:top;}
+.objc .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.objc .li2 {font-weight: bold; vertical-align:top;}
+.objc .kw1 {color: #a61390;}
+.objc .kw2 {color: #a61390;}
+.objc .kw3 {color: #a61390;}
+.objc .kw4 {color: #a61390;}
+.objc .kw5 {color: #400080;}
+.objc .kw6 {color: #2a6f76;}
+.objc .kw7 {color: #400080;}
+.objc .kw8 {color: #2a6f76;}
+.objc .kw9 {color: #400080;}
+.objc .co1 {color: #6e371a;}
+.objc .co2 {color: #11740a; font-style: italic;}
+.objc .co3 {color: #bf1d1a;}
+.objc .coMULTI {color: #11740a; font-style: italic;}
+.objc .es0 {color: #2400d9;}
+.objc .br0 {color: #002200;}
+.objc .sy0 {color: #002200;}
+.objc .st0 {color: #bf1d1a;}
+.objc .nu0 {color: #2400d9;}
+.objc .ln-xtra, .objc li.ln-xtra, .objc div.ln-xtra {background-color: #ffc;}
+.objc span.xtra { display:block; }
+
+.perl .de1, .perl .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.perl  {font-family:monospace;}
+.perl .imp {font-weight: bold; color: red;}
+.perl li, .perl .li1 {font-weight: normal; vertical-align:top;}
+.perl .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.perl .li2 {font-weight: bold; vertical-align:top;}
+.perl .kw1 {color: #b1b100;}
+.perl .kw2 {color: #000000; font-weight: bold;}
+.perl .kw3 {color: #000066;}
+.perl .co1 {color: #666666; font-style: italic;}
+.perl .co2 {color: #009966; font-style: italic;}
+.perl .co3 {color: #0000ff;}
+.perl .co4 {color: #cc0000; font-style: italic;}
+.perl .co5 {color: #0000ff;}
+.perl .coMULTI {color: #666666; font-style: italic;}
+.perl .es0 {color: #000099; font-weight: bold;}
+.perl .es_h {color: #000099; font-weight: bold;}
+.perl .br0 {color: #009900;}
+.perl .sy0 {color: #339933;}
+.perl .st0 {color: #ff0000;}
+.perl .st_h {color: #ff0000;}
+.perl .nu0 {color: #cc66cc;}
+.perl .me1 {color: #006600;}
+.perl .me2 {color: #006600;}
+.perl .re0 {color: #0000ff;}
+.perl .re4 {color: #009999;}
+.perl .ln-xtra, .perl li.ln-xtra, .perl div.ln-xtra {background-color: #ffc;}
+.perl span.xtra { display:block; }
+
+.perl6 .de1, .perl6 .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.perl6  {font-family:monospace;}
+.perl6 .imp {font-weight: bold; color: red;}
+.perl6 li, .perl6 .li1 {font-weight: normal; vertical-align:top;}
+.perl6 .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.perl6 .li2 {font-weight: bold; vertical-align:top;}
+.perl6 .kw1 {color: #b1b100;}
+.perl6 .kw2 {color: #000000; font-weight: bold;}
+.perl6 .kw3 {color: #000066;}
+.perl6 .co1 {color: #666666; font-style: italic;}
+.perl6 .co2 {color: #009966; font-style: italic;}
+.perl6 .co3 {color: #0000ff;}
+.perl6 .co4 {color: #cc0000; font-style: italic;}
+.perl6 .co5 {color: #666666; font-style: italic;}
+.perl6 .coMULTI {color: #666666; font-style: italic;}
+.perl6 .es0 {color: #000099; font-weight: bold;}
+.perl6 .es_h {color: #000099; font-weight: bold;}
+.perl6 .br0 {color: #009900;}
+.perl6 .sy0 {color: #339933;}
+.perl6 .st0 {color: #ff0000;}
+.perl6 .st_h {color: #ff0000;}
+.perl6 .nu0 {color: #cc66cc;}
+.perl6 .me1 {color: #006600;}
+.perl6 .me2 {color: #006600;}
+.perl6 .re0 {color: #0000ff;}
+.perl6 .ln-xtra, .perl6 li.ln-xtra, .perl6 div.ln-xtra {background-color: #ffc;}
+.perl6 span.xtra { display:block; }
+
+.php .de1, .php .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.php  {font-family:monospace;}
+.php .imp {font-weight: bold; color: red;}
+.php li, .php .li1 {font-weight: normal; vertical-align:top;}
+.php .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.php .li2 {font-weight: bold; vertical-align:top;}
+.php .kw1 {color: #b1b100;}
+.php .kw2 {color: #000000; font-weight: bold;}
+.php .kw3 {color: #990000;}
+.php .kw4 {color: #009900; font-weight: bold;}
+.php .co1 {color: #666666; font-style: italic;}
+.php .co2 {color: #666666; font-style: italic;}
+.php .co3 {color: #0000cc; font-style: italic;}
+.php .co4 {color: #009933; font-style: italic;}
+.php .coMULTI {color: #666666; font-style: italic;}
+.php .es0 {color: #000099; font-weight: bold;}
+.php .es1 {color: #000099; font-weight: bold;}
+.php .es2 {color: #660099; font-weight: bold;}
+.php .es3 {color: #660099; font-weight: bold;}
+.php .es4 {color: #006699; font-weight: bold;}
+.php .es5 {color: #006699; font-weight: bold; font-style: italic;}
+.php .es6 {color: #009933; font-weight: bold;}
+.php .es_h {color: #000099; font-weight: bold;}
+.php .br0 {color: #009900;}
+.php .sy0 {color: #339933;}
+.php .sy1 {color: #000000; font-weight: bold;}
+.php .st0 {color: #0000ff;}
+.php .st_h {color: #0000ff;}
+.php .nu0 {color: #cc66cc;}
+.php .nu8 {color: #208080;}
+.php .nu12 {color: #208080;}
+.php .nu19 {color:#800080;}
+.php .me1 {color: #004000;}
+.php .me2 {color: #004000;}
+.php .re0 {color: #000088;}
+.php .ln-xtra, .php li.ln-xtra, .php div.ln-xtra {background-color: #ffc;}
+.php span.xtra { display:block; }
+
+.php-brief .de1, .php-brief .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.php-brief  {font-family:monospace;}
+.php-brief .imp {font-weight: bold; color: red;}
+.php-brief li, .php-brief .li1 {font-weight: normal; vertical-align:top;}
+.php-brief .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.php-brief .li2 {font-weight: bold; vertical-align:top;}
+.php-brief .kw1 {color: #b1b100;}
+.php-brief .kw2 {color: #000000; font-weight: bold;}
+.php-brief .kw3 {color: #990000;}
+.php-brief .co1 {color: #666666; font-style: italic;}
+.php-brief .co2 {color: #666666; font-style: italic;}
+.php-brief .co3 {color: #0000cc; font-style: italic;}
+.php-brief .coMULTI {color: #666666; font-style: italic;}
+.php-brief .es0 {color: #000099; font-weight: bold;}
+.php-brief .es_h {color: #000099; font-weight: bold;}
+.php-brief .br0 {color: #009900;}
+.php-brief .sy0 {color: #339933;}
+.php-brief .sy1 {color: #000000; font-weight: bold;}
+.php-brief .st0 {color: #0000ff;}
+.php-brief .st_h {color: #0000ff;}
+.php-brief .nu0 {color: #cc66cc;}
+.php-brief .nu8 {color: #208080;}
+.php-brief .nu12 {color: #208080;}
+.php-brief .nu19 {color:#800080;}
+.php-brief .me1 {color: #004000;}
+.php-brief .me2 {color: #004000;}
+.php-brief .re0 {color: #0000ff;}
+.php-brief .ln-xtra, .php-brief li.ln-xtra, .php-brief div.ln-xtra {background-color: #ffc;}
+.php-brief span.xtra { display:block; }
+
+.properties .de1, .properties .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.properties  {font-family:monospace;}
+.properties .imp {font-weight: bold; color: red;}
+.properties li, .properties .li1 {font-weight: normal; vertical-align:top;}
+.properties .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.properties .li2 {font-weight: bold; vertical-align:top;}
+.properties .kw1 {font-weight: bold;}
+.properties .co1 {color: #808080; font-style: italic;}
+.properties .sy0 {color: #000000;}
+.properties .st0 {color: #933;}
+.properties .re0 {color: #000080; font-weight:bold;}
+.properties .re1 {color: #008000; font-weight:bold;}
+.properties .ln-xtra, .properties li.ln-xtra, .properties div.ln-xtra {background-color: #ffc;}
+.properties span.xtra { display:block; }
+
+.python .de1, .python .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python li, .python .li1 {font-weight: normal; vertical-align:top;}
+.python .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.python .li2 {font-weight: bold; vertical-align:top;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: #f0f;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #ffff00;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: white;}
+.python .ln-xtra, .python li.ln-xtra, .python div.ln-xtra {background-color: #ffc;}
+.python span.xtra { display:block; }
+
+.robots .de1, .robots .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.robots  {font-family:monospace;}
+.robots .imp {font-weight: bold; color: red;}
+.robots li, .robots .li1 {font-weight: normal; vertical-align:top;}
+.robots .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.robots .li2 {font-weight: bold; vertical-align:top;}
+.robots .kw1 {color: #b1b100;}
+.robots .co1 {color: #808080; font-style: italic;}
+.robots .es0 {color: #000099; font-weight: bold;}
+.robots .br0 {color: #66cc66;}
+.robots .sy0 {color: #66cc66;}
+.robots .st0 {color: #ff0000;}
+.robots .nu0 {color: #cc66cc;}
+.robots .ln-xtra, .robots li.ln-xtra, .robots div.ln-xtra {background-color: #ffc;}
+.robots span.xtra { display:block; }
+
+.sql .de1, .sql .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.sql  {font-family:monospace;}
+.sql .imp {font-weight: bold; color: red;}
+.sql li, .sql .li1 {font-weight: normal; vertical-align:top;}
+.sql .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.sql .li2 {font-weight: bold; vertical-align:top;}
+.sql .kw1 {color: #993333; font-weight: bold;}
+.sql .co1 {color: #808080; font-style: italic;}
+.sql .coMULTI {color: #808080; font-style: italic;}
+.sql .es0 {color: #000099; font-weight: bold;}
+.sql .br0 {color: #66cc66;}
+.sql .sy0 {color: #66cc66;}
+.sql .st0 {color: #ff0000;}
+.sql .nu0 {color: #cc66cc;}
+.sql .ln-xtra, .sql li.ln-xtra, .sql div.ln-xtra {background-color: #ffc;}
+.sql span.xtra { display:block; }
+
+.text .de1, .text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text li, .text .li1 {font-weight: normal; vertical-align:top;}
+.text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text .li2 {font-weight: bold; vertical-align:top;}
+.text .ln-xtra, .text li.ln-xtra, .text div.ln-xtra {background-color: #ffc;}
+.text span.xtra { display:block; }
+
+.tsql .de1, .tsql .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.tsql  {font-family:monospace;}
+.tsql .imp {font-weight: bold; color: red;}
+.tsql li, .tsql .li1 {font-weight: normal; vertical-align:top;}
+.tsql .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.tsql .li2 {font-weight: bold; vertical-align:top;}
+.tsql .kw1 {color: #0000FF;}
+.tsql .kw2 {color: #FF00FF;}
+.tsql .kw3 {color: #AF0000;}
+.tsql .kw4 {color: #AF0000;}
+.tsql .co1 {color: #008080;}
+.tsql .coMULTI {color: #008080;}
+.tsql .es0 {color: #000099; font-weight: bold;}
+.tsql .br0 {color: #808080;}
+.tsql .sy0 {color: #808080;}
+.tsql .st0 {color: #FF0000;}
+.tsql .nu0 {color: #000;}
+.tsql .me1 {color: #202020;}
+.tsql .me2 {color: #202020;}
+.tsql .ln-xtra, .tsql li.ln-xtra, .tsql div.ln-xtra {background-color: #ffc;}
+.tsql span.xtra { display:block; }
+
+.vb .de1, .vb .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.vb  {font-family:monospace;}
+.vb .imp {font-weight: bold; color: red;}
+.vb li, .vb .li1 {font-weight: normal; vertical-align:top;}
+.vb .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.vb .li2 {font-weight: bold; vertical-align:top;}
+.vb .kw1 {color: #0ff;}
+.vb .co1 {color: #ccc;}
+.vb .es0 {color: #800000; font-weight: bold;}
+.vb .st0 {color: #ff6;}
+.vb .ln-xtra, .vb li.ln-xtra, .vb div.ln-xtra {background-color: #ffc;}
+.vb span.xtra { display:block; }
+
+.vbnet .de1, .vbnet .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.vbnet  {font-family:monospace;}
+.vbnet .imp {font-weight: bold; color: red;}
+.vbnet li, .vbnet .li1 {font-weight: normal; vertical-align:top;}
+.vbnet .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.vbnet .li2 {font-weight: bold; vertical-align:top;}
+.vbnet .kw1 {color: #0600FF;}
+.vbnet .kw2 {color: #FF8000;}
+.vbnet .kw3 {color: #008000;}
+.vbnet .kw4 {color: #FF0000;}
+.vbnet .kw5 {color: #804040;}
+.vbnet .kw6 {color: #0600FF;}
+.vbnet .kw7 {color: #0600FF;}
+.vbnet .kw8 {color: #0600FF;}
+.vbnet .co1 {color: #008080; font-style: italic;}
+.vbnet .coMULTI {color: #008080; font-style: italic;}
+.vbnet .es0 {color: #008080; font-weight: bold;}
+.vbnet .br0 {color: #000000;}
+.vbnet .sy0 {color: #008000;}
+.vbnet .st0 {color: #808080;}
+.vbnet .nu0 {color: #FF0000;}
+.vbnet .me1 {color: #0000FF;}
+.vbnet .ln-xtra, .vbnet li.ln-xtra, .vbnet div.ln-xtra {background-color: #ffc;}
+.vbnet span.xtra { display:block; }
+
+.xml .de1, .xml .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml li, .xml .li1 {font-weight: normal; vertical-align:top;}
+.xml .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.xml .li2 {font-weight: bold; vertical-align:top;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .nu0 {color: #cc66cc;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml .ln-xtra, .xml li.ln-xtra, .xml div.ln-xtra {background-color: #ffc;}
+.xml span.xtra { display:block; }
+
+.xorg_conf .de1, .xorg_conf .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.xorg_conf  {font-family:monospace;}
+.xorg_conf .imp {font-weight: bold; color: red;}
+.xorg_conf li, .xorg_conf .li1 {font-weight: normal; vertical-align:top;}
+.xorg_conf .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.xorg_conf .li2 {font-weight: bold; vertical-align:top;}
+.xorg_conf .kw1 {color: #b1b100;}
+.xorg_conf .kw2 {color: #990000;}
+.xorg_conf .kw3 {color: #550000;}
+.xorg_conf .co1 {color: #adadad; font-style: italic;}
+.xorg_conf .st0 {color: #0000ff;}
+.xorg_conf .nu0 {color: #cc66cc;}
+.xorg_conf .ln-xtra, .xorg_conf li.ln-xtra, .xorg_conf div.ln-xtra {background-color: #ffc;}
+.xorg_conf span.xtra { display:block; }

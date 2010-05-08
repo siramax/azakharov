@@ -1,0 +1,129 @@
+#!/bin/sh
+# TODO schemas :) 
+##
+#Directory for back up
+DIR=$1/
+##
+#Global name to backing up
+NAME=$2
+##
+#Backup system dir, where date files will be stored
+BACKUP_SYS_DIR=/home/vaulter
+##
+# Backup ignore
+BACKUP_IGNORE=/home/vaulter/backup.ignore
+##
+#File name with date
+DATE_FILE=$BACKUP_SYS_DIR/.backup_date.$NAME
+##
+#Directory where backup will be stored locally
+BACKUP_DIR=/home/vaulter/backup/
+##
+#Date format
+DATE_FORMAT="%Y-%m-%d"
+##
+#File name with date
+DATE_FILE=$BACKUP_SYS_DIR/.backup_date.$NAME
+##
+# Date when time begins
+DATE_BEGIN="4 aug 1981"
+##
+#
+usage()
+{
+    echo "$0 Directory Name-of-Branch"
+    echo "e.g. $0 ~ home"
+    exit 1
+}
+
+unit_test()
+{
+    local units=0
+    TMPDIR=/tmp
+    local TF="$TMPDIR/bk.$$"
+# by date inside file
+    date --utc > $TF
+    test x"`DATE_FILE="$TF" read_date`" = x"`date -r $TF +$DATE_FORMAT `" || let units=$units+1
+# unit2 by inname of file
+    touch $TF #now
+    return $units
+}
+##
+#
+read_date(){
+        # Get the date
+        DATE=`cat "$DATE_FILE" 2> /dev/null`
+
+        # Check it
+        if [ -z "$DATE" ] ; then
+                DATE="blah_blah"
+                # wring way...DATE=`date --reference BACKUP_DIR
+                # right way: to get last file in dir, and PARSE Name (actual date of backup start)
+
+#FILE=`date +"$DATE_FORMAT"`.`date +"$DATE_FORMAT" --date "$DATE"`.$NAME
+                DATE=`ls -1tr $BACKUP_DIR/*$NAME | tail -n 1 | sed 's#.*\([0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\)\.[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}.*#\1#g'`
+        fi
+
+        if ( date --date "$DATE" 1> /dev/null 2> /dev/null ) ; then
+                # Fixing format, noo data change...
+                DATE=`date +"$DATE_FORMAT" --date "$DATE" --utc` ;
+        else
+                # Fixing date, reset to 01.01.1980
+                DATE=`date +"$DATE_FORMAT" --date "$DATE_BEGIN" --utc`
+        fi
+
+        echo $DATE
+}
+
+
+##
+#The date of last backup
+DATE=`read_date`
+##
+#Backup file name (today).(last).(name)
+FILE=`date +"$DATE_FORMAT"`.`date +"$DATE_FORMAT" --date "$DATE"`.$NAME
+
+[ -z "$DIR" -o -z "$NAME" ] && usage
+unit_test; exit $?
+cd $BACKUP_DIR
+
+# Tape it
+# Old variant - with empty dirs
+# if tar --newer-mtime="$DATE" --totals --verbose --one-file-system --ignore-failed-read                    \
+#     --atime-preserve                            \
+#     --directory "$DIR"                                                                                                        \
+#     --exclude="$FILE"                           \
+#     --exclude-from="$BACKUP_IGNORE"             \
+#     --create --file "$BACKUP_SYS_DIR/$FILE"     \
+#     --gzip "$DIR"; then
+# New variant, by find
+# But we need test file
+touch $BACKUP_DIR/$NAME -t "`date --date=\"$DATE\" +%y%m%d%H%M`"
+
+if find "$DIR" -newer "${BACKUP_DIR}$NAME" -print0 | xargs -0 \
+    tar --newer-mtime="$DATE" --totals --verbose --one-file-system --ignore-failed-read \
+    --atime-preserve                            \
+    --directory "$DIR"                          \
+    --exclude="$FILE"                           \
+    --exclude-from="$BACKUP_IGNORE"             \
+    --create --file "$BACKUP_SYS_DIR/$FILE"     \
+    --gzip
+then
+
+#================================================================
+# Set new backup date (today)
+#================================================================
+    echo "$DATE_TODAY" > "$DATE_FILE"
+fi
+#================================================================
+#Mail it
+#================================================================
+#mail "$MAIL_RCPT" -s "backup ok, name=$NAME" << [DONE1]
+cat <<MSG
+Hello Master,
+Backup was successfully made.
+
+DATE LAST BACKUP: $DATE
+DATE THIS BACKUP: $DATE_TODAY
+NAME OF BACKUP  : $NAME
+MSG

@@ -72,7 +72,7 @@ ob_menu_item() {
 # Creates menu for linux /etc/alternatives system
 # @param $1 - groupname (x-www-browser)
 getAlternatives() {
-    update-alternatives --list $1 | while read line; do
+    /usr/sbin/update-alternatives --list $1 | while read line; do
         ob_menu_item 0 $line $line
     done
 }
@@ -177,16 +177,19 @@ case "$1" in
     t | tools)
         shift
         
-        UID=$USER simple_check "ktorrent" "/usr/bin/ktorrent" "kquitapp --service org.ktorrent.ktorrent ktorrent" "KTorrent"
-        UID=$USER simple_check "skype" "/usr/bin/skype" "pkill -SIGINT skype" "Skype"
-        UID=$USER simple_check "plasma" "/usr/bin/plasma" "kquitapp plasma"
-        UID=$USER simple_check "openvpn" "lxterm -title \"Sperasoft VPN\" -e '/bin/sh -c \"cd /home/vaulter/.openvpn/config/; cat /home/vaulter/Desktop/vpn.txt; sudo openvpn client.ovpn\"'" \
+        #UID=$USER 
+        simple_check "ktorrent" "/usr/bin/ktorrent" "kquitapp --service org.ktorrent.ktorrent ktorrent" "KTorrent"
+        simple_check "skype" "/usr/bin/skype" "pkill -SIGINT skype" "Skype"
+        simple_check "plasma" "/usr/bin/plasma" "kquitapp plasma"
+        #UID=$USER 
+        simple_check "openvpn" "lxterm -title \"Sperasoft VPN\" -e '/bin/sh -c \"cd /home/vaulter/.openvpn/config/; cat /home/vaulter/Desktop/vpn.txt; sudo openvpn client.ovpn\"'" \
         "pkill openvpn" "Sperasoft VPN"
         ;;
     *)
 #openttd 
 # ratings
 # land area
+        ob_menu_sep "`pwd`"
         ob_subpipe_menu Desktop "$txtDesktop" "$SELF desktop"
         #use open box built-in menu
         ob_subpipe_menu client-list-combined-menu "❖ "
