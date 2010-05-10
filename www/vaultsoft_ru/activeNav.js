@@ -173,5 +173,5 @@ Drupal.behaviors.activeNav = function( context ) {
 
 
 //unit tests
-t1 = Drupal.behaviors.activeNav( null );
-t2 = Drupal.behaviors.activeNav( t1 );
+//t1 = Drupal.behaviors.activeNav( null );
+//t2 = Drupal.behaviors.activeNav( t1 );

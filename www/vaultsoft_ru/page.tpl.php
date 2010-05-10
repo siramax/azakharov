@@ -84,8 +84,9 @@
 
 <head>
   <title><?php print $head_title; ?></title>
-  <?php print $head; ?>
-  <?php print $styles; ?>
+    <?php print $head; ?>
+    <?php print $styles; ?>
+    <link rel="me" type="text/html" href="http://www.google.com/profiles/aazaharov81"/>
 </head>
 <body class="<?php print $body_classes; ?>">
   <div id="page"><div id="page-inner">
@@ -250,6 +251,6 @@
 
     <?php print $scripts; ?>
     <?php print $closure; ?>
-
+ <!-- Themed by Andrey Zakharov based on nynke.wordpress.com -->
 </body>
 </html>

@@ -45,6 +45,18 @@ h1,h2,h3,h4,h5 {
     font-weight: bold;
 }
 
+#content, #sidebar-left, #sidebar-right {
+    transition:         left 1s ease-in-out, right 1s ease-in-out;
+    -moz-transition:    left 1s ease-in-out, right 1s ease-in-out;
+    -o-transition:      left 1s ease-in-out, right 1s ease-in-out;
+    -webkit-transition: left 1s ease-in-out, right 1s ease-in-out;
+}
+#sidebar-left.hidden-by-pos {
+    left: -199px;
+}
+#sidebar-right.hidden-by-pos {
+    right: -199px;
+}
 /* cool stuff for header links */
 #primary .links li {
     margin-top: 3px;
