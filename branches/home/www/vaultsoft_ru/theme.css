@@ -213,6 +213,7 @@
     -khtml-border-radius:   5px;
     -webkit-border-radius:  5px;
     border-radius:          5px; /* CSS3 */
+
   }
 
 #content-area a {
@@ -825,6 +826,7 @@
   {
     margin: 0;
     padding: 0;
+    padding-left: 2em;
     font-size: 0.9em;
   }
 
@@ -897,9 +899,13 @@ textarea  {
     -webkit-border-radius:      4px;
     border-radius:              4px;
     border:1px solid #5D380E;
-    opacity:0.8;
     color: #5D380E;
     line-height: 1.65em;
+    -khtml-opacity: .8;
+    -moz-opacity:   .8;
+    -ms-filter:"alpha(opacity=80)";
+    filter:     alpha(opacity=80);
+    opacity:        .8;
     /*text-indent: 0.1em;*/
 }
 input[type="password"],
@@ -938,12 +944,12 @@ input[type="submit"] {
     border: solid 1px #9E8562;
     background: #895E22;
     background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 0, 0, 0, 0.36 ) 36%, rgba( 255, 255, 255, 0.1 ) );
+    background: -moz-linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 0, 0, 0, 0.36 ) 36%, rgba( 255, 255, 255, 0.1 ) );
     background: -webkit-gradient( linear, left top, left bottom, 
         from(rgba( 255, 255, 255, 0.1 )), 
         color-stop( 36%, rgba( 0, 0, 0, 0.36 )), 
         to(rgba( 255, 255, 255, 0.1 )) );/*from(#EAC794), to(#895E22)*/
-    background: -moz-linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 0, 0, 0, 0.36 ) 36%, rgba( 255, 255, 255, 0.1 ) );
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff1e', endColorstr='#00000055');
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1effffff', endColorstr='#55000000');
 
     transition:         color 1s ease-in-out;
     -o-transition:      color 1s ease-in-out;
@@ -956,7 +962,7 @@ input[type="submit"]:hover {
     background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 137, 94, 34, 0.36 ) 36%, rgba( 255, 255, 255, 0.1 ) );
     background: -webkit-gradient(linear, left top, left bottom, from(rgba( 255, 255, 255, 0.1 )), color-stop( 36%, rgba( 137, 94, 34, 0.36 )), to(rgba( 255, 255, 255, 0.1 )) );/*from(#895E22), to(#9E8562)*/
     background: -moz-linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 137, 94, 34, 0.36 ) 36%, rgba( 255, 255, 255, 0.1 ) );
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff1e', endColorstr='#895e2255');
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1effffff', endColorstr='#55895e22');
     color: yellow;
 
     transition:         color 2s ease-in-out;
@@ -972,11 +978,24 @@ input[type="submit"]:active {
         color-stop( 36%, rgba( 166, 221, 140, 0.5 )), 
         to(rgba( 255, 255, 255, 0.1 )) );
     background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.1 ), rgba( 166, 221, 140, 0.5 ) 36%, rgba( 255, 255, 255, 0.1 ));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff1e', endColorstr='#a6dd8c80');
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1effffff', endColorstr='#80a6dd8c');
 
     -webkit-box-shadow: 0 0 ;
     -moz-box-shadow:    0 0 ;
     box-shadow:         0 0 ;
+}
+
+input:focus {
+    background-color: white;
+    -khtml-opacity: 1;
+    -moz-opacity:   1;
+    -ms-filter:"alpha(opacity=100)";
+    filter:     alpha(opacity=100);
+    opacity:        1;
+    transition:         background-color 1s ease-in-out, opacity 1s ease-in-out;
+    -o-transition:      background-color 1s ease-in-out, opacity 1s ease-in-out;
+    -moz-transition:    background-color 1s ease-in-out, -moz-opacity 1s ease-in-out;
+    -webkit-transition: background-color 1s ease-in-out, opacity 1s ease-in-out;
 }
 
  /* A sticky node (displayed before others in a list) */
@@ -1005,5 +1024,23 @@ input[type="submit"]:active {
     background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ) );
     background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.1 )), to(rgba( 255, 255, 255, 0 )) );
     background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ));
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1effffff', endColorstr='#01ffffff');
+}
 
+#triggerView {
+    color: #dcb073;
+    padding: 0 0.5em 0.4em 0.5em;
+    font-size: 16pt;
+    /* old */
+    background: black; opacity: 0.5;
+    background: linear-gradient( -90deg, rgba( 0, 0, 0, 0.5 ), rgba( 0, 0, 0, 0.3 ) 36%, rgba( 0, 0, 0, 0.5 ) );
+    background: -moz-linear-gradient(-90deg, rgba( 0, 0, 0, 0.5 ), rgba( 0, 0, 0, 0,2 ) 36%, rgba( 0, 0, 0, 0.5 ));
+    background: -webkit-gradient( linear, left top, left bottom, from(rgba( 0, 0, 0, 0.5 )), color-stop( 36%, rgba( 0, 0, 0, 0.3 )), to(rgba( 0, 0, 0, 0.5 )) );
+    -ms-filter:"alpha(opacity=50)";
+    filter:     alpha(opacity=50);
+
+    -moz-border-radius:     0 0 5px 5px;
+    -khtml-border-radius:   0 0 5px 5px;
+    -webkit-border-radius:  0 0 5px 5px;
+    border-radius:          0 0 5px 5px; /* CSS3 */
 }
