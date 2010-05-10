@@ -97,10 +97,10 @@
 
 
 <?php if ( $navbar || $left || $right ): ?>
-    <div id = "triggerView" class = "trigger animable hidden"></div>
 <?php endif; ?>
     <div id="main"><div id="main-inner" class="clear-block<?php if ($search_box || $primary_links || $secondary_links || $navbar) { print ' with-navbar'; } ?>">
       <div id="content" class = "<?php if ($left) { print " with-sidebar-left "; }; if ($right) { print " with-sidebar-right "; };?> "><div id="content-inner">
+        <div id = "triggerView" class = "trigger animable hidden"></div>
         <?php if ($mission): ?>
           <div id="mission"><?php print $mission; ?></div>
         <?php endif; ?>

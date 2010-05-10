@@ -44,7 +44,7 @@ h1,h2,h3,h4,h5 {
     
     font-weight: bold;
 }
-
+/** extendView */
 #content, #sidebar-left, #sidebar-right {
     transition:         left 1s ease-in-out, right 1s ease-in-out;
     -moz-transition:    left 1s ease-in-out, right 1s ease-in-out;
@@ -57,6 +57,38 @@ h1,h2,h3,h4,h5 {
 #sidebar-right.hidden-by-pos {
     right: -199px;
 }
+#content.with-sidebar-left.half {
+    left: 100px;
+}
+
+#content.with-sidebar-right.half {
+    right: 100px;
+}
+
+#sidebar-left.half {
+    left: -100px;
+}
+
+#sidebar-right.half {
+    right: -100px;
+}
+/* peep out */
+.sidebar-left #content.peep {
+    left: 20px;/* to skip scrollbar...*/
+}
+
+.sidebar-right #content.peep {
+    right: 5px;
+}
+
+#sidebar-left.peep {
+    left: -180px;
+}
+
+#sidebar-right.peep {
+    right: -195px;
+}
+
 /* cool stuff for header links */
 #primary .links li {
     margin-top: 3px;

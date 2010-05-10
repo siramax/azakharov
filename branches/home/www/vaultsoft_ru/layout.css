@@ -162,7 +162,7 @@
   }
 #triggerView {
     position: absolute;
-    top: 72px;
+    top: 0px;
     left: 0px;
     width: 16px;
     height: 6px;
@@ -214,6 +214,8 @@
 #content.with-sidebar-right {
     right: 200px;
 }
+
+
 
   #navbar-inner
   {
@@ -272,6 +274,8 @@
     padding: 0; /* DO NOT CHANGE. Add padding or margin to #sidebar-left-inner. */
     width: 200px;
   }
+
+
 
   #sidebar-left-inner
   {
