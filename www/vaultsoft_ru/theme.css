@@ -1020,7 +1020,7 @@ input:focus {
     margin-left: 0;
 }
 
-#sidebar-left .block, #sidebar-right .block, .region-vertical .block {
+#sidebar-left .block .title, #sidebar-right .block  .title, .region-vertical .block  .title {
     background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ) );
     background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.1 )), to(rgba( 255, 255, 255, 0 )) );
     background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ));
@@ -1029,8 +1029,8 @@ input:focus {
 
 #triggerView {
     color: #dcb073;
-    padding: 0 0.5em 0.4em 0.5em;
-    font-size: 16pt;
+    font-size: 8pt;
+    padding: 0 0.7em 0 0.4em;
     /* old */
     background: black; opacity: 0.5;
     background: linear-gradient( -90deg, rgba( 0, 0, 0, 0.5 ), rgba( 0, 0, 0, 0.3 ) 36%, rgba( 0, 0, 0, 0.5 ) );
@@ -1039,8 +1039,19 @@ input:focus {
     -ms-filter:"alpha(opacity=50)";
     filter:     alpha(opacity=50);
 
-    -moz-border-radius:     0 0 5px 5px;
-    -khtml-border-radius:   0 0 5px 5px;
-    -webkit-border-radius:  0 0 5px 5px;
-    border-radius:          0 0 5px 5px; /* CSS3 */
+    -moz-border-radius:     0 5px 5px 0;
+    -khtml-border-radius:   0 5px 5px 0;
+    -webkit-border-radius:  0 5px 5px 0;
+    border-radius:          0 5px 5px 0; /* CSS3 */
+    cursor: hand; cursor: pointer;
+}
+
+#triggerView {
+    position: fixed;
+    top: 60%;
+    margin-left: 0;
+    width: 0.6em;
+    height:         10em;
+    line-height:    10em;
+    z-index: 5;
 }
