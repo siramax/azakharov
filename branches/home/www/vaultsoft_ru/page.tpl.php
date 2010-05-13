@@ -86,7 +86,8 @@
   <title><?php print $head_title; ?></title>
     <?php print $head; ?>
     <?php print $styles; ?>
-    <link rel="me" type="text/html" href="http://www.google.com/profiles/aazaharov81"/>
+    <?php print $scripts; ?>
+    <link rel="me" type="text/html" href="http://www.google.com/profiles/106955530525522116068"/>
 </head>
 <body class="<?php print $body_classes; ?>">
   <div id="page"><div id="page-inner">
@@ -99,8 +100,9 @@
 <?php if ( $navbar || $left || $right ): ?>
 <?php endif; ?>
     <div id="main"><div id="main-inner" class="clear-block<?php if ($search_box || $primary_links || $secondary_links || $navbar) { print ' with-navbar'; } ?>">
-      <div id="content" class = "<?php if ($left) { print " with-sidebar-left "; }; if ($right) { print " with-sidebar-right "; };?> "><div id="content-inner">
-        <div id = "triggerView" class = "trigger animable hidden"></div>
+      <div id="content" class = "<?php if ($left) { print " with-sidebar-left "; }; if ($right) { print " with-sidebar-right "; };?> ">
+        <div id = "triggerView" class = "trigger animable hidden" title ="Works Great in Chromium Browser!"></div>
+        <div id="content-inner">
         <?php if ($mission): ?>
           <div id="mission"><?php print $mission; ?></div>
         <?php endif; ?>
@@ -123,7 +125,7 @@
         <?php endif; ?>
 
         <?php if ($title): ?>
-            
+
 
 
 
@@ -248,8 +250,6 @@
   <?php if ($closure_region): ?>
     <div id="closure-blocks" class="region region-closure"><?php print $closure_region; ?></div>
   <?php endif; ?>
-
-    <?php print $scripts; ?>
     <?php print $closure; ?>
  <!-- Themed by Andrey Zakharov based on nynke.wordpress.com -->
 </body>

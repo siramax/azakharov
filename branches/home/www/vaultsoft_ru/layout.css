@@ -84,14 +84,14 @@
   */
 
 /** header **/
-  #header
-  {
+#header
+{
     position: absolute;
     left: 10px; /* = body.padding*/
     right: 10px;
     top: 0px; /* ~= body.padding to hide beneath*/
     height: 44px;
-  }
+}
 
 #sidebar-left, #content, #sidebar-right {
     top: 72px; /* header + nav */
@@ -160,14 +160,7 @@
     /*padding-left: 200px;  The width + left margin of #sidebar-left. */
     /*padding-right: 200px;  The width + right margin of #sidebar-right. */
   }
-#triggerView {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 16px;
-    height: 6px;
-    z-index: 5;
-}
+
 /** navbar **/
   #navbar
   {
@@ -289,7 +282,7 @@
     /*float: right;
     margin-left: -200px; /* Negative value of #sidebar-right's width + right margin. */
     width: 200px;
-    RIGHT: 0px;
+    right: 0px;
     padding: 0; /* DO NOT CHANGE. Add padding or margin to #sidebar-right-inner. */
   }
 

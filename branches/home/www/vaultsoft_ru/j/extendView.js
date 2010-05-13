@@ -20,40 +20,78 @@ So. plan is:
 Also, need attension stop pause at the middle of the ride for a .... 3 secs is enoigh to hover over CRAZY sidebar!!!:)
 
 Attach events for hover and click (touch UI)
+
+depend on $.cookie :(
 */
 
 
-    var extendView = function( params ) {//TODO settings type
+    var extendView = function( paramTable ) {//TODO settings type
         var self = this;
-        var params = params || {};
-        this.trigger = params.trigger || $( "<div id = triggerView></div>" ).prependTo( "body" ).get( 0 );//DOM
+        var params = paramTable                 || {};
+        this.trigger = params.trigger           || $( "<div id = triggerView></div>" ).prependTo( "body" ).get( 0 );//DOM
 //        var indica = params.indicator || $( "<div id = indicator></div>" ).prependTo( "#footer" ).get( 0 );//DOM
-        this.regions = params.regions ||  "#sidebar-left, #sidebar-right";
-        this.contentClasses =  params.classes || "narrow-left narrow-right";
-        var toShow;//to cancel
+        this.regions = params.regions           || "#sidebar-left, #sidebar-right";
+        this.contentClasses =  params.classes   || "narrow-left narrow-right";
+        this.content = params.content           || "#content";
+        this.cookieName = params.cookieName     || "extendViewState";
+        this.initialState = params.initialState || $.cookie( this.cookieName ) || "Shown";
+        this.arrowLeft = "&#x25C0;";//&lArr;
+        this.arrowRight = "&#x25B6;";// "&rArr;" 
 
-        this.currentState = this.doActionTransition( "Half", "mousemove" );//strange init. I know
+        if ( "undefined" == typeof this.actionTransitionFunctions[ this.initialState ] ) { this.initialState = "Shown"; }
 
-        $( this.regions ).click( function( e ) { self.handleEvent( e ) }/*late binding*/ ).
-            mousemove( function( e ) { self.handleEvent( e ) } ).
-            mouseout( function( e ) { self.handleEvent( e ) } ).
+        this.currentState = this.initialState;
+        this.currentState = this.doActionTransition( this.initialState, "restore" );
+
+        $( this.regions ).click( function( e ) { self.handleEvent( e ); }/*late binding*/ ).
+            mousemove( function( e ) { self.handleEvent( e ); } ).
+            mouseout( function( e ) { self.handleEvent( e ); } ).
             find( "input, a" ).
-                focus( function( e ) { self.handleEvent( e ) } ).
-                blur( function( e ) { self.handleEvent( e ) } );
+                focus( function( e ) { self.handleEvent( e ); } ).
+                blur( function( e ) { self.handleEvent( e ); } );
 
-        $( this.trigger ).removeClass( "hidden" ).click( function( e ) { self.handleEvent( e ) } );//some internal code
+        $( this.trigger ).removeClass( "hidden" ).
+            click( function( e ) { self.handleEvent( e ); e.target.inn = false; } ).
+            mouseover( function ( e ) {
+                e.target.inn = false;
+                if ( self.currentState == "Hidden" ) {
+                    e.target.inn = true;
+                }
+            } ).
+            mouseout( function ( e ) {
+                e.target.inn = false;
+            } ).
+            mousemove( function( e ) {
+                if ( self.currentState != "Hidden" ) {
+                    self.handleEvent( e );
+                } else {//only if "in" later
+                    if ( e.target.inn ) {
+                        self.handleEvent( e );
+                    }
+                }
+                e.target.inn = false;
+            } );//some internal code
     };
 
     extendView.prototype = {
         currentState:               null, // current state of finite state machine (one of "actionTransitionFunctions" properties)
-        trace:                      function ( obj ) { if ( console ) { console.log( obj ); } },
+        trace:                      function ( obj ) { if ( "undefined" != typeof(console) ) { console.log( obj ); } },
         actionTransitionFunctions:  { // main table TODO define at level above
+
             Shown: {
-                focus:              function( e ) {
+                restore:            function() {//restore this state from cookie
+                    $( this.regions ).removeClass( "peep half hidden-by-pos" );
+                    $( this.content ).removeClass( "peep half" ).addClass( this.contentClasses );
+                    $( this.trigger ).html( this.arrowLeft );
+                    this.cancelTimer();
+                    this.startTimer( this.timeoutShown * 1000 );//will trigger timeout
+                    return this.currentState;
+                },
+                focus:              function( e ) {//->Stop
                     this.cancelTimer();
                     $( this.regions ).removeClass( "half" ).removeClass( "hidden-by-pos" );
-                    $( "#content" ).removeClass( "half" ).addClass( this.contentClasses );//TODO
-                    $( this.trigger ).html(  "&lArr;" );//show backward arrow
+                    $( this.content ).removeClass( "half" ).addClass( this.contentClasses );
+                    $( this.trigger ).html( this.arrowLeft );
                     return "Stop";
                 },
                 mousemove:          function( e ) {//human act on sidebar
@@ -62,65 +100,91 @@ Attach events for hover and click (touch UI)
                     return "Shown";
                 },
                 click:              function( e ) {
-                    if ( e && e.target === this.trigger ) {//force hide by trigger
-                        if ( this.currentState == "Shown" ) {
+                    if ( e && e.target === this.trigger ) { //->Hidden
+                        if ( this.currentState == "Shown" ) {//force hide by trigger
+                            this.cancelTimer();
                             return this.doActionTransition( "Half", "timeout", e ); 
                         }
                     }
                     return this.doActionTransition( "Shown", "mousemove", e );
                 },
-                timeout:            function( e ) {// goes to half shown
+                timeout:            function( e ) {//->Half
                     $( this.regions ).addClass( "half" );
                     $( "#content" ).addClass( "half" );//TODO
-                    $( this.trigger ).html(  "&rArr;" );//show backward arrow
+                    $( this.trigger ).html( this.arrowRight );//show backward arrow
                     //start timer for hide
                     this.startTimer( this.timeoutHalfShown * 1000 );
                     return "Half";
                 }
             },
+
             Stop : {
-                blur:               function( e ) { return this.doActionTransition( "Shown", "mousemove", e ); },
+                restore:            function() {//restore this state from cookie
+                    this.cancelTimer();
+                    $( this.regions ).removeClass( "peep half hidden-by-pos" );
+                    $( this.content ).removeClass( "peep half" ).addClass( this.contentClasses );
+                    $( this.regions ).focus();
+                    return this.currentState;
+                },//below is a some duck - when user reloads page, blur event occures too.
+                blur:               function( e ) { return this.doActionTransition( "Shown", "mousemove", e ); } //-> Shown
             },
+
             Half: {
-                focus:              function( e ) { return this.doActionTransition( "Shown", "focus", e ); },
-                mousemove:          function( e ) { return this.doActionTransition( "Half", "click", e ); },
-                click:              function( e ) {//Show back
+                restore:            function() {//restore this state from cookie
+                    $( this.regions ).removeClass( "peep hidden-by-pos" ).addClass( "half" );
+                    $( this.content ).removeClass( "peep" ).addClass( "half" );
+                    this.cancelTimer();
+                    this.startTimer( this.timeoutHalfShown * 1000 );
+                    $( this.trigger ).html( this.arrowRight );//show backward arrow
+                    return this.currentState;
+                },
+                focus:              function( e ) { return this.doActionTransition( "Shown", "focus", e ); },//->Shown, Stop
+                mousemove:          function( e ) { return this.doActionTransition( "Half", "click", e ); },//->Shown
+                click:              function( e ) {//->Shown
                     this.cancelTimer();
                     $( this.regions ).removeClass( "half" );
                     $( "#content" ).removeClass( "half" );//TODO
-                    $( this.trigger ).html(  "&lArr;" );//show backward arrow
+                    $( this.trigger ).html( this.arrowLeft );//show backward arrow
                     return this.doActionTransition( "Shown", "click", e );
                 },
-                timeout:            function( e ) {// goes to hide
+                timeout:            function( e ) {//->Hidden
                     $( this.regions ).removeClass( "half" ).addClass( "hidden-by-pos" );
-                    $( "#content" ).removeClass( "half" ).removeClass( this.contentClasses );//TODO
-                    $( this.trigger ).html(  "&rArr;" );//show backward arrow
+                    $( this.content ).removeClass( "half " + this.contentClasses );
+                    $( this.trigger ).html( this.arrowRight );
                     this.cancelTimer();//any
                     return "Hidden";
-                },
+                }
             },
+
             Hidden: {
-                    focus:              function( e ) { return this.doActionTransition( "Shown", "focus", e ); },
-                    mousemove:          function( e ) {
-                        if ( ! this.currentTimer ) {
-                            $( this.regions ).addClass( "peep" );
-                            $( "#content" ).addClass( "peep" );//TODO
-                            this.startTimer( this.timeoutPause * 1000 ); 
-                        }
-                    },
-                    mouseout:           function( e ) { 
-                        $( this.regions ).removeClass( "peep" );
-                        $( "#content" ).removeClass( "peep" );//TODO
-                        this.cancelTimer(); 
-                    },
-                    click:              function( e ) { 
-                        this.doActionTransition( "Hidden", "mouseout", e );
-                        $( this.regions ).removeClass( "hidden-by-pos" );
-                        $( "#content" ).addClass( this.contentClasses );//TODO
-                        return this.doActionTransition( "Half", "click", e ); 
-                    },
-                    timeout:            function( e ) { return this.doActionTransition( "Hidden", "click", e ); },
-            },
+                restore:            function() {//restore this state from cookie
+                    $( this.regions ).removeClass( "peep half" ).addClass( "hidden-by-pos" );
+                    $( this.content ).removeClass( "peep half " + this.contentClasses );
+                    this.cancelTimer();
+                    $( this.trigger ).html( this.arrowRight );
+                    return this.currentState;
+                },
+                focus:              function( e ) { return this.doActionTransition( "Shown", "focus", e ); },//->Shown, Stop
+                mousemove:          function( e ) {//->Hidden
+                    if ( ! this.currentTimer ) {
+                        $( this.regions ).addClass( "peep" );
+                        $( this.content ).addClass( "peep" );
+                        this.startTimer( this.timeoutPause * 1000 ); 
+                    }
+                },
+                mouseout:           function( e ) {//->Hidden
+                    $( this.regions ).removeClass( "peep" );
+                    $( this.content ).removeClass( "peep" );
+                    this.cancelTimer(); 
+                },
+                click:              function( e ) {//->Shown
+                    this.doActionTransition( "Hidden", "mouseout", e );
+                    $( this.regions ).removeClass( "hidden-by-pos" );
+                    $( this.content ).addClass( this.contentClasses );
+                    return this.doActionTransition( "Half", "click", e ); 
+                },
+                timeout:            function( e ) { return this.doActionTransition( "Hidden", "click", e ); }//->Shown
+            }
         }, //end of actionTransitionFunctions
         
         timeoutShown:               5, //5 sec
@@ -145,12 +209,15 @@ Attach events for hover and click (touch UI)
          */
         handleEvent: function( event ) { 
             var actionTransitionFunction = this.actionTransitionFunctions[ this.currentState ][ event.type ];
-            if ( !actionTransitionFunction ) //actionTransitionFunction = this.unexpectedEvent;
-                return true;//bubble event
+            //bubble event
+            if ( !actionTransitionFunction ) { return true; } //actionTransitionFunction = this.unexpectedEvent;
+
             var nextState = actionTransitionFunction.call( this, event ) || this.currentState;
+            if ( !this.actionTransitionFunctions[ nextState ] ) { nextState = this.undefinedState( event, nextState ); }
             //if (this.trace) this.trace("'" + event.type + "' event caused transition from '" + this.currentState + "' state to '" + nextState + "' state");
-            if ( !this.actionTransitionFunctions[ nextState ] ) nextState = this.undefinedState( event, nextState );
             this.currentState = nextState;
+            $.cookie( this.cookieName, null );
+            $.cookie( this.cookieName, this.currentState );
         },
 
         /**
@@ -164,7 +231,7 @@ Attach events for hover and click (touch UI)
         unexpectedEvent: function( event ) { 
             this.cancelTimer();
             //this.cancelTicker();
-            alert("extendView handled unexpected event '" + event.type + "' in state '" + this.currentState + "' for id='" + this.regions + "' running browser " + window.navigator.userAgent);
+            //alert("extendView handled unexpected event '" + event.type + "' in state '" + this.currentState + "' for id='" + this.regions + "' running browser " + window.navigator.userAgent);
             return this.initialState; 
         },  
         
@@ -179,7 +246,7 @@ Attach events for hover and click (touch UI)
         undefinedState: function(event, state) {
             this.cancelTimer();
             //this.cancelTicker();
-            alert("extendView transitioned to undefined state '" + state + "' from state '" + this.currentState + "' due to event '" + event.type + "' from HTML element id='" + this.regions + "' running browser " + window.navigator.userAgent);
+            //alert("extendView transitioned to undefined state '" + state + "' from state '" + this.currentState + "' due to event '" + event.type + "' from HTML element id='" + this.regions + "' running browser " + window.navigator.userAgent);
             return this.initialState; 
         },
         /**
@@ -226,9 +293,9 @@ Attach events for hover and click (touch UI)
         * This method does not return a value.
         */
         cancelTimer: function() { 
-            if ( this.currentTimer ) clearTimeout( this.currentTimer );
+            if ( this.currentTimer ) { clearTimeout( this.currentTimer ); }
             this.currentTimer = null;
-        },
+        }
     };
 
     $( document ).ready( function() {
@@ -238,10 +305,9 @@ Attach events for hover and click (touch UI)
         if ( sideBars.length ) {
             var exv = new extendView( { 
                 trigger: $( "#triggerView" ).get( 0 ),
-                classes: sideBars, //adapt to current layout.. TODO
-            
+                classes: sideBars //adapt to current layout.. TODO
             } );
-        }
+        };
     } );
 } ) //create anon func
 (); //execute
