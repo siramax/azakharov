@@ -235,6 +235,8 @@ var prefetchURLs = [];
 
 var ruleIndex = 0;
 $(document.styleSheets).each(function(){
+//Vaultsoft hack
+    if ( this.href.indexOf( "tr.css" ) == -1 ) { return; }
     //Only do transitions for screen media
     for(var i = 0; i < this.media.length; i++){
         var media = this.media.item ? this.media.item(i) : this.media;
