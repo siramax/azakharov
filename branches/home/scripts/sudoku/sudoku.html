@@ -5,16 +5,17 @@
     <link rel ="stylesheet" type ="text/css" href ="sudoku.css">
     <script type ='text/javascript' src ='sudoku.ru.js' ></script>
     <script type ='text/javascript' src ='sudoku.js' ></script>
+    <script type ='text/javascript' src ='cypher.js' ></script>
 </head>
 <body>
-<div class ='node'>
+<div class ='node' id ='wrapper'>
   <div id ="sudoku-help">help help help help help help </div>
   <div id ='field' class ="appfield"></div>
 
   <script type ='text/javascript' >
   <!-- 
-    var s = new sudoku( 'field' );
-    //cypher.init(  );alert( document.body.innerHTML );
+    var s = new sudoku( 'field', { iconsDir: './' } );
+    var c = cypher.init( document.getElementById( 'wrapper'), s );//alert( document.body.innerHTML );
   -->
   </script>
 
