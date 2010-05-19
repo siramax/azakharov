@@ -563,10 +563,11 @@ conky_draw_hook_pre = function ()
     if tonumber( conky_parse( '${updates}' ) ) > 2 then -- HERE you MUST use in your conkyrc ${cpu} var to init cpu nums
 --
         for i in pairs( settings_table ) do
-
             setup_rings( cr, settings_table[ i ], update_num )
         end
     end
+
+    cairo_destroy( cr )
 end
 
 --[[

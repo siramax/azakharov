@@ -75,6 +75,7 @@ conky_tribar = function( aiface, sp_in, sp_out )
   )
   local cr = cairo_create( cs )
   draw_rect( cr, { speed_in, speed_out, max } );
+  cairo_destroy( cr )
   return ''
 end
 
