@@ -5,7 +5,8 @@
  * version Jan 6 22:06:55 VOLT 2009 v0.2
  * version Thursday, January 10, 2008 v0.1
  */
-;( function() {
+; // prevent previous erroneus stuff
+( function() {
 /**
  * @class Sudoku 
  * This will be an object that preserves the cell playing field,
@@ -15,6 +16,8 @@
  */
 sudoku = function( pid, opts ) {
 
+  var textField;//local closure var with lazy init in getTextField
+  
   if( "string" === typeof pid ) { this.wrapper = document.getElementById( pid ); }
   else                          { this.wrapper = pid; }
 
@@ -59,22 +62,19 @@ sudoku = function( pid, opts ) {
 
     var options = conf || {};
     
-    ( "undefined" === typeof options.type )?
-      options.tag = 'button' :
-      options.tag = 'input';
+    if ( "undefined" === typeof options.type ) { options.tag= 'button'; }
+    else { options.tag= 'input'; }
 
     var btn = document.createElement( options.tag );
 
-    ( "undefined" !== typeof options.type )?
-      btn.setAttribute( "type", options.type ) : 0;
+    if ( "undefined" !== typeof options.type ) { btn.setAttribute( "type", options.type ); }
 
-    ( "undefined" !== typeof options.id )? 
-      btn.setAttribute( "id", options.id ) : 1;
+    if ( "undefined" !== typeof options.id ) { btn.setAttribute( "id", options.id ); }
 
-    ( "undefined" !== typeof options.cl )? 
-      btn.setAttribute( "class",options.cl + " button" ): 
-      btn.setAttribute( "class"," button" );
-      //old way
+    if ( "undefined" !== typeof options.cl ) {
+      btn.setAttribute( "class",options.cl + " button" ); } else {
+      btn.setAttribute( "class"," button" ); }
+
     if ( "undefined" !== typeof options.note ) {
       btn.setAttribute( "title", options.note );
     }
@@ -105,7 +105,7 @@ sudoku = function( pid, opts ) {
 
         var lbl = options.parentNode.appendChild( document.createElement( 'label' ) );
         /* i need id of control */
-        ( "undefined" !== typeof options.id )? lbl.setAttribute( 'for', options.id ): 0;
+        if ( "undefined" !== typeof options.id ) { lbl.setAttribute( 'for', options.id ); }
         lbl.innerHTML = options.label;
 
       } else {//simple label
@@ -117,7 +117,16 @@ sudoku = function( pid, opts ) {
 
     return btn;
   };
-
+  var DOMNodeWithHelp;
+  var toolbar = { //TODO
+    refresh: {
+      icon : "i/refresh.png",
+      label: "refresh",
+      help: DOMNodeWithHelp || "If in textbox something will changed, it will go to grid",
+      act: function( e ) { alert( "Hello" ); }
+    }
+  };
+  
   
   //create div for toolbar rewrite old prnt
   this.tb = document.createElement( 'div' );
@@ -162,7 +171,7 @@ sudoku = function( pid, opts ) {
     hb.tab = help;
     this.tb.appendChild( hb );
     help.style.display = "none";
-  };
+  }
   
   this.tb.appendChild( new this.toolbarButton( { // Stats
     icon: "i/table.png",
@@ -172,18 +181,19 @@ sudoku = function( pid, opts ) {
 
   this.tb.appendChild( new this.toolbarButton( { // Clear
     label: m.buttons.clear.label,
-    act: function( e ) { self.cl( e ) },
+    act: function( e ) { self.cl( e ); },
     icon: "i/edit-clear.png"
   } ) );
     
   this.tb.appendChild( new this.toolbarButton( { // Import
-    label: m.buttons.import.label,
+    label: m.buttons._import.label,
     act: function( e ) { self._import( e ); },
-    icon: "i/document-import.png"
+    icon: "i/document-import.png",
+    note: m.buttons._import.note
   } ) );
     
   this.tb.appendChild( new this.toolbarButton( { // export
-    label: m.buttons.export.label,
+    label: m.buttons._export.label,
     act: function( e ) { self._export( e ); },
     icon: "i/document-export.png"
   } ) );
@@ -199,7 +209,7 @@ sudoku = function( pid, opts ) {
     id: 'count_diag',
     act: function( e ) { 
       var d = ( window.event ? window.event.srcElement : e.target ); 
-      self.options.count_diag = d.checked 
+      self.options.count_diag = d.checked;
     }
   } ) );
 
@@ -224,7 +234,7 @@ sudoku = function( pid, opts ) {
     
   this.wrapper.style.display = "block";
   return this;
-}
+};
 
 sudoku.prototype = {
 
@@ -242,6 +252,47 @@ sudoku.prototype = {
 
     f = wrapper.appendChild( f );
 
+    /// functions for td's
+    /**
+     * This function has been called as td's event, 
+     * In mozilla - this = current element
+     * But in IE - not.
+     */
+    var mouseover = function( e ) {
+      var d = null;
+
+      if ( "object" === typeof e ) { d = window.event ? window.event.srcElement : e.target; } 
+      else                        { d = this; }//try mozilla
+
+      //var s = this.sudoku;//must be
+      window.status = ( d.cx + 1 ) + " x " + ( d.cy + 1 ) + " = "+ s.m( d.cx , d.cy );
+
+      self.c( d.cx, d.cy, turn.BLOCK ).each(   function ( el ) { el.className += " light"; } );
+
+      self.c( d.cx, d.cy, turn.HORIZ ).each(   function ( el ) { el.className += " horiz"; } );
+
+      self.c( d.cx, d.cy, turn.VERT ).each(    function ( el ) { el.className += " vert"; } );
+
+      if ( self.options.count_diag ) {
+        self.c( d.cx, d.cy, turn.DIAG ).each(  function ( el ) { el.className += " diag"; } );
+      }
+    };
+    
+    var mouseout = function ( e ) {
+      self.c( this.cx,this.cy, turn.BLOCK ).each( function (el) {
+        el.className = el.className.replace(/light/,"");
+      } );
+      self.c( this.cx,this.cy, turn.HORIZ ).each( function (el) {
+        el.className = el.className.replace(/horiz/,"");
+      } );
+      self.c( this.cx,this.cy, turn.VERT ).each( function ( el ) {
+        el.className = el.className.replace(/vert/,"");
+      } );
+      self.c( this.cx,this.cy, turn.DIAG ).each( function ( el ) {
+        el.className = el.className.replace(/diag/,"");
+      } );
+    };
+    
     for ( var y = 0; y < my; y ++ ) {
       var r = f.insertRow( y );
 
@@ -261,21 +312,8 @@ sudoku.prototype = {
         //add events
         this.ae( c, "click", this.i );
         //this.ae( c, "mouseover" , function(e) { self.tdmouseover( e ) } );        //HM, why it just so..
-        this.ae( c, "mouseover", this.tdmouseover );
-        this.ae( c, "mouseout", function () {
-          this.sudoku.c( this.cx,this.cy, turn.BLOCK ).each( function (el) {
-            el.className = el.className.replace(/light/,"");
-          } );
-          this.sudoku.c( this.cx,this.cy, turn.HORIZ ).each( function (el) {
-            el.className = el.className.replace(/horiz/,"");
-          } );
-          this.sudoku.c( this.cx,this.cy, turn.VERT ).each( function ( el ) {
-            el.className = el.className.replace(/vert/,"");
-          } );
-          this.sudoku.c( this.cx,this.cy, turn.DIAG ).each( function ( el ) {
-            el.className = el.className.replace(/diag/,"");
-          } );
-        } );
+        this.ae( c, "mouseover", mouseover );
+        this.ae( c, "mouseout", mouseout );
 
         /**
          * Gets the sudoku object of this td
@@ -298,17 +336,20 @@ sudoku.prototype = {
    */
   canbe: function( n, x, y ) { //x = 0..8, y = 0..8
     var can = true;//nothing is wrong
+    
+    //functor of check
+    //first variant - directly parse DOM element
+    //second is from m
+    var checkN = function ( t ) { 
+    //console.log(  parseInt( t.innerHTML ) );
+    //console.log( t.m[ t.cx ][ t.cy ] );
+      if( parseInt( t.innerHTML, 10 ) === n ) { return false; }//look directly to DOM!
+    };
+    
     //check for row compability
     for ( type = 0; type < turn.DIAG + ( this.options.count_diag? 1 : 0 ); type++ ) {
-      r = this.c( x, y, type, true ).each( function ( t ) {
-//first variant - directly parse DOM element
-      //console.log(  parseInt( t.innerHTML ) );
-//second is from m
-      //console.log( t.m[ t.cx ][ t.cy ] );
-        if( parseInt( t.innerHTML ) == n ) return false;//lokk directly to DOM!
-      } );
-
-      if( false === r ) can = false;
+      r = this.c( x, y, type, true ).each( checkN );
+      if( false === r ) { can = false; }
     }
 
     return can;
@@ -322,13 +363,13 @@ sudoku.prototype = {
 
     if (    ( 0 > x ) || ( x > this.options.mx ) || 
             ( 0 > y ) || ( y > this.options.my ) || 
-            ( "undefined" === typeof v ) || ( null === v ) ) { 
-        error( "wrong params" ); /*console.log( x, y, v ); */return false; 
+            ( "undefined" === typeof v ) || ( null === v ) ) { /*console.log( x, y, v ); */
+        error( "wrong params" ); return false; 
     }
 
     if ( "object" === typeof v ) {//separate DOM and numbers
       d = v;//DOM
-      v = parseInt( v.innerHTML );
+      v = parseInt( v.innerHTML, 10 );
       
     } else {                //MY FIELD VALIDATION
     
@@ -336,12 +377,12 @@ sudoku.prototype = {
         this.start();
       }
       
-      d = this.f.rows[ y ].cells[ x ];//INNER DOM
-      v = parseInt( v );//AS NUMBER
+      d = this.f.rows[ y ].cells[ x ]; //INNER DOM
+      v = parseInt( v, 10 ); //AS NUMBER
       //alert('rows['+y+'].cells['+x+'] = '+d.cx+'x'+d.cy);
     }
     
-    if ( !isNaN( parseInt( v ) ) && ( 0 < v ) && ( v < 10 ) && 
+    if ( !isNaN( parseInt( v, 10 ) ) && ( 0 < v ) && ( v < 10 ) && 
         this.canbe( v, d.cx, d.cy ) ) {
       d.innerHTML = v;
       d.style.fontWeight = '900';
@@ -364,7 +405,7 @@ sudoku.prototype = {
       d = window.event ? window.event.srcElement : e.target;
 
       if ( "undefined" === typeof cypher ) {
-        n = parseInt( d.innerHTML );
+        n = parseInt( d.innerHTML, 10 );
 
         if ( !isNaN( n ) && 0 < n ) {
           nn = prompt( m.inputNumber + ( d.cx+1 )+'x'+( d.cy+1 ), n );
@@ -422,7 +463,7 @@ sudoku.prototype = {
     switch ( type ) {
       case turn.HORIZ:   iy = y; break;
       case turn.VERT:    ix = x; break;
-      case turn.BLOCK:   { ix= Math.floor( x / 3 ) * 3; iy = Math.floor( y / 3 ) * 3; } break;
+      case turn.BLOCK:   ix= Math.floor( x / 3 ) * 3; iy = Math.floor( y / 3 ) * 3; break;
       case turn.DIAG:    ix=x; iy=y; break;
     }
 
@@ -432,85 +473,81 @@ sudoku.prototype = {
       var xx,yy;
 
       switch ( type ) {
-        case turn.HORIZ: {
-
-          for ( var xx=0; xx < self.options.mx; xx++ ) {
+        case turn.HORIZ:
+          for ( xx = 0; xx < self.options.mx; xx++ ) {
 
             if( exclude && ( sx === xx )) { continue; }//
             //console.log( iy, self.f.rows[ iy ] );
             r = f( self.f.rows[ iy ].cells[ xx ], context );//need?
 
-            if( null != r ) {//break loop
+            if( "undefined" !== typeof r && null !== r ) {//break loop
               return r;//to callee
             }
           }
-          break; 
-        }
+        break; 
+        
+        case turn.VERT:
 
-        case turn.VERT: {
-
-          for ( var yy=0; yy < self.options.my; yy++ ) {
+          for ( yy = 0; yy < self.options.my; yy++ ) {
 
             if( exclude && ( sy === yy )) { continue; }
             r = f( self.f.rows[ yy ].cells[ ix ], context );
 
-            if( null != r ) { //break loop
+            if( "undefined" !== typeof r && null !== r ) { //break loop
               return r;//to callee
             }
           }
-          break;
-        }
+        break;
 
-        case turn.BLOCK: {   //check for quandrant
+        case turn.BLOCK: //check for quandrant
 
-          for ( var xx = ix; xx < ( ix + 3 ); xx ++ ) {
+          for ( xx = ix; xx < ( ix + 3 ); xx ++ ) {
 
-            for ( var yy = iy; yy < ( iy + 3 ); yy ++ ) {
+            for ( yy = iy; yy < ( iy + 3 ); yy ++ ) {
 
               if ( exclude && ( yy === sy ) && ( xx === sx )) { continue; }
               r = f( self.f.rows[ yy ].cells[ xx ], context );
 
-              if ( null != r ) {//break loop
+              if( "undefined" !== typeof r && null !== r ) {//break loop
                 return r;//to callee
               }
             }
           }
-          break; 
-        }//count_diag
+        break; 
 
-        case turn.DIAG: {
+        case turn.DIAG:
 
           if ( ix === iy ) {
-            for ( var xx = 0; xx < self.options.mx; xx ++ ) {
+            for ( xx = 0; xx < self.options.mx; xx ++ ) {
 
               if ( exclude && ( sx === xx )) { continue; }
 
               r = f( self.f.rows[ xx ].cells[ xx ], context );
 
-              if(null != r ) {//break loop
-                return r;//to callee
+              if( "undefined" !== typeof r && null !== r ) { //break loop
+                return r; //to callee
               }
             }
           }
 
-          if ( ( 8 - ix ) === iy ) {//lay on diag
+          if ( ( 8 - ix ) === iy ) { //lay on diag
 
-            for ( xx=0; xx < self.options.mx; xx ++ ) {
+            for ( xx = 0; xx < self.options.mx; xx ++ ) {
 
               if ( exclude && ( sx === xx )) { continue; }
 
               r = f( self.f.rows[ (8-xx) ].cells[ xx ], context );
 
-              if( r != null ) { //break loop
+              if( "undefined" !== typeof r && null !== r ) { //break loop
                 return r;//to callee
               }
             }
           }
 
-          break; 
-        }//case DIAG
-      }//switch
-    }//this.each
+        break; //case DIAG
+      } //switch
+    }; //this.each
+    
     return this;
   },
   
@@ -545,60 +582,62 @@ sudoku.prototype = {
    * 6. If there is no field with a possible - a step is not successful 
    */
   s : function( e ) {
-    var sudoku, d, xx, yy, v, c, i;
+    var self = this;
+    var d, i;
           //
     if( "object" === typeof e ) {
       d = window.event ? window.event.srcElement : e.target;
-    } 
-    
-    sudoku = this;
+    }
 
-    if ( ( "undefined" === typeof sudoku.f ) || null === sudoku.f ) {
+    if ( ( "undefined" === typeof self.f ) || null === self.f ) {
       error( m.errors.noField );
       return;
     }
 
-    var m = sudoku.stats().free; //(1,2)
+    var mfree = self.stats().free; //(1,2)
+    var free, poss; // store free cell here, possible values for this cell
+    
+    //functor for counting free
+    var countFree = function ( e ) {
 
-    for( var mi= 0; mi < m.length; mi++ ) { //for each free cell
-      var free = [];
-      var poss = [ 1,2,3,4,5,6,7,8,9 ]; //(3)
+      if ( self.options.verbose ) { e.className += " debug"; }
 
-      sudoku.c( m[mi].x, m[mi].y, m[mi].type ).each( function ( e, sudoku ) {
+      var n = self.wrapper.m[ e.cx ][ e.cy ];
 
-        if ( sudoku.options.verbose ) { e.className += " debug"; }
+      if( n > 0 && n < 10 ) {
+        poss[ n - 1 ] = 0; // clear
+      } else { // that is free field, save pos
+        free.push( { x: e.cx, y: e.cy, nn:[] } );
+      }
+    };
+    
+    for( var mi= 0; mi < mfree.length; mi++ ) { //for each free cell
+      free = [];
+      poss = [ 1,2,3,4,5,6,7,8,9 ]; //(3)
 
-        n = sudoku.wrapper.m[ e.cx ][ e.cy ];
-
-        if( n > 0 && n < 10 ) {
-          poss[ n - 1 ] = 0;//
-        } else { // that is free field, save pos
-          free.push( { x: e.cx, y: e.cy, nn:[] } );
-        }
-      }, sudoku );
+      self.c( mfree[ mi ].x, mfree[ mi ].y, mfree[ mi ].type ).each( countFree );
 
       var nn = [];//total
-      var nnn = [];
 
       for ( i = 0; i < poss.length; i++ ) { 
-        if( 0 != poss[ i ] ) { nn.push( { n: poss[i], free: [] } ); }
+        if( 0 !== poss[ i ] ) { nn.push( { n: poss[i], free: [] } ); }
       }
       ///Now free for all cells verify the possibility of insert-free numbers (4)
       for ( i= 0; i < free.length; i++ ) {
 
         for ( var j=0; j < nn.length; j++ ) {
 
-          if ( sudoku.canbe( nn[ j ].n, free[ i ].x, free[ i ].y )) {
+          if ( self.canbe( nn[ j ].n, free[ i ].x, free[ i ].y )) {
             free[ i ].nn.push( nn[ j ].n );
             nn[ j ].free.push( { x: free[ i ].x,y: free[ i ].y } );
           }
         }
-      };
+      }
       
       for ( i = 0; i  <  free.length;  i++  ) {
 
         if( 1 === free[ i ].nn.length ) {//URAAAH!
-          sudoku.set( free[ i ].x, free[ i ].y, free[ i ].nn.pop() );//FOUND STEP
+          self.set( free[ i ].x, free[ i ].y, free[ i ].nn.pop() );//FOUND STEP
           //clear verbose?
           return true;
         }
@@ -609,8 +648,8 @@ sudoku.prototype = {
       /// Possible position in the criteria
       for ( i= 0; i < nn.length; i++ ) {
         if ( 1 === nn[ i ].free.length ) {//URAAAH!
-          var free = nn[ i ].free.pop();
-          sudoku.set( free.x, free.y, nn[ i ].n ); //clear verbose?
+          var topfree = nn[ i ].free.pop();
+          self.set( topfree.x, topfree.y, nn[ i ].n ); //clear verbose?
           return true;
         }
       }
@@ -636,7 +675,7 @@ sudoku.prototype = {
     }
     
     var sudoku = this;//just trying
-    while( sudoku.s() );//solving cycle TODO as setInterval
+    while( sudoku.s() ){} //solving cycle TODO as setInterval
   },
   
   /**
@@ -653,25 +692,27 @@ sudoku.prototype = {
     var total = 0;
     var self = this;//save context
     
+    //get stats for rows
     this.c( 0, 0, turn.VERT ).each( function( el ) {
 
-      ttl = 0;
+      ttl = 0; // total free on the row
       rows[ el.cy ] = 0;
 
-      self.c( 0, el.cy, turn.HORIZ ).each( function( e ) { if( 0 < self.m( e.cx, e.cy ) ) { ttl++ } } );
+      self.c( 0, el.cy, turn.HORIZ ).each( function( e ) { if( 0 < self.m( e.cx, e.cy ) ) { ttl++; } } );
 
-      rows[ el.cy ] = ttl;
+      rows[ el.cy ] = ttl; //store for this 
 
-      if ( 9 != ttl ){
+      if ( 9 !== ttl ) { //something busy, check
         free.unshift( { ttl:ttl, x: 0, y: el.cy, type: turn.HORIZ } );
-        if ( ttl > max.ttl ) {//store as prob
-          max = { ttl: ttl, x: 0, y: el.cy, type: turn.HORIZ };
+        if ( ttl > max.ttl ) { //store as prob
+          max = { ttl: ttl, x: 0, y: el.cy, type: turn.HORIZ }; //store row with most free
         }
       }
 
       total+=ttl;
     } );
 
+    //get stats for columns
     this.c( 0, 0, turn.HORIZ ).each( function( el ) {
       cols[ el.cx ] = 0;
       ttl = 0;
@@ -691,14 +732,16 @@ sudoku.prototype = {
         }
       }
     } );
-
+    //functor outside cycle
+    var ttlcounter = function( e ) {
+      if ( 0 < self.m( e.cx, e.cy )) { ttl++; }
+    };
+    
     for ( bx = 0; bx < this.options.mx / 3 ; bx++ ) {
       for ( by = 0; by < this.options.my / 3 ; by++ ) {
         ttl = 0;
 
-        this.c( bx*3+1, by*3+1, turn.BLOCK ).each( function( e ) {
-          if ( 0 < self.m( e.cx, e.cy )) { ttl++; }
-        } );
+        this.c( bx*3+1, by*3+1, turn.BLOCK ).each( ttlcounter );
 
         blocks[ bx ][ by ] = ttl;
 
@@ -711,7 +754,7 @@ sudoku.prototype = {
           }
         }
       }
-    };
+    }
 
     if ( this.options.count_diag ) {//check diags
       var ttl1 = 0, ttl2 = 0;
@@ -746,7 +789,7 @@ sudoku.prototype = {
     this.max = max;
     this.alert = function() {
       var colsstats =   "        | ";
-      var header =      "____| ";
+      //var header =      "____| ";
       for ( xx = 0; xx < cols.length; xx++ ) {
           colsstats += " " + cols[ xx ]; //header += " "+xx;
       }
@@ -754,7 +797,7 @@ sudoku.prototype = {
       var rowstats = "";
       for ( yy = 0; yy < rows.length; yy++ ) {
         rowstats += " " + rows[ yy ] + " ";
-        if ( ((yy - 1) % 3) == 0 ) {//
+        if ( ((yy - 1) % 3) === 0 ) { //
           rowstats += "          "+
             " " + blocks[0][(yy-1)/3]+" "+
             "     " + blocks[1][(yy-1)/3]+" "+
@@ -769,34 +812,9 @@ sudoku.prototype = {
         ret += "\r\nDiag1: " + diag[1] + " Diag2: " + diag[2];
       }
       return ret;
-    }
+    };
+    
     return this;
-  },
-
-  /**
-   * This function has been called as td's event, 
-   * In mozilla - this = current element
-   * But in IE - not.
-   */
-  tdmouseover : function( e ) {
-    var d = null;
-
-    if ( "object" === typeof e ) { d = window.event ? window.event.srcElement : e.target; } 
-    else                        { d = this; }//try mozilla
-
-    var s = this.sudoku;//must be
-
-    window.status = ( d.cx + 1 ) + " x " + ( d.cy + 1 ) + " = "+ s.m( d.cx , d.cy );
-
-    s.c( d.cx, d.cy, turn.BLOCK ).each(   function ( el ) { el.className += " light"; } );
-
-    s.c( d.cx, d.cy, turn.HORIZ ).each(   function ( el ) { el.className += " horiz"; } );
-
-    s.c( d.cx, d.cy, turn.VERT ).each(    function ( el ) { el.className += " vert"; } );
-
-    if ( s.options.count_diag ) {
-      s.c( d.cx, d.cy, turn.DIAG ).each(  function ( el ) { el.className += " diag"; } );
-    }
   },
 
   /**
@@ -828,9 +846,10 @@ sudoku.prototype = {
       }
     }
     
-    if( this.ex || ( this.ex = document.getElementById( "export-import" ) ) ) {
-      document.body.removeChild( this.ex );
-      this.ex = null;
+    if( ( "undefined" !== typeof textField && textField ) || 
+      ( textField = document.getElementById( "export-import" ) ) ) {
+      this.wrapper.removeChild( textField );
+      textField = null;
     }
   },
   
@@ -879,48 +898,64 @@ sudoku.prototype = {
     }
     
     var txt = this.toString( this );
-    document.all? this.ex.innerText = txt: this.ex.innerHTML = txt;
+    if ( document.all ) { this.ex.innerText = txt; } else { this.ex.innerHTML = txt; }
     this.ex.focus();
     return true;
   },
   
+  getTextField: function() {
+  
+    if ( "undefined" === typeof textField || !textField ) {
+      textField = document.getElementById( "export-import" );
+    }
+    
+    if ( "undefined" === typeof textField || !textField ) { //createElement
+      textField = this.wrapper.appendChild( document.createElement( "textarea" ) );
+    }
+    
+    textField.setAttribute( "id","export-import" );
+    
+    if ( this.options.human ) {
+      textField.setAttribute( "rows", this.options.my );
+      textField.setAttribute( "cols", this.options.mx );
+    }
+    
+    return textField;
+  },
+  
+  /**
+   * Handles UI textarea (get, init) and injecting back
+   */
   _import: function( e ) {
   
-    if ( !this.ex || "undefined" === typeof this.ex ) {
-      this.ex = document.getElementById( "export-import" );
-    }
+    var tf = this.getTextField(); //lazy init this.ex
     
-    if ( !this.ex || "undefined" === typeof this.ex ) {//createElement
-      this.ex = document.body.appendChild( document.createElement( "textarea" ) );
-      this.ex.setAttribute( "id","export-import" );
-      if ( this.options.human ) {
-        this.ex.setAttribute( "rows", 9 );
-        this.ex.setAttribute( "cols", 9 );
-      }
-      //initial
+    var val = tf.value;
+    
+    if ( val.length === 0 ) { // empty as initial
       var txt = this.toString( this );
-      document.all? this.ex.innerText = txt: this.ex.innerHTML = txt;
-      this.ex.focus();
+      if ( document.all ) { tf.innerText = txt; } else { tf.innerHTML = txt; }
+      tf.focus();
       return true;// first state?
     }
-    
-    var it = this.ex.value;
-
+    /*
     if ( it.length === 0 ) {
       alert( m.errors.empty );
       return false;
-    }
+    }*/
     
-    var im = new Array();
+    var im = [];
     
     try {
       if ( this.options.human /*&& this.options.mx < 10*/ ) {
-        var lines = it.replace( /\r\n|\r|\n/g, "|||" ).split( "|||" );
+        var lines = val.replace( /\r\n|\r|\n/g, "|||" ).split( "|||" );
+        
         for ( var line in lines ) {
-          im.push( lines[ line ].split( "" ) );
+          if ( lines.hasOwnProperty( line )) { im.push( lines[ line ].split( "" ) ); }
         }
+        
       } else {
-        eval( "im = " + it + ";" );
+        eval( "im = " + it + ";" ); // quick hack for import js arrays
       }
     } catch ( err ) {
       alert( err );
@@ -946,8 +981,8 @@ sudoku.prototype = {
     }
     
     return true;
-  },
-}
+  }
+};
 /* criteries */
 var turn = {
   HORIZ   : 0,
@@ -956,5 +991,23 @@ var turn = {
   DIAG    : 3 
 };
 
+
+/** 
+ * wrapper around console
+ */
+if( "undefined" == typeof( console )){
+  console = document.createElement( "div" );
+}
+
+if( "undefined" == typeof( console.log )){
+  console.log = function( str ){
+    console.innerHTML += str;
+  };
+}
+
+error = function( str ){//just to log
+ // alert( document.body );
+  console.log( str );//error!!!!
+};
 } ) //create anon func
 (); //execute

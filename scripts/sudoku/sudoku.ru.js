@@ -8,9 +8,9 @@ m = {
         help:   { label: 'Что это?' },
         stats:  { label: 'Статистика' },
         clear:  { label: 'Очистить' },
-        diag:   { label: 'Учитывать диагонали' },
-        import: { label: 'Импорт' },
-        export: { label: 'Экспорт' }
+        diag:   { label: 'Учитывать диагонали' }, /* "import", "export" is keyword */
+        _import: { label: 'Импорт', note: "Нажми один раз чтобы появилось текстовое поле, нажми еще раз чтобы сделать импорт"  },
+        _export: { label: 'Экспорт' }
     },
     inputNumber: "Введите число для ячейки ",
     inputEN: "Введите число для этой ячейки ", //!< For Empty Number
