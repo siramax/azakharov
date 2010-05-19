@@ -167,6 +167,7 @@ function vaultsoft_ru_breadcrumb($breadcrumb) {
   // Otherwise, return an empty string.
   return '';
 }
+
 /**
  * Override or insert variables into all templates.
  *
@@ -175,9 +176,10 @@ function vaultsoft_ru_breadcrumb($breadcrumb) {
  * @param $hook
  *   The name of the template being rendered (name of the .tpl.php file.)
  */
-/* -- Delete this line if you want to use this function
- function vaultsoft_ru_preprocess(&$vars, $hook) {
- $vars['sample_variable'] = t('Lorem ipsum.');
+/*
+ function vaultsoft_ru_preprocess( &$vars, $hook ) {
+    //$vars['sample_variable'] = t('Lorem ipsum.');
+
  }
  // */
 
@@ -189,9 +191,11 @@ function vaultsoft_ru_breadcrumb($breadcrumb) {
  * @param $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-/* -- Delete this line if you want to use this function
  function vaultsoft_ru_preprocess_page(&$vars, $hook) {
- $vars['sample_variable'] = t('Lorem ipsum.');
+    //$vars['sample_variable'] = t('Lorem ipsum.');
+    drupal_add_css( path_to_theme() . '/c/tr.css', 'theme', 'screen', FALSE );
+    $vars[ 'styles' ] = drupal_get_css();
+    //drupal_set_message('<pre>'. print_r( $hook , TRUE) .'</pre>');
  }
  // */
 

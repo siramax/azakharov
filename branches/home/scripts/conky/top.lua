@@ -225,7 +225,7 @@ draw_text = function ( cr, t, sets, sx, sy )
 --print( table.show( sets, "sets" ) )
 
     if ( sets.text.color ) then
-            cairo_set_source_rgba( cr, sets.text.color.r, sets.text.color.g, sets.text.color.b, (sets.text.alpha or 1) ) 
+      cairo_set_source_rgba( cr, sets.text.color.r, sets.text.color.g, sets.text.color.b, (sets.text.alpha or 1) ) 
     end
     cairo_move_to ( cr, x, y );
     cairo_show_text ( cr, t );
