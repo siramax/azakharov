@@ -48,6 +48,10 @@
 .node {
  /*margin-top: 80px;for toolbar */
   padding-top: 1em;/* for humans */
+  
+  /* for example */
+  left: 50%;
+  position: absolute;
 }
 
 .bold { font-weight: bolder; }

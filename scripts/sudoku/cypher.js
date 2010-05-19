@@ -75,8 +75,7 @@ cypher = {
 /// here we have egg and mother dillema
     if ( "undefined" === typeof( this.cypher ) ) { this.init( obj.sudoku.wrapper ); }//error
     this.invoker = obj;
-    this.f = this.invoker.sudoku;
-    
+    this.f = obj.sudoku;
     this.f.f.className += " asking";////HMMMMMMMMMMMMMMMMMMM
     
 //HERE MUST BE
@@ -93,7 +92,7 @@ cypher = {
 
     //console.log( obj, getPos( obj ) );
     // below works for absolute poss, but in TD :)
-    var p = getPos( obj );//position of left top corner of cell
+    var p;
     
     var od = [ obj.offsetWidth, obj.offsetHeight ];//cell dimensions
 
@@ -101,11 +100,17 @@ cypher = {
     this.cypher.style.display = "block";
     var cd = [ this.cypher.offsetWidth , this.cypher.offsetHeight ];//cypher dimen
     
-    if ( 'absolute' == this.cypher.style.position ) {
-      this.cypher.style.left = p[0] + ( od[ 0 ] / 2 ) - ( cd[0] / 2 ) + "px";
-      this.cypher.style.top =  p[1] + ( od[ 1 ] / 2 ) - ( cd[1] / 2 ) + "px";
+    if ( 'absolute' === this.cypher.style.position ) {
+      p = getPos( obj, this.cypher );
+      var cleft = p[0] + ( od[ 0 ] / 2 ) - ( cd[0] / 2 ) ;
 
+      this.cypher.style.top =  p[1] + ( od[ 1 ] / 2 ) - ( cd[1] / 2 ) + "px";
+      if ( "undefined" !== this.f.wrapper.style.left ) { console.log( this.f.wrapper.style.left ); cleft -= this.f.wrapper.style.left; }
+      
+      this.cypher.style.left = cleft  + "px";
+      
     } else {
+      p = getPos( obj ); //position of left top corner of cell
       this.cypher.style.marginLeft =  p[0] + ( od[ 0 ] / 2 ) - ( cd[ 0 ] / 2 ) + "px";
       this.cypher.style.marginTop =   p[1] - ( od[ 1 ] / 2 ) - ( cd[ 1 ] / 2 ) -  this.f.wrapper.offsetHeight + "px" ;
     }
@@ -120,7 +125,7 @@ cypher = {
 
 
     d = window.event ? window.event.srcElement : e.target;
-    var n = parseInt( d.getAttribute( "value" ) );
+    var n = parseInt( d.getAttribute( "value" ), 10 );
 
     if ( !isNaN( n ) && ( "undefined" !== typeof( this.cypher ) ) ) {// here invoke chyper client NOW
 
@@ -153,14 +158,74 @@ cypher = {
   }
 };
 
-getPos = function( obj ) {
+/**
+ * Safari contains is broken, but appears to be fixed in WebKit 522+
+ * @type {Boolean}
+ * @private
+ */
+/*goog_dom_BAD_CONTAINS_SAFARI_ = goog.userAgent.SAFARI &&
+   goog.userAgent.compare(goog.userAgent.VERSION, '521') <= 0;*/
+goog = { dom: {} }
+/**
+ * Enumeration for DOM node types (for reference)
+ * @enum {Number}
+ */
+goog.dom.NodeType = {
+  ELEMENT: 1,
+  ATTRIBUTE: 2,
+  TEXT: 3,
+  CDATA_SECTION: 4,
+  ENTITY_REFERENCE: 5,
+  ENTITY: 6,
+  PROCESSING_INSTRUCTION: 7,
+  COMMENT: 8,
+  DOCUMENT: 9,
+  DOCUMENT_TYPE: 10,
+  DOCUMENT_FRAGMENT: 11,
+  NOTATION: 12
+};
+/**
+ * Whether a node contains another node
+ * @param {Node} parent The node that should contain the other node
+ * @param {Node} descendant The node to test presence of
+ * @return {Boolean}
+ */
+goog.dom.contains = function(parent, descendant) {
+  // We use browser specific methods for this if available since it is faster
+  // that way.
+
+  // IE / Safari(some) DOM
+  if (typeof parent.contains != 'undefined' && /*!goog.dom.BAD_CONTAINS_SAFARI_ &&*/
+      descendant.nodeType == goog.dom.NodeType.ELEMENT) {
+    return parent == descendant || parent.contains(descendant);
+  }
+
+  // W3C DOM Level 3
+  if (typeof parent.compareDocumentPosition != 'undefined') {
+    return parent == descendant ||
+        Boolean(parent.compareDocumentPosition(descendant) & 16);
+  }
+
+  // W3C DOM Level 1
+  while (descendant && parent != descendant) {
+    descendant = descendant.parentNode;
+  }
+  return descendant == parent;
+};
+
+getPos = function( obj, stopOn ) {
 /// avoid empty calls to this revursive, 
 /// so no getPos( null ) will be
 /// bitty but pleasure :)
+  //console.log( obj, obj.offsetLeft, stopOn, goog.dom.contains( obj, stopOn ) );
+  if ( "undefined" !== typeof stopOn && stopOn && goog.dom.contains( obj, stopOn ) ) {
+    return [ 0, 0 ]
+  }
+  
   if ( obj.offsetParent && 
     "undefined" !== typeof( obj.offsetParent.offsetLeft ) && 
     "undefined" !== typeof( obj.offsetParent.offsetTop ) ) {
-    pp = getPos( obj.offsetParent );
+    var pp = getPos( obj.offsetParent, stopOn );
 
     //console.log( "parent: ", pp );
     //console.log( "this: x,y: ", obj, obj.offsetLeft + pp[0]- obj.scrollLeft, obj.offsetTop + pp[1] - obj.scrollTop );
