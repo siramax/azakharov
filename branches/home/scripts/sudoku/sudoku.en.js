@@ -9,8 +9,8 @@ m = {
         stats:  { label: 'Stats' },
         clear:  { label: 'Clear' },
         diag:   { label: 'Consider the diagonal' },
-        import: { label: 'Import' },
-        export: { label: 'Export' }
+        _import: { label: 'Import', note: "Press once to get input textarea, press again to do import"  },
+        _export: { label: 'Export' }
     },
     inputNumber: "Input the number for cell ",
     inputEN: "Input the number for this cell ", //!< For Empty Number
