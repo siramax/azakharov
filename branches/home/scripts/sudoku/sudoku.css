@@ -1,9 +1,9 @@
 
 /* for design , define this below */
 
-.light {background: #90FFFF}
+.light {background: #90FFFF; -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50;}
 .diag {background: #CAFFCA}
-
+.appfield { zoom: 1 }
 .appfield table td { border-color: black; }
 
 .appfield table td.horiz { border-top-color: #50FF50; border-bottom-color:#50FF50; }
@@ -42,16 +42,18 @@
 .appfield table td.rbold { border-right-width:3px  }
 /*.appfield table td.horiz { border-top-width: 2px;border-bottom-width:2px; }
 .appfield table td.vert  { border-left-width: 2px;border-right-width:2px;}*/
-.appfield table td.vert.horiz { border-radius: 5px; opacity: 0.5 }
+.appfield table td.vert.horiz { 
+  -moz-border-radius:       0.85em; /* Firefox */
+  -webkit-border-radius:    0.85em; /* Safari, Chrome */
+  -khtml-border-radius:     0.85em; /* KHTML */
+  border-radius:            0.85em; /* CSS3 */
+  -moz-opacity:.85; filter:alpha(opacity=85); opacity:.85; }
 .appfield table td span {position:absolute; margin:auto; top:0;}
 
 .node {
  /*margin-top: 80px;for toolbar */
   padding-top: 1em;/* for humans */
   
-  /* for example */
-  left: 50%;
-  position: absolute;
 }
 
 .bold { font-weight: bolder; }
@@ -118,16 +120,37 @@
 .cypher {
   padding:2px;
   border:1px solid gray;
+  -moz-border-radius:       10px; /* Firefox */
+  -webkit-border-radius:    10px; /* Safari, Chrome */
+  -khtml-border-radius:     10px; /* KHTML */
+  border-radius:            10px; /* CSS3 */
   overflow:hidden;
   width: auto;
   float:left;
 /* wow, firefox 3.0.5 and opera 9.26 ignores this for buttons and inputs????!!! */
   z-index: 1000;
+  /*background: gray ;
+  -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50;*/
+  background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.5 ), rgba( 255, 255, 255, 0.25 ) );
+  background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.5 )), to(rgba( 255, 255, 255, 0.25 )) );
+  background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.5 ), rgba( 255, 255, 255, 0.25 ));
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fffffff', endColorstr='#40ffffff');
 }
 
 .cypher input {
   float:left;
   z-index: 1000;
+  -moz-border-radius:       0.7em; /* Firefox */
+  -webkit-border-radius:    0.7em; /* Safari, Chrome */
+  -khtml-border-radius:     0.7em; /* KHTML */
+  border-radius:            0.7em; /* CSS3 */
+  background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.25 ), rgba( 255, 255, 255, 0.75 ) );
+  background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.25 )), to(rgba( 255, 255, 255, 0.75 )) );
+  background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.25 ), rgba( 255, 255, 255, 0.75 ));
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#40ffffff', endColorstr='#7fffffff');
+  
+  font-size: 125%;
+  border-width: 1px;
 }
 
 * html .cypher input {
