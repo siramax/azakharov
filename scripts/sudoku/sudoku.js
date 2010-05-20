@@ -265,7 +265,7 @@ sudoku.prototype = {
       else                        { d = this; }//try mozilla
 
       //var s = this.sudoku;//must be
-      window.status = ( d.cx + 1 ) + " x " + ( d.cy + 1 ) + " = "+ s.m( d.cx , d.cy );
+      window.status = ( d.cx + 1 ) + " x " + ( d.cy + 1 ) + " = "+ self.m( d.cx , d.cy );
 
       self.c( d.cx, d.cy, turn.BLOCK ).each(   function ( el ) { el.className += " light"; } );
 
@@ -880,29 +880,7 @@ sudoku.prototype = {
       return "[\r\n" + rep.join( ",\r\n" ) + "\r\n]";
     }
   },
-   
-  _export: function( e ) {
-
-    if ( !this.ex || "undefined" === typeof this.ex ) {
-      this.ex = document.getElementById( "export-import" );
-    }
-    
-    if ( !this.ex || "undefined" === typeof this.ex ) {//createElement
-      this.ex = document.body.appendChild( document.createElement( "textarea" ) );
-      this.ex.setAttribute( "id","export-import" );
-      
-      if ( this.options.human ) {
-        this.ex.setAttribute( "rows", 9 );
-        this.ex.setAttribute( "cols", 9 );
-      }
-    }
-    
-    var txt = this.toString( this );
-    if ( document.all ) { this.ex.innerText = txt; } else { this.ex.innerHTML = txt; }
-    this.ex.focus();
-    return true;
-  },
-  
+     
   getTextField: function() {
   
     if ( "undefined" === typeof textField || !textField ) {
@@ -922,6 +900,16 @@ sudoku.prototype = {
     
     return textField;
   },
+  
+  _export: function( e ) {
+
+    var tf = this.getTextField(); //lazy init this.ex
+    var txt = this.toString( this );
+    if ( document.all ) { tf.innerText = txt; } else { tf.innerHTML = txt; }
+    tf.focus();
+    return true;
+  },
+
   
   /**
    * Handles UI textarea (get, init) and injecting back
