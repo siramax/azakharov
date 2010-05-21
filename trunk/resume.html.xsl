@@ -4,7 +4,7 @@
 ]>
 <xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" xmlns:xlink = "http://www.w3.org/1999/xlink" version = "1.0">
   <xsl:output method = "html" media-type = "application/xhtml+xml" />
-  
+  <xsl:param name = "lang" >en</xsl:param>
   <xsl:template match = "*[ @xlink:role = 'locator' ]">
     <a>
       <xsl:attribute name = 'href'><xsl:value-of select = "@xlink:href" /></xsl:attribute>
@@ -21,7 +21,7 @@
   <style type = 'text/css'>
     body, table { font-family: times; font-size: 10pt }
     td { vertical-align: top }
-    .personal { overflow: hidden }
+    #personal { overflow: hidden }
     .address, .phone, .mobile, .email, .skype { float: right; margin-right:100pt; clear: right; }
     .picture { float: right;   clear: right; margin-bottom: -55pt; border: 1px solid; padding: 2px; }
     .firstname { font-size: 120% }
@@ -42,7 +42,7 @@
   </style>
   </head>
   <body>
-  	<xsl:apply-templates select = '/Document/Meta/Personal' />
+  	<xsl:apply-templates select = '/Document/Meta' />
   	<xsl:apply-templates select = '/Document/Meta/following-sibling::*' />
   </body>
 </html>
@@ -50,8 +50,9 @@
   
   <xsl:template match="Period"><xsl:value-of select = "@From" />&mdash;<xsl:value-of select = "@To" /></xsl:template>
   <!-- Meta -->
-  <xsl:template match = '/Document/Meta'><xsl:apply-templates /></xsl:template>
-  <xsl:template match = '/Document/Meta/Personal'><div class='personal'><xsl:apply-templates /></div></xsl:template>
+  <xsl:template match = '/Document/Meta'><xsl:apply-templates select = "*[@lang=$lang]"/></xsl:template>
+  <xsl:template match = '/Document/Meta/Personal'><div id='personal'><xsl:apply-templates /></div></xsl:template>
+  
   <xsl:template match = '//Meta/Title'><title><xsl:value-of select = '.' /></title></xsl:template>
   
   <xsl:template match = '//Personal/FirstName'><span class='firstname'><xsl:value-of select = '.' /></span></xsl:template>

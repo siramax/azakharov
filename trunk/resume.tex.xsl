@@ -12,7 +12,7 @@
   
   <xsl:template match = "/">
 %
-\documentclass[11pt,a4paper]{moderncv}
+\documentclass[10pt,a4paper]{moderncv}
 %\renewcommand*{\addresssymbol}{\CircledA}
 \moderncvtheme[green]{classic}
 %\usepackage[T2A]{fontenc}

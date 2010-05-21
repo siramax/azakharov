@@ -68,7 +68,7 @@ opportunity for advancement.
           <Description>International outsourcing company</Description>
         </Employer>
         <Description>Working as member of a team developing and maintaining: 
-        distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application</Description>
+        distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application. Plan, control and evaluate the operations of information systems. Develop and implement policies and procedures for electronic data processing and computer systems operations and development. Meet with clients to discuss system requirements, specifications, costs and timelines. Recruit and supervise computer engineers and programmers. </Description>
         <Achievement lang = "ru">Улучшил скорость SOAP запросов web приложения к серверу</Achievement>
         <Achievement lang = "en">Improved speed of SOAP data exchange between web application and server</Achievement>
         
@@ -94,7 +94,6 @@ opportunity for advancement.
         <Period From = "May 2006" To = "Aug 2007" />
         <Job>Software Engineer</Job>
         <Employer><Name> OOO "Greentek"</Name><City>Volgograd</City></Employer>
-        
         <Description>Development of the accounting system of orders and sales, support multiple sales sites (<go 
             xlink:title = "See it in porfolio" 
             xlink:role = "locator" 
@@ -105,7 +104,7 @@ opportunity for advancement.
             xlink:role = "locator" 
             xlink:href = "http://vaultsoft.ru/portfolio/sverka" 
             xlink:actuate = "onRequest" 
-            xlink:show = "new" >sverka</go>).</Description>
+            xlink:show = "new" >sverka</go>). Control the budget and expenditures of the projects. Develop and implement policies and procedures for electronic data processing and computer systems operations and development.</Description>
         <Achievement lang = "ru">Автоматизировал документооборот компании</Achievement>
         <Achievement lang = "en">Implemented web system to workflow orders and sales of company</Achievement>
         <Achievement lang = "ru">Разработал распределенную систему интернет магазинов компании</Achievement>
@@ -120,7 +119,7 @@ opportunity for advancement.
           <City>Volgograd</City>
           <Description>web-studio</Description>
         </Employer>
-        <Description>Planned, created, launched, and managed web-site <go 
+        <Description> Meet with clients to discuss sites requirements, specifications, costs and timelines. Control the budget and expenditures of the projects. Planned, created, launched, and managed web-site <go 
             xlink:role = "locator" 
             xlink:href = "http://vaultsoft.ru/portfolio/creative-volga" 
             xlink:actuate = "onRequest" 
@@ -217,7 +216,7 @@ opportunity for advancement.
       <Entry type = 'OS'>MS Windows, Linux (Debian), QNX, FreeBSD, MSDOS, Apple DOS 3.3</Entry>
       <Entry type = 'DBMS'>MySQL, MS SQL, SQLite, MS Access</Entry>
       <Entry type = 'Related Software'>MS Office, MS Visio, MS Project, SSH, Bash, Kile</Entry>
-      <Entry type = 'Development software'>MS Visual Studio, Netbeans IDE, Eclipse IDE, code reviewer, JIRA, GDB, Borland Delphi</Entry>
+      <Entry type = 'Development'>MS Visual Studio, Netbeans IDE, Eclipse IDE, code reviewer, JIRA, GDB, Borland Delphi</Entry>
       <Entry type = 'SCM'>CVS, SVN, Perforce, git</Entry>
     </Group>
     <Group type = 'Programming languages'>
