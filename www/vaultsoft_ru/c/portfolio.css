@@ -1,0 +1,102 @@
+/**
+ * Portfolio  css
+ * Should be aggreagated when needed
+ */
+ 
+.section-portfolio #content-area {
+  /*padding: 0px;  precise */
+}
+.section-portfolio .taxonomy-term-description {
+  padding: 1.5em;
+}
+
+.section-portfolio .node-teaser {
+  width: 49%;
+  float: left;
+  margin: 0;
+  padding: 0.2em;
+}
+.section-portfolio .node-teaser .node-inner {
+  margin: 0;
+  background: #FCFAF4;
+  border: 1px solid #5D380E;
+  padding: 0.3em;
+  -webkit-border-top-left-radius: 1em;
+  -moz-border-radius-topleft:    1em;
+  border-top-left-radius: 1em;
+  
+}
+
+.section-portfolio .node-teaser img {
+  box-shadow: 3px 3px 5px #111;
+  -webkit-box-shadow: 3px 3px 5px #111;
+  -moz-box-shadow: 3px 3px 5px #111;
+  float: left;
+  margin-right: 0.75em;
+  margin-bottom: 0.5em;
+  
+}
+
+.section-portfolio .node-teaser img:hover {
+  box-shadow: 3px 3px 7px #111;
+  -webkit-box-shadow: 3px 3px 7px #111;
+  -moz-box-shadow: 3px 3px 7px #111;
+}
+/* css3 way 
+.section-portfolio  #content-area {
+  column-count:       2;
+  column-gap:         1.5em;
+  -moz-column-count:       2;
+  -moz-column-gap:         1.5em;
+  -webkit-column-count:       2;
+  -webkit-column-gap:         1.5em;
+} result not productive */
+.section-portfolio .node {
+  overflow: hidden;
+}
+  
+.custom-pager { 
+  clear: both;
+  overflow: hidden;
+}
+
+.custom-pager h1 {
+   text-indent: 0px;
+ }
+
+.center-wrapper {
+  float:right;
+  position:relative;
+  left:-50%;
+  text-align:left;
+  clear: both;
+}
+
+.custom-pager-top,
+.section-portfolio .custom-pager-bottom {
+  list-style:none; 
+  position:relative;
+  left:50%;
+}
+
+.section-portfolio .image-preview { /* zen theme based */
+  float: left;
+  padding: 1%; margin-right: 1.5em;
+  background: #FCFAF4;
+  box-shadow:           0px 5px 5px -3px #111 ;
+  -webkit-box-shadow:   0px 5px 5px -3px #111 ; /* Safari, Chrome */
+  -moz-box-shadow:      0px 5px 5px -3px #111 ; /* Firefox */
+}
+
+.section-portfolio .image-preview:hover {
+  box-shadow:           0px 5px 8px -3px #111 ;
+  -webkit-box-shadow:   0px 5px 8px -3px #111 ; /* Safari, Chrome */
+  -moz-box-shadow:      0px 5px 8px -3px #111 ; /* Firefox */
+}
+
+.section-portfolio div.links {
+  float: left;
+}
+.section-portfolio .meta {
+  float: right;
+}

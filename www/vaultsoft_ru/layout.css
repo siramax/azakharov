@@ -236,6 +236,7 @@
     margin: 0;
     padding: 0;
     text-align: left;
+    overflow: hidden;
   }
 
   #navbar li /* A simple method to get navbar links to appear in one line. */
@@ -330,7 +331,7 @@
 
   #navbar
   {
-    overflow: hidden; /* May need to be removed if using a dynamic drop-down menu */
+     /*overflow: hidden; May need to be removed if using a dynamic drop-down menu */
   }
 
   /* If a div.clear-block doesn't have any content after it and its bottom edge

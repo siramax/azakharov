@@ -1,0 +1,82 @@
+/* Cross browsers css3 support transitions */
+/** extendView scripting and bindings, #content #sidebar-left, #sidebar-right DOESN't WORK as basestyle */
+#content {
+    /*@transition-rule@*/
+    transition-property:                left, right;
+    transition-duration:                1s;
+
+    -moz-transition-property:                left, right;
+    -moz-transition-duration:                1s;
+
+    -o-transition-property:                left, right;
+    -o-transition-duration:                1s;
+
+    -webkit-transition-property:                left, right;
+    -webkit-transition-duration:                1s;
+}
+
+#sidebar-left {
+    /*@transition-rule@*/
+    transition-property:                left, right;
+    transition-duration:                1s;
+
+    -moz-transition-property:                left, right;
+    -moz-transition-duration:                1s;
+
+    -o-transition-property:                left, right;
+    -o-transition-duration:                1s;
+
+    -webkit-transition-property:                left, right;
+    -webkit-transition-duration:                1s;
+}
+#sidebar-right {
+    /*@transition-rule@*/
+    transition-property:                left, right;
+    transition-duration:                1s;
+
+    -moz-transition-property:                left, right;
+    -moz-transition-duration:                1s;
+
+    -o-transition-property:                left, right;
+    -o-transition-duration:                1s;
+
+    -webkit-transition-property:                left, right;
+    -webkit-transition-duration:                1s;
+}
+
+#content { /*@transition-rule@*/ left: 1px; right: 1px; }
+#content.with-sidebar-left          {/*@transition-rule@*/ left: 200px; }
+#sidebar-left                       {/*@transition-rule@*/left: 0px;}
+#sidebar-right                      {/*@transition-rule@*/right: 0px;}
+#content.with-sidebar-right         {/*@transition-rule@*/right: 200px;}
+#sidebar-left.hidden-by-pos         {/*@transition-rule@*/left: -199px;}
+#sidebar-right.hidden-by-pos        {/*@transition-rule@*/right: -199px;}
+#content.with-sidebar-left.half     {/*@transition-rule@*/ left: 100px; }
+
+#content.with-sidebar-right.half {/*@transition-rule@*/
+    right: 100px;
+}
+
+#sidebar-left.half {/*@transition-rule@*/
+    left: -100px;
+}
+
+#sidebar-right.half {/*@transition-rule@*/
+    right: -100px;
+}
+/* peep out */
+.sidebar-left #content.peep {/*@transition-rule@*/
+    left: 20px;/* to skip scrollbar...*/
+}
+
+.sidebar-right #content.peep {/*@transition-rule@*/
+    right: 5px;
+}
+
+#sidebar-left.peep {/*@transition-rule@*/
+    left: -180px;
+}
+
+#sidebar-right.peep {/*@transition-rule@*/
+    right: -195px;
+}

@@ -33,11 +33,11 @@
   {
     background:#664117 url('i/investment-darker.jpg') repeat fixed; 
     color:#111;
-    font-family: "Lucida Grande", serif;
   }
 
 /* colors */
 .node .content {
+
 }
   #page
   {
@@ -77,6 +77,7 @@
     margin: 0;
     font-size: 2em;
     line-height: 1.3em;
+    float: right;
   }
 
 #header, #navbar, .region {
@@ -103,6 +104,46 @@
 }
 #navbar a.active {
     color: #eee;
+}
+
+ul.primary li a {
+    background: linear-gradient( -90deg, rgba( 130, 130, 130, 0.1 ), rgba( 255, 255, 255, 0.5 ) );
+    background: -moz-linear-gradient( -90deg, rgba( 130, 130, 130, 0.1 ), rgba( 255, 255, 255, 0.5 ) );
+    background: -webkit-gradient( linear, left top, left bottom, 
+        from(rgba( 130, 130, 130, 0.1 )), 
+        to(rgba( 255, 255, 255, 0.5 )) );
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e7f7f7f', endColorstr='#55ffffff');
+    color: #111;
+    border-radius: 5px 5px 0px 0px;
+    margin: 1px;
+}
+
+ul.primary li a:hover {
+    background: linear-gradient( -90deg, rgba( 210,166,104, 0.3 ), rgba( 255, 255, 255, 0.75 ) );
+    background: -moz-linear-gradient( -90deg, rgba( 210,166,104, 0.3 ), rgba( 255, 255, 255, 0.75 ) );
+    background: -webkit-gradient( linear, left top, left bottom,
+        from(rgba( 210,166,104, 0.3 )), to(rgba( 255, 255, 255, 0.75 )) );
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e7f7f7f', endColorstr='#55D2A668');
+}
+
+ul.primary li a .tab,               ul.primary li a:hover .tab,
+ul.primary li a:hover .tab:hover,
+ul.primary li.active a .tab,        ul.primary li.active a:hover .tab {
+      background: transparent;
+}
+
+ul.primary li.active a {
+  background: rgba( 255, 255, 255, 0.5 ); /* CSS3 */
+  background: white; /* old CSS */
+  opacity: .5;
+  -khtml-opacity: .5;
+  -moz-opacity:   .5;
+  -ms-filter:"alpha(opacity=50)";
+  filter:     alpha(opacity=50);
+}
+
+ul.primary li.active a:hover {
+  background: rgba( 210,166,104, 1 ); /* CSS3 */
 }
 /*
   #site-name a:link,
@@ -138,6 +179,7 @@
 /** content **/
   #content
   {
+
   }
 
   #content-inner
@@ -160,8 +202,13 @@
   {
     padding-bottom: 0; /* Undo system.css */
   }
-
-  h1.title, /* The title of the page */
+h1.title {
+    color:#fdc417;
+   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+   text-indent: 1em;
+    
+}
+    h1.title, /* The title of the page */
   h2.title, /* Block title or the title of a piece of content when it is given in a list of content */
   h3.title /* Comment title */
   {
@@ -299,6 +346,7 @@
 #sidebar-left,   #sidebar-right {
     font-size: 0.75em;
     color: #ddd;
+    text-shadow: 1px 1px 2px #d2a668;
 }
 /** sidebar-left **/
   #sidebar-left
@@ -357,6 +405,7 @@
     background: #FCFAF4;
     border: 1px solid #5D380E;
     color: #111;
+    padding-top: 1em;
   }
 
     #content-area .sticky a {
@@ -376,7 +425,7 @@
     color: #d8d8d8;
     font-size: 75px;
     line-height: 1;
-    font-family: Impact, "Arial Narrow", Helvetica, sans-serif;
+    /*font-family: Impact, "Arial Narrow", Helvetica, sans-serif;*/
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
@@ -414,8 +463,14 @@
 
 /* init letter*/
 .node h2.title:first-letter, h3.title:first-letter {
-    font-family: "Times New Roman", Times, serif;
+    /*font-family: "Times New Roman", Times, serif;*/
     font-size: 200%;
+    text-shadow: 1px 1px 2px #FCFAF4;
+}
+.sticky h2.title:first-letter, h3.title:first-letter {
+    /*font-family: "Times New Roman", Times, serif;*/
+    color: #fdc417;
+    text-shadow: 1px 1px 2px #697557;
 }
   .node .picture /* The picture of the node author */
   {
@@ -429,6 +484,7 @@
 
   .node .meta /* Wrapper for submitted and terms data */
   {
+      text-shadow: 1px 1px 2px #FCFAF4;
   }
 
   .node .submitted /* The "posted by" information */
@@ -444,8 +500,9 @@
 
   .node .content /* Node's content wrapper */
   {
-    font-family: Georgia, Geneva, "Nimbus Roman No9 L", "Century Schoolbook L", Times, serif;
+    /*font-family: Georgia, Geneva, "Nimbus Roman No9 L", "Century Schoolbook L", Times, serif;*/
     font-size: 110%;
+    text-shadow: 1px 1px 2px #FCFAF4;
   }
 
   .node ul.links /* Node links. See also the ul.links declaration above. */
@@ -1055,3 +1112,4 @@ input:focus {
     line-height:    10em;
     z-index: 5;
 }
+
