@@ -39,11 +39,11 @@ a:hover {
 
 
 h1,h2,h3,h4,h5 {
-    font-family:serif;
+    /*font-family: 'Old Standard TT', serif;*/
     text-transform:uppercase;
-    
     font-weight: bold;
 }
+
 #content, #sidebar-left, #sidebar-right {/* for modern */
     transition-timing-function:         ease-in-out;
     -moz-transition-timing-function:         ease-in-out;

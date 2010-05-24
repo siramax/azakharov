@@ -87,6 +87,7 @@
     <?php print $head; ?>
     <?php print $styles; ?>
     <?php print $scripts; ?>
+    <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT:regular,bold' rel='stylesheet' type='text/css'>
     <link rel="me" type="text/html" href="http://www.google.com/profiles/106955530525522116068"/>
 </head>
 <body class="<?php print $body_classes; ?>">
@@ -127,7 +128,7 @@
         <?php if ($title): ?>
 
 
-
+<?php //print_r( $node );//&& $node->isportfolio ?>
 
             <h1 class="title"><?php print $title; ?></h1>
 
@@ -250,6 +251,7 @@
   <?php if ($closure_region): ?>
     <div id="closure-blocks" class="region region-closure"><?php print $closure_region; ?></div>
   <?php endif; ?>
+  
     <?php print $closure; ?>
  <!-- Themed by Andrey Zakharov based on nynke.wordpress.com -->
 </body>

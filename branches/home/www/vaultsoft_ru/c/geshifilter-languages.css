@@ -3,7 +3,9 @@
  * (http://qbnz.com/highlighter/ and http://geshi.org/)
  */
 
-
+.geshifilter {
+  text-shadow: none;
+}
 .actionscript .de1, .actionscript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
 .actionscript  {font-family:monospace;}
 .actionscript .imp {font-weight: bold; color: red;}

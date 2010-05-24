@@ -91,6 +91,7 @@ function vaultsoft_ru_theme(&$existing, $type, $theme, $path) {
         'arguments' => array('form' => NULL),
         ); 
   // @TODO: Needs detailed comments. Patches welcome!
+//drupal_set_message('<pre>'. print_r($existing, TRUE) .'</pre>');
   return $hooks;
 }
 
@@ -192,12 +193,44 @@ function vaultsoft_ru_breadcrumb($breadcrumb) {
  *   The name of the template being rendered ("page" in this case.)
  */
  function vaultsoft_ru_preprocess_page(&$vars, $hook) {
+
+    //drupal_set_message('<pre>'. print_r(  drupal_get_css(), TRUE) .'</pre>');
+    //"/geshifilter.css"
     //$vars['sample_variable'] = t('Lorem ipsum.');
     drupal_add_css( path_to_theme() . '/c/tr.css', 'theme', 'screen', FALSE );
     $vars[ 'styles' ] = drupal_get_css();
-    //drupal_set_message('<pre>'. print_r( $hook , TRUE) .'</pre>');
+  //print_r( $vars[ 'node' ]->path );
+//drupal_set_message('<pre>'. print_r( $vars, TRUE) .'</pre>');
+//drupal_set_message('<pre>'. print_r( $vars[ 'node' ], TRUE) .'</pre>');
+    if ( !empty( $vars[ 'node' ] ) && preg_match( '/^portfolio(\/*)?/i', $vars[ 'node' ]->path ) ) {
+      unset( $vars[ 'title' ] );
+    }
  }
  // */
+function vaultsoft_ru_preprocess_custom_pager( &$vars ) {
+ 
+  $nav = $vars['nav_array'];
+  $prev = 'prev';
+
+  if ( !empty($nav['prev']) ) {
+    $nodeObj = node_load($nav['prev']);
+    if ( $nodeObj ) {
+      $prev = node_page_title( $nodeObj );
+    }
+  }
+   
+  $next = 'next';
+  if ( !empty($nav['next']) ) {
+    $nodeObj = node_load($nav['next']);
+    if ( $nodeObj ) {
+      $next = node_page_title( $nodeObj );
+    }
+  }
+   
+  $vars['previous'] = !empty($nav['prev']) ? l('‹ ' . $prev, 'node/'. $nav['prev']) : '';
+  $vars['next'] =  !empty($nav['next']) ? l($next . ' ›', 'node/'. $nav['next']) : '';
+  
+}
 
 /**
  * Override or insert variables into the node templates.
@@ -208,18 +241,35 @@ function vaultsoft_ru_breadcrumb($breadcrumb) {
  *   The name of the template being rendered ("node" in this case.)
  */
 
- function vaultsoft_ru_preprocess_node(&$vars, $hook) {
+function vaultsoft_ru_preprocess_node( &$vars, $hook ) {
  //$vars['sample_variable'] = t('Lorem ipsum.');
-  //  print_r( $vars );
-//print_r( $hook );
+  //print_r( $vars );
+  //drupal_set_message('<pre>'. print_r( $hook, TRUE) .'</pre>');
     
 /* SLOW but right way to iterate terms,
 fast - examine path portfolio(/*)? */
-    if ( preg_match( '/^portfolio(\/*)?/i', $vars[ 'path' ] ) ) {
-        $vars[ 'classes' ] .= ' portfolio ';
+  if ( preg_match( '/^portfolio(\/*)?/i', $vars[ 'path' ] ) ) {
+    $vars[ 'classes' ] .= ' portfolio ';
+    $vars[ 'year' ] = format_date( $vars[ 'created' ], 'custom', 'Y' );
+    $vars[ 'template_files' ] = array( 'node-'. $vars[ 'type' ] .'-portfolio' );
+
+    foreach ( $vars[ 'node' ]->tags[ 1 ] as $term ) { // 1 MAGIC NUMBER!!!!
+      $vocabulary[ 'taxonomy_term_'. $term->tid ] = array(
+        'title' => $term->name,
+        'href' => taxonomy_term_path( $term ),
+        'attributes' => array(
+          'rel' => 'tag',
+          'title' => strip_tags( $term->description ),
+          'class' => 'tag tag-'. str_replace( ' ', '', $term->name ),
+        )
+      );
     }
-    //drupal_set_message('<pre>'. print_r($vars, TRUE) .'</pre>');
- }
+    // Using the theme('links', ...) function to theme terms list.
+    $vars[ 'terms' ] = theme( 'links', $vocabulary, array('class' => 'links inline') );
+    //drupal_set_message( '<pre>'. print_r( $vars['terms'], TRUE ) .'</pre>' );
+  }
+  //drupal_set_message('<pre>'. print_r($vars, TRUE) .'</pre>');
+}
  
 
 /**
