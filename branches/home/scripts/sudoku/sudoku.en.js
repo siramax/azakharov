@@ -19,7 +19,11 @@ m = {
         linesNotEqual:      function( y, w ) { return   "Row number not equal " + w + "!" ; },
         columnsNotEqual:    function( y, w ) { return   "Columns number at row "+( y+1 )+" not equal " + w + "!"; },
         notFound:                                       "Cannot find target field",
-        noField:                                        "There is no field"
+        noField:                                        "There is no field",
+        failToSolve:        function( remain ) { 
+           return "                 Remain " + remain + " cells to solve :( " +
+               " *** Donate for advanced solver *** " +
+               " Sorry, maybe sudoku too hard. "; }
     }
 }
     

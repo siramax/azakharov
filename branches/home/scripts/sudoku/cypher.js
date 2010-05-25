@@ -20,8 +20,8 @@ cypher = {
       parent.appendChild( this.cypher );
 
     } else {
-      if( document.body.appendChild ) document.body.appendChild( this.cypher );
-      else document.appendChild( this.cypher );
+      if( document.body.appendChild ) { document.body.appendChild( this.cypher ); }
+      else { document.appendChild( this.cypher ); }
     }
 
     this.cypher.setAttribute( "id", "cypher" );
@@ -45,7 +45,7 @@ cypher = {
         this.cypher.appendChild( document.createElement( "div" ) ).className = "clear-right";
       }
     }
-//CLEAR BUTTON
+    //CLEAR BUTTON
     b = document.createElement( "input" );
     b.cypher = this;
     b.setAttribute( "type", "button" );
@@ -54,7 +54,7 @@ cypher = {
     sudoku.ae( b, "click", this.onclick );
     this.cypher.buttons['clear'] = //need this for cycle through cypher buttons
     this.cypher.appendChild( b );
-//CLOSE BUTTON
+    //CLOSE BUTTON
     b =  document.createElement( "input" );
     b.cypher = this;
     b.setAttribute( "type", "button" );
@@ -70,9 +70,8 @@ cypher = {
    * @param obj TD invoker of ask
    */
   ask: function( obj ) {//TODO method of DOM #cypher. which cloning if this is needed 
-/// different fields of page, END TODO
-
-/// here we have egg and mother dillema
+     /// different fields of page, END TODO
+     /// here we have egg and mother dilemma
     if ( "undefined" === typeof( this.cypher ) ) { this.init( obj.sudoku.wrapper ); }//error
     this.invoker = obj;
     this.f = obj.sudoku;
@@ -105,7 +104,7 @@ cypher = {
       var cleft = p[0] + ( od[ 0 ] / 2 ) - ( cd[0] / 2 ) ;
 
       this.cypher.style.top =  p[1] + ( od[ 1 ] / 2 ) - ( cd[1] / 2 ) + "px";
-      if ( "undefined" !== this.f.wrapper.style.left ) { console.log( this.f.wrapper.style.left ); cleft -= this.f.wrapper.style.left; }
+      //if ( "undefined" !== this.f.wrapper.style.left ) { console.log( this.f.wrapper.style.left ); cleft -= this.f.wrapper.style.left; }
       
       this.cypher.style.left = cleft  + "px";
       

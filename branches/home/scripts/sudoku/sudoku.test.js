@@ -2,6 +2,9 @@
 //Assert.isNotUndefined(solver.m,"NO MATRIX IN solver.OBJECT");
 
 ///////////////////////// Case Constructor ///////////////////////////////
+( function(){
+      if ( "undefined" === typeof Assert ) { return; };
+      
 Assert.isEqual( new sudoku( 'something-non-existent' ).wrapper, document.body, "wrapper not fallback to body" );
 
 var testDOMNode = document.createElement( 'div' );
@@ -86,3 +89,5 @@ cypher.init( solver );
 
 solver.cl();
 //try to resolve
+}() );
+
