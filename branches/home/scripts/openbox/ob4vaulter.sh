@@ -196,7 +196,7 @@ case "$1" in
         ob_subpipe_menu ssh "$txtSSH" "$HOME/scripts/openbox/ssh.sh"
         ob_subpipe_menu Tools "$txtTools" "$SELF tools"
         ob_subpipe_menu time `date` "$SELF cal"
-        ob_menu_item 0 "$txtWallpaper" "$HOME/scripts/set.random.wallpaper.sh"
+        ob_menu_item 0 "$txtWallpaper" "$HOME/scripts/set.random.wallpaper.sh ~/pics/wallpapers remote"
 
 
         ob_menu_sep

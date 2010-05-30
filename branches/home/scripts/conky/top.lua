@@ -29,6 +29,7 @@ settings_table = {
         fg          = {
             color = { 0xbb1a1a, 0x1abb1a },--gradient TODO source
             color_by_value = 1 or true, --not by pos
+            threshold = 0.4, -- 0..1
             alpha = { 0.1, 0.025 }
         },
         --[[text = {
@@ -43,9 +44,9 @@ settings_table = {
         },]]
         line_color          = 0x188b18,
         line_side           = 1 or true, -- right
-    },
+    }, 
     {   name = 'top_mem', arg = 'mem', -- max top
-        items = 5,
+        items = 5, max = 100, --! max value
         --bg      = { color   = 0x000000, alpha    = 0.05, },
         fg      = { color   = { 0xbb1a1a, 0x1abb1a },
                     alpha   = { 0.1, 0.025 }, },
@@ -55,6 +56,7 @@ settings_table = {
         thickness   = 800,
         start_angle = 0,
         end_angle   = 180,
+        line_side   = 0, --left
         --[[text        = {
             mask = "${top_mem pid %d} ${top_mem name %d}",
             x = 110, y = 100,
@@ -64,7 +66,6 @@ settings_table = {
             },
             color = { 0x7f7f00, 0x007f7f },
         },]]
-        line_side   = 0, --left
     },--[[
     {   name = 'top_io', arg = 'io_perc',
         items = 5,
@@ -248,8 +249,9 @@ calculate_top = function ( sets )
 
     local iMin, iMax              = 1, sets.items or top_items or 4;
     local rings = {}
-    local gra2rad, grade, grade_alpha, grade_color, min_angle, max_angle, current_angle
+    local gra2rad, grade, grade_alpha, grade_color, min_angle, max_angle, current_angle, grade_red
     local color_by_value = sets.fg and sets.fg.color_by_value or false
+    
 
     if ( sets.start_angle ) then --will calc and draw ring
         local gra2rad = merilo( 0, 360, 0, 2 * math.pi )
@@ -296,8 +298,8 @@ calculate_top = function ( sets )
     for i = iMin, iMax do
         rings[ i ] = {}
 
-        val = conky_parse( string.format( '${%s %d}', prep, i ) )
-        --val = string.format( "%f", (iMax-i) * 10.5 )
+        --val = conky_parse( string.format( '${%s %d}', prep, i ) )
+        val = string.format( "%f", (iMax-i) * 6 )
 
         if ( val and #val ) then
             val = tonumber( val )
@@ -311,11 +313,17 @@ calculate_top = function ( sets )
 
                 if ( grade_color ) then
                     local x = color_by_value and val or i
+
                     rings[ i ].color = {
                         r = grade_color.r( x ),
                         g = grade_color.g( x ),
                         b = grade_color.b( x )
                     }
+
+                    if ( sets.fg.threshold and (sets.fg.threshold < (x / sets.max)) ) then
+                      rings[ i ].color.r = merilo( sets.fg.threshold, 1, rings[ i ].color.r, 255 )( x )
+                    end
+
 --for c = 0,100,10 do print (color_by_value,x,c, grade_color.r( c ), grade_color.g( c ), grade_color.b( c )) end
                 elseif ( text_color ) then
                     rings[ i ].color = text_color
@@ -385,16 +393,16 @@ draw_top = function ( cr, pt, rings )
         x1, y1 = 0, 0
         local inGrad = rad2gra( rings.max_angle )
         --cairo_translate( cr, radius, radius)
-        --print( inGrad, math.cos( rings.max_angle ), math.cos( math.pi/2 ) )
+        --print( rings.max_angle, inGrad, math.cos( rings.max_angle ) )
     --print( conky_window, inGrad, conky_parse( '${updates}' ) )
         x1 = dx
         x2 = radius--[[ ( r*(1-cos) )]]
 
-        if ( math.abs(inGrad) < 90 ) then
+        if ( math.abs(inGrad) <= 90 ) then
             y2 = dy
-        elseif ( math.abs(inGrad) < 180 ) then
+        elseif ( math.abs(inGrad) <= 180 ) then
             y2 = radius
-        elseif ( math.abs(inGrad) < 270 ) then --more than 180
+        elseif ( math.abs(inGrad) <= 270 ) then --more than 180
             y1 = dy
             x1 = -radius
             y2 = radius
@@ -404,7 +412,7 @@ draw_top = function ( cr, pt, rings )
             y2 = radius
         end
 
-        if ( rings.max_angle < 0 and math.abs(inGrad) < 180 ) then --TODO better
+        if ( rings.max_angle < 0 and math.abs(inGrad) <= 180 ) then --TODO better
             y1, y2 = y2, y1
         end
 --[[
@@ -427,19 +435,20 @@ draw_top = function ( cr, pt, rings )
         cairo_rectangle(  cr, clip[2], clip[1], clip[4]-clip[2],  clip[3]-clip[1] )
         cairo_stroke( cr )
         cairo_restore( cr )]]
+
         --cairo_rectangle( cr, clip[2], clip[1], clip[4]-clip[2],  clip[3]-clip[1] )
         --cairo_clip( cr )
         
 
         clip = { clip[2], clip[1], clip[ 4 ], clip[ 3 ] } -- due to rotate -pi/2
         if( rings.max_angle < 0 ) then
-            clip[ 1 ],clip[ 4 ] = 
-                clip[ 3 ] - (clip[4]-clip[2]),--ex - dy
-                clip[ 2 ] + (clip[3]-clip[1])--y + dx
+            clip[ 1 ],clip[ 4 ] = --cx1, cy2
+                clip[ 3 ] - (clip[4]-clip[2]),  -- ex - dy
+                clip[ 2 ] + (clip[3]-clip[1])   -- y + dx
         else
             clip[ 3 ],clip[ 4 ] = 
-                clip[ 1 ] + (clip[4]-clip[2]),--x + dy
-                clip[ 2 ] + (clip[3]-clip[1])--y + dx
+                clip[ 1 ] + (clip[4]-clip[2]),  -- x + dy
+                clip[ 2 ] + (clip[3]-clip[1])   -- y + dx
         end
 
         local magnX, magnY, magn = 
@@ -451,13 +460,23 @@ draw_top = function ( cr, pt, rings )
 
         --cairo_translate( cr, pt.x , pt.y)
         if ( rings.max_angle < 0 ) then
+
+          if ( math.abs(inGrad) <= 90 ) then -- >>:(
             cairo_translate( cr, clip[ 3 ] , clip[ 2 ] + (x2)*magn )
+          else
+            if ( math.abs(inGrad) <= 180 ) then -- >>:(
+              --cairo_translate( cr, clip[ 1 ] - (y1)*magn, clip[ 2 ] )
+cairo_translate( cr, pt.x , pt.y)
+            else
+              cairo_translate( cr, clip[ 3 ] - (y1)*magn, clip[ 2 ] + (x2)*magn )
+            end
+          end
         else
             cairo_translate( cr, clip[ 1 ] - (y1)*magn, clip[ 2 ] + (x2)*magn )
         end
-
+-- I NEED MATRIX!
         cairo_scale( cr, magn, magn )
-        cairo_rotate( cr, -math.pi/2 )
+        cairo_rotate( cr, -math.pi / 2 )
 
     end
     --draw bg
