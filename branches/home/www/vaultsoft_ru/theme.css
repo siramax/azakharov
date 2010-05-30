@@ -465,6 +465,7 @@ h1.title {
 .node h2.title:first-letter, h3.title:first-letter {
     /*font-family: "Times New Roman", Times, serif;*/
     font-size: 200%;
+    color: black;
     text-shadow: 1px 1px 2px #FCFAF4;
 }
 .sticky h2.title:first-letter, h3.title:first-letter {

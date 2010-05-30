@@ -37,6 +37,10 @@
     line-height: 1.286em; /* 14px x 1.286 = 18px */
   }
 
+/* .wf-inactive body {
+    font-family: "Nimbus Roman No9 L", "Times", "Times New Roman", Times, Georgia, "Bitstream Vera Serif", serif;
+  }*/
+
   body, caption, th, td, input, textarea, select, option, legend, fieldset
   {
     /* The following font family declarations are based on the Microsoft core
