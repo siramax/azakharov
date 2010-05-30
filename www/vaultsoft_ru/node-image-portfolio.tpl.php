@@ -1,0 +1,95 @@
+<?php //if(in_array($tags,'Портфолио')) echo 'Оно!'; 
+    /*print_r( $tags );
+  $year = '';
+//we need to separate tags from diff dics
+$terms = array();//replace
+$aterms = array();
+foreach($node->taxonomy as $tid=> $nt/*NodeTags*) {
+  $aterms[$nt->vid][$tid] = &$node->taxonomy[$tid];
+  if($nt->name == 'Портфолио') $isportfolio = true;//hmmmmmmm
+}
+$dn = new stdClass();
+$dn->taxonomy = & $tt;
+foreach($aterms as $vid => $tt) {
+  $linksbydic[$vid] =  taxonomy_link('taxonomy terms', $dn);//['taxonomy']
+  $terms[$vid] = theme('links', $linksbydic[$vid], array('class' => 'links inline'));
+}
+if($isportfolio)
+  $year = format_date($node->created,'custom','Y');*/ ?>
+
+<?php
+//drupal_set_message('<pre>'. print_r( $node, TRUE) .'</pre>');
+/**
+ * @file node.tpl.php
+ *
+ * Theme implementation to display a node.
+ *
+ * Available variables:
+ * - $title: the (sanitized) title of the node.
+ * - $content: Node body or teaser depending on $teaser flag.
+ * - $picture: The authors picture of the node output from
+ *   theme_user_picture().
+ * - $date: Formatted creation date (use $created to reformat with
+ *   format_date()).
+ * - $links: Themed links like "Read more", "Add new comment", etc. output
+ *   from theme_links().
+ * - $name: Themed username of node author output from theme_username().
+ * - $node_url: Direct url of the current node.
+ * - $terms: the themed list of taxonomy term links output from theme_links().
+ * - $submitted: themed submission information output from
+ *   theme_node_submitted().
+ *
+ * Other variables:
+ * - $node: Full node object. Contains data that may not be safe.
+ * - $type: Node type, i.e. story, page, blog, etc.
+ * - $comment_count: Number of comments attached to the node.
+ * - $uid: User ID of the node author.
+ * - $created: Time the node was published formatted in Unix timestamp.
+ * - $zebra: Outputs either "even" or "odd". Useful for zebra striping in
+ *   teaser listings.
+ * - $id: Position of the node. Increments each time it's output.
+ *
+ * Node status variables:
+ * - $teaser: Flag for the teaser state.
+ * - $page: Flag for the full page state.
+ * - $promote: Flag for front page promotion state.
+ * - $sticky: Flags for sticky post setting.
+ * - $status: Flag for published status.
+ * - $comment: State of comment settings for the node.
+ * - $readmore: Flags true if the teaser content of the node cannot hold the
+ *   main body content.
+ * - $is_front: Flags true when presented in the front page.
+ * - $logged_in: Flags true when the current user is a logged-in member.
+ * - $is_admin: Flags true when the current user is an administrator.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_node()
+ */
+?>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes ?><?php if ($sticky) { print ' sticky'; } ?><?php 
+  if (!$status) { print ' node-unpublished'; } ?>">
+  <div class ="node-inner">
+  <?php print $picture ?>
+
+  <?php if( !$page ): ?>
+    <h3 class ="title"><a href ="<?php print $node_url ?>" title ="<?php print $title ?>"><?php print $title?></a> <?php print $year ?></h3>
+  <?php endif; ?>
+
+
+    <div class="content">
+      <?php print $content ?>
+    </div>
+
+    <?php if ($links) { ?><div class="links">&raquo; <?php print $links?></div><?php }; ?>
+    <?php if( $page && $terms ): ?>
+      <div class="meta">
+        <div class="terms terms-inline"><?php print $terms ?></div>
+      </div>
+    <?php endif; ?>
+    <div class="clear-block"></div>
+  </div>
+</div>
+
+<?php if(($id % 2) == 0):?>
+  <div class="clear-block"></div>
+<?php endif; ?>

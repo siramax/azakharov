@@ -1,0 +1,36 @@
+<?php
+// $Id: custom-pager.tpl.php,v 1.1.2.1 2008/12/24 00:58:21 eaton Exp $
+
+/**
+ * @file
+ * custom-pager.tpl.php
+ *
+ * Theme implementation to display a custom pager.
+ *
+ * Default variables:
+ * - $previous: A formatted <A> link to the previous item.
+ * - $next: A formatted <A> link to the next item.
+ * - $key: Formatted text describing the item's position in the list.
+ * - $position: A textual flag indicating how the pager is being displayed.
+ *   Possible values include: 'top', 'bottom', and 'block'.
+ *
+ * Other variables:
+ * - $nav_array: An array containing the raw node IDs and position data of the
+ *   current item in the list.
+ * - $node: The current node object.
+ * - $pager: The pager object itself.
+ *
+ * @see custom_pagers_preprocess_custom_pager()
+ */
+?>
+<div class ="center-wrapper">
+  <ul class="custom-pager custom-pager-<?php print $position; ?>">
+    <li class="previous"><?php print $previous; ?></li>
+    <li class ="key title node-title">
+      <h1 class ="title node-title"><?php print $node->title ?></h1>
+      <span class ="date">(<?php print format_date( $node->created, 'custom', 'F Y' ) ?>)</span>
+    </li>
+    <li class="next"><?php print $next; ?></li>
+  </ul>
+</div>
+<div class="clear-block"></div>

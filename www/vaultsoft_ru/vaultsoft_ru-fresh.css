@@ -39,7 +39,6 @@ a:hover {
 
 
 h1,h2,h3,h4,h5 {
-    /*font-family: 'Old Standard TT', serif;*/
     text-transform:uppercase;
     font-weight: bold;
 }
@@ -212,7 +211,20 @@ h1,h2,h3,h4,h5 {
     */
 
 /*  Geishi  */
-div.geshifilter {
+div.geshifilter-bg {
     background: black;
+    background: url(i/wallpaper.jpg) fixed;
     color: lightgreen;
+  padding:0px; margin: 0.5em;
+}
+div.geshifilter {
+
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgb(0, 0, 0);
+  background: rgba( 0, 0, 0, .80 );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000)";  /* For IE 8*/
+
+  margin: 0px;
+  color: lightgreen;
 }

@@ -87,7 +87,7 @@
     <?php print $head; ?>
     <?php print $styles; ?>
     <?php print $scripts; ?>
-    <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT:regular,bold' rel='stylesheet' type='text/css'>
+    <link href ='http://fonts.googleapis.com/css?family=Old+Standard+TT:regular,bold' rel ='stylesheet' type ='text/css'>
     <link rel="me" type="text/html" href="http://www.google.com/profiles/106955530525522116068"/>
 </head>
 <body class="<?php print $body_classes; ?>">
@@ -253,6 +253,17 @@
   <?php endif; ?>
   
     <?php print $closure; ?>
+    
+    <script type ="text/javascript" src ="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+    <script type ="text/javascript">
+      WebFont.load( {
+        custom: { 
+            families: [ 'Old Standard TT:regular,bold' ],
+            urls: [ '/<?php print $directory; ?>/f/stylesheet.css' ] 
+        }
+      /*google: { families: [ '' ] }*/
+      } );
+    </script>
  <!-- Themed by Andrey Zakharov based on nynke.wordpress.com -->
 </body>
 </html>

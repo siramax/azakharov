@@ -10,7 +10,7 @@
   padding: 1.5em;
 }
 
-.section-portfolio .node-teaser {
+.section-portfolio .node-teaser  {
   width: 49%;
   float: left;
   margin: 0;
@@ -57,7 +57,7 @@
   
 .custom-pager { 
   clear: both;
-  overflow: hidden;
+/*  overflow: hidden;*/
 }
 
 .custom-pager h1 {
@@ -72,6 +72,15 @@
   clear: both;
 }
 
+.custom-pager-top li.previous {
+  position: absolute;
+  right: 100%;
+}
+
+.custom-pager-top li.next {
+  position: absolute;
+  left: 100%;
+}
 .custom-pager-top,
 .section-portfolio .custom-pager-bottom {
   list-style:none; 
