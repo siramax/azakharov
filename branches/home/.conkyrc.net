@@ -28,5 +28,5 @@ ${if_gw wlan0}${color2}${font Lucida Grande:size=12}Send-Q ${totaldown wlan0}${c
 ${execi 5 netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $3; count[ $7 ]++ } END { for ( s in sum ) printf "%7d %dx %s\n", sum[ s ], count[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }
 ${color2}${font Lucida Grande:size=12}Recv-Q ${totalup wlan0}${color} / ${downspeed wlan0}${font}
 ${execi 5 netstat --tcp --numeric-hosts --program 2>/dev/null | grep ESTABLISHED | awk ' { sum[ $7 ] += $2; count[ $7 ]++ } END { for ( s in sum ) printf "%7d %dx %s\n", sum[ s ], count[ s ], s }' | sort --numeric --key=1 --reverse | head --lines=15 }
-${lua tribar wlan0}
+${lua tribar wlan0 20M}
 ${endif}

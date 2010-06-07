@@ -1,16 +1,17 @@
-/* 
-@author Andrey Zakharov
-color theme:
-bg:
-    #664117
-    #d2a668
-    #FCFAF4
-
-fg:
-    #111
-    #dcb073 / #fdc417
-#504B35
-*/
+/**
+ * @author Andrey Zakharov
+ * developed for vaultsoft.ru 
+ * April - May 2010
+ * swatch colors:
+ * bg:
+ *   #664117 - brown
+ *   #d2a668 - light brown
+ *   #FCFAF4 - light light pink
+ * fg:
+ *   #111 - almost black
+ *   #dcb073 / #fdc417 - light brown / yellow
+ *   #504B35 - wet asphalt
+ */
 
 /*  This file used for 
     common styles

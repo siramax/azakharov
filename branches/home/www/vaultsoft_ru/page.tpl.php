@@ -258,7 +258,7 @@
     <script type ="text/javascript">
       WebFont.load( {
         custom: { 
-            families: [ 'Old Standard TT:regular,bold' ],
+            families: [ 'Old Standard TT' ],
             urls: [ '/<?php print $directory; ?>/f/stylesheet.css' ] 
         }
       /*google: { families: [ '' ] }*/

@@ -46,8 +46,7 @@ get_hardware_max = function( aiface )
     return max
 end
 
--- too many responsibility here
-conky_tribar = function( aiface, sp_in, sp_out )
+conky_tribar = function( aiface, sp_max, sp_in, sp_out )
 
   if conky_window == nil then return end
 
@@ -56,7 +55,7 @@ conky_tribar = function( aiface, sp_in, sp_out )
     sp_in or conky_parse( "${downspeed "..iface.."}" ) or "1M", -- in bytes!
     sp_out or conky_parse( "${upspeed "..iface.."}" ) or "1M",
     get_hardware_max( iface )
-  max = "2.5M" -- in bits
+  max = sp_max or "2.5M" -- in bits
   max, speed_in, speed_out = 
     get_in_bytes( max ) / 8, get_in_bytes( speed_in ), get_in_bytes( speed_out )
 
@@ -74,7 +73,7 @@ conky_tribar = function( aiface, sp_in, sp_out )
     conky_window.height 
   )
   local cr = cairo_create( cs )
-  draw_rect( cr, { speed_in, speed_out, max } );
+  draw_tribar( cr, { speed_in, speed_out, max } );
   cairo_destroy( cr )
   return ''
 end
@@ -89,7 +88,10 @@ get_in_bytes = function( str )
   --print( b, m );
 end
 
-draw_rect = function( cr, m )
+--! Draws tribar for max, num1, num2...
+--! TODO for any other values
+--! Chart lib :)
+draw_tribar = function( cr, m )
   --print( sets.w, sets.h )
   local y = sets.y
 

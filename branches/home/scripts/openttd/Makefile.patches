@@ -56,19 +56,23 @@ find_ignorable_prefix = $$(\
 all : vs_pack_${REV}.patch
 	@echo "==> $@ DONE"
 
-vs_pack_${REV}.patch : $(addsuffix .patched, $(PATCHES) )
+vs_pack_${REV}.build.log : $(addsuffix .patched, $(PATCHES) )
 ifeq (${MODE},patchpack)
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
 	( cd $(TRUNK); ./configure )
 	( $(MAKE) -C $(TRUNK) clean )
-	( $(MAKE) -C $(TRUNK) all > $@.build.log )
+	( $(MAKE) -C $(TRUNK) all > $@ )
 else
 	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
 	@echo "PARAM=\"\" $(MAKE) all"
 endif
 	@echo "==> Buildin $* DONE"
 endif
+
+vs_pack_${REV}.patch : vs_pack_${REV}.build.log
+	@( find $(TRUNK) -name \*orig | xargs rm --force --verbose )
+	( cd $(TRUNK) && svn status | grep -v M |  awk '{print $$2}' | xargs svn add )
 	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
 	@echo "==> $@ DONE"
 
