@@ -24,21 +24,21 @@ base theme = zen
   ; You can also override any of Zen's stylesheets or any module's stylesheets,
   ; an /extremely/ useful feature. See the excellent Drupal 6 Theme Guide at
   ; http://drupal.org/node/171209 for more details.
-stylesheets[all][]   = layout.css
-stylesheets[all][]   = html-elements.css
+stylesheets[all][]   = c/layout.css
+stylesheets[all][]   = c/html-elements.css
 ; stylesheets[all][] = tabs.css
 ; stylesheets[all][] = messages.css
 ; stylesheets[all][] = block-editing.css
 ; stylesheets[all][] = wireframes.css
 
   ; Adding a nice clean stylesheet
-stylesheets[all][] = vaultsoft_ru-fresh.css
+stylesheets[all][] = c/vaultsoft_ru-fresh.css
 
-stylesheets[all][]   = theme.css
+stylesheets[all][]   = c/theme.css
 stylesheets[all][]   = c/agg.css
 stylesheets[all][]   = c/portfolio.css
 
-stylesheets[print][] = print.css
+stylesheets[print][] = c/print.css
   ; To prevent stylesheets of a base theme or of a module from being included in
   ; our sub-theme, we specify it in our .info file (and we don't need to have a
   ; stylesheet in our sub-theme with that name.) For example, we prevent the
@@ -49,15 +49,15 @@ stylesheets[all][]   = zen.css
 
   ; Set the conditional stylesheets that are processed by IE.
 
-conditional-stylesheets[if IE][all][] = ie.css
+conditional-stylesheets[if IE][all][] = c/ie.css
 
   ; Optionally add some jquery scripts to your theme.
 ; scripts[] = script.js
 ; scripts[] = activeNav.js
-scripts[] = j/jquery.css-transitions.min.js
+; scripts[] = j/jquery.css-transitions.min.js
 ; scripts[] = j/jquery.css-transitions.js
 scripts[] = j/jquery.cookie.min.js
-scripts[] = j/extendView.min.js
+; scripts[] = j/extendView.min.js
 
 
   ; The regions defined in Zen's default page.tpl.php file.  The name in
@@ -69,12 +69,12 @@ scripts[] = j/extendView.min.js
   ; To add a new region, copy Zen's page.tpl.php to your sub-theme's directory,
   ; add a line line to this file, and then add the new variable to your
   ; page.tpl.php template.
+regions[header]         = header
 regions[left]           = left sidebar
 regions[right]          = right sidebar
 regions[navbar]         = navigation bar
 regions[content_top]    = content top
 regions[content_bottom] = content bottom
-regions[header]         = header
 regions[footer]         = footer
 regions[closure_region] = closure
 

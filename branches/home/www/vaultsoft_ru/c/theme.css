@@ -31,7 +31,7 @@
 /** body **/
   body
   {
-    background:#664117 url('i/investment-darker.jpg') repeat fixed; 
+    background:#664117 url('../i/investment-darker.jpg') repeat fixed; 
     color:#111;
   }
 
@@ -58,8 +58,6 @@
 
   #logo-title /* Wrapper for logo, website name, and slogan */
   {
-    position: absolute;
-    left: 34px;
   }
 
   #logo /* Wrapper for logo */
@@ -80,7 +78,8 @@
     float: right;
   }
 
-#header, #navbar, .region {
+#header, #navbar, .region,
+.accordion_blocks_container .ui-accordion-header a {
     color: #eee;
 }
 
@@ -97,6 +96,9 @@
     /*text-transform:uppercase;*/
 }
 
+#navbar {
+    background:#664117 url('../i/investment-darker.jpg') repeat fixed; /* explicit to hide beneath */
+}
 #header a:hover,
 #navbar a:hover {
     background:none;
@@ -202,18 +204,36 @@ ul.primary li.active a:hover {
   {
     padding-bottom: 0; /* Undo system.css */
   }
-h1.title {
+
+h1.title,  .ui-accordion-header {
     color:#fdc417;
    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
    text-indent: 1em;
-    
 }
-    h1.title, /* The title of the page */
-  h2.title, /* Block title or the title of a piece of content when it is given in a list of content */
-  h3.title /* Comment title */
-  {
+h1.title, /* The title of the page */
+h2.title, /* Block title or the title of a piece of content when it is given in a list of content */
+h3.title /* Comment title */,
+.ui-accordion-header {
     margin: 0;
-  }
+}
+
+#sidebar-left .block .title, #sidebar-right .block  .title, .region-vertical .block  .title,
+.accordion_blocks_container .ui-accordion-header {
+    background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ) );
+    background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.1 )), to(rgba( 255, 255, 255, 0 )) );
+    background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ));
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1effffff', endColorstr='#01ffffff');
+}
+ .ui-accordion-header {
+    padding: .5em 0;
+    cursor: pointer;
+}
+.ui-accordion-header a:hover {
+    text-decoration: none;
+}
+.ui-accordion .content {
+    border: 1px dashed #FCFAF4;
+}
 
   div.messages /* Important messages (status, warning, and error) for the user */
   {
@@ -241,6 +261,9 @@ h1.title {
   {
     margin: 1em 0;
     padding: 0.1em 1em;
+    background: infobackground;
+    color: infotext;
+    
   }
 
 
@@ -254,7 +277,7 @@ h1.title {
   {
     margin:     0px;
     padding:    10px;
-    background: #d2a668 url('i/bgtile1.jpg') repeat;
+    background: #d2a668 url('../i/bgtile1.jpg') repeat;
     border:     0;
     -moz-border-radius:     5px;
     -khtml-border-radius:   5px;
@@ -348,6 +371,9 @@ h1.title {
     color: #ddd;
     text-shadow: 1px 1px 2px #d2a668;
 }
+.accordion_blocks_container .ui-accordion-header a {
+    text-shadow: 1px 1px 2px #d2a668;
+}
 /** sidebar-left **/
   #sidebar-left
   {
@@ -376,7 +402,6 @@ h1.title {
 
   #footer-inner
   {
-    padding-top: 5px;
   }
 
   #footer-message /* Wrapper for the footer message from Drupal's "Site information"
@@ -463,7 +488,7 @@ h1.title {
 
 /* init letter*/
 .node h2.title:first-letter, h3.title:first-letter {
-    /*font-family: "Times New Roman", Times, serif;*/
+    font-family:  "DejaVu Serif", "Nimbus Roman No9 L", "Times New Roman", Times, Georgia, "Bitstream Vera Serif", serif; 
     font-size: 200%;
     color: black;
     text-shadow: 1px 1px 2px #FCFAF4;
@@ -491,7 +516,7 @@ h1.title {
   .node .submitted /* The "posted by" information */
   {
     float:right;
-    font-size: 0.7em;
+    font-size: 0.9em;
   }
 
   .node .terms /* Node terms (taxonomy) */
@@ -875,10 +900,10 @@ h1.title {
   {
   }
 
-  .container-inline div, .container-inline label /* Inline labels and form divs */
-  {
+  .container-inline div, .container-inline label {/* Inline labels and form divs */
     display: inline;
   }
+
 
   .tips /* Tips for Drupal's input formats */
   {
@@ -989,7 +1014,6 @@ input[type="submit"] {
     text-decoration: none;
     font: 14px/100% Arial, Helvetica, sans-serif;
     font-weight: bolder;
-    padding: .5em 1em;
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
     -moz-border-radius:         0.5em;
     -khtml-border-radius:       0.5em;
@@ -1078,12 +1102,6 @@ input:focus {
     margin-left: 0;
 }
 
-#sidebar-left .block .title, #sidebar-right .block  .title, .region-vertical .block  .title {
-    background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ) );
-    background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.1 )), to(rgba( 255, 255, 255, 0 )) );
-    background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1effffff', endColorstr='#01ffffff');
-}
 
 #triggerView {
     color: #dcb073;

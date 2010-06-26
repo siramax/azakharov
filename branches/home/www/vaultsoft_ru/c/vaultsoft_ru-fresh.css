@@ -85,10 +85,10 @@ h1,h2,h3,h4,h5 {
     -webkit-transition: text-shadow 0.1s linear;
 }
 
-
-#header, #navbar {
-    background:#664117 url('i/investment-darker.jpg') repeat fixed; /* explicit to hide beneath */
+#header {
+  background: transparent;
 }
+
 
 #navbar, #footer {/* SAME cascade*/
     border-width: 1px;
@@ -109,7 +109,7 @@ h1,h2,h3,h4,h5 {
 }
 
 #navbar-inner {
-    margin: 0.3ex;
+/*    margin: 0.3ex;*/
 }
 
 
@@ -131,7 +131,18 @@ h1,h2,h3,h4,h5 {
 
 /* webkit */
 .block-search input.form-text {
-    
+}
+.block-search .form-submit {
+}
+.block-search .container-inline {
+  overflow: hidden;
+  line-height: 22px;
+}
+.container-inline div#edit-search-block-form-1-wrapper {
+  margin: 0;
+  padding: 0;
+  display: block;
+  float: left;
 }
 /* TODO remain only for scripting */
 #content-top .block {
@@ -140,10 +151,6 @@ h1,h2,h3,h4,h5 {
 
 #breadcrumb {
 /*	position: absolute; /* for tooltips */
-}
-
-#breadcrumb ul {
-	margin:0;
 }
 
 #breadcrumb li {
@@ -173,7 +180,9 @@ h1,h2,h3,h4,h5 {
 
 
 
-.block h1, .block h2,.block h3,.block h4,.block h5 {
+.block h1, .block h2,.block h3,.block h4,.block h5, 
+.accordion_blocks_container .ui-accordion-header
+{
     text-transform:none;
 }
 
@@ -214,7 +223,7 @@ h1,h2,h3,h4,h5 {
 /*  Geishi  */
 div.geshifilter-bg {
     background: black;
-    background: url(i/wallpaper.jpg) fixed;
+    background: url(../i/wallpaper.jpg) fixed;
     color: lightgreen;
   padding:0px; margin: 0.5em;
 }
