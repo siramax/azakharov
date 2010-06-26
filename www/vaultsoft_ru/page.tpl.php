@@ -78,32 +78,41 @@
  * @see template_preprocess()
  * @see template_preprocess_page()
  */
-?>
+?><?php $logotitle = $site_name . ' ' . t('Home'); ?>
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" 
+    lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
+
+
 
 <head>
-  <title><?php print $head_title; ?></title>
+    <title><?php print $head_title; ?></title>
+    <link rel = "me" type = "text/html" href="http://www.google.com/profiles/aazaharov81" ></link>
     <?php print $head; ?>
     <?php print $styles; ?>
-    <?php print $scripts; ?>
-    <link href ='http://fonts.googleapis.com/css?family=Old+Standard+TT:regular,bold' rel ='stylesheet' type ='text/css'>
-    <link rel="me" type="text/html" href="http://www.google.com/profiles/106955530525522116068"/>
 </head>
+
+
+
 <body class="<?php print $body_classes; ?>">
   <div id="page"><div id="page-inner">
-    <a name="navigation-top" id="navigation-top"></a>
+    <a name = "navigation-top" id = "navigation-top"></a>
     <?php if ($primary_links || $secondary_links || $navbar): ?>
-      <div id="skip-to-nav"><a href="#navigation"><?php print t('Skip to Navigation'); ?></a></div>
+      <div id = "skip-to-nav"><a href = "#navigation"><?php print t('Skip to Navigation'); ?></a></div>
     <?php endif; ?>
 
-
-<?php if ( $navbar || $left || $right ): ?>
-<?php endif; ?>
-    <div id="main"><div id="main-inner" class="clear-block<?php if ($search_box || $primary_links || $secondary_links || $navbar) { print ' with-navbar'; } ?>">
+    <div id="main"><div id="main-inner" class="clear-block<?php 
+    if ($search_box || $primary_links || $secondary_links || $navbar) { print ' with-navbar'; } ?>">
+      
+      
       <div id="content" class = "<?php if ($left) { print " with-sidebar-left "; }; if ($right) { print " with-sidebar-right "; };?> ">
         <div id = "triggerView" class = "trigger animable hidden" title ="Works Great in Chromium Browser!"></div>
         <div id="content-inner">
+        
         <?php if ($mission): ?>
           <div id="mission"><?php print $mission; ?></div>
         <?php endif; ?>
@@ -116,39 +125,41 @@
 
         <?php if ($title || $tabs || $help || $messages): ?>
           <div id="content-header">
-
+            <?php print $help; ?>
             <?php print $messages; ?>
             <?php if ($tabs): ?>
               <div class="tabs"><?php print $tabs; ?></div>
             <?php endif; ?>
-            <?php print $help; ?>
           </div> <!-- /#content-header -->
         <?php endif; ?>
 
         <?php if ($title): ?>
 
 
-<?php //print_r( $node );//&& $node->isportfolio ?>
+
+
+
 
             <h1 class="title"><?php print $title; ?></h1>
-
-
-
-
         <?php endif; ?>
+        
 
-        <div id="content-area">
+        <div id = "content-area">
           <?php print $content; ?>
         </div>
 
         <?php if ($feed_icons): ?>
-          <div class="feed-icons"><?php print $feed_icons; ?></div>
+          <div class = "feed-icons"><?php print $feed_icons; ?></div>
         <?php endif; ?>
 
         <?php if ($content_bottom): ?>
-          <div id="content-bottom" class="region region-content_bottom">
+          <div id = "content-bottom" class = "region region-content_bottom">
             <?php print $content_bottom; ?>
           </div> <!-- /#content-bottom -->
+        <?php endif; ?>
+        
+        <?php if ($footer_message): ?>
+          <div id = "footer-message"><?php print $footer_message; ?></div>
         <?php endif; ?>
 
       </div></div> <!-- /#content-inner, /#content -->
@@ -177,7 +188,6 @@
           <?php endif; ?>
 
           <?php print $navbar; ?>
-
         </div></div> <!-- /#navbar-inner, /#navbar -->
       <?php endif; ?>
 
@@ -194,37 +204,8 @@
       <?php endif; ?>
 
     </div></div> <!-- /#main-inner, /#main -->
+    
     <div id="header"><div id="header-inner" class="clear-block">
-
-      <?php if ($logo || $site_name || $site_slogan): ?>
-        <div id="logo-title">
-
-          <?php if ($logo): ?>
-            <div id="logo"><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" id="logo-image" /></a></div>
-          <?php endif; ?>
-
-          <?php if ($site_name): ?>
-            <?php if ($title): ?>
-              <div id="site-name"><strong>
-                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
-                <?php print $site_name; ?>
-                </a>
-              </strong></div>
-            <?php else: ?>
-              <h1 id="site-name">
-                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
-                <?php print $site_name; ?>
-                </a>
-              </h1>
-            <?php endif; ?>
-          <?php endif; ?>
-
-          <?php if ($site_slogan): ?>
-            <div id="site-slogan"><?php print $site_slogan; ?></div>
-          <?php endif; ?>
-
-        </div> <!-- /#logo-title -->
-      <?php endif; ?>
 
       <?php if ($header): ?>
         <div id="header-blocks" class="region region-header">
@@ -235,12 +216,23 @@
     </div></div> <!-- /#header-inner, /#header -->
 
     <?php if ($footer || $footer_message || $breadcrumb): ?>
-      <div id="footer"><div id="footer-inner" class="region region-footer">
-        <div id = "breadcrumb"><?php print $breadcrumb; ?></div>
-        <?php if ($footer_message): ?>
-          <div id = "footer-message"><?php print $footer_message; ?></div>
-        <?php endif; ?>
+      <div id="footer">
+        <div id="footer-inner" class="region region-footer">
 
+          <?php if ($logo || $site_slogan): ?>
+            <div id="logo-title">
+              <div id="logo">
+                <a href = "<?php print $front_page; ?>" title = "<?php print $logotitle; ?>" rel = "home">
+                  <img src = "<?php print $logo; ?>" alt = "<?php print $logotitle; ?>" id = "logo-image" />
+                </a>
+              </div>
+              <?php if ($site_slogan): ?>
+                <div id="site-slogan"><?php print $site_slogan; ?></div>
+              <?php endif; ?>
+            </div> <!-- /#logo-title -->
+          <?php endif; ?>
+
+        <?php print $breadcrumb; ?>
         <?php print $footer; ?>
 
       </div></div> <!-- /#footer-inner, /#footer -->
@@ -252,6 +244,7 @@
     <div id="closure-blocks" class="region region-closure"><?php print $closure_region; ?></div>
   <?php endif; ?>
   
+    <?php print $scripts; ?>
     <?php print $closure; ?>
     
     <script type ="text/javascript" src ="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
@@ -265,5 +258,8 @@
       } );
     </script>
  <!-- Themed by Andrey Zakharov based on nynke.wordpress.com -->
+ <!--  optional lazy stuff -->
+    <!-- link href ='http://fonts.googleapis.com/css?family=Old+Standard+TT:regular,bold' rel ='stylesheet' type ='text/css'></link> -->
+    
 </body>
 </html>
