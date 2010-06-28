@@ -23,7 +23,8 @@ m = {
         failToSolve:        function( remain ) { 
            return "                 Remain " + remain + " cells to solve :( " +
                " *** Donate for advanced solver *** " +
-               " Sorry, maybe sudoku too hard. "; }
+               " Sorry, maybe sudoku too hard. "; },
+        noLabel:            function( btnID ) { return    "No label for button " + btnID; }
     }
 }
     

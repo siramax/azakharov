@@ -2,9 +2,10 @@
 //Assert.isNotUndefined(solver.m,"NO MATRIX IN solver.OBJECT");
 
 ///////////////////////// Case Constructor ///////////////////////////////
-( function(){
+( function() {
       if ( "undefined" === typeof Assert ) { return; };
       
+      if ( "undefined" !== typeof sudoku ) {
 Assert.isEqual( new sudoku( 'something-non-existent' ).wrapper, document.body, "wrapper not fallback to body" );
 
 var testDOMNode = document.createElement( 'div' );
@@ -21,14 +22,14 @@ var toolbarTest = new sudoku();
 Assert.isEqual( typeof( new toolbarTest.toolbarButton() ), "object", "Failed to create toolbar button" );
 
 var solver = new sudoku( 'test-field' );
-
+/*
 Assert.isTrue( solver.set( 0, 0, 1 ), "test #1 Чтото не ставится .set failed" );
 
 Assert.isFalse( solver.set( -2, 11, 1 ), "Чтото ставится в координаты -2х11" );
 
 solver.set( 0, 0, 1 );solver.set( 1, 0, 2 );solver.set( 2, 0, 3 );
 solver.set( 0, 1, 4 );solver.set( 1, 1, 5 );solver.set( 2, 1, 6 );
-solver.set( 0, 2, 7 );solver.set( 1, 2, 8 );/* RESOLVE :)  BY TEST */
+solver.set( 0, 2, 7 );solver.set( 1, 2, 8 );// RESOLVE :)  BY TEST 
 //CORRECT INPUT? 
 
 Assert.isEqual( 1, solver.m( 0, 0 ), "Ой" );
@@ -77,17 +78,56 @@ solver.options.count_diag = false;
 0,1,0, 0,0,0, 0,0,0,
 0,0,0, 0,0,0, 0,0,0,
 0,0,0, 0,0,0, 0,0,0, 
-*/
+//
 solver.set( 3, 2, 1 );
 solver.set( 6, 1, 1 );
 solver.set( 2, 3, 1 );
 solver.set( 1, 6, 1 )
 Assert.isTrue( solver.s(), "Третий Шаг не прошел!" ); //step
 Assert.isEqual( 1, solver.m( 0, 0 ), "Не решается" );
-
-cypher.init( solver );
-
+*/
+/**
+ * The most difficult sudoku in the world
+ 850 002 400
+ 720 000 009
+ 004 000 000
+ 
+ 000 107 002
+ 305 000 900
+ 040 000 000
+ 
+ 000 080 070
+ 017 000 000
+ 000 036 040
+ */
 solver.cl();
+
+console.log( "START" );
+solver.fromStr( "850002400\n720000009\n004000000\n000107002\n305000900\n040000000\n000080070\n017000000\n000036040" );
+var snum = 0;
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+Assert.isTrue( solver.s(), "Шаг на самой сложной не удался!" + snum++ );
+
+console.log( "SOLVE" );
+Assert.isTrue( solver.solve(), "Ты должен решить ёё!" );
+
+//solver.cl();
+}
+
+  if ( "undefined" !== typeof cypher && "undefined" !== typeof solver ) {
+    cypher.init( solver );
+  }
+
 //try to resolve
 }() );
 

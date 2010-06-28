@@ -16,7 +16,7 @@ cypher = {
 
     this.cypher =  document.createElement( "form" );
 
-    if( "undefined" != typeof( parent )) { 
+    if( "undefined" != typeof( parent ) && typeof parent.appendChild != "undefined" ) { 
       parent.appendChild( this.cypher );
 
     } else {
@@ -30,20 +30,34 @@ cypher = {
     this.cypher.style.position = "absolute";
     //to speed up 
     // we dont need now this 
-    this.cypher.buttons = [];
+    this.cypher.buttons = [ {}, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1 ];
     
     for ( var i = 1; i < 10; i++ ) {
-      var b = document.createElement( "input" );
-      b.cypher = this;//how about mem... TODO bench
-      b.setAttribute( "type", "button" );
-      sudoku.ae( b, "click", this.onclick );//callbaack 
-      b.setAttribute( "value", i );
-      this.cypher.buttons[ i ] =  //need this for cycle through cypher buttons
-        this.cypher.appendChild( b );
-
+    
+    
+      if ( "undefined" !== typeof jQuery ) {
+         this.cypher.buttons[ i ] = 
+           jQuery( "<input type=button />" ).appendTo( this.cypher ).attr( { value: i } ).
+             bind( 'click', this.onclick ).get( 0 );
+         this.cypher.buttons[ i ].cypher = this;
+             
+      } else {
+        var b = document.createElement( "input" );
+        b.cypher = this;//how about mem... TODO bench
+        b.setAttribute( "type", "button" );
+        if ( typeof sudoku  !== "undefined" ) {
+          sudoku.ae( b, "click", this.onclick );//callbaack 
+        }
+        b.setAttribute( "value", i );
+      
+        this.cypher.buttons[ i ] =  //need this for cycle through cypher buttons
+          this.cypher.appendChild( b );
+      }
+      
       if ( 0 === ( i % 3 ) ) {
         this.cypher.appendChild( document.createElement( "div" ) ).className = "clear-right";
       }
+      
     }
     //CLEAR BUTTON
     b = document.createElement( "input" );
@@ -51,7 +65,7 @@ cypher = {
     b.setAttribute( "type", "button" );
     b.setAttribute( "value", "0" );
     b.className= "fit";
-    sudoku.ae( b, "click", this.onclick );
+    jQuery? jQuery( b ).bind( 'click', this.onclick ) : sudoku.ae( b, "click", this.onclick );
     this.cypher.buttons['clear'] = //need this for cycle through cypher buttons
     this.cypher.appendChild( b );
     //CLOSE BUTTON
@@ -60,7 +74,7 @@ cypher = {
     b.setAttribute( "type", "button" );
     b.setAttribute( "value", "X" );
     b.className =  "bold" ;
-    sudoku.ae( b, "click" , this.close );
+    jQuery? jQuery( b ).bind( 'click', this.close ) :sudoku.ae( b, "click" , this.close );
     this.cypher.buttons['close'] = 
     this.cypher.appendChild( b );
 
@@ -76,12 +90,9 @@ cypher = {
     this.invoker = obj;
     this.f = obj.sudoku;
     this.f.f.className += " asking";////HMMMMMMMMMMMMMMMMMMM
-    
-//HERE MUST BE
-///check for avalaibility of numbers
-    var buttons = this.cypher.buttons;
 
-// loop thru all child nodes
+    var buttons = this.cypher.buttons;
+    // loop thru all child nodes
     for ( var i = 1; i < buttons.length; i++ ) {
       buttons[ i ].disabled = !this.f.canbe( i , obj.cx, obj.cy );
             // do something with node here
@@ -126,16 +137,17 @@ cypher = {
     d = window.event ? window.event.srcElement : e.target;
     var n = parseInt( d.getAttribute( "value" ), 10 );
 
-    if ( !isNaN( n ) && ( "undefined" !== typeof( this.cypher ) ) ) {// here invoke chyper client NOW
+    if ( !isNaN( n ) && ( "undefined" !== typeof( d.cypher ) ) ) {// here invoke chyper client NOW
 
-      if( "undefined" == typeof( this.cypher.invoker )){
+      if( "undefined" == typeof( d.cypher.invoker )){
         error( "Cannot find target field" );
         return false;
       }
-      var td = this.cypher.invoker;
+      var td = d.cypher.invoker;
 
       td.sudoku.set( td.cx, td.cy, n );
-      this.cypher.close( e );
+      d.cypher.close( e );
+      
     } else {
       error( "Sorry. Smthg wrong with me" );
     }
@@ -152,7 +164,7 @@ cypher = {
     d.parentNode.style.display = "none";
 
     d.cypher.invoker.sudoku.f.className=
-    d.cypher.invoker.sudoku.f.className.replace(/\basking\b/g, "" );
+      d.cypher.invoker.sudoku.f.className.replace(/\basking\b/g, "" );
 
   }
 };

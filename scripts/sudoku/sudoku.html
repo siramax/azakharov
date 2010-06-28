@@ -3,20 +3,37 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <title>Sudoku - dev</title>
     <link rel ="stylesheet" type ="text/css" href ="sudoku.css">
+    <script type ='text/javascript' src ='http://jqueryjs.googlecode.com/files/jquery-1.2.min.js' ></script>
+    <script type ='text/javascript' src ='stdlib.js' ></script>
     <script type ='text/javascript' src ='sudoku.ru.js' ></script>
     <script type ='text/javascript' src ='sudoku.js' ></script>
     <script type ='text/javascript' src ='cypher.js' ></script>
+    <style>
+    table td {
+  width:1em;
+  height:1em;
+  border-width: 1px;
+  border-style: solid;
+  margin:0px;
+  padding:0px;
+  font-size:normal;
+  text-align:center;
+  cursor: hand;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 <div class ='node' id ='wrapper'>
   <div id ="sudoku-help">help help help help help help </div>
   <div id ='field' class ="appfield"></div>
+  <div id = 'sudoku-toolbar' class = 'toolbar'></div>
 
   <script type ='text/javascript' >
   <!-- 
 
     var s = new sudoku( 'field', { iconsDir: './' } );
-    var c = cypher.init( document.getElementById( 'field'), s );//alert( document.body.innerHTML );
+    //var c = cypher.init( document.getElementById( 'field'), s );//alert( document.body.innerHTML );
   -->
   </script>
 
@@ -24,6 +41,5 @@
 <script type='text/javascript' src="assert.js"></script>
 <script type='text/javascript' src='sudoku.test.js'></script>
 </div>
-<script type ='text/javascript' src ='../js/jquery.js'></script>
 </body>
 </html>

@@ -1,8 +1,10 @@
 /**
+ * $ID$
  * @package Sudoku
  * @author Vaulter <vaulter@nm.ru> http://vaulter.narod.ru/sudoku 
  * need jquery
  *         for movable...
+ * @date $Date$
  * @version Mon May 17 13:59:39 2010 v0.3 
  *  version Jan 6 22:06:55 VOLT 2009 v0.2
  *  version Thursday, January 10, 2008 v0.1
@@ -18,66 +20,11 @@
     * <link rel="stylesheet" type="text/css"
     * href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
     */
-
-   /**
-    * @class Importer
-    * @author vaulter 
-    * Control UI. 
-    *    1. ask /with default value/... 
-    *    2. onkeyup:
-    *         replace, not insert as default 
-    *    3. getValue.... as js array :)
-    */
-   var importer = function( opts ) { // damn, i miss that export goes via
-                                       // import...
-      // and
-      // they use... okk.... exporter just reduced
-      // version
-      // / 1. setValue
-      // / 2. show / not ask........ copy to clipboard max that we can.. TODO
-      this.sets = opts || {};
-      this.wrapper = opts.wrapper || document.body;
-      this.human = opts.human || false; // !< I know about you :)
-      this.mx = opts.mx || 9;
-      this.my = opts.my || 9;
-
-      this.getTextValueDOMElement = function( $ ) {
-         // new
-         var DOMid = "export-import";
-
-         if ( $ ) {
-            if ( $( "#" + DOMid ).length ) {
-            }
-         }
-
-         // old way
-         if ( "undefined" === typeof $ || !$ ) {
-            $ = document.getElementById( "export-import" );
-         }
-
-         if ( "undefined" === typeof $ || !$ ) { // createElement
-            $ = this.wrapper.appendChild( document.createElement( "textarea" ) );// wrapper
-                                                                                 // init
-         }
-
-         $.setAttribute( "id", "export-import" );
-
-         if ( this.options.human ) { // another. movable...rich...
-            $.setAttribute( "rows", this.options.my );
-            $.setAttribute( "cols", this.options.mx );
-         }
-
-         return $;// lazy loading should ...injecting to live user DOM
-      };
-
-      this.ask = function( defaultValue ) {
-         var tv = this.getTextValueDOMElement();
-         
-         if ( tv.value.length === 0 ) {
-            tv.value = ( typeof defaultValue === "function" ) ? defaultValue() : defaultValue;
-         }
-      };
-   };
+    
+  var eventNames = {//!< dummy object
+    statsUpdated: 'statsupdated',
+    step: 'step'
+  }
 
    /**
     * @class Sudoku 
@@ -104,7 +51,7 @@
          this.wrapper = document.body;
       }
 
-      this.options = opts || {};
+      this.options = opts || {};//TODO
 
       this.options.mx = opts && opts.mx || 9;
       this.options.my = opts && opts.my || 9;
@@ -138,6 +85,7 @@
        * Click, here just avoid keywords "click" and "class" icon: url, note: ""
        * parent: DOM TODO new toolBar().attachTo( this ); or toolBar( { ao: this } );
        * //ao attaching object
+       TODO JSON
        * 
        * @return DOM element, you need to inject it to DOM yourself
        */
@@ -217,33 +165,11 @@
          return btn;
       };
       
-      var DOMNodeWithHelp;
-      var toolbar = { // TODO
-         refresh : {
-            icon : "i/refresh.png",
-            label : "refresh",
-            help : DOMNodeWithHelp || "If in textbox something will changed, it will go to grid",
-            act : function( e ) {
-               alert( "Hello" );
-            }
-         }
-      };
-
-      // create div for toolbar rewrite old prnt TODO jquery :)
-      this.tb = document.createElement( 'div' );
-      this.tb.setAttribute( 'id', "sudoku-toolbar" );
-      this.tb.setAttribute( 'class', "toolbar" );
-      this.tb = this.wrapper.appendChild( this.tb );
-      
-      var help = document.getElementById( "sudoku-help" );
-      
-      if ( ( "undefined" !== typeof help ) && help ) { // found help text
-         // help button
-         var hb = new this.toolbarButton( {
+      var toolbar = {
+         help : {
             icon : "i/help-hint.png",
-            label : m.buttons.help.label,
             act : function( e ) {
-               d = window.event ? window.event.srcElement : e.target;// crossbrowser
+               var d = window.event ? window.event.srcElement : e.target;// crossbrowser
 
                if ( "none" != help.style.display ) {
                   help.style.display = "none";
@@ -251,78 +177,84 @@
                   help.style.display = "block";
                }
             }
-         } );
+         },
+         _import : { // Import TODO invert
+           icon : "i/document-import.png",
+           label : m.buttons._import.label, //[optional]
+           act : function( e ) { self._import( e ); },
+           note : m.buttons._import.note// [optional]
+         },
+         solve : { // Solve level
+             icon : "i/arrow-right-double.png",
+             note : m.buttons.solve.note,
+             id : "solve-button",
+             cl : "solve",
+             act : function( e ) { self.solve( e ); }
+          },
+          step: { // DO step of solve
+             icon : "i/arrow-right.png",
+             id : "step-button",
+             cl : "step",
+             act : function( e ) { return self.s( e ); }
+          },
+          _export : { // export
+             act : function( e ) { self._export( e ); },
+             icon : "i/document-export.png"
+          },
+          stats: { // Stats
+             icon : "i/table.png",
+             act : function( e ) { alert( self.stats().alert() ); }
+          },
+          clear : { // Clear
+             act : function( e ) { self.cl( e ); },
+             icon : "i/edit-clear.png"
+          }
+      };
 
-         hb.tab = help;
-         this.tb.appendChild( hb );
-         help.style.display = "none";
+      //var DOMNodeWithHelp;
+      var help = document.getElementById( "sudoku-help" );
+      if ( ( "undefined" === typeof help ) || !help ) { // found help text
+         delete toolbar.help;
+      } else {
+        help.style.display = "none";
       }
       
-      this.tb.appendChild( new this.toolbarButton( { // Import TODO invert
-               label : m.buttons._import.label,
-               act : function( e ) {
-                  self._import( e );
-               },
-               icon : "i/document-import.png",
-               note : m.buttons._import.note
-            } ) );
-      this.tb.appendChild( new this.toolbarButton( { // Solve level
-               label : m.buttons.solve.label,
-               icon : "i/arrow-right-double.png",
-               note : m.buttons.solve.note,
-               id : "solve-button",
-               cl : "solve",
-               act : function( e ) { self.solve( e ); }
-            } ) );
+      // create div for toolbar rewrite old prnt TODO jquery :)
+      this.tb = document.createElement( 'div' );
+      this.tb.setAttribute( 'id', "sudoku-toolbar" );
+      this.tb.setAttribute( 'class', "toolbar" );
+      this.wrapper.appendChild( this.tb );
 
-      this.tb.appendChild( new this.toolbarButton( { // DO step of solve
-               label : m.buttons.step.label,
-               icon : "i/arrow-right.png",
-               id : "step-button",
-               cl : "step",
-               act : function( e ) { return self.s( e ); }
-            } ) );
+      for ( buttonID in toolbar ) {
+        var btn = toolbar[ buttonID ];
+        
+        if ( ! btn.label ) {
+        
+          if ( m.buttons[ buttonID ].label ) {
+            btn.label = m.buttons[ buttonID ].label;
+          } else {
+            error( noLabel( buttonID ) );
+            break;
+          }
+        }
+        
+        this.tb.appendChild( new this.toolbarButton( btn ) );
+      }
       
-      this.tb.appendChild( new this.toolbarButton( { // export
-         label : m.buttons._export.label,
-         act : function( e ) {
-            self._export( e );
-         },
-         icon : "i/document-export.png"
-      } ) );
-
-      this.tb.appendChild( new this.toolbarButton( { // Stats
-               icon : "i/table.png",
-               label : m.buttons.stats.label,
-               act : function( e ) {
-                  alert( self.stats().alert() );
-               }
-            } ) );
-
-      this.tb.appendChild( new this.toolbarButton( { // Clear
-               label : m.buttons.clear.label,
-               act : function( e ) {
-                  self.cl( e );
-               },
-               icon : "i/edit-clear.png"
-            } ) );
-
-
-
       this.tb.appendChild( document.createElement( "br" ) );
       // this.tb.innerHTML += "<br />";
 
       this.tb.appendChild( new this.toolbarButton( { // Diagonals
-               type : 'checkbox',
-               label : m.buttons.diag.label,
-               parentNode : this.tb,
-               value : 1,
-               id : 'count_diag',
-               act : function( e ) {
-                  var d = ( window.event ? window.event.srcElement : e.target );
-                  self.options.count_diag = d.checked;
-               }
-            } ) );
+         type : 'checkbox',
+         label : m.buttons.diag.label,
+         parentNode : this.tb,
+         value : 1,
+         id : 'count_diag',
+         act : function( e ) {
+            var d = ( window.event ? window.event.srcElement : e.target );
+            self.options.count_diag = d.checked;
+         }
+      } ) );
 
       this.theme();// loads css
 
@@ -407,16 +339,23 @@
          };
 
          var mouseout = function( e ) {
-            self.c( this.cx, this.cy, turn.BLOCK ).each( function( el ) {
+            var d = null;
+
+            if ( "object" === typeof e ) {
+               d = window.event ? window.event.srcElement : e.target;
+            } else {
+               d = this;
+            }// try mozilla
+            self.c( d.cx, d.cy, turn.BLOCK ).each( function( el ) {
                el.className = el.className.replace( /light/, "" );
             } );
-            self.c( this.cx, this.cy, turn.HORIZ ).each( function( el ) {
+            self.c( d.cx, d.cy, turn.HORIZ ).each( function( el ) {
                el.className = el.className.replace( /horiz/, "" );
             } );
-            self.c( this.cx, this.cy, turn.VERT ).each( function( el ) {
+            self.c( d.cx, d.cy, turn.VERT ).each( function( el ) {
                el.className = el.className.replace( /vert/, "" );
             } );
-            self.c( this.cx, this.cy, turn.DIAG ).each( function( el ) {
+            self.c( d.cx, d.cy, turn.DIAG ).each( function( el ) {
                el.className = el.className.replace( /diag/, "" );
             } );
          };
@@ -506,7 +445,9 @@
             error( "wrong params" );
             return false;
          }
-
+         
+         var d;
+         
          if ( "object" === typeof v ) {// separate DOM and numbers
             d = v;// DOM
             v = parseInt( v.innerHTML, 10 );
@@ -514,7 +455,9 @@
          } else { // MY FIELD VALIDATION
 
             if ( "undefined" === typeof this.f ) {
-               this.start();
+               //this.start();
+               alert(  m.errors.noField );
+               //message( WARNING, m.errors.noField );
             }
 
             d = this.f.rows[ y ].cells[ x ]; // INNER DOM
@@ -564,8 +507,8 @@
        */
       theme : function( csstoload ) {
 
-         this.themeDir = "/files";// here we need cacl relative path
-      this.autoCSS = this.themeDir + "/sudoku/sudoku.css";// were style lay.
+        this.themeDir = "/files";// here we need cacl relative path
+        this.autoCSS = this.themeDir + "/sudoku/sudoku.css";// were style lay.
       // absolute path
       var loc = document.location.href;// e.g.
       // http://vaulter.localhost/download.html
@@ -641,7 +584,7 @@
                   if ( exclude && ( sx === xx ) ) {
                      continue;
                   }//
-                  // console.log( iy, self.f.rows[ iy ] );
+                   //console.log( iy, self.f.rows[ iy ] );
                   r = f( self.f.rows[ iy ].cells[ xx ], context );// need?
 
                   if ( "undefined" !== typeof r && null !== r ) {// break loop
@@ -757,13 +700,14 @@
    },
 
    /**
-    * Step of solving 1. take statistics of the field, ie the sum of digits affixed
-    * to verticals, horizontals and blocks 2. determine the best stocked criterion,
-    * sort criteria on the number of free cells 3. to him looking for what figures
-    * it otsutvuyut and which fields are free 4. for all the free-field try to put
-    * all the free numbers. 5. if there is a field with one possible option - put
-    * it. step successful 6. If there is no field with a possible - a step is not
-    * successful
+    * Step of solving 
+    1. take statistics of the field, ie the sum of digits affixed to verticals, horizontals and blocks 
+    2. determine the best stocked criterion, sort criteria on the number of free cells 
+    3. to him looking for what figures it otsutvuyut and which fields are free 
+    4. for all the free-field try to putall the free numbers. 
+    5. if there is a field with one possible option - put it. step successful 
+    6. If there is no field with a possible - a step is not successful
+    7. Return info for next decisions 
     */
    s : function( e ) {
       //var self = this;
@@ -781,14 +725,12 @@
       }
 
       var mfree = self.stats().free; // (1,2)
-      var free, poss; // store free cell here, possible values for this cell
+      var free, poss, variants = []; // store free cell here, possible values for this cell
 
       // functor for counting free
       var countFree = function( e ) {
 
-         if ( self.options.verbose ) {
-            e.className += " debug";
-         }
+         if ( self.options.verbose ) { e.className += " debug"; }
 
          var n = self.wrapper.m[ e.cx ][ e.cy ];
 
@@ -809,38 +751,46 @@
 
          self.c( mfree[ mi ].x, mfree[ mi ].y, mfree[ mi ].type ).each( countFree );
 
-         var nn = [];// total
+         var byNumbers = [];// total
 
          for ( i = 0; i < poss.length; i++ ) {
             if ( 0 !== poss[ i ] ) {
-               nn.push( {
-                  n : poss[ i ],
-                  free : []
-               } );
+               byNumbers.push( { n : poss[ i ], free : [] } );
             }
          }
          // /Now free for all cells verify the possibility of insert-free
          // numbers (4)
          for ( i = 0; i < free.length; i++ ) {
 
-            for ( var j = 0; j < nn.length; j++ ) {
+            for ( var j = 0; j < byNumbers.length; j++ ) {
 
-               if ( self.canbe( nn[ j ].n, free[ i ].x, free[ i ].y ) ) {
-                  free[ i ].nn.push( nn[ j ].n );
-                  nn[ j ].free.push( {
+               if ( self.canbe( byNumbers[ j ].n, free[ i ].x, free[ i ].y ) ) {
+                  free[ i ].nn.push( byNumbers[ j ].n );
+                  byNumbers[ j ].free.push( {
                      x : free[ i ].x,
                      y : free[ i ].y
                   } );
+                  //overall
+                  if ( !variants[ free[ i ].x ] ) { variants[ free[ i ].x ] = []; }
+                  if ( !variants[ free[ i ].x ][ free[ i ].y ] ) { variants[ free[ i ].x ][ free[ i ].y ] = []; }
+                  //console.log( nn[ j ].n );
+                  //variants[ free[ i ].x ][ free[ i ].y ] = 
+                  //  variants[ free[ i ].x ][ free[ i ].y ].concat( nn[ j ].n );
                }
             }
          }
-
+         //console.log(mfree[ mi ].x, mfree[ mi ].y, mfree[ mi ].type, free, byNumbers);
+         
+         //decision make
+         //console.log( mfree[ mi ], free, nn );
+         
          for ( i = 0; i < free.length; i++ ) {
-
+         
             if ( 1 === free[ i ].nn.length ) {// URAAAH!
                self.set( free[ i ].x, free[ i ].y, free[ i ].nn.pop() );// FOUND
                // STEP
                // clear verbose?
+               console.log( "STEP by only free possible at ", free[ i ] );
                return true;
             }
          }
@@ -848,13 +798,15 @@
          // / So, walked through the free cells, but no obvious solutions.
          // / Then try to free all the digits from 1 to 9 to find the only
          // / Possible position in the criteria
-         for ( i = 0; i < nn.length; i++ ) {
-            if ( 1 === nn[ i ].free.length ) {// URAAAH!
-               var topfree = nn[ i ].free.pop();
-               self.set( topfree.x, topfree.y, nn[ i ].n ); // clear verbose?
+         for ( i = 0; i < byNumbers.length; i++ ) {//WARNING!
+            if ( 1 === byNumbers[ i ].free.length ) {// URAAAH!
+               var topfree = byNumbers[ i ].free.pop();
+               self.set( topfree.x, topfree.y, byNumbers[ i ].n ); // clear verbose?
+               console.log( "STEP by position only possible of ",  byNumbers[ i ], topfree );
                return true;
             }
          }
+          //all fail
 
          /*
           * if ( sudoku.verbose ) { this.c( m[mi].x, m[mi].y, m[mi].type ).each(
@@ -862,14 +814,23 @@
           * "el=f.rows["+el.cy+"].cells["+el.cx+"];el.className =
           * el.className.replace(/debug/g,'')",300 ); }, this ); }
           */
+
       }
+
+      //for( var i in variants ) {
+      console.log( mfree );//, 'x', variants[ i ].y, ': ', variants[ i ].nn  );
+      //}
       return false;
    },
 
    /**
     * Just run while steps can be performed Can be called as DOM event
+    1 try to step
+    2. get cells by sorted num of variants (asc)
+    3 try to solve step
     */
    solve : function( e ) {
+      var d;
 
       if ( "object" === typeof e ) {
          d = window.event ? window.event.srcElement : e.target;
@@ -883,15 +844,38 @@
          alert( m.errors.empty );
          return false;
       }
+
+      if( "undefined" != typeof jQuery ) {//fire event
+        jQuery( this ).trigger( eventNames.statsUpdated, [ st ] );
+      }
       
-      // some async maybe.... TODO >:
-      while ( this.s() ) {
-      } // solving cycle TODO as setInterval
+      var hope = true;//{};//object of variants, key = field, value is array of variants
+      //hope[ this.wrapper.m ] = {};
+      var variants = {};
+      
+      while ( hope ) { // some async maybe.... TODO >:
+      
+        while ( this.s() ) {
+        
+          if( "undefined" != typeof jQuery ) {//fire event danger UNDER while!
+            jQuery( this ).trigger( eventNames.step, [ st ] );
+          }
+          //setTimeout( this.s, 1 );
+        } // solving cycle TODO as setInterval
+        //now sort by free cells
+        
+        
+        hope = false;// total FAIL
+      }
 
       if ( this.stats().total < this.options.mx * this.options.my ) {// this.f.wi
                                                                      // this.f.he
          alert( m.errors.failToSolve( // again... now relaxing
                this.options.mx * this.options.my - this.stats().total ) );
+         return false;
+
+      } else {
+        return true;//solved!
       }
    },// my first detabbing
 
@@ -1163,6 +1147,53 @@
          return "[\r\n" + rep.join( ",\r\n" ) + "\r\n]";
       }
    },
+   
+   /**
+    * Import from string
+    */
+   fromStr : function ( str ) {
+     
+      var im = [];
+
+      try {
+         if ( this.options.human /* && this.options.mx < 10 */) {
+            var lines = str.replace( /\r\n|\r|\n/g, "|||" ).split( "|||" );
+
+            for ( var line in lines ) {
+               if ( lines.hasOwnProperty( line ) ) {
+                  im.push( lines[ line ].split( "" ) );
+               }
+            }
+
+         } else {
+            eval( "im = " + it + ";" ); // quick hack for import js arrays
+         }
+
+      } catch ( err ) {
+         alert( err );
+         return false;
+      }
+      
+      // if imported array not like sudoku field - error
+      if ( im.length !== this.options.my ) {
+         alert( m.errors.linesNotEqual( 0, this.options.my ) );
+         return false;
+      }
+
+      for ( var y = 0; y < this.options.my; y++ ) {
+
+         if ( im[ y ].length != this.options.mx ) {
+            alert( m.errors.columnsNotEqual( y, this.options.mx ) );
+            return false;
+         }
+
+         for ( var x = 0; x < this.options.mx; x++ ) {
+            this.set( x, y, im[ y ][ x ] );
+         }
+      }
+
+      return true;
+   },
 
    getTextField : function() {
 
@@ -1219,49 +1250,9 @@
       /*
        * if ( it.length === 0 ) { alert( m.errors.empty ); return false; }
        */
-
-      var im = [];
-
-      try {
-         if ( this.options.human /* && this.options.mx < 10 */) {
-            var lines = val.replace( /\r\n|\r|\n/g, "|||" ).split( "|||" );
-
-            for ( var line in lines ) {
-               if ( lines.hasOwnProperty( line ) ) {
-                  im.push( lines[ line ].split( "" ) );
-               }
-            }
-
-         } else {
-            eval( "im = " + it + ";" ); // quick hack for import js arrays
-         }
-      }
-      catch ( err ) {
-         alert( err );
-         return false;
-      }
-
-      // if imported array not like sudoku field - error
-      if ( im.length !== this.options.my ) {
-         alert( m.errors.linesNotEqual( 0, this.options.my ) );
-         return false;
-      }
-
-      for ( var y = 0; y < this.options.my; y++ ) {
-
-         if ( im[ y ].length != this.options.mx ) {
-            alert( m.errors.columnsNotEqual( y, this.options.mx ) );
-            return false;
-         }
-
-         for ( var x = 0; x < this.options.mx; x++ ) {
-            this.set( x, y, im[ y ][ x ] );
-         }
-      }
-
-      return true;
+      return this.fromStr( val );
    }
-   };
+ };
    /* criteries */
    var turn = {
       HORIZ : 0,
