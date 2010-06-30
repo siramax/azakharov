@@ -3,9 +3,67 @@
 
 ///////////////////////// Case Constructor ///////////////////////////////
 ( function() {
-      if ( "undefined" === typeof Assert ) { return; };
+   if ( "undefined" === typeof Assert ) { return; };
       
-      if ( "undefined" !== typeof sudoku ) {
+   if ( "undefined" !== typeof SudokuSolver ) {
+      /*
+?,0,0, 0,0,0, 0,0,0,
+0,0,0, 0,0,0, 1,0,0,
+0,0,0, 1,0,0, 0,0,0,
+
+0,0,1, 0,0,0, 0,0,0,
+0,0,0, 0,0,0, 0,0,0,
+0,0,0, 0,0,0, 0,0,0,
+
+0,1,0, 0,0,0, 0,0,0,
+0,0,0, 0,0,0, 0,0,0,
+0,0,0, 0,0,0, 0,0,0,
+       */
+      solver = new SudokuSolver( 
+            "000 000 000" +
+      		"050 000 100" +
+      		"000 100 000" +
+      		
+      		"001 000 0,0,0," +
+      		"0,0,0, 0,0,0, 0,0,0," +
+      		"0,0,0, 0,0,0, 0,0,0," +
+      		
+      		"0,1,0, 0,0,0, 0,0,0," +
+      		"0,0,0, 0,0,0, 0,0,0," +
+      		"5,0,0, 0,0,0, 0,0,0, " );
+      Assert.isEqual( 1, solver.field[ 2 ][ 3 ] );
+      Assert.isEqual( 1, solver.at( 3, 2 ) );
+      
+      var test = [];
+      solver.c( 0, 2, turn.HORIZ ).each( function(a) {test.push(a);} );
+      Assert.isEqual( 1, test[ 3 ], "sliced by HORIZ criteria" );//see origin at x=3, y=2 (3-1=2)
+      
+      test = [];
+      solver.c( 2, 0, turn.VERT ).each( function(a) {test.push(a);} );
+      Assert.isEqual( 1, test[ 3 ], "sliced by VERT criteria" );//see origin
+      
+      test = [];
+      solver.c( 3, 0, turn.BLOCK ).each( function(a) {test.push(a);} );
+      Assert.isEqual( 1, test[ 2 ], "sliced by BLOCK criteria" );//see origin   
+      
+      test = [];
+      solver.c( 3, 3, turn.DIAG ).each( function(a) {test.push(a);} );
+      Assert.isEqual( 5, test[ 1 ], "sliced by DIAG criteria" );//see origin
+      
+      test = [];
+      solver.c( 3, 5, turn.DIAG ).each( function(a) {test.push(a);} );
+      Assert.isEqual( 5, test[ 8 ], "sliced by DIAG criteria" );//see origin
+      
+      Assert.isTrue( solver.set( 1, 0, 1 ), "Set withOUT possibility check" );
+      Assert.isFalse( solver.set( 1, 0, 1, true ), "Set with possibility check" );
+      
+      Assert.isEqual( 6, solver.stats().total, "Total set was 6 cells" );
+      
+      Assert.isTrue( solver.step(), "Obvious step failed" );
+      Assert.isEqual( 6+1, solver.stats().total, "Total set was 6 cells. One should be filled" );
+   }
+   
+   if ( "undefined" !== typeof sudoku ) {/* 
 Assert.isEqual( new sudoku( 'something-non-existent' ).wrapper, document.body, "wrapper not fallback to body" );
 
 var testDOMNode = document.createElement( 'div' );
@@ -22,7 +80,7 @@ var toolbarTest = new sudoku();
 Assert.isEqual( typeof( new toolbarTest.toolbarButton() ), "object", "Failed to create toolbar button" );
 
 var solver = new sudoku( 'test-field' );
-/*
+
 Assert.isTrue( solver.set( 0, 0, 1 ), "test #1 Чтото не ставится .set failed" );
 
 Assert.isFalse( solver.set( -2, 11, 1 ), "Чтото ставится в координаты -2х11" );
@@ -100,7 +158,8 @@ Assert.isEqual( 1, solver.m( 0, 0 ), "Не решается" );
  017 000 000
  000 036 040
  */
-solver.cl();
+
+/*solver.cl();
 
 console.log( "START" );
 solver.fromStr( "850002400\n720000009\n004000000\n000107002\n305000900\n040000000\n000080070\n017000000\n000036040" );
@@ -121,8 +180,9 @@ Assert.isTrue( solver.s(), "Шаг на самой сложной не удал�
 console.log( "SOLVE" );
 Assert.isTrue( solver.solve(), "Ты должен решить ёё!" );
 
-//solver.cl();
+//solver.cl();*/
 }
+
 
   if ( "undefined" !== typeof cypher && "undefined" !== typeof solver ) {
     cypher.init( solver );
