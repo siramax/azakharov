@@ -703,7 +703,7 @@
     * Step of solving 
     1. take statistics of the field, ie the sum of digits affixed to verticals, horizontals and blocks 
     2. determine the best stocked criterion, sort criteria on the number of free cells 
-    3. to him looking for what figures it otsutvuyut and which fields are free 
+    3. looking for what figures are absent and which fields are free 
     4. for all the free-field try to putall the free numbers. 
     5. if there is a field with one possible option - put it. step successful 
     6. If there is no field with a possible - a step is not successful
@@ -726,7 +726,6 @@
 
       var mfree = self.stats().free; // (1,2)
       var free, poss, variants = []; // store free cell here, possible values for this cell
-
       // functor for counting free
       var countFree = function( e ) {
 
@@ -737,11 +736,7 @@
          if ( n > 0 && n < 10 ) {
             poss[ n - 1 ] = 0; // clear
          } else { // that is free field, save pos
-            free.push( {
-               x : e.cx,
-               y : e.cy,
-               nn : []
-            } );
+            free.push( { x : e.cx, y : e.cy, nn : [] } );
          }
       };
 
@@ -763,23 +758,23 @@
          for ( i = 0; i < free.length; i++ ) {
 
             for ( var j = 0; j < byNumbers.length; j++ ) {
+                var num = byNumbers[ j ].n;
+               if ( self.canbe( num, free[ i ].x, free[ i ].y ) ) {
+                  free[ i ].nn.push( num );//store as possible number for position
+                  byNumbers[ j ].free.push( { x : free[ i ].x, y : free[ i ].y } );//store as possible position for number
 
-               if ( self.canbe( byNumbers[ j ].n, free[ i ].x, free[ i ].y ) ) {
-                  free[ i ].nn.push( byNumbers[ j ].n );
-                  byNumbers[ j ].free.push( {
-                     x : free[ i ].x,
-                     y : free[ i ].y
-                  } );
                   //overall
-                  if ( !variants[ free[ i ].x ] ) { variants[ free[ i ].x ] = []; }
-                  if ( !variants[ free[ i ].x ][ free[ i ].y ] ) { variants[ free[ i ].x ][ free[ i ].y ] = []; }
+                  if ( !variants[ free[ i ].y ] ) { variants[ free[ i ].y ] = []; }
+                  if ( !variants[ free[ i ].y ][ free[ i ].x ] ) { variants[ free[ i ].y ][ free[ i ].x ] = []; }
                   //console.log( nn[ j ].n );
-                  //variants[ free[ i ].x ][ free[ i ].y ] = 
+                  variants[ free[ i ].y ][ free[ i ].x ].push( num );
                   //  variants[ free[ i ].x ][ free[ i ].y ].concat( nn[ j ].n );
                }
             }
+            variants[ free[ i ].y ][ free[ i ].x ] = variants[ free[ i ].y ][ free[ i ].x ].unique();
+            //console.log( free[ i ].x ,free[ i ].y, variants[ free[ i ].x ][ free[ i ].y ] );
          }
-         //console.log(mfree[ mi ].x, mfree[ mi ].y, mfree[ mi ].type, free, byNumbers);
+         //console.log(mfree[ mi ].x, mfree[ mi ].y, mfree[ mi ].type, byNumbers);
          
          //decision make
          //console.log( mfree[ mi ], free, nn );
@@ -818,9 +813,9 @@
       }
 
       //for( var i in variants ) {
-      console.log( mfree );//, 'x', variants[ i ].y, ': ', variants[ i ].nn  );
+      //console.log( variants );//, 'x', variants[ i ].y, ': ', variants[ i ].nn  );
       //}
-      return false;
+      return variants;
    },
 
    /**
@@ -840,32 +835,56 @@
       //console.log( st );
 
       // pre checks. alert here. this is controller then
-      if ( st.isEmpty() ) {
-         alert( m.errors.empty );
-         return false;
-      }
+      if ( st.isEmpty() ) { throw( m.errors.empty ); }
 
       if( "undefined" != typeof jQuery ) {//fire event
         jQuery( this ).trigger( eventNames.statsUpdated, [ st ] );
       }
       
-      var hope = true;//{};//object of variants, key = field, value is array of variants
-      //hope[ this.wrapper.m ] = {};
-      var variants = {};
-      
-      while ( hope ) { // some async maybe.... TODO >:
-      
-        while ( this.s() ) {
+      //array of objects of variants, field, v: variants
+      var variants = [ { field: this.wrapper.m } ];
+
+      while ( variants.length ) { // some async maybe.... TODO >:
+        //takes and prepare field for the variant
+        var tryVariant = variants.pop();
+        this.wrapper.m = tryVariant.field;
+        
+        if ( tryVariant.fork && tryVariant.fork.length ) {//set this variant, else initial
+          var fork = tryVariant.fork.possibilities.pop();//pop the VALUE of VARIANT, saving variant itself
+          this.set( tryVariant.fork.x, tryVariant.fork.y, fork );
+        }
+        
+        var stepRes;
+        
+        while ( true === (stepRes = this.s()) ) {
         
           if( "undefined" != typeof jQuery ) {//fire event danger UNDER while!
             jQuery( this ).trigger( eventNames.step, [ st ] );
           }
+          
+          if ( this.stats().total == this.options.mx * this.options.my ) {
+            //SOLVED!
+            return true; //TODO dialog for others steps
+          }
           //setTimeout( this.s, 1 );
         } // solving cycle TODO as setInterval
-        //now sort by free cells
         
+        //now found first minimal free variants
+        var min = { possibilities: new Array(10), x: -1, y: -1 };
         
-        hope = false;// total FAIL
+        stepRes.map( function ( col, y ) { col.map( function( cell, x ) {
+            if( min.possibilities.length > cell.length ) {
+              min.possibilities = cell;
+              min.x = x;
+              min.y = y;
+            };
+          } ); } );
+        //console.log( min );
+        if ( min.x != -1 ) {//some found
+
+          variants.push( { field: this.wrapper.m, fork: min } );//TODO optimize
+
+        }
       }
 
       if ( this.stats().total < this.options.mx * this.options.my ) {// this.f.wi
@@ -1253,13 +1272,7 @@
       return this.fromStr( val );
    }
  };
-   /* criteries */
-   var turn = {
-      HORIZ : 0,
-      VERT : 1,
-      BLOCK : 2,
-      DIAG : 3
-   };
+
 
    /**
     * wrapper around console
@@ -1280,3 +1293,10 @@
    };
 } ) // create anon func
       (); // execute
+/* criteries */
+var turn = {
+   HORIZ : 0,
+   VERT : 1,
+   BLOCK : 2,
+   DIAG : 3
+};
