@@ -20,7 +20,7 @@
 0,0,0, 0,0,0, 0,0,0,
        */
       solver = new SudokuSolver( 
-            "000 000 000" +
+            "... 000 000" +
       		"050 000 100" +
       		"000 100 000" +
       		
@@ -31,8 +31,15 @@
       		"0,1,0, 0,0,0, 0,0,0," +
       		"0,0,0, 0,0,0, 0,0,0," +
       		"5,0,0, 0,0,0, 0,0,0, " );
+      Assert.isEqual( 0, solver.field[ 0 ][ 1 ] );//direct access
+      Assert.isEqual( 0, solver.at( 1, 0 ) );// x, y - getter
+
+      Assert.isEqual( 5, solver.field[ 0 ][ 8 ] );//direct access
+      Assert.isEqual( 5, solver.at( 0, 8 ) );// x, y - getter
+
+      
       Assert.isEqual( 1, solver.field[ 2 ][ 3 ] );
-      Assert.isEqual( 1, solver.at( 3, 2 ) );
+      Assert.isEqual( 1, solver.at( 2, 3 ) );
       
       var test = [];
       solver.c( 0, 2, turn.HORIZ ).each( function(a) {test.push(a);} );
@@ -52,7 +59,7 @@
       
       test = [];
       solver.c( 3, 5, turn.DIAG ).each( function(a) {test.push(a);} );
-      Assert.isEqual( 5, test[ 8 ], "sliced by DIAG criteria" );//see origin
+      Assert.isEqual( 5, test[ 0 ], "sliced by DIAG criteria" );//see origin
       
       Assert.isTrue( solver.set( 1, 0, 1 ), "Set withOUT possibility check" );
       Assert.isFalse( solver.set( 1, 0, 1, true ), "Set with possibility check" );
@@ -61,6 +68,29 @@
       
       Assert.isTrue( solver.step(), "Obvious step failed" );
       Assert.isEqual( 6+1, solver.stats().total, "Total set was 6 cells. One should be filled" );
+      
+      solver2 = new SudokuSolver( 
+               "123 000 000" +
+               "456 000 000" +
+               "78. 000 000" +
+               
+               "214 356 78." +
+               "300, 0,0,0, 0,0,0," +
+               "500, 0,0,0, 0,0,0," +
+               
+               "600, 0,0,0, 0,0,0," +
+               "800, 0,0,0, 0,0,0," +
+               ".00 000 000" );
+      //perform 3 steps and then assert
+      Assert.isTrueAssert( solver2.step(), "#1 obvious step failed" );
+      Assert.isTrueAssert( solver2.step(), "#2 obvious step failed" );
+      Assert.isTrueAssert( solver2.step(), "#3 obvious step failed" );
+      
+      Assert.isEqual( 9, solver2.at( 2, 2 ), "remain number in block" );
+      Assert.isEqual( 9, solver2.at( 8, 3 ), "remain number in horiz line" );
+      Assert.isEqual( 9, solver2.at( 0, 8 ), "remain number in vert col" );
+      
+      window.location.href; 
    }
    
    if ( "undefined" !== typeof sudoku ) {/* 
