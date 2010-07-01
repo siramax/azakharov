@@ -25,6 +25,8 @@
       this.options.mx =          opts && opts.mx || 9;
       this.options.my =          opts && opts.my || 9;
       this.options.count_diag =  opts && opts.count_diag || false;
+      //from GET param
+      this.fromLocation();
       
       if ( "string" === typeof obj ) {
          this.fromString( obj );
@@ -43,12 +45,12 @@
        */
       at : function( x, y ) {
       
-         if ( ( "undefined" === typeof x ) || ( "undefined" === typeof y ) ) { return this.field; }
+         if ( ( "undefined" === typeof x ) && ( "undefined" === typeof y ) ) { return this.field; }
+         
+         if ( ( 0 > x ) || ( x > this.options.mx ) ) { throw( "m: wrong param x = " + x ); }
+         if ( ( "undefined" === typeof y )  ) { return this.field[ x ]; }
       
-         if ( ( 0 > x ) || ( x > this.options.mx ) || ( 0 > y ) || ( y > this.options.my ) ) {
-            throw( "m: wrong params" );
-         }
-      
+         if ( ( 0 > y ) || ( y > this.options.my ) ) { throw( "m: wrong param y = " + y ); }
          return this.field[ x ][ y ];
       },
 
@@ -61,7 +63,8 @@
    
          try {
 
-            var lines = str.replace( /[^\d]/gm, '' ).replace( /(\d{9})(?=\d)/g, "$1|||").split( "|||" );
+            var lines = str.replace( /\./mg, '0' ).replace( /[^\d]/gm, '' ).
+               replace( /(\d{9})(?=\d)/g, "$1|||").split( "|||" );
    
             lines.map( function( line, i ) {
                im.push( line.split( "" ) );
@@ -88,6 +91,27 @@
          }
    
          return this;
+      },
+  
+      /**
+       * Imports from GET param "f" or just sudoku?00000 TODO
+       */
+      fromLocation: function () {
+         var qstr = location.search.replace( /\?/,"&" );
+         var pair = qstr.split( "&" );
+         for ( var i = 1; i < pair.length; i++ ) {
+            var item = pair[ i ].split( "=" );
+            
+            if ( item[ 0 ] === "f" ) {
+               try {
+                  return this.fromString( item[ 1 ] );
+                  
+               } catch (err) {
+                  alert( err );
+                  return false;
+               }
+            }
+         }
       },
       
       /**
@@ -196,7 +220,7 @@
 
                      if ( exclude && ( sx === xx ) ) { continue; }
                      
-                     r = f.call( self, self.field[ iy ][ xx ], xx, iy, context );// need?
+                     r = f.call( self, self.field[ xx ][ iy ], xx, iy, context );// need?
 
                      if ( "undefined" !== typeof r && null !== r ) {// break loop
                         return r;// to callee
@@ -209,7 +233,7 @@
                   for ( yy = 0; yy < self.options.my; yy++ ) {
 
                      if ( exclude && ( sy === yy ) ) { continue; }
-                     r = f.call( self, self.field[ yy ][ ix ], ix, yy, context );
+                     r = f.call( self, self.field[ ix ][ yy ], ix, yy, context );
 
                      if ( "undefined" !== typeof r && null !== r ) { // break loop
                         return r;// to callee
@@ -225,7 +249,7 @@
 
                         if ( exclude && ( yy === sy ) && ( xx === sx ) ) { continue; }
 
-                        r = f.call( self, self.field[ yy ][ xx ], xx, yy, context );
+                        r = f.call( self, self.field[ xx ][ yy ], xx, yy, context );
 
                         if ( "undefined" !== typeof r && null !== r ) {// break loop
                            return r;// to callee
@@ -253,7 +277,7 @@
 
                         if ( exclude && ( sx === xx ) ) { continue; }
 
-                        r = f.call( self, self.field[ ( 8 - xx ) ][ xx ], xx, 8 - xx, context );
+                        r = f.call( self, self.field[ xx ][ ( 8 - xx ) ], xx, 8 - xx, context );
 
                         if ( "undefined" !== typeof r && null !== r ) { return r; }
                      }
@@ -268,40 +292,25 @@
 
       /**
        * Step of solving 
-       1. take statistics of the field, ie the sum of digits affixed to verticals, horizontals and blocks 
+       1. take statistics of the field, ie the sum of digits affixed to cols, lines and blocks 
        2. determine the best stocked criterion, sort criteria on the number of free cells 
        3. looking for what figures are absent and which fields are free 
-       4. for all the free-field try to putall the free numbers. 
+       4. for all the free-field try to put all the free numbers. 
        5. if there is a field with one possible option - put it. step successful 
        6. If there is no field with a possible - a step is not successful
        7. Return info for next decisions 
        */
-      step: function( e ) {
+      step: function() {
          //var self = this;
          var d, i;
          
          var self = this;
-         
-         if ( "object" === typeof e ) {
-            d = window.event ? window.event.srcElement : e.target;
-         }
 
          if ( ( "undefined" === typeof self.field ) || null === self.field ) {
             throw( m.errors.noField );
          }
 
-         var mfree = self.stats().free; // (1,2)
-         var free, poss, variants = []; // store free cell here, possible values for this cell
-         // functor for counting free
-         var countFree = function( n, cx, cy ) {
 
-//          if ( self.options.verbose ) { e.className += " debug"; }
-            if ( n > 0 && n < 10 ) {
-               poss[ n - 1 ] = 0; // clear
-            } else { // that is free field, save pos
-               free.push( { x : cx, y : cy, nn : [] } );
-            }
-         };
 
          for ( var mi = 0; mi < mfree.length; mi++ ) { // for each free cell
             free = [];
@@ -393,14 +402,13 @@
          // functor outside cycle
          var ttlcounter = function( n ) { if ( 0 < n ) { ttl++; } };
          
-         // get stats for rows
+         // get stats for lines
          this.c( 0, 0, turn.VERT ).each( function( n, cx, cy ) {
 
             ttl = 0; // total free on the row
             rows[ cy ] = 0;
 
             this.c( 0, cy, turn.HORIZ ).each( ttlcounter );
-
             rows[ cy ] = ttl; // store for this
 
             if ( 9 !== ttl ) { // something busy, check
@@ -429,7 +437,6 @@
             ttl = 0;
 
             r = self.c( cx, 0, turn.VERT ).each( ttlcounter );
-
             cols[ cx ] = ttl;
 
             if ( 9 != ttl ) {
@@ -458,7 +465,6 @@
                ttl = 0;
 
                this.c( bx * 3 + 1, by * 3 + 1, turn.BLOCK ).each( ttlcounter );
-
                blocks[ bx ][ by ] = ttl;
 
                if ( 9 != ttl ) {
@@ -530,22 +536,14 @@
             diag[ 2 ] = ttl2;
          }
 
-         this.free = free.sort( function( E1, E2 ) {
-            return ( E2.ttl - E1.ttl );
-         } );
+         free = free.sort( function( E1, E2 ) { return ( E2.ttl - E1.ttl ); } );
+         
          // momentary, not safe at all!!!
          this.isEmpty = function() { return total === 0; };
          this.total = total;
          this.max = max;
          this.alert = function() {
-            var colsstats = "        | ";
-            // var header = "____| ";
-            console.log( cols.split( " " ) );
-            
-            for ( xx = 0; xx < cols.length; xx++ ) {
-               colsstats += " " + cols[ xx ]; // header += " "+xx;
-            }
-            console.log( colsstats );
+            var colsstats = "        |  " + cols.join( " " );
 
             var rowstats = "";
             for ( yy = 0; yy < rows.length; yy++ ) {
@@ -565,9 +563,86 @@
             return ret;
          };
 
-         return this;
+         return { rows: rows, cols: cols, free: free, total: total, max: max };
+      },
+      
+      /**
+       * Advanced calculations, such as for possible numbers for cells
+       */
+      variants: function( stats ) {
+         var st = typeof stats === "object" && stats || this.stats();
+         var fullCheck = typeof stats === "boolean" && stats; //perform complete check
+         
+         var free, poss, variants = []; // store free cell here, possible values for this cell
+         // functor for counting free
+         var countFree = function( n, cx, cy ) {
+            
+            if ( n > 0 && n < 10 ) {   
+               poss[ n - 1 ] = 0; // remove possibility
+            } else {              // that is free field, save position
+               free.push( { x : cx, y : cy, n : [] } );
+            }
+         };
+         
+         for ( var mi = 0; mi < mfree.length; mi++ ) { // for each free cell
+            free = [];
+            poss = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]; // (3)
+
+            self.c( mfree[ mi ].x, mfree[ mi ].y, mfree[ mi ].type ).each( countFree );
+
+            var byNumbers = [];// total
+
+            for ( i = 0; i < poss.length; i++ ) {
+               if ( 0 !== poss[ i ] ) {
+                  byNumbers.push( { n : poss[ i ], free : [] } );
+               }
+            }
+            // /Now free for all cells verify the possibility of insert-free
+            // numbers (4)
+            for ( i = 0; i < free.length; i++ ) {
+
+               for ( var j = 0; j < byNumbers.length; j++ ) {
+                   var num = byNumbers[ j ].n;
+                  if ( self.canbe( free[ i ].x, free[ i ].y, num ) ) {
+                     free[ i ].nn.push( num );//store as possible number for position
+                     byNumbers[ j ].free.push( { x : free[ i ].x, y : free[ i ].y } );//store as possible position for number
+
+                     //overall
+                     if ( !variants[ free[ i ].y ] ) { variants[ free[ i ].y ] = []; }
+                     if ( !variants[ free[ i ].y ][ free[ i ].x ] ) { variants[ free[ i ].y ][ free[ i ].x ] = []; }
+                     //console.log( nn[ j ].n );
+                     variants[ free[ i ].y ][ free[ i ].x ].push( num );
+                     //  variants[ free[ i ].x ][ free[ i ].y ].concat( nn[ j ].n );
+                  }
+               }
+               variants[ free[ i ].y ][ free[ i ].x ] = variants[ free[ i ].y ][ free[ i ].x ].unique();
+               //console.log( free[ i ].x ,free[ i ].y, variants[ free[ i ].x ][ free[ i ].y ] );
+            }
+            
+         }
+         
+         
+      },
+   
+      /**
+       * Finds naked single - the only possible number in the cell
+       * @param stats
+       * @return
+       */
+      nakedSingle: function( stats ) {
+         
+      },
+      
+      /**
+       * Finds the singles - the only possible cell for number 
+       * @param stats
+       * @return
+       */
+      singles: function( stats ) {
       }
-   }
+      
+   
+   };
 } ) // create anon function
          (); // execute
 
