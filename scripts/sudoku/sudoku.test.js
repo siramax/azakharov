@@ -66,7 +66,8 @@
       
       Assert.isEqual( 6, solver.stats().total, "Total set was 6 cells" );
       
-      Assert.isTrue( solver.step(), "Obvious step failed" );
+      //Assert.isTrue( solver.step(), "Obvious step failed" );
+      Assert.isTrue( solver.nakedSingle(), "Obvious step failed" );
       Assert.isEqual( 6+1, solver.stats().total, "Total set was 6 cells. One should be filled" );
       
       solver2 = new SudokuSolver( 
@@ -82,7 +83,7 @@
                "800, 0,0,0, 0,0,0," +
                ".00 000 000" );
       //perform 3 steps and then assert
-      Assert.isTrueAssert( solver2.step(), "#1 obvious step failed" );
+      Assert.isTrueAssert( solver2.singles().changed, "#1 obvious step failed" );
       Assert.isTrueAssert( solver2.step(), "#2 obvious step failed" );
       Assert.isTrueAssert( solver2.step(), "#3 obvious step failed" );
       
