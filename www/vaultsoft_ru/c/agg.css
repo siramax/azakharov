@@ -1,0 +1,13 @@
+
+.section-aggregator #content-area {
+    padding: 0;
+}
+
+#aggregator .feed-item {
+    float: left;
+    width: 30%;
+    border: 1px solid #5D380E;
+    border-radius: 1em;
+    padding: 0.5em;
+    margin: 0.5em 0.5em 1em 0.5em ;
+}

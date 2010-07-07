@@ -224,6 +224,18 @@ h3.title /* Comment title */,
     background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ));
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1effffff', endColorstr='#01ffffff');
 }
+/* selected */
+.accordion_blocks_container .ui-accordion-header.selected {
+    background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.3 ), rgba( 255, 255, 255, 0 ) );
+    background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.3 )), to(rgba( 255, 255, 255, 0 )) );
+    background: -moz-linear-gradient(-90deg, rgba( 255, 255, 255, 0.3 ), rgba( 255, 255, 255, 0 ));
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ffffff', endColorstr='#01ffffff');
+    border-radius: 1.2em 1.2em 0 0;
+    -moz-border-radius: 1.2em 1.2em 0 0;
+    -q-border-radius: 1.2em 1.2em 0 0;
+    -webkit-border-radius: 1.2em 1.2em 0 0;
+}
+
  .ui-accordion-header {
     padding: .5em 0;
     cursor: pointer;
@@ -231,8 +243,10 @@ h3.title /* Comment title */,
 .ui-accordion-header a:hover {
     text-decoration: none;
 }
-.ui-accordion .content {
+/*.ui-accordion .content*/.accordion_blocks_container div[role=tabpanel],
+.accordion_blocks_container div.content {
     border: 1px dashed #FCFAF4;
+    border-top: none;
 }
 
   div.messages /* Important messages (status, warning, and error) for the user */
@@ -367,7 +381,7 @@ h3.title /* Comment title */,
   }
 
 #sidebar-left,   #sidebar-right {
-    font-size: 0.75em;
+    /*font-size: 0.75em;*/
     color: #ddd;
     text-shadow: 1px 1px 2px #d2a668;
 }
@@ -476,10 +490,13 @@ h3.title /* Comment title */,
   .node-type-story /* Story content node */
   {
   }
-
-  .node h2.title /* Node title */
-  {
-  }
+.node h2.title   {/* Node title */
+    font-family:  "DejaVu Serif", "Nimbus Roman No9 L", "Times New Roman", Times, Georgia, "Bitstream Vera Serif", serif; 
+    text-shadow: 1px 1px 2px #FCFAF4;
+}
+.sticky h2.title {
+  text-shadow: 1px 1px 2px #697557;
+}
 
   .marker /* "New" or "Updated" marker for content that is new or updated for the current user */
   {
@@ -488,7 +505,6 @@ h3.title /* Comment title */,
 
 /* init letter*/
 .node h2.title:first-letter, h3.title:first-letter {
-    font-family:  "DejaVu Serif", "Nimbus Roman No9 L", "Times New Roman", Times, Georgia, "Bitstream Vera Serif", serif; 
     font-size: 200%;
     color: black;
     text-shadow: 1px 1px 2px #FCFAF4;

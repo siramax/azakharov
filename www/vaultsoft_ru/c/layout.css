@@ -27,6 +27,7 @@
 input[type="submit"] {
   padding: .5em 1em;
 }
+.content { clear: both; }
   #page,
   #closure-blocks
   {
@@ -47,12 +48,13 @@ input[type="submit"] {
 /** header **/
 #header
 {
-    position: absolute;
+   /* position: absolute;*/
     left: 0; /* = body.padding*/
-    width: 100%;
+/*    width: 100%;*/
     top: 0px; /* ~= body.padding to hide beneath*/
     /*height: 44px;*/
-
+    float: left;
+    z-index: 5;
 }
 
 #header-inner {

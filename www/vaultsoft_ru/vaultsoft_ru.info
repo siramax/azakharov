@@ -37,6 +37,7 @@ stylesheets[all][] = c/vaultsoft_ru-fresh.css
 stylesheets[all][]   = c/theme.css
 stylesheets[all][]   = c/agg.css
 stylesheets[all][]   = c/portfolio.css
+stylesheets[all][]   = c/geshi.css
 
 stylesheets[print][] = c/print.css
   ; To prevent stylesheets of a base theme or of a module from being included in
@@ -44,6 +45,7 @@ stylesheets[print][] = c/print.css
   ; stylesheet in our sub-theme with that name.) For example, we prevent the
   ; zen.css file in the base theme from being included by specifying it here.
 stylesheets[all][]   = zen.css
+stylesheets[handheld][]   = c/hh.css
 
 
 
@@ -56,7 +58,7 @@ conditional-stylesheets[if IE][all][] = c/ie.css
 ; scripts[] = activeNav.js
 ; scripts[] = j/jquery.css-transitions.min.js
 ; scripts[] = j/jquery.css-transitions.js
-scripts[] = j/jquery.cookie.min.js
+scripts[footer] = j/jquery.cookie.min.js
 ; scripts[] = j/extendView.min.js
 
 

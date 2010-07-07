@@ -123,6 +123,13 @@ h1,h2,h3,h4,h5 {
     padding: 0;
     list-style: none;
 }
+.block-locale li {
+  float: left;
+  margin-left: 1em;
+}
+.block-locale li a.active {
+  display: none;
+}
 
 #navbar .block-search {
     float:          right;
@@ -151,6 +158,7 @@ h1,h2,h3,h4,h5 {
 
 #breadcrumb {
 /*	position: absolute; /* for tooltips */
+  float: left;
 }
 
 #breadcrumb li {

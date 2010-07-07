@@ -1,0 +1,31 @@
+div.geshifilter-bg { clear: both; }
+
+.geshifilter { 
+  text-shadow: none; 
+  font: normal normal 1em/1.2em monospace;
+}
+
+/* COMMON */
+.geshifilter .co0,.geshifilter .co1,
+.geshifilter .coMULTI { color:#676767; font-style:italic; background: black; } /* jQuery Zoom on this TODO */
+.geshifilter .sc0  { color:#00BBDD; } /* doctype */
+.geshifilter .br0  { color:#FF00FF; } /* brackets */
+.geshifilter .sy0 { color: #f0f0f0; } /* selector */
+span.geshifilter .sy0 { color: inherit; } /* inline selector */
+.geshifilter .sy1,
+.geshifilter .sy2 { color:#CC0099; }
+.geshifilter .st0 { color: yellow; } /* strings1 */
+span.geshifilter .st0 { font-weight:bold; } /* strings1 */
+.geshifilter .nu0  { color:#008080; } /* numbers */
+.geshifilter .kw1  { color:#66FFFF; font-weight:bold; } /* keywords */
+.geshifilter .kw2  { color:#FFFFFF; font-weight:bold; }
+.geshifilter .kw3  { color:#66FFFF; }
+span.geshifilter .kw3  { color:#0aa; font-weight:bold; } /* light */
+.geshifilter .kw4  { color:#999900; font-weight:bold; }
+
+.geshifilter .kw6  { color:#FF9900; font-weight:bold; }
+.geshifilter .kw10  { color:#CC0099; font-weight:bold; }
+.geshifilter .me1 {color: #f5f;} /* methods light color*/
+span.geshifilter .me1 { color: #700070; } /*dark */
+/* geshi-css class selector */
+.geshifilter .re1 { color: #ffff80; }
