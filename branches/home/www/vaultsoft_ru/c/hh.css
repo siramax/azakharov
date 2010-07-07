@@ -1,0 +1,5 @@
+/* for hand helds */
+/* layout */
+#sidebar-left, #content, #sidebar-right {
+  position: static;
+}

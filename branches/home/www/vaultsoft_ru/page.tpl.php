@@ -91,7 +91,7 @@
 
 <head>
     <title><?php print $head_title; ?></title>
-    <link rel = "me" type = "text/html" href="http://www.google.com/profiles/aazaharov81" ></link>
+    <link rel = "me" type = "text/html" href="http://www.google.com/profiles/aazaharov81" />
     <?php print $head; ?>
     <?php print $styles; ?>
 </head>
@@ -163,7 +163,15 @@
         <?php endif; ?>
 
       </div></div> <!-- /#content-inner, /#content -->
-
+      
+      
+      
+      
+      <!-- HEAVY STAFF -->
+    <?php print drupal_get_js( 'header' ); ?>
+    
+    
+    
       <?php if ($search_box || $primary_links || $secondary_links || $navbar): ?>
         <div id="navbar"><div id="navbar-inner" class="clear-block region region-navbar">
 
@@ -244,18 +252,18 @@
     <div id="closure-blocks" class="region region-closure"><?php print $closure_region; ?></div>
   <?php endif; ?>
   
-    <?php print $scripts; ?>
+    <?php print drupal_get_js( 'footer' ); ?>
     <?php print $closure; ?>
     
     <script type ="text/javascript" src ="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
     <script type ="text/javascript">
-      WebFont.load( {
+      /*WebFont.load( {
         custom: { 
             families: [ 'Old Standard TT' ],
             urls: [ '/<?php print $directory; ?>/f/stylesheet.css' ] 
         }
-      /*google: { families: [ '' ] }*/
-      } );
+      google: { families: [ '' ] }
+      } );*/
     </script>
  <!-- Themed by Andrey Zakharov based on nynke.wordpress.com -->
  <!--  optional lazy stuff -->
