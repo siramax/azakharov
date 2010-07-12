@@ -68,7 +68,7 @@ opportunity for advancement.
           <Description>International outsourcing company</Description>
         </Employer>
         <Description>Working as member of a team developing and maintaining: 
-        distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application. Plan, control and evaluate the operations of information systems. Develop and implement policies and procedures for electronic data processing and computer systems operations and development. Meet with clients to discuss system requirements, specifications, costs and timelines. Recruit and supervise computer engineers and programmers. </Description>
+            distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application. Automate, optimize and promote corporate sites. Plan, control and evaluate the operations of information systems. Develop and implement policies and procedures for electronic data processing and computer systems operations and development. Meet with clients to discuss system requirements, specifications, costs and timelines. Recruit and supervise computer engineers and programmers. </Description>
         <Achievement lang = "ru">Улучшил скорость SOAP запросов web приложения к серверу</Achievement>
         <Achievement lang = "en">Improved speed of SOAP data exchange between web application and server</Achievement>
         
@@ -78,7 +78,7 @@ opportunity for advancement.
         <Achievement lang = "ru">Оптимизировал процесс сборки проекта под Linux</Achievement>
         <Achievement lang = "en">Optimized project building under Linux</Achievement>
         
-        <Techs>C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat.</Techs>
+        <Techs>Drupal, PHP, Javascript, HTML, CSS, C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat.</Techs>
       </Entry><!-- 
       <Entry Job = 'Freelancer'>
         <Period From = "Aug 2007" To = "Jul 2008" />
