@@ -77,7 +77,12 @@ opportunity for advancement.
         
         <Achievement lang = "ru">Оптимизировал процесс сборки проекта под Linux</Achievement>
         <Achievement lang = "en">Optimized project building under Linux</Achievement>
-        
+		
+        <Achievement lang = "ru">Разработал скрипт (bash) установки, конфигурации и управления ПО</Achievement>
+        <Achievement lang = "en">Develop deployment, configuration and handling script (bash) of software instances</Achievement>
+		
+        <Achievement lang = "ru">Перенес статичный сайт на CMS Drupal</Achievement>
+        <Achievement lang = "en">Convert static corporate site into dynamic full-featured extensible site on CMS Drupal</Achievement>
         <Techs>Drupal, PHP, Javascript, HTML, CSS, C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat.</Techs>
       </Entry><!-- 
       <Entry Job = 'Freelancer'>
@@ -213,8 +218,9 @@ opportunity for advancement.
   
   <Skills>
     <Group type = 'Tools'>
+      <Entry type = 'Technologies'>.NET, J2EE, EJB, COM/DCOM/COM+, OLE/ActiveX, AJAX</Entry>
       <Entry type = 'OS'>MS Windows, Linux (Debian), QNX, FreeBSD, MSDOS, Apple DOS 3.3</Entry>
-      <Entry type = 'DBMS'>MySQL, MS SQL, SQLite, MS Access</Entry>
+      <Entry type = 'DBMS'>MySQL, PostgreSQL, MS SQL, SQLite, MS Access</Entry>
       <Entry type = 'Related Software'>MS Office, MS Visio, MS Project, SSH, Bash, Kile</Entry>
       <Entry type = 'Development'>MS Visual Studio, Netbeans IDE, Eclipse IDE, code reviewer, JIRA, GDB, Borland Delphi</Entry>
       <Entry type = 'SCM'>CVS, SVN, Perforce, git</Entry>
@@ -228,8 +234,8 @@ opportunity for advancement.
       <Entry type = 'SQL'>MySQL, SQLite, T-SQL</Entry>
       <Entry type = 'Visual Basic'>VBA, MS Word, MS Excel, MS Access, MS Outlook</Entry>
       <Entry type = 'Markup'>XHTML, CSS, XML, XSL</Entry>
-      <Entry type = 'GNU'>BASH, SSH, sed, awk, \LaTeXe</Entry>
-      <Entry type = 'Scripting'>BASH, Lua, Python, Groovy</Entry>
+      <!--Entry type = 'GNU'>BASH, SSH, sed, awk, \LaTeXe</Entry-->
+      <Entry type = 'Scripting'>BASH, Perl, Lua, Python, Groovy, sed, awk, \LaTeXe</Entry>
       <Entry type = 'Exotic'>Architecture and assembler MOStech 6502 (Apple II, etc.)</Entry>
     </Group>
     <!-- <Group type = 'Practical'>
@@ -264,6 +270,11 @@ opportunity for advancement.
   </Programs>
   
   <Bibliography>
+      <Entry Type = "Misc"
+        Author = "Andrey Zakharov"
+        Title = "How to instant fast quick analyze core dump files"
+        Url = "http://vaultsoft.ru/en/instant-fast-quick-analyze-core-files"
+        Year = "2009" />
     <Entry Type = "Misc"
         Author = "Andrey Zakharov"
         Title = "How to make a site"
@@ -286,16 +297,27 @@ opportunity for advancement.
         Year = "2003" />
   </Bibliography>
   
+  <Links>
     <Portfolio>
-        <Links>
+
             <Entry type = ""
                 xlink:title = "See it in porfolio" 
                 xlink:role = "locator" 
                 xlink:href ="http://vaultsoft.ru/portfolio" 
                 xlink:actuate = "onRequest" 
                 xlink:show = "new" >http://vaultsoft.ru/portfolio</Entry>
-        </Links>
-    </Portfolio>
+
+
+		</Portfolio>
+		<Brainbench>
+			<Entry type = "transcript"
+                xlink:title = "Brainbench Public Transcript" 
+                xlink:role = "locator" 
+                xlink:href ="http://www.brainbench.com/transcript.jsp?pid=8883643" 
+                xlink:actuate = "onRequest" 
+                xlink:show = "new" >http://www.brainbench.com/transcript.jsp?pid=8883643</Entry>
+		</Brainbench>
+	</Links>
 </Document>
 
 

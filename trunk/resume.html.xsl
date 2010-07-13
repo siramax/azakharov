@@ -90,7 +90,7 @@
       <xsl:apply-templates />
     </table>
   </xsl:template>
-  
+  <xsl:template match = '/Document/Programs'></xsl:template>
   <xsl:template match = '/Document/Strengths'><h1><xsl:value-of select = 'name()' /></h1><ul><xsl:apply-templates /></ul></xsl:template>
   <xsl:template match = '//Strengths/Entry'><li><xsl:apply-templates /></li></xsl:template>
   
