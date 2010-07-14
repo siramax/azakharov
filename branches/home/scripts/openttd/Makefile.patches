@@ -56,11 +56,13 @@ find_ignorable_prefix = $$(\
 all : vs_pack_${REV}.patch
 	@echo "==> $@ DONE"
 
-vs_pack_${REV}.build.log : $(addsuffix .patched, $(PATCHES) )
+$(TRUNK)/Makefile:
+	( cd $(TRUNK); ./configure > /dev/null )
+
 ifeq (${MODE},patchpack)
+vs_pack_${REV}.build.log :  $(TRUNK)/Makefile $(addsuffix .patched, $(PATCHES) )
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
-	( cd $(TRUNK); ./configure )
 	( $(MAKE) -C $(TRUNK) clean )
 	( $(MAKE) -C $(TRUNK) all > $@ )
 else
@@ -68,6 +70,9 @@ else
 	@echo "PARAM=\"\" $(MAKE) all"
 endif
 	@echo "==> Buildin $* DONE"
+else
+vs_pack_${REV}.build.log :  $(TRUNK)/Makefile $(addsuffix .patch.check, $(PATCHES) )
+	@echo "==> Checking all patches..."
 endif
 
 vs_pack_${REV}.patch : vs_pack_${REV}.build.log
@@ -81,7 +86,7 @@ vs_pack_${REV}.patch : vs_pack_${REV}.build.log
 ##
 # Patchworks
 #
-%.patch.log : %.patch
+%.patch.log : %.patch  $(TRUNK)/Makefile
 	@echo "==> Patchin $*..."
 	@( test -f $< )
 ifeq ($(findstring --dry-run,${PARAM}),)
@@ -92,13 +97,16 @@ else
 endif
 	@echo "==> Patchin $* DONE"
 
+%.patch.check : trunk-prepare %.build.log
+	@echo "==> $* - OK"
 
 
 
 %.build.log : %.patch.log
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
-	( $(MAKE) -C $(TRUNK) clean all > $@ )
+	( $(MAKE) -C $(TRUNK) clean )
+	( $(MAKE) -C $(TRUNK) all > $@ )
 else
 	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
 	@echo "PARAM=\"\" $(MAKE) all"
@@ -127,7 +135,7 @@ endif
 	@( awk '/^$*/ { print $$2 }' ${PATCHMAP} )
 	wget --output-document="$@" \
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
-		$(shell awk '/^$*/ { print $$2 }' ${PATCHMAP})
+		$(shell awk '/^$*[ ]+/ { print $$2 }' ${PATCHMAP})
 
 sweep : $(addsuffix .sweep, $(PATCHES) )
 	@( echo Done )
@@ -159,3 +167,10 @@ clean :
 
 run :
 	$(MAKE) run -C $(TRUNK)
+
+SRCDIR := $(shell dirname ${TRUNK})
+%.new :
+	( cd $(SRCDIR) && \
+	  svn checkout svn://svn.openttd.org/tags/$*/ $* && \
+	  echo "Don't forget to change TRUNK=\"$(SRCDIR)/$*\"!")
+
