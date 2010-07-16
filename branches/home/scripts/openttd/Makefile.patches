@@ -12,9 +12,12 @@
 #defaults
 #
 include Mk.params
+# TODO openttd specific out to profiles?
+PACKNAME=vs_hard_pack
 PARAM ?= "--dry-run"
 TRUNK ?= ~/src/openttd/svn.openttd.org/trunk
 MODE ?= alone # or patchpack
+BROWSER ?= kate #opens final result
 PATCHDIR ?= $(shell pwd)
 PATCHMAP ?= ${PATCHDIR}/Mk.patchtable
 PATCHES ?= rating_town_label station-build-gui_v5.1 openttd-cargodist-minipack harder_game IB
@@ -33,8 +36,8 @@ REV := r$(shell cd ${TRUNK} && svnversion -n)
 original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
 
 #
-# gets the number of ignorable prefixes in unified patch
-#
+# Gets the number of ignorable prefixes in unified patch
+# Internal, skip this!
 # 1. find "--- PATH"
 # 2. see if this available
 # 3. p++ goto 1
@@ -50,38 +53,63 @@ find_ignorable_prefix = $$(\
 	      if [ -r "${TRUNK}/$$f2c" ]; then echo $$i; exit 0; fi; \
 	  done; \
 	done; )
-
 # do it better by GNU make itself TODO
 
-all : vs_pack_${REV}.patch
+# start of easy part
+all : $(PACKNAME).patch.${REV}
 	@echo "==> $@ DONE"
+	( $(BROWSER) $(PACKNAME).patch.${REV} & )
 
 $(TRUNK)/Makefile:
 	( cd $(TRUNK); ./configure > /dev/null )
 
-ifeq (${MODE},patchpack)
-vs_pack_${REV}.build.log :  $(TRUNK)/Makefile $(addsuffix .patched, $(PATCHES) )
-	@echo "==> Buildin $*..."
-ifeq ($(findstring --dry-run,${PARAM}),)
-	( $(MAKE) -C $(TRUNK) clean )
-	( $(MAKE) -C $(TRUNK) all > $@ )
-else
-	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
-	@echo "PARAM=\"\" $(MAKE) all"
-endif
-	@echo "==> Buildin $* DONE"
-else
-vs_pack_${REV}.build.log :  $(TRUNK)/Makefile $(addsuffix .patch.check, $(PATCHES) )
-	@echo "==> Checking all patches..."
-endif
-
-vs_pack_${REV}.patch : vs_pack_${REV}.build.log
+#
+# Making auto patch file
+# $(PACKNAME).patch.${REV} will be caught by this
+%.patch.${REV} : %.build.log
 	@( find $(TRUNK) -name \*orig | xargs rm --force --verbose )
 	( cd $(TRUNK) && svn status | grep -v M |  awk '{print $$2}' | xargs svn add )
 	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
+
+# override common rule by this one
+$(PACKNAME).build.log : patching-building
 	@echo "==> $@ DONE"
+# end of easy part
+
+#
+# Separate 
+# * patchpack,
+# * alone (patching and building patches alone one-by-one from list),
+# * increment (patching and build-check one, then add next one, and so on
+ifeq (${MODE},patchpack)
+
+patching-building : $(TRUNK)/Makefile $(addsuffix .patched, $(PATCHES) )
+	@echo "==> Buildin $*..."
+ifeq ($(findstring --dry-run,${PARAM}),)
+#	( $(MAKE) -C $(TRUNK) clean )
+	( $(MAKE) -C $(TRUNK) all > $@ )
+else
+	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
+	@echo "                  $$ PARAM=\"\" $(MAKE) all"
+endif
+	@echo "==> Buildin $* DONE"
 
 
+else ifeq (${MODE},alone)
+patching-building : $(TRUNK)/Makefile $(addprefix trunk-prepare ,$(addsuffix .patch.${REV}, $(PATCHES) ))
+	@echo "==> Alone checking all patches DONE."
+
+
+else
+patching-building :  $(TRUNK)/Makefile $(addprefix increment ,$(addsuffix .patch.${REV}, $(PATCHES) ))
+	@echo "==> Increment checking all patches DONE."
+
+endif
+
+
+
+increment :
+	@echo "==> Incrementing..."
 
 ##
 # Patchworks
@@ -97,21 +125,20 @@ else
 endif
 	@echo "==> Patchin $* DONE"
 
-%.patch.check : trunk-prepare %.build.log
-	@echo "==> $* - OK"
-
-
-
 %.build.log : %.patch.log
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
-	( $(MAKE) -C $(TRUNK) clean )
+#ifeq ($(findstring forceclean,${PARAM}),)
+#	( $(MAKE) -C $(TRUNK) clean )
 	( $(MAKE) -C $(TRUNK) all > $@ )
 else
 	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
-	@echo "PARAM=\"\" $(MAKE) all"
+	@echo "                  $ PARAM=\"\" $(MAKE) all"
 endif
 	@echo "==> Buildin $* DONE"
+
+%.patch.check : %.build.log %.patch.${REV}
+	@echo "==> $* - OK"
 
 
 
@@ -122,10 +149,11 @@ ifeq (${MODE},alone)
 	@echo "==> Saving $@..."
 	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
 else
-%.patched : %.patch.log 
+%.patched : %.patch.log
 	@echo "==> Patched $@..."
 endif
 
+# Do patch from current trunk
 
 
 
@@ -136,6 +164,8 @@ endif
 	wget --output-document="$@" \
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
 		$(shell awk '/^$*[ ]+/ { print $$2 }' ${PATCHMAP})
+
+
 
 sweep : $(addsuffix .sweep, $(PATCHES) )
 	@( echo Done )
