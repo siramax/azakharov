@@ -2,11 +2,11 @@
 # Checking and applying patches against trunk or specified sources
 # @author Andrey Zakharov /2010/
 #
-.PHONY : all clean trunk-prepare trunk-clean trunk-update clean vs_pack run
+.PHONY : all clean trunk-prepare tp patching-building trunk-clean trunk-update clean run
 
 .NOTPARALLEL :
 
-.PRECIOUS : %.patch %.patch.log %.build.log
+
 
 #
 #defaults
@@ -24,6 +24,7 @@ PATCHES ?= rating_town_label station-build-gui_v5.1 openttd-cargodist-minipack h
 # TimeOut in secs
 HTTP_TO ?= 30
 DNS_TO ?= 2
+DONE = @echo "==> $@ DONE"
 
 #
 # Utils
@@ -32,7 +33,7 @@ DNS_TO ?= 2
 # revision
 # TODO as file REVISION.txt
 REV := r$(shell cd ${TRUNK} && svnversion -n)
-
+.PRECIOUS : %.patch %.build.log %.patch.${REV}
 original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
 
 #
@@ -58,22 +59,68 @@ find_ignorable_prefix = $$(\
 # start of easy part
 all : $(PACKNAME).patch.${REV}
 	@echo "==> $@ DONE"
-	( $(BROWSER) $(PACKNAME).patch.${REV} & )
+	( $(BROWSER) $(PACKNAME).patch.${REV} )
 
 $(TRUNK)/Makefile:
 	( cd $(TRUNK); ./configure > /dev/null )
 
-#
+# 
 # Making auto patch file
+# Do patch from current trunk
 # $(PACKNAME).patch.${REV} will be caught by this
-%.patch.${REV} : %.build.log
+%.save :
 	@( find $(TRUNK) -name \*orig | xargs rm --force --verbose )
-	( cd $(TRUNK) && svn status | grep -v M |  awk '{print $$2}' | xargs svn add )
+	( cd $(TRUNK) && svn status | grep -v M |  awk '{print $$2}' | xargs svn add || true )
+	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@.patch.$(REV)" )
+
+%.patch.${REV} : $(TRUNK)/Makefile %.build.log
+	@( find $(TRUNK) -name \*orig | xargs rm --force --verbose )
+	( cd $(TRUNK) && svn status | grep -v M |  awk '{print $$2}' | xargs svn add || true )
 	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
 
 # override common rule by this one
 $(PACKNAME).build.log : patching-building
-	@echo "==> $@ DONE"
+	$(DONE)
+
+##
+# Preparing, cleaning & sweeping
+#
+tp trunk-prepare  : trunk-clean trunk-update
+	$(DONE)
+
+trunk-clean : 
+	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
+	( cd $(TRUNK) && svn -R revert . )
+#deep clean
+	( cd $(TRUNK) && svn stat | grep ^? | grep -v 'nbproject\|Makefile-trunk.mk' | xargs rm -rf )
+	@echo $(REV)
+
+trunk-update : 
+	( cd $(TRUNK) && svn update )
+#    RVER=$(svnversion -n)
+
+clean : 
+	( rm *.log || true )
+	$(DONE)
+
+distclean : 
+	( rm *.patch.$(REV) )
+	$(DONE)
+
+sweep : $(addsuffix .sweep, $(PATCHES) )
+	$(DONE)
+
+%.sweep :
+	@echo "==> Sweeping $*..."
+	( rm $*.patch || true )
+	$(DONE)
+
+run :
+	$(MAKE) run -C $(TRUNK)
+
+reset: clean trunk-prepare
+	$(DONE)
+
 # end of easy part
 
 #
@@ -83,7 +130,7 @@ $(PACKNAME).build.log : patching-building
 # * increment (patching and build-check one, then add next one, and so on
 ifeq (${MODE},patchpack)
 
-patching-building : $(TRUNK)/Makefile $(addsuffix .patched, $(PATCHES) )
+patching-building : $(addsuffix .patch.log, $(PATCHES) )
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
 #	( $(MAKE) -C $(TRUNK) clean )
@@ -92,16 +139,16 @@ else
 	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
 	@echo "                  $$ PARAM=\"\" $(MAKE) all"
 endif
-	@echo "==> Buildin $* DONE"
+	$(DONE)
 
 
 else ifeq (${MODE},alone)
-patching-building : $(TRUNK)/Makefile $(addprefix trunk-prepare ,$(addsuffix .patch.${REV}, $(PATCHES) ))
+patching-building : $(addprefix trunk-prepare ,$(addsuffix .patch.${REV}, $(PATCHES) ))
 	@echo "==> Alone checking all patches DONE."
 
 
 else
-patching-building :  $(TRUNK)/Makefile $(addprefix increment ,$(addsuffix .patch.${REV}, $(PATCHES) ))
+patching-building : $(addprefix increment ,$(addsuffix .patch.${REV}, $(PATCHES) ))
 	@echo "==> Increment checking all patches DONE."
 
 endif
@@ -138,22 +185,7 @@ endif
 	@echo "==> Buildin $* DONE"
 
 %.patch.check : %.build.log %.patch.${REV}
-	@echo "==> $* - OK"
-
-
-
-
-#%_$(REV).patch : %.patch trunk-prepare
-ifeq (${MODE},alone)
-%.patched : trunk-prepare %.build.log
-	@echo "==> Saving $@..."
-	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
-else
-%.patched : %.patch.log
-	@echo "==> Patched $@..."
-endif
-
-# Do patch from current trunk
+	$(DONE)
 
 
 
@@ -165,38 +197,6 @@ endif
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
 		$(shell awk '/^$*[ ]+/ { print $$2 }' ${PATCHMAP})
 
-
-
-sweep : $(addsuffix .sweep, $(PATCHES) )
-	@( echo Done )
-
-%.sweep :
-	@echo "==> Sweeping $*..."
-	( rm $*.patch || true )
-
-
-##
-# Cleaning & sweeping
-#
-trunk-prepare : trunk-clean trunk-update
-	@( echo "trunk prepared." )
-
-trunk-clean : 
-	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
-	( cd $(TRUNK) && svn -R revert . )
-#deep clean
-	( cd $(TRUNK) && svn stat | grep ^? | grep -v 'nbproject\|Makefile-trunk.mk' | xargs rm -rf )
-	@echo $(REV)
-
-trunk-update : 
-	( cd $(TRUNK) && svn update )
-#    RVER=$(svnversion -n)
-
-clean : 
-	( rm *.log || true )
-
-run :
-	$(MAKE) run -C $(TRUNK)
 
 SRCDIR := $(shell dirname ${TRUNK})
 %.new :
