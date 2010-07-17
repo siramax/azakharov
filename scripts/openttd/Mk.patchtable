@@ -6,6 +6,7 @@ station-build-gui_v6.1      http://www.tt-forums.net/download/file.php?id=125817
 station-build-gui_v6.2      http://www.tt-forums.net/download/file.php?id=126796
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
 cargo_dist                  http://fickzoo.com/fonsinchen/patches/current/trunk-cargodist.diff
+openttd-cargodist-sprinkles    http://qmsk.net/~terom/openttd/patches/variable-daylength_town-cargo_misc-00-trunk.svn.patch
 openttd-cargodist-minipack  http://www.tt-forums.net/download/file.php?id=127095 My merge for 1.0.0
                             http://www.tt-forums.net/download/file.php?id=127043
                             http://www.tt-forums.net/download/file.php?id=125924
@@ -40,6 +41,8 @@ copypaste                   http://www.tt-forums.net/download/file.php?id=127691
 # Dependency of copypaste:
 copypaste.grf               http://www.tt-forums.net/download.php?id=50279
 signaltunnel                http://www.tt-forums.net/download/file.php?id=126249
-timetable-separation         http://www.tt-forums.net/download/file.php?id=115079
+# timetable-separation         http://www.tt-forums.net/download/file.php?id=115079
 zoning                  http://www.tt-forums.net/download/file.php?id=131263    
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
+
+
