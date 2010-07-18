@@ -6,7 +6,7 @@ station-build-gui_v6.1      http://www.tt-forums.net/download/file.php?id=125817
 station-build-gui_v6.2      http://www.tt-forums.net/download/file.php?id=126796
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
 cargo_dist                  http://fickzoo.com/fonsinchen/patches/current/trunk-cargodist.diff
-openttd-cargodist-sprinkles    http://qmsk.net/~terom/openttd/patches/variable-daylength_town-cargo_misc-00-trunk.svn.patch
+openttd-cargodist-sprinkles    http://www.tt-forums.net/download/file.php?id=130107 http://qmsk.net/~terom/openttd/patches/variable-daylength_town-cargo_misc-00-trunk.svn.patch
 openttd-cargodist-minipack  http://www.tt-forums.net/download/file.php?id=127095 My merge for 1.0.0
                             http://www.tt-forums.net/download/file.php?id=127043
                             http://www.tt-forums.net/download/file.php?id=125924
@@ -22,13 +22,14 @@ stuck_trains                http://www.tt-forums.net/download/file.php?id=126757
 whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
 better_graphs               http://www.tt-forums.net/download/file.php?id=93336
 airport-close-v6            http://www.tt-forums.net/download/file.php?id=121464
-airport-close-v7            http://www.tt-forums.net/download/file.php?id=127529 http://www.tt-forums.net/download/file.php?id=126200
+airport-close-v7            http://www.tt-forums.net/download/file.php?id=128408 http://www.tt-forums.net/download/file.php?id=127529 http://www.tt-forums.net/download/file.php?id=126200
 airport_upgrade             http://www.tt-forums.net/download/file.php?id=125591 http://www.tt-forums.net/download/file.php?id=124542
 airport-upgrade-v6-1.0.0    http://www.tt-forums.net/download/file.php?id=128417
 grassOnTracks               http://www.tt-forums.net/download/file.php?id=124535
 variable_daylength          http://qmsk.net/~terom/openttd/patches/everything-00-trunk-r18774.patch
 moreheightlevels_v24_20     http://www.tt-forums.net/download/file.php?id=125135 r19304
 moreheightlevels_v24_21     http://www.tt-forums.net/download/file.php?id=126749 r19386
+moreheightlevels_v27        http://www.tt-forums.net/download/file.php?id=130709
 cargo_autosep_moreheights   http://www.tt-forums.net/download/file.php?id=125861
 
 watch_gui_6                 http://www.tt-forums.net/download/file.php?id=126291
@@ -46,3 +47,8 @@ zoning                      http://www.tt-forums.net/download/file.php?id=131263
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
 more-cond-orders            http://www.tt-forums.net/download/file.php?id=109179
 
+town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=89652
+keyb_config                 http://www.tt-forums.net/download/file.php?id=130663
+build_while_pause_in_editor    http://www.tt-forums.net/download/file.php?id=127664
+reload-ai                   http://www.tt-forums.net/download/file.php?id=127668
+infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122924&sid=98ed8ef9eb3bc7ed87e829b2a9d1b744

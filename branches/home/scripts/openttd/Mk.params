@@ -3,7 +3,7 @@
 
 TRUNK ?= $(HOME)/src/openttd/1.0.2
 MODE ?= patchpack
-PATCHES = openttd-cargodist-minipack IB station-build-gui_v6.2 harder_game stuck_trains rating_town_label watch_gui_6 russian-town-names airport-upgrade-v6-1.0.0 VTI_console zoning more-cond-orders vs.russian
+PATCHES = openttd-cargodist-sprinkles IB station-build-gui_v6.2 harder_game stuck_trains rating_town_label watch_gui_6 russian-town-names airport-upgrade-v6-1.0.0 VTI_console zoning more-cond-orders whistle vs.russian 
 
 
 #  airport_upgrade  airport-close-v7 
