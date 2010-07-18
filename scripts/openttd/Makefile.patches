@@ -71,12 +71,12 @@ $(TRUNK)/Makefile:
 %.save :
 	@( find $(TRUNK) -name \*orig | xargs rm --force --verbose )
 	( cd $(TRUNK) && svn status | grep -v M |  awk '{print $$2}' | xargs svn add || true )
-	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@.patch.$(REV)" )
+	( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "${PATCHDIR}/$@.patch.$(REV)" )
 
 %.patch.${REV} : $(TRUNK)/Makefile %.build.log
 	@( find $(TRUNK) -name \*orig | xargs rm --force --verbose )
 	( cd $(TRUNK) && svn status | grep -v M |  awk '{print $$2}' | xargs svn add || true )
-	( cd ${TRUNK} && svn diff > "${PATCHDIR}/$@" )
+	( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "${PATCHDIR}/$@" )
 
 # override common rule by this one
 $(PACKNAME).build.log : patching-building
