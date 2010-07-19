@@ -79,7 +79,9 @@ ${PATCHDIR}/%.patch.${REV} : trunk-sweep
 	$(DONE)#report here of diffs with previois patch
 
 # override common rule by this one
-$(PACKNAME).build.log : patching-building
+${PATCHDIR}/$(PACKNAME).patch.${REV} : ${PATCHDIR}/$(PACKNAME).build.log
+
+${PATCHDIR}/$(PACKNAME).build.log : patching-building
 	$(DONE)
 
 ##
@@ -87,7 +89,7 @@ $(PACKNAME).build.log : patching-building
 #
 tp :trunk-prepare
 
-trunk-prepare  : trunk-clean trunk-sweep trunk-revert trunk-update #alias
+trunk-prepare  : trunk-sweep trunk-revert trunk-clean trunk-update #alias
 	$(DONE)
 
 trunk-revert : 
@@ -100,7 +102,7 @@ trunk-sweep:
 
 trunk-clean :
 	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
-#deep clean
+#deep svn new files from patches clean
 	( cd $(TRUNK) && svn stat | grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf )
 	@echo $(REV)
 
