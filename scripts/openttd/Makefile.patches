@@ -157,12 +157,12 @@ endif
 
 
 else ifeq (${MODE},alone)
-patching-building : $(addprefix trunk-prepare ${PATCHDIR}/,$(addsuffix .patch.${REV}, $(PATCHES) ))
+patching-building : $(addprefix trunk-prepare ${PATCHDIR}/,$(addsuffix .patch.check, $(PATCHES) ))
 	@echo "==> Alone checking all patches DONE."
 
 
 else
-patching-building : $(addprefix increment ${PATCHDIR}/,$(addsuffix .patch.${REV}, $(PATCHES) ))
+patching-building : $(addprefix increment ${PATCHDIR}/,$(addsuffix .patch.check, $(PATCHES) ))
 	@echo "==> Increment checking all patches DONE."
 
 endif
