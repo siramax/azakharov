@@ -59,9 +59,9 @@ find_ignorable_prefix = $$(\
 # do it better by GNU make itself TODO
 
 # start of easy part
-all : $(PACKNAME).patch.${REV}
+all : ${PATCHDIR}/$(PACKNAME).patch.${REV}
 	@echo "==> $@ DONE"
-	( $(BROWSER) $(PACKNAME).patch.${REV} )
+	( $(BROWSER) ${PATCHDIR}/$(PACKNAME).patch.${REV} )
 
 $(TRUNK)/Makefile:
 	( cd $(TRUNK); ./configure > /dev/null )
@@ -70,11 +70,12 @@ $(TRUNK)/Makefile:
 # Making auto patch file
 # Do patch from current trunk
 # $(PACKNAME).patch.${REV} will be caught by this
-${PATCHDIR}/%.patch.${REV} : $(TRUNK)/Makefile %.build.log
+${PATCHDIR}/%.patch.${REV} : trunk-sweep
 	( cd $(TRUNK) && svn status | grep -v M |grep -v bin/|  awk '{print $$2}' | xargs svn add || true )
 	( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
 
-%.save : trunk-clean ${PATCHDIR}/%.patch.${REV} #alias
+# for quick hack, we do not require %.build.log 
+%.save : ${PATCHDIR}/%.patch.${REV} #alias
 	$(DONE)#report here of diffs with previois patch
 
 # override common rule by this one
@@ -86,18 +87,21 @@ $(PACKNAME).build.log : patching-building
 #
 tp :trunk-prepare
 
-trunk-prepare  : trunk-clean trunk-update #alias
+trunk-prepare  : trunk-clean trunk-sweep trunk-revert trunk-update #alias
 	$(DONE)
 
 trunk-revert : 
 	( cd $(TRUNK) && svn -R revert . )
 
-trunk-clean : 
+#sweep our mess
+trunk-sweep:
+	( find $(TRUNK) -name \*rej -or -name \*orig -or -name \.~\*bak | xargs rm --force --verbose )
+	@echo $(REV) was sweeped
+
+trunk-clean :
 	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
-	( find $(TRUNK) -name \*rej -name \*orig | xargs rm --force --verbose )
-	@echo $(REV) was cleared
 #deep clean
-	( cd $(TRUNK) && svn stat | grep ^? | grep -v 'nbproject\|Makefile-trunk.mk' | xargs rm -rf )
+	( cd $(TRUNK) && svn stat | grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf )
 	@echo $(REV)
 
 trunk-update : 
@@ -125,6 +129,9 @@ run :
 
 reset: clean trunk-prepare
 	$(DONE)
+
+list :
+	@( awk '/^\w/ { print $$1 }' ${PATCHMAP} | tail -n+2|sort)
 
 # end of easy part
 
@@ -166,7 +173,7 @@ increment :
 ##
 # Patchworks
 #
-%.patch.log : ${PATCHDIR}/%.patch  $(TRUNK)/Makefile
+%.patch.log : ${PATCHDIR}/%.patch
 	@echo "==> Patchin $*..."
 	@( test -f $< )
 ifeq ($(findstring --dry-run,${PARAM}),)
@@ -177,7 +184,8 @@ else
 endif
 	@echo "==> Patchin $* DONE"
 
-%.build.log : %.patch.log
+# runs configure after patching? or not? who cares
+%.build.log : %.patch.log $(TRUNK)/Makefile 
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
 #ifeq ($(findstring forceclean,${PARAM}),)
