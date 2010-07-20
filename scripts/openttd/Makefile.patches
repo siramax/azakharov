@@ -60,7 +60,7 @@ find_ignorable_prefix = $$(\
 
 # start of easy part
 all : $(PACKNAME).patch.check ${PATCHDIR}/$(PACKNAME).patch.${REV}
-	@echo "==> $@ DONE"
+	$(DONE)
 	( $(BROWSER) ${PATCHDIR}/$(PACKNAME).patch.${REV} )
 
 $(TRUNK)/Makefile:
@@ -76,12 +76,13 @@ ${PATCHDIR}/%.patch.${REV} : trunk-sweep
 
 # for quick hack, we do not require %.build.log 
 %.save : ${PATCHDIR}/%.patch.${REV} #alias
-	$(DONE)#report here of diffs with previois patch
+	$(DONE) 
+# report here of diffs with previois patch
 
 # override common rule by this one
 #${PATCHDIR}/$(PACKNAME).patch.${REV} : ${PATCHDIR}/$(PACKNAME).build.log  trunk-sweep 
 
-${PATCHDIR}/$(PACKNAME).build.log : patching-building reporting
+$(PACKNAME).build.log : patching-building reporting
 	$(DONE)
 
 ##
@@ -189,7 +190,7 @@ endif
 	@echo "==> Patchin $* DONE"
 
 # runs configure after patching? or not? who cares
-%.build.log : %.patch.log $(TRUNK)/Makefile 
+%.build.log : %.patch.log $(TRUNK)/Makefile
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
 #ifeq ($(findstring forceclean,${PARAM}),)
@@ -200,7 +201,9 @@ else
 	@echo "                  $ PARAM=\"\" $(MAKE) all"
 endif
 	@echo "==> Buildin $* DONE"
-
+	
+%.patch.check : %.build.log ${PATCHDIR}/%.patch.${REV}
+	$(DONE)
 %.patch.check : %.build.log ${PATCHDIR}/%.patch.${REV}
 	$(DONE)
 
@@ -210,7 +213,7 @@ endif
 ${PATCHDIR}/%.patch : #  here TODO from local saved file by currev-1,currev+1,currev-2,currev+2...
 	@echo "==> Refreshing $*..." 
 	@( awk '/^$*/ { print $$2 }' ${PATCHMAP} )
-	wget --output-document="$@" \
+	wget --output-document="${PATCHDIR}/$*.patch" \
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
 		"$(shell awk '/^$*[ ]+/ { print $$2 }' ${PATCHMAP})"
 
