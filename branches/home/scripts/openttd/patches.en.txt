@@ -1,0 +1,28 @@
+station-build-gui_v6.2 	[b]Improved Build Station GUI[/b]. With Industry Renewal Station Set (in) - cool.
+rating_town_label		[b]Colour rating in town label[/b].
+openttd-cargodist-sprinkles    patches with [b][url=http://www.tt-forums.net/viewtopic.php?t=41992]CargoDist[/url][/b]
+IB                    	[b]Improved Breakdowns[/b].
+harder_game				Bigos set [b]makes game harder[/b]
+stuck_trains            
+whistle                 Trains whistle when bridge and tunnels approaching.
+airport-upgrade-v6-1.0.0   [b]Airport upgrade[/b]
+watch_gui_6             
+vs.russian              [b]Russian translate[/b]
+VTI_console             For new commands refer to  [url=http://wiki.openttd.org/Vehicle_console_commands]here[/url], [url=http://wiki.openttd.org/Town_console_commands]there[/url] and [url=http://wiki.openttd.org/index.php/Industry_console_commands]here[/url]
+zoning                  buggy with NewGRFs
+more-cond-orders        [b]More conditional orders[/b]
+town_growth_need_goods  [b]Town growth based on passenger/mails/goods[/b] A small patch that slow down town growth if there aren't enough passengers, mails and goods transported relatively to it's size.
+reload-ai               Add console command restart_ai <ID>, which reloads AI without infrastructure loses.
+stop-sharing  			This patch use the 'Delete' button, refitted to 'Stop Sharing' when 'End Of Shared Orders' is selected
+winstate        		This patch provides [b]ability to save window position and/or size[/b] when window closed and restore it when window is reopened.
+no_home_dir				Settings, save and data are in program folder
+cargo_dist 				[b]Passenger and cargo distribution.[/b]
+variable-daylength 		
+town-cargo-factor 		[b]Adjust town passenger/cargo rates[/b] Advice to set it -2 :)
+Daily-autosave 			[b]Daily autosave[/b] provides "daily" and "weekly" autosave options in addition to the previous monthly ones.
+Vehicle-name-length		Enlarge vehicle name limit from 150 to 250 chars
+timetable-separation  	
+infrastructure_maintenance	 This setting makes all companies pay X% of the construction cost of all infrastructure per year, with X being configurable between 1 and 100. Alternatively, setting X to zero maintains the old behaviour to maintain full backwards compatibility.		
+building-costs			Bigos [b]Improved Building Costs Patch[/b] Here is small patch which allow you to change cost of few things in game. For now you can multiply price of tunnels, bridges, terraforming (without building on slopes), signals and airports.
+additional-taxes		Bigos [b]Additional Tax Patch v0.2[/b] [list][*]at start ~2 year free from tax [*] ~10% of company value per year after your company reach 250 000 pounds[*]~20% of company value per year after your company reach 1 500 000 pounds[*]cash from tax is assign for creation of new industries[/list]
+vehicle-repair-cost		Bigos [b]Vehicle Repair Cost[/b] Cost of repair for each breakdown is 1/1024 vehicle value. 
