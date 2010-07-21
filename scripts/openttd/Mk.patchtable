@@ -1,12 +1,13 @@
-patch_name                  url                                                                         notes
+patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
 station-build-gui_v5.1      http://www.tt-forums.net/download/file.php?id=124242
 station-build-gui_v6.0      http://www.tt-forums.net/download/file.php?id=125763
 station-build-gui_v6.1      http://www.tt-forums.net/download/file.php?id=125817
-station-build-gui_v6.2      http://www.tt-forums.net/download/file.php?id=126796
+station-build-gui_v6.2      http://www.tt-forums.net/download/file.php?id=126796 http://www.tt-forums.net/viewtopic.php?t=41222
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
-cargo_dist                  http://fickzoo.com/fonsinchen/patches/current/trunk-cargodist.diff
-openttd-cargodist-sprinkles    http://www.tt-forums.net/download/file.php?id=130107 http://qmsk.net/~terom/openttd/patches/variable-daylength_town-cargo_misc-00-trunk.svn.patch
+cargo_dist                  http://fickzoo.com/fonsinchen/patches/current/trunk-cargodist.diff http://www.tt-forums.net/viewtopic.php?t=41992
+openttd-cargodist-sprinkles    http://www.tt-forums.net/download/file.php?id=130107 http://www.tt-forums.net/viewtopic.php?t=46399
+http://qmsk.net/~terom/openttd/patches/variable-daylength_town-cargo_misc-00-trunk.svn.patch
 openttd-cargodist-minipack  http://www.tt-forums.net/download/file.php?id=127095 My merge for 1.0.0
                             http://www.tt-forums.net/download/file.php?id=127043
                             http://www.tt-forums.net/download/file.php?id=125924
@@ -16,9 +17,10 @@ openttd-cargodist-minipack  http://www.tt-forums.net/download/file.php?id=127095
                             cargodist, automated-timetables-and-separation, variable-daylength-01, 
                             variable-daylength-02-towngrowthfreq, variable-daylength-03-autofill-roundoff, 
                             town-cargo-factor-01, daily-autosave-00, vehicle-name-length
-IB                          http://www.tt-forums.net/download/file.php?id=124966
-harder_game                 http://www.tt-forums.net/download/file.php?id=120185 http://www.tt-forums.net/viewtopic.php?f=33&t=45642
-stuck_trains                http://www.tt-forums.net/download/file.php?id=126757 http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
+IB                          http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518 улучшенные поломки. Ќаверное самый прикольный патчик после CargoDist. “еперь транспорт может не просто заглохнуть, но, например, снизить т€гу, скорость, а самолетам потребуетс€ срочна€ посадка.
+harder_game                 http://www.tt-forums.net/download/file.php?id=120185 http://www.tt-forums.net/viewtopic.php?t=45642
+stuck_trains                http://www.tt-forums.net/download/file.php?id=126757 http://www.tt-forums.net/viewtopic.php?t=47095
+http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
 whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
 better_graphs               http://www.tt-forums.net/download/file.php?id=93336
 airport-close-v6            http://www.tt-forums.net/download/file.php?id=121464
@@ -32,10 +34,10 @@ moreheightlevels_v24_21     http://www.tt-forums.net/download/file.php?id=126749
 moreheightlevels_v27        http://www.tt-forums.net/download/file.php?id=130709
 cargo_autosep_moreheights   http://www.tt-forums.net/download/file.php?id=125861
 
-watch_gui_6                 http://www.tt-forums.net/download/file.php?id=126291
+watch_gui_6                 http://www.tt-forums.net/download/file.php?id=126291 http://www.tt-forums.net/viewtopic.php?t=45221
 close_tools_middle_v1       http://www.tt-forums.net/download/file.php?id=116056
 pathfinder_penalty_rv       http://www.tt-forums.net/download/file.php?id=121071
-russian-town-names          http://www.tt-forums.net/download/file.php?id=126930
+russian-town-names          http://www.tt-forums.net/download/file.php?id=126930 http://www.tt-forums.net/viewtopic.php?t=33344
 vs.russian                  http://vaulter.localhost/vs.russian.patch
 VTI_console                 http://www.tt-forums.net/download/file.php?id=127681    http://www.tt-forums.net/viewtopic.php?t=32964
 copypaste                   http://www.tt-forums.net/download/file.php?id=127691
@@ -43,12 +45,15 @@ copypaste                   http://www.tt-forums.net/download/file.php?id=127691
 copypaste.grf               http://www.tt-forums.net/download.php?id=50279
 signaltunnel                http://www.tt-forums.net/download/file.php?id=126249
 # timetable-separation      http://www.tt-forums.net/download/file.php?id=115079
-zoning                      http://www.tt-forums.net/download/file.php?id=131263    
+zoning                      http://www.tt-forums.net/download/file.php?id=131263 
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
 more-cond-orders            http://www.tt-forums.net/download/file.php?id=109179
 
-town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=89652
+town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=89652 http://www.tt-forums.net/viewtopic.php?t=37158
 keyb_config                 http://www.tt-forums.net/download/file.php?id=130663
 build_while_pause_in_editor    http://www.tt-forums.net/download/file.php?id=127664
-reload-ai                   http://www.tt-forums.net/download/file.php?id=127668
-infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122924&sid=98ed8ef9eb3bc7ed87e829b2a9d1b744
+reload-ai                   http://www.tt-forums.net/download/file.php?id=127668 http://bugs.openttd.org/task/2837
+infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122924&sid=98ed8ef9eb3bc7ed87e829b2a9d1b744 http://www.tt-forums.net/viewtopic.php?t=46811
+stop-sharing-order-list     http://bugs.openttd.org/task/3711/getfile/6104/stop-sharing-order-list_hg-488d4cd37ddd.patch http://bugs.openttd.org/task/3711
+winstate        http://bugs.openttd.org/task/3900/getfile/6223/ak2-patch-winstate-r20016.zip http://bugs.openttd.org/task/3900
+
