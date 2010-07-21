@@ -23,7 +23,8 @@ PATCHDIR ?= $(shell pwd)
 PATCHMAP ?= $(PATCHDIR)/Mk.patchtable
 PATCHES ?= rating_town_label station-build-gui_v5.1 openttd-cargodist-minipack harder_game IB
 CONFIGURE_PARAMS ?=
-BUNDLEDIR ?= $(PATCHDIR)/../bundle
+BUNDLE_OVERLAP ?= $(PATCHDIR)/../bundle
+DOS2UNIXPATH ?= sed 's\#\\\\\#/\#g'
 # TimeOut in secs
 HTTP_TO ?= 30
 DNS_TO ?= 2
@@ -106,7 +107,7 @@ trunk-sweep:
 trunk-clean :
 	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
 #deep svn new files from patches clean
-	( cd $(TRUNK) && svn stat | sed 's#\\\#/#g' | grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf )
+	( cd $(TRUNK) && svn stat | $(DOS2UNIXPATH)  |  grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf )
 	@echo $(REV)
 
 trunk-update : 
@@ -233,7 +234,7 @@ BUNDLES_DIR = $(TRUNK)/bundles
 BUNDLE_NAME = openttd-hardpack-$(REV)
 bundle :
 	( make $(MAKEFLAGS) -C "$(TRUNK)" bundle )
-	( cp -R --force --target-directory="$(TRUNK)/" "$(BUNDLEDIR)/"  )
+	( [ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && cp -R --force --target-directory="$(TRUNK)" "$(BUNDLE_OVERLAP)/" || true)
 	@echo '[BUNDLE] Creating $(BUNDLE_NAME).tar.gz'
 	$(Q)mkdir -p "$(BUNDLES_DIR)/.gzip/$(BUNDLE_NAME)"
 	$(Q)cp -R    "$(BUNDLE_DIR)/"* "$(BUNDLES_DIR)/.gzip/$(BUNDLE_NAME)/"

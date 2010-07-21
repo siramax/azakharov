@@ -6,3 +6,9 @@ PATCHES = openttd-cargodist-sprinkles IB station-build-gui_v6.2 town_growth_need
 PATCHDIR ?= $(shell pwd)/../patches
 PATCHMAP ?= $(shell pwd)/Mk.patchtable
 CONFIGURE_PARAMS ?=
+DOS2UNIXPATH ?= sed 's\#\\\\\#/\#g'
+DOS2UNIXPATH ?= cat
+
+#BUNDLE_OVERLAP ?= $(PATCHDIR)/../bundle
+#disable
+BUNDLE_OVERLAP = 
