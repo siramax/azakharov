@@ -21,7 +21,7 @@ BROWSER ?= cat #opens final result
 BROWSERI ?= cat # pipes
 PATCHDIR ?= $(shell pwd)
 PATCHMAP ?= $(PATCHDIR)/Mk.patchtable
-PATCHES ?= rating_town_label station-build-gui_v5.1 openttd-cargodist-minipack harder_game IB
+PATCHES ?= rating_town_label station-build-gui_v6.2 openttd-cargodist-minipack harder_game IB
 CONFIGURE_PARAMS ?=
 BUNDLE_OVERLAP ?= $(PATCHDIR)/../bundle
 DOS2UNIXPATH ?= sed 's\#\\\\\#/\#g'
@@ -36,7 +36,9 @@ FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROW
 
 # revision
 # TODO as file REVISION.txt
-REV := r$(shell cd ${TRUNK} && svnversion -n)
+#REV := r$(shell cd ${TRUNK} && svnversion -n)
+REV := $(shell cd ${TRUNK} && findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
+
 .PRECIOUS: ${PATCHDIR}/%.patch %.patch.log %.build.log ${PATCHDIR}/%.patch.${REV}
 
 
@@ -185,7 +187,7 @@ increment :
 # Patchworks
 #
 %.patch.log : ${PATCHDIR}/%.patch
-	@echo "==> Patchin $*..."
+	@echo -n "==> Patchin $*..."
 	@( test -f $< )
 ifeq ($(findstring --dry-run,${PARAM}),)
 	@( patch $(PARAM) --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="$<" > $@ ) || \
@@ -193,7 +195,7 @@ ifeq ($(findstring --dry-run,${PARAM}),)
 else
 	@( patch $(PARAM) --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="$<" )
 endif
-	@echo "==> Patchin $* DONE"
+	@echo "OK"
 
 # runs configure after patching? or not? who cares
 %.build.log : %.patch.log $(TRUNK)/Makefile 
