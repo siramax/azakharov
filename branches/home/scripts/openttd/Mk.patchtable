@@ -54,6 +54,6 @@ keyb_config                 http://www.tt-forums.net/download/file.php?id=130663
 build_while_pause_in_editor    http://www.tt-forums.net/download/file.php?id=127664
 reload-ai                   http://www.tt-forums.net/download/file.php?id=127668 http://bugs.openttd.org/task/2837
 infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122924&sid=98ed8ef9eb3bc7ed87e829b2a9d1b744 http://www.tt-forums.net/viewtopic.php?t=46811
-stop-sharing-order-list     http://bugs.openttd.org/task/3711/getfile/6104/stop-sharing-order-list_hg-488d4cd37ddd.patch http://bugs.openttd.org/task/3711
+stop-sharing     http://bugs.openttd.org/task/3711/getfile/6104/stop-sharing-order-list_hg-488d4cd37ddd.patch http://bugs.openttd.org/task/3711
 winstate        http://bugs.openttd.org/task/3900/getfile/6223/ak2-patch-winstate-r20016.zip http://bugs.openttd.org/task/3900
 
