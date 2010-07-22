@@ -36,9 +36,11 @@ FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROW
 #
 
 # revision
+VERSION := 0.1
 # TODO as file REVISION.txt
 #REV := r$(shell cd ${TRUNK} && svnversion -n)
-REV := $(shell cd ${TRUNK} && findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
+#REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
+REV := $(VERSION).$(shell cd ~/scripts/openttd && svnversion -n)
 
 .PRECIOUS: ${PATCHDIR}/%.patch %.patch.log %.build.log ${PATCHDIR}/%.patch.${REV}
 
@@ -78,7 +80,7 @@ $(TRUNK)/Makefile:
 # Do patch from current trunk
 # $(PACKNAME).patch.${REV} will be caught by this
 ${PATCHDIR}/%.patch.${REV} : trunk-sweep
-	( cd $(TRUNK) && svn status | sed 's#\\\#/#g' | grep -v M |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
+	( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^M |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
 	( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
 
 # for quick hack, we do not require %.build.log 
