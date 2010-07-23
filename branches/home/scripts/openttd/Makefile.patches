@@ -22,8 +22,11 @@ BROWSER ?= cat #opens final result
 BROWSERI ?= cat # pipes
 PATCHDIR ?= $(shell pwd)
 PATCHMAP ?= $(PATCHDIR)/Mk.patchtable
-PATCHES ?= rating_town_label station-build-gui_v6.2 openttd-cargodist-minipack harder_game IB
-CONFIGURE_PARAMS ?=
+PATCHES ?= openttd-cargodist-sprinkles IB station-build-gui_v6.2 town_growth_need_goods \
+	harder_game stuck_trains rating_town_label watch_gui_6 russian-town-names \
+	airport-upgrade-v6-1.0.0 VTI_console zoning more-cond-orders whistle vs.russian \
+	no_home_dir reload-ai stop-sharing winstate
+CONFIGURE_PARAMS ?= 
 BUNDLE_OVERLAP ?= $(PATCHDIR)/../bundle
 DOS2UNIXPATH ?= sed 's\#\\\\\#/\#g'
 # TimeOut in secs
@@ -40,7 +43,8 @@ VERSION := 0.1
 # TODO as file REVISION.txt
 #REV := r$(shell cd ${TRUNK} && svnversion -n)
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
-REV := $(VERSION).$(shell cd ~/scripts/openttd && svnversion -n)
+#REV := $(VERSION).$(shell cd ~/scripts/openttd && svnversion -n)
+REV := $(VERSION).$(shell cd ./ && svnversion -n)
 
 .PRECIOUS: ${PATCHDIR}/%.patch %.patch.log %.build.log ${PATCHDIR}/%.patch.${REV}
 
@@ -160,7 +164,7 @@ ifeq ($(findstring --dry-run,${PARAM}),)
 #	( $(MAKE) -C $(TRUNK) clean )
 # changing dir for possible reconfigure, but we do not know initial path too
 # also this is hack to pre-reconfigure by "make" not $(MAKE) which can be mingw32-make.exe
-	( make $(MAKEFLAGS) -C $(TRUNK) all >$@ )
+	( make $(MFLAGS) -C $(TRUNK) all >$@ )
 else
 	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
 	@echo "                  $$ PARAM=\"\" $(MAKE) all"
@@ -208,7 +212,7 @@ ifeq ($(findstring --dry-run,${PARAM}),)
 #ifeq ($(findstring forceclean,${PARAM}),)
 #	( $(MAKE) -C $(TRUNK) clean )
 # also this is hack to pre-reconfigure by "make" not $(MAKE) which can be mingw32-make.exe
-	( make $(MAKEFLAGS) -C $(TRUNK) all >$@ )
+	( make $(MFLAGS) -C $(TRUNK) all >$@ )
 else
 	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
 	@echo "                  $ PARAM=\"\" $(MAKE) all"
@@ -221,8 +225,9 @@ endif
 
 
 # Refresh patch file from its URL
-${PATCHDIR}/%.patch : #  here TODO from local saved file by currev-1,currev+1,currev-2,currev+2...
-	@echo "==> Refreshing $*..." 
+#  here TODO from local saved file by currev-1,currev+1,currev-2,currev+2...
+${PATCHDIR}/%.patch : 
+	@echo "==> Refreshing $@..." 
 	@( awk '/^$*/ { print $$2 }' ${PATCHMAP} )
 	wget --output-document="$@" \
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
@@ -239,7 +244,7 @@ BUNDLE_DIR =  $(TRUNK)/bundle
 BUNDLES_DIR = $(TRUNK)/bundles
 BUNDLE_NAME = openttd-hardpack-$(REV)
 bundle :
-	( make $(MAKEFLAGS) -C "$(TRUNK)" bundle )
+	( make $(MFLAGS) -C "$(TRUNK)" bundle )
 	( [ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && cp -R --force --target-directory="$(TRUNK)" "$(BUNDLE_OVERLAP)/" || true)
 	@echo '[BUNDLE] Creating $(BUNDLE_NAME).tar.gz'
 	$(Q)mkdir -p "$(BUNDLES_DIR)/.gzip/$(BUNDLE_NAME)"

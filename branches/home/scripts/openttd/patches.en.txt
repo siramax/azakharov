@@ -17,7 +17,7 @@ stop-sharing  			This patch use the 'Delete' button, refitted to 'Stop Sharing' 
 winstate        		This patch provides [b]ability to save window position and/or size[/b] when window closed and restore it when window is reopened.
 no_home_dir				Settings, save and data are in program folder
 cargo_dist 				[b]Passenger and cargo distribution.[/b]
-variable-daylength 		
+variable-daylength 		Adjust base daylength factor
 town-cargo-factor 		[b]Adjust town passenger/cargo rates[/b] Advice to set it -2 :)
 Daily-autosave 			[b]Daily autosave[/b] provides "daily" and "weekly" autosave options in addition to the previous monthly ones.
 Vehicle-name-length		Enlarge vehicle name limit from 150 to 250 chars
