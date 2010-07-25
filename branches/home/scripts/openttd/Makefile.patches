@@ -16,17 +16,14 @@ include Mk.params
 PACKNAME=vs_hard_pack
 LANG ?= ru
 PARAM ?= "--dry-run"
-TRUNK ?= ~/src/openttd/svn.openttd.org/trunk
+TRUNK ?= ~/src/openttd/trunk
+WORKDIR ?= ./
 MODE ?= alone # or patchpack
 BROWSER ?= cat #opens final result
-BROWSERI ?= cat # pipes
 PATCHDIR ?= $(shell pwd)
 PATCHMAP ?= $(PATCHDIR)/Mk.patchtable
-PATCHES ?= openttd-cargodist-sprinkles IB station-build-gui_v6.2 town_growth_need_goods \
-	harder_game stuck_trains rating_town_label watch_gui_6 russian-town-names \
-	airport-upgrade-v6-1.0.0 VTI_console zoning more-cond-orders whistle vs.russian \
-	no_home_dir reload-ai stop-sharing winstate
-CONFIGURE_PARAMS ?= 
+PATCHES ?= $(shell cat patchpack.txt)
+CONFIGURE_PARAMS +=
 BUNDLE_OVERLAP ?= $(PATCHDIR)/../bundle
 DOS2UNIXPATH ?= sed 's\#\\\\\#/\#g'
 # TimeOut in secs
@@ -39,12 +36,12 @@ FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROW
 #
 
 # revision
-VERSION := 0.1
+VERSION := 0.2
 # TODO as file REVISION.txt
 #REV := r$(shell cd ${TRUNK} && svnversion -n)
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
 #REV := $(VERSION).$(shell cd ~/scripts/openttd && svnversion -n)
-REV := $(VERSION).$(shell cd ./ && svnversion -n)
+REV := $(VERSION).$(shell cd $(WORKDIR) && svnversion -n)
 
 .PRECIOUS: ${PATCHDIR}/%.patch %.patch.log %.build.log ${PATCHDIR}/%.patch.${REV}
 
@@ -149,6 +146,9 @@ reset: clean trunk-prepare
 list :
 	@( awk '/^\w/ { print $$1 }' ${PATCHMAP} | tail -n+2|sort)
 
+plan:
+	@( echo $(PATCHES) )
+
 # end of easy part
 
 #
@@ -244,8 +244,11 @@ BUNDLE_DIR =  $(TRUNK)/bundle
 BUNDLES_DIR = $(TRUNK)/bundles
 BUNDLE_NAME = openttd-hardpack-$(REV)
 bundle :
-	( make $(MFLAGS) -C "$(TRUNK)" bundle )
-	( [ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && cp -R --force --target-directory="$(TRUNK)" "$(BUNDLE_OVERLAP)/" || true)
+	@( make $(MFLAGS) -C "$(TRUNK)" bundle )
+	( [ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && \
+	  cp -R --force --target-directory="$(TRUNK)/bundle" "$(BUNDLE_OVERLAP)/"* && \
+	  echo '[BUNDLE] Customs copied from "$(BUNDLE_OVERLAP)"' || \
+	true)
 	@echo '[BUNDLE] Creating $(BUNDLE_NAME).tar.gz'
 	$(Q)mkdir -p "$(BUNDLES_DIR)/.gzip/$(BUNDLE_NAME)"
 	$(Q)cp -R    "$(BUNDLE_DIR)/"* "$(BUNDLES_DIR)/.gzip/$(BUNDLE_NAME)/"
@@ -271,7 +274,7 @@ descr-start:
 	fi )
 	@( if [ "$*" == "harder_game" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) --no-print-directory -f Makefile.patches $(addsuffix .descr, infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
+		$(MAKE) --no-print-directory -f Makefile.patches $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
 		echo "		[/list]"; \
 	fi )
 		
