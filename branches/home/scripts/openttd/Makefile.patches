@@ -276,6 +276,11 @@ descr-start:
 		$(MAKE) --no-print-directory -f Makefile.patches $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
 		echo "		[/list]"; \
 	fi )
+	@( if [ "$*" == "adv-orders" ]; then \
+		echo "		[list=1]"; \
+		$(MAKE) --no-print-directory -f Makefile.patches $(addsuffix .descr, more-cond-orders stop-sharing  ); \
+		echo "		[/list]"; \
+	fi )
 		
 
 
