@@ -1,11 +1,9 @@
 patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
-station-build-gui_v5.1      http://www.tt-forums.net/download/file.php?id=124242
-station-build-gui_v6.0      http://www.tt-forums.net/download/file.php?id=125763
-station-build-gui_v6.1      http://www.tt-forums.net/download/file.php?id=125817
 station-build-gui_v6.2      http://www.tt-forums.net/download/file.php?id=126796 http://www.tt-forums.net/viewtopic.php?t=41222
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
 cargo_dist                  http://fickzoo.com/fonsinchen/patches/current/trunk-cargodist.diff http://www.tt-forums.net/viewtopic.php?t=41992
+cargodist                   http://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r20211.diff
 openttd-cargodist-sprinkles    http://www.tt-forums.net/download/file.php?id=130107 http://www.tt-forums.net/viewtopic.php?t=46399
                             http://qmsk.net/~terom/openttd/patches/variable-daylength_town-cargo_misc-00-trunk.svn.patch
 openttd-cargodist-minipack  http://www.tt-forums.net/download/file.php?id=127095 My merge for 1.0.0
@@ -22,17 +20,10 @@ harder_game                 http://www.tt-forums.net/download/file.php?id=120185
 stuck_trains                http://www.tt-forums.net/download/file.php?id=126757 http://www.tt-forums.net/viewtopic.php?t=47095
                             http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
 whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
-better_graphs               http://www.tt-forums.net/download/file.php?id=93336
 airport-close-v6            http://www.tt-forums.net/download/file.php?id=121464
 airport-close-v7            http://www.tt-forums.net/download/file.php?id=128408 http://www.tt-forums.net/download/file.php?id=127529                                                                                               http://www.tt-forums.net/download/file.php?id=126200
 airport_upgrade             http://www.tt-forums.net/download/file.php?id=125591 http://www.tt-forums.net/download/file.php?id=124542
 airport-upgrade-v6-1.0.0    http://www.tt-forums.net/download/file.php?id=128417
-grassOnTracks               http://www.tt-forums.net/download/file.php?id=124535
-variable_daylength          http://qmsk.net/~terom/openttd/patches/everything-00-trunk-r18774.patch
-moreheightlevels_v24_20     http://www.tt-forums.net/download/file.php?id=125135 r19304
-moreheightlevels_v24_21     http://www.tt-forums.net/download/file.php?id=126749 r19386
-moreheightlevels_v27        http://www.tt-forums.net/download/file.php?id=130709
-cargo_autosep_moreheights   http://www.tt-forums.net/download/file.php?id=125861
 
 watch_gui_6                 http://www.tt-forums.net/download/file.php?id=126291 http://www.tt-forums.net/viewtopic.php?t=45221
 close_tools_middle_v1       http://www.tt-forums.net/download/file.php?id=116056
@@ -40,15 +31,12 @@ pathfinder_penalty_rv       http://www.tt-forums.net/download/file.php?id=121071
 russian-town-names          http://www.tt-forums.net/download/file.php?id=126930 http://www.tt-forums.net/viewtopic.php?t=33344
 vs.russian                  http://vaulter.localhost/vs.russian.patch
 VTI_console                 http://www.tt-forums.net/download/file.php?id=127681    http://www.tt-forums.net/viewtopic.php?t=32964
-copypaste                   http://www.tt-forums.net/download/file.php?id=127691
-# Dependency of copypaste:
-copypaste.grf               http://www.tt-forums.net/download.php?id=50279
 signaltunnel                http://www.tt-forums.net/download/file.php?id=126249
 # timetable-separation      http://www.tt-forums.net/download/file.php?id=115079
 zoning                      http://www.tt-forums.net/download/file.php?id=131263 
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
 more-cond-orders            http://www.tt-forums.net/download/file.php?id=109179
-
+town-cargo-factor           http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor-01-noslv.patch
 town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=89652 http://www.tt-forums.net/viewtopic.php?t=37158
 keyb_config                 http://www.tt-forums.net/download/file.php?id=130663
 build_while_pause_in_editor    http://www.tt-forums.net/download/file.php?id=127664
@@ -62,3 +50,22 @@ towncost                    http://www.tt-forums.net/download/file.php?id=76518 
 more_diesel_smoke           http://www.tt-forums.net/download/file.php?id=125402    http://www.tt-forums.net/viewtopic.php?t=19896
 daypatch                    http://www.tt-forums.net/download/file.php?id=108045    http://www.tt-forums.net/viewtopic.php?t=31657
 leasing                     http://www.tt-forums.net/download/file.php?id=132263 http://www.tt-forums.net/viewtopic.php?f=33&t=49389
+daily-autosave              http://qmsk.net/~terom/openttd/patches/daily-autosave-00-trunk.patch
+vehicle-name-length         http://qmsk.net/~terom/openttd/patches/vehicle-name-length-00-trunk.patch
+automated-timetables-and-separation     http://www.tt-forums.net/download/file.php?id=126671
+
+############
+# Experimental
+grassOnTracks               http://www.tt-forums.net/download/file.php?id=124535
+# variable_daylength          http://qmsk.net/~terom/openttd/patches/everything-00-trunk-r18774.patch
+# moreheightlevels_v24_20     http://www.tt-forums.net/download/file.php?id=125135 r19304
+# moreheightlevels_v24_21     http://www.tt-forums.net/download/file.php?id=126749 r19386
+moreheightlevels_v27        http://www.tt-forums.net/download/file.php?id=130709
+cargo_autosep_moreheights   http://www.tt-forums.net/download/file.php?id=125861
+copypaste                   http://www.tt-forums.net/download/file.php?id=127691
+# Dependency of copypaste:
+copypaste.grf               http://www.tt-forums.net/download.php?id=50279
+better_graphs               http://www.tt-forums.net/download/file.php?id=93336
+station-build-gui_v5.1      http://www.tt-forums.net/download/file.php?id=124242
+station-build-gui_v6.0      http://www.tt-forums.net/download/file.php?id=125763
+station-build-gui_v6.1      http://www.tt-forums.net/download/file.php?id=125817
