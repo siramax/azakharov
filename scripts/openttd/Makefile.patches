@@ -16,7 +16,7 @@ include Mk.params
 PACKNAME=vs_hard_pack
 LANG ?= ru
 PARAM ?= "--dry-run"
-TRUNK ?= ~/src/openttd/trunk
+TRUNK ?= $(HOME)/src/openttd/trunk
 WORKDIR ?= ./
 MODE ?= alone # or patchpack
 BROWSER ?= cat #opens final result
@@ -41,10 +41,9 @@ VERSION := 0.2
 #REV := r$(shell cd ${TRUNK} && svnversion -n)
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
 #REV := $(VERSION).$(shell cd ~/scripts/openttd && svnversion -n)
-REV := $(VERSION).$(shell cd $(WORKDIR) && svnversion -n)
+REV := $(VERSION).$(shell cd ${WORKDIR} && svnversion -n)
 
 .PRECIOUS: ${PATCHDIR}/%.patch %.patch.log %.build.log ${PATCHDIR}/%.patch.${REV}
-
 
 original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
 
@@ -81,7 +80,7 @@ $(TRUNK)/Makefile:
 # Do patch from current trunk
 # $(PACKNAME).patch.${REV} will be caught by this
 ${PATCHDIR}/%.patch.${REV} : trunk-sweep
-	( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^M |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
+	( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
 	( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
 
 # for quick hack, we do not require %.build.log 
@@ -134,7 +133,7 @@ sweep : $(addsuffix .sweep, $(PATCHES) )
 
 %.sweep :
 	@echo "==> Sweeping $*..."
-	( rm $*.patch || true )
+	( rm ${PATCHDIR}/$*.patch || true )
 	$(DONE)
 
 run :
