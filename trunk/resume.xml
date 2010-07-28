@@ -67,8 +67,7 @@ opportunity for advancement.
           <City>Volgograd branch</City>
           <Description>International outsourcing company</Description>
         </Employer>
-        <Description>Working as member of a team developing and maintaining: 
-            distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application. Automate, optimize and promote corporate sites. Plan, control and evaluate the operations of information systems. Develop and implement policies and procedures for electronic data processing and computer systems operations and development. Meet with clients to discuss system requirements, specifications, costs and timelines. Recruit and supervise computer engineers and programmers. </Description>
+        <Description>Working as member of a team developing and maintaining: distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application. Automate, optimize and promote corporate sites. Plan, control and evaluate the operations of information systems. Develop and implement policies and procedures for electronic data processing and computer systems operations and development. Meet with clients to discuss system requirements, specifications, costs and time lines. Recruit and supervise computer engineers and programmers.</Description>
         <Achievement lang = "ru">Улучшил скорость SOAP запросов web приложения к серверу</Achievement>
         <Achievement lang = "en">Improved speed of SOAP data exchange between web application and server</Achievement>
         
@@ -83,8 +82,8 @@ opportunity for advancement.
 		
         <Achievement lang = "ru">Перенес статичный сайт на CMS Drupal</Achievement>
         <Achievement lang = "en">Convert static corporate site into dynamic full-featured extensible site on CMS Drupal</Achievement>
-        <Techs>Drupal, PHP, Javascript, HTML, CSS, C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat.</Techs>
-      </Entry><!-- 
+        <Techs>C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat, Drupal, PHP, Javascript, HTML, CSS.</Techs>
+      </Entry>
       <Entry Job = 'Freelancer'>
         <Period From = "Aug 2007" To = "Jul 2008" />
         <Job>Freelancer</Job>
@@ -92,9 +91,9 @@ opportunity for advancement.
           <Name></Name>
           <City>Volgograd</City>
         </Employer>
-        <Description>Development and implementation of web-projects (<go xlink:title = "See it in porfolio" xlink:role = "locator" xlink:href ="http://vaultsoft.ru/portfolio" xlink:actuate = "onRequest" xlink:show = "new" />).</Description>
+        <Description>Meet with clients to discuss system requirements, specifications, costs and time lines. Development, implementation, optimization and modernization of web-projects. Implementation of custom modules and themes for Drupal (node files local task tab). Implementing sites based on Drupal modules: Content Construction Kit, Views, Pathauto, Nodewords, Taxonomy breadcrumb, MultiLink, Location, GClassified Ads, Video Filter, Custom Pagers, Image, Boost, Locale, Profile, Actions, IMCE, Workflow, Ubercart, Slideshow, TinyMCE and so on. Customizing and code tweaking: Image,  Taxonomy menu, Drush, Imagefield Crop. Development and implementation of web-projects (<go xlink:title = "See it in porfolio" xlink:role = "locator" xlink:href ="http://vaultsoft.ru/portfolio" xlink:actuate = "onRequest" xlink:show = "new" />).</Description>
         <Techs>Drupal, Joomla, DataLife Engine, Wordpress, HTML, JavaScript, PHP, MySQL, Apache, MSSQL, IIS, SSH.</Techs>
-      </Entry> -->
+      </Entry>
       <Entry Job = 'Software Engineer'>
         <Period From = "May 2006" To = "Aug 2007" />
         <Job>Software Engineer</Job>
