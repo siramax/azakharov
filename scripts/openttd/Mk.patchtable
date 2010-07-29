@@ -3,7 +3,7 @@ patch_name                  url                                                 
 station-build-gui_v6.2      http://www.tt-forums.net/download/file.php?id=126796 http://www.tt-forums.net/viewtopic.php?t=41222
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
 cargo_dist                  http://fickzoo.com/fonsinchen/patches/current/trunk-cargodist.diff http://www.tt-forums.net/viewtopic.php?t=41992
-cargodist                   http://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r20211.diff
+cargodist                   http://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r20211.diff   http://www.tt-forums.net/viewtopic.php?t=41992
 openttd-cargodist-sprinkles    http://www.tt-forums.net/download/file.php?id=130107 http://www.tt-forums.net/viewtopic.php?t=46399
                             http://qmsk.net/~terom/openttd/patches/variable-daylength_town-cargo_misc-00-trunk.svn.patch
 openttd-cargodist-minipack  http://www.tt-forums.net/download/file.php?id=127095 My merge for 1.0.0
@@ -47,8 +47,9 @@ winstate        http://bugs.openttd.org/task/3900/getfile/6223/ak2-patch-winstat
 panorama 		http://www.tt-forums.net/download/file.php?id=132100
 addional_orders    http://new.tt-forums.net/download/file.php?id=50435
 towncost                    http://www.tt-forums.net/download/file.php?id=76518 http://www.tt-forums.net/viewtopic.php?t=32942
-more_diesel_smoke           http://www.tt-forums.net/download/file.php?id=125402    http://www.tt-forums.net/viewtopic.php?t=19896
-daypatch                    http://www.tt-forums.net/download/file.php?id=108045    http://www.tt-forums.net/viewtopic.php?t=31657
+more_diesel_smoke           http://www.tt-forums.net/download/file.php?id=132402    http://www.tt-forums.net/viewtopic.php?t=19896
+daypatch                    http://www.tt-forums.net/download/file.php?id=108045    http://www.tt-forums.net/viewtopic.php?t=31657 /Sep 12, 2008/
+daylen                      http://www.tt-forums.net/download/file.php?id=131893    http://www.tt-forums.net/viewtopic.php?f=33&t=42432
 leasing                     http://www.tt-forums.net/download/file.php?id=132263 http://www.tt-forums.net/viewtopic.php?f=33&t=49389
 daily-autosave              http://qmsk.net/~terom/openttd/patches/daily-autosave-00-trunk.patch
 vehicle-name-length         http://qmsk.net/~terom/openttd/patches/vehicle-name-length-00-trunk.patch

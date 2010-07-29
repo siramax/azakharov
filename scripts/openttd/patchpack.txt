@@ -1,6 +1,6 @@
 cargodist IB station-build-gui_v6.2 town_growth_need_goods
 harder-game stuck_trains rating_town_label watch_gui_6 russian-town-names
-airport-upgrade-v6-1.0.0 VTI_console zoning adv-orders whistle vs.russian
-no_home_dir reload-ai winstate more_diesel_smoke
-vehicle-name-length town-cargo-factor daily-autosave automated-timetables-and-separation
-
+airport-upgrade-v6-1.0.0 VTI_console zoning adv-orders whistle
+reload-ai winstate more_diesel_smoke
+vehicle-name-length town-cargo-factor daylen daily-autosave automated-timetables-and-separation
+no_home_dir  vs.russian

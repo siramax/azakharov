@@ -268,17 +268,17 @@ descr-start:
 	@awk '/^$*\>/ { $$1=""; print $$0 }' patches.$(LANG).txt
 	@( if [ "$*" == "openttd-cargodist-sprinkles" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) --no-print-directory -f Makefile.patches $(addsuffix .descr, cargo_dist variable-daylength Daily-autosave Vehicle-name-length ); \
+		$(MAKE) --no-print-directory $(addsuffix .descr, cargo_dist variable-daylength Daily-autosave Vehicle-name-length ); \
 		echo "		[/list]"; \
 	fi )
-	@( if [ "$*" == "harder_game" ]; then \
+	@( if [ "$*" == "harder-game" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) --no-print-directory -f Makefile.patches $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
+		$(MAKE) --no-print-directory $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
 		echo "		[/list]"; \
 	fi )
 	@( if [ "$*" == "adv-orders" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) --no-print-directory -f Makefile.patches $(addsuffix .descr, more-cond-orders stop-sharing  ); \
+		$(MAKE) --no-print-directory $(addsuffix .descr, more-cond-orders stop-sharing  ); \
 		echo "		[/list]"; \
 	fi )
 		
