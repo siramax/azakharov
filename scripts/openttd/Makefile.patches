@@ -36,7 +36,7 @@ FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROW
 #
 
 # revision
-VERSION := 0.2
+VERSION := 0.3
 # TODO as file REVISION.txt
 #REV := r$(shell cd ${TRUNK} && svnversion -n)
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
@@ -150,6 +150,14 @@ plan:
 
 # end of easy part
 
+patchpack-versions: 
+	( sed '/openttd_revision\[\]/ s!".*"!"HardPack-$(REV)"!g' $(TRUNK)/src/rev.cpp.in > rev.cpp.in.tmp )
+	( mv rev.cpp.in.tmp $(TRUNK)/src/rev.cpp.in )
+	( if [ -w $(BUNDLE_OVERLAP)/openttd.cfg ]; then \
+		sed '/version_string/ s!=.*$$!= HardPack-$(REV)!g' $(BUNDLE_OVERLAP)/openttd.cfg > openttd.cfg.tmp; \
+		mv openttd.cfg.tmp $(BUNDLE_OVERLAP)/openttd.cfg; \
+	fi )
+
 #
 # Separate 
 # * patchpack,
@@ -157,7 +165,7 @@ plan:
 # * increment (patching and build-check one, then add next one, and so on
 ifeq (${MODE},patchpack)
 
-patching-building : $(addsuffix .patch.log, $(PATCHES) ) $(TRUNK)/Makefile
+patching-building : $(addsuffix .patch.log, $(PATCHES) ) $(TRUNK)/Makefile patchpack-versions
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
 #	( $(MAKE) -C $(TRUNK) clean )
