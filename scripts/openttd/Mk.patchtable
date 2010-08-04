@@ -54,10 +54,12 @@ leasing                     http://www.tt-forums.net/download/file.php?id=132263
 daily-autosave              http://qmsk.net/~terom/openttd/patches/daily-autosave-00-trunk.patch
 vehicle-name-length         http://qmsk.net/~terom/openttd/patches/vehicle-name-length-00-trunk.patch
 automated-timetables-and-separation     http://www.tt-forums.net/download/file.php?id=126671
-
-############
-# Experimental
 extra-large-maps            http://www.tt-forums.net/download/file.php?id=127603    http://www.tt-forums.net/viewtopic.php?f=33&t=33137
+clipboard   http://www.tt-forums.net/download/file.php?id=132261 http://www.tt-forums.net/viewtopic.php?f=33&t=45488
+split-refit                 http://www.tt-forums.net/download/file.php?id=128088    http://www.tt-forums.net/viewtopic.php?f=33&t=48220
+minimap-screenshot          http://www.tt-forums.net/download/file.php?id=122869    http://www.tt-forums.net/viewtopic.php?f=33&t=42845
+############    
+# Experimental
 grassOnTracks               http://www.tt-forums.net/download/file.php?id=124535
 # variable_daylength          http://qmsk.net/~terom/openttd/patches/everything-00-trunk-r18774.patch
 # moreheightlevels_v24_20     http://www.tt-forums.net/download/file.php?id=125135 r19304
@@ -71,4 +73,5 @@ better_graphs               http://www.tt-forums.net/download/file.php?id=93336
 station-build-gui_v5.1      http://www.tt-forums.net/download/file.php?id=124242
 station-build-gui_v6.0      http://www.tt-forums.net/download/file.php?id=125763
 station-build-gui_v6.1      http://www.tt-forums.net/download/file.php?id=125817
-
+transp-roads-rails-slopes     http://www.tt-forums.net/download/file.php?id=131160 http://www.tt-forums.net/viewtopic.php?f=33&t=49151
+group-by-property           http://www.tt-forums.net/download/file.php?id=117633 http://www.tt-forums.net/viewtopic.php?f=33&t=45224
