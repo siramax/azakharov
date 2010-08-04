@@ -272,8 +272,9 @@ descr-start:
 
 %.descr :
 	@echo -n "	[*]"
-	@awk '/^$*\>/ { if ($$3!="") printf "[url=%s]%s[/url]", $$3, $$1; else printf "%s", $$1 }' ${PATCHMAP}
-	@awk '/^$*\>/ { $$1=""; print $$0 }' patches.$(LANG).txt
+	@awk '/^$*\>/ { $$1=""; printf "%s", $$0 }' patches.$(LANG).txt
+	@awk '/^$*\>/ { if ($$3!="") printf " ([url=%s]%s[/url])", $$3, $$1 }' ${PATCHMAP}
+	@echo
 	@( if [ "$*" == "openttd-cargodist-sprinkles" ]; then \
 		echo "		[list=1]"; \
 		$(MAKE) --no-print-directory $(addsuffix .descr, cargo_dist variable-daylength Daily-autosave Vehicle-name-length ); \
