@@ -157,10 +157,6 @@ plan:
 patchpack-versions: 
 	( sed '/openttd_revision\[\]/ s!".*"!"HardPack-$(REV)"!g' $(TRUNK)/src/rev.cpp.in > rev.cpp.in.tmp )
 	( mv rev.cpp.in.tmp $(TRUNK)/src/rev.cpp.in )
-	( if [ -w $(BUNDLE_OVERLAP)/openttd.cfg ]; then \
-		sed '/version_string/ s!=.*$$!= HardPack-$(REV)!g' $(BUNDLE_OVERLAP)/openttd.cfg > openttd.cfg.tmp; \
-		mv openttd.cfg.tmp $(BUNDLE_OVERLAP)/openttd.cfg; \
-	fi )
 
 #
 # Separate 
@@ -258,6 +254,10 @@ bundle :
 	@( make $(MFLAGS) -C "$(TRUNK)" bundle )
 	( [ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && \
 	  cp -R --force --target-directory="$(TRUNK)/bundle" "$(BUNDLE_OVERLAP)/"* && \
+	  ( if [ -w $(TRUNK)/bundle/openttd.cfg ]; then \
+		sed '/version_string/ s!=.*$$!= HardPack-$(REV)!g' $(TRUNK)/bundle/openttd.cfg > openttd.cfg.tmp; \
+		mv openttd.cfg.tmp $(TRUNK)/bundle/openttd.cfg; \
+	   fi ) && \
 	  echo '[BUNDLE] Customs copied from "$(BUNDLE_OVERLAP)"' || \
 	true)
 	@echo '[BUNDLE] Creating $(BUNDLE_NAME).tar.gz'
