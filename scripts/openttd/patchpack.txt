@@ -4,4 +4,4 @@ airport-upgrade-v6-1.0.0 VTI_console zoning adv-orders whistle
 reload-ai winstate more_diesel_smoke
 vehicle-name-length town-cargo-factor daylen daily-autosave automated-timetables-and-separation
 extra-large-maps clipboard transp-roads-rails-slopes minimap-screenshot split-refit leasing
-no_home_dir  vs.russian
+no_home_dir  vs.russian vs-hacks
