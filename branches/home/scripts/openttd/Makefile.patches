@@ -38,11 +38,11 @@ FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROW
 # revision
 VERSION := 0.3
 # TODO as file REVISION.txt
-#REV := r$(shell cd ${TRUNK} && svnversion -n)
+
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
 #REV := $(VERSION).$(shell cd ~/scripts/openttd && svnversion -n)
 REV := $(VERSION).$(shell cd ${WORKDIR} && svnversion -n)
-
+TRUNKREV := r$(shell cd ${TRUNK} && svnversion -n)
 .PRECIOUS: ${PATCHDIR}/%.patch %.patch.log %.build.log ${PATCHDIR}/%.patch.${REV}
 
 original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
@@ -79,7 +79,7 @@ $(TRUNK)/Makefile:
 # Making auto patch file
 # Do patch from current trunk
 # $(PACKNAME).patch.${REV} will be caught by this
-${PATCHDIR}/%.patch.${REV} : trunk-sweep
+${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 	( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
 	( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
 
@@ -108,7 +108,7 @@ trunk-revert :
 #sweep our mess
 trunk-sweep:
 	( find $(TRUNK) -name \*rej -or -name \*orig -or -name \.~\*bak | xargs rm --force --verbose )
-	@echo $(REV) was sweeped
+	@echo $(TRUNKREV) was sweeped
 
 trunk-clean :
 	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
@@ -119,6 +119,10 @@ trunk-clean :
 trunk-update : 
 	( cd $(TRUNK) && svn update )
 #    RVER=$(svnversion -n)
+
+# generate project files
+trunk-generate:
+	( cd $(TRUNK) && sh projects/generate )
 
 clean : 
 	( rm *.log || true )
