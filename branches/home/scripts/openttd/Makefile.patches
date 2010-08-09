@@ -13,7 +13,7 @@
 #
 include Mk.params
 # TODO openttd specific out to profiles?
-PACKNAME=vs_hard_pack
+PACKNAME ?= vs_hard_pack
 LANG ?= ru
 PARAM ?= "--dry-run"
 TRUNK ?= $(HOME)/src/openttd/trunk
@@ -164,11 +164,22 @@ patchpack-versions:
 # * alone (patching and building patches alone one-by-one from list),
 # * increment (patching and build-check one, then add next one, and so on
 ifeq (${MODE},patchpack)
+patching: $(addsuffix .patch.log, $(PATCHES) ) patchpack-versions
+	@echo "==> Patchpack patches DONE."
 
-patching-building : $(addsuffix .patch.log, $(PATCHES) ) $(TRUNK)/Makefile patchpack-versions
+else ifeq (${MODE},alone)
+patching: $(addprefix trunk-prepare ,$(addsuffix .patch.check, $(PATCHES) ))
+	@echo "==> Alone checking all patches DONE."
+
+else
+patching: $(addprefix increment ,$(addsuffix .patch.check, $(PATCHES) ))
+	@echo "==> Increment checking all patches DONE."
+
+endif
+
+building: $(TRUNK)/Makefile
 	@echo "==> Buildin $*..."
 ifeq ($(findstring --dry-run,${PARAM}),)
-#	( $(MAKE) -C $(TRUNK) clean )
 # changing dir for possible reconfigure, but we do not know initial path too
 # also this is hack to pre-reconfigure by "make" not $(MAKE) which can be mingw32-make.exe
 	( make $(MFLAGS) -C $(TRUNK) all >$@ )
@@ -178,18 +189,9 @@ else
 endif
 	$(DONE)
 
-
-else ifeq (${MODE},alone)
-patching-building : $(addprefix trunk-prepare ,$(addsuffix .patch.check, $(PATCHES) ))
-	@echo "==> Alone checking all patches DONE."
-
-
-else
-patching-building : $(addprefix increment ,$(addsuffix .patch.check, $(PATCHES) ))
-	@echo "==> Increment checking all patches DONE."
-
-endif
-
+# and all together
+patching-building: patching building
+	$(DONE)
 # here construct txt report
 reporting: 
 	$(DONE)
