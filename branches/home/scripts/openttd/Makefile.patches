@@ -206,10 +206,10 @@ increment :
 	@echo -n "==> Patchin $*..."
 	@( test -f $< )
 ifeq ($(findstring --dry-run,${PARAM}),)
-	@( patch $(PARAM) --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="$<" > $@ ) || \
+	@( patch $(PARAM) --forward --force --fuzz=3 --directory="${TRUNK}" --strip=${find_ignorable_prefix} --input="$<" > $@ ) || \
 		$(FAILREPORT) && false )
 else
-	@( patch $(PARAM) --directory=${TRUNK} --forward --force --fuzz=3 --strip=${find_ignorable_prefix} --input="$<" )
+	@( patch $(PARAM) --forward --force --fuzz=3 --directory="${TRUNK}" --strip=${find_ignorable_prefix} --input="$<" )
 endif
 	@echo "OK"
 
