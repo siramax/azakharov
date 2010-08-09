@@ -40,4 +40,6 @@ transp-roads-rails-slopes   [b]Transparent roads[/b]
 clipboard               [b]Copy / Paste infrastructure[/b] - press Ctrl + C / Ctrl + V to copy / paste, and Ctrl + (Left | Right | Up | Down) for rotations / reflections.
 minimap-screenshot      [b]Minimap Screenshot[/b] adds a console command `minimap`.
 split-refit             [b]Split refit window[/b] - makes it more convenient choice of transport model.
+daily-scripts           [b]Invoke daily, monthly and yearly scripts[/b] - you can write your scripts for daily, monthly and yearly invokation: [list][*]scripts/on_newday.scr[*]scripts/on_newmonth.scr[*]scripts/on_newyear.scr[/list]
+
 
