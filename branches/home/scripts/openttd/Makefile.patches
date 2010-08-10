@@ -6,7 +6,8 @@
 
 .NOTPARALLEL :
 
-
+location = $(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+whoami := $(location)
 
 #
 #defaults
@@ -274,7 +275,7 @@ descr : descr-start $(addsuffix .descr, $(PATCHES) )
 	@echo "[/list]"
 
 descr-start:
-	@echo "[list=1]"	
+	@echo "[list=1]"
 
 %.descr :
 	@echo -n "	[*]"
@@ -283,18 +284,16 @@ descr-start:
 	@echo
 	@( if [ "$*" == "openttd-cargodist-sprinkles" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) --no-print-directory $(addsuffix .descr, cargo_dist variable-daylength Daily-autosave Vehicle-name-length ); \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, cargo_dist variable-daylength Daily-autosave Vehicle-name-length ); \
 		echo "		[/list]"; \
 	fi )
 	@( if [ "$*" == "harder-game" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) --no-print-directory $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
 		echo "		[/list]"; \
 	fi )
 	@( if [ "$*" == "adv-orders" ]; then \
-		echo "		[list=1]"; \
-		$(MAKE) --no-print-directory $(addsuffix .descr, more-cond-orders stop-sharing  ); \
-		echo "		[/list]"; \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, more-cond-orders stop-sharing  ); \
 	fi )
 		
 
