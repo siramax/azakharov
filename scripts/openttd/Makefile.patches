@@ -107,13 +107,13 @@ trunk-revert :
 
 #sweep our mess
 trunk-sweep:
-	( find $(TRUNK) -name \*rej -or -name \*orig -or -name \.~\*bak | xargs rm --force --verbose )
+	( find $(TRUNK) -name \*rej -or -name \*orig -or -name \.~\*bak | xargs rm --force --verbose -- )
 	@echo $(TRUNKREV) was sweeped
 
 trunk-clean :
 	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
 #deep svn new files from patches clean
-	( cd $(TRUNK) && svn stat | $(DOS2UNIXPATH)  |  grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf )
+	( cd $(TRUNK) && svn stat | $(DOS2UNIXPATH)  |  grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf -- )
 	@echo $(REV)
 
 trunk-update : 
