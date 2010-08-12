@@ -3,5 +3,5 @@ harder-game stuck_trains rating_town_label watch_gui_6 russian-town-names
 airport-upgrade-v6-1.0.0 VTI_console zoning adv-orders whistle
 reload-ai winstate more_diesel_smoke
 vehicle-name-length town-cargo-factor daylen daily-autosave automated-timetables-and-separation
-extra-large-maps clipboard minimap-screenshot split-refit leasing statue-placement daily-scripts
+extra-large-maps clipboard minimap-screenshot split-refit leasing statue-placement daily-scripts industry-stationnames
 no_home_dir  vs.russian vs-hacks vs.patchpack.tunes
