@@ -21,8 +21,8 @@ settings_table = {
         max         = 100,
         x = 100, y =  100, -- 5 margin
         clip = { 5, 5, -5, .5 }, --the next level :)
-        radius      = 50,
-        thickness   = 100,
+        radius      = 500,
+        thickness   = 1000,
         start_angle = 0,
         end_angle   = -180,
         --bg          = { color = 0x000000, alpha    = 0.05, }, --TODO pie as shape
@@ -298,8 +298,8 @@ calculate_top = function ( sets )
     for i = iMin, iMax do
         rings[ i ] = {}
 
-        --val = conky_parse( string.format( '${%s %d}', prep, i ) )
-        val = string.format( "%f", (iMax-i) * 6 )
+        val = conky_parse( string.format( '${%s %d}', prep, i ) )
+        --val = string.format( "%f", (iMax-i) * 5.1 )
 
         if ( val and #val ) then
             val = tonumber( val )
@@ -456,7 +456,7 @@ draw_top = function ( cr, pt, rings )
             (clip[ 4 ] - clip[ 2 ]) / (y2 - y1),
             1 --zoom
         --print( (x2 - x1), (y2 - y1), clip[ 3 ] - clip[ 1 ], clip[ 4 ] - clip[ 2 ], magnX, magnY )
-        magn = math.min( magnX, magnY )
+        magn = math.min( math.abs(magnX), math.abs(magnY) )
 
         --cairo_translate( cr, pt.x , pt.y)
         if ( rings.max_angle < 0 ) then
@@ -465,8 +465,7 @@ draw_top = function ( cr, pt, rings )
             cairo_translate( cr, clip[ 3 ] , clip[ 2 ] + (x2)*magn )
           else
             if ( math.abs(inGrad) <= 180 ) then -- >>:(
-              --cairo_translate( cr, clip[ 1 ] - (y1)*magn, clip[ 2 ] )
-cairo_translate( cr, pt.x , pt.y)
+              cairo_translate( cr, clip[ 3 ] , clip[ 2 ]  + (x2)*magn )
             else
               cairo_translate( cr, clip[ 3 ] - (y1)*magn, clip[ 2 ] + (x2)*magn )
             end
