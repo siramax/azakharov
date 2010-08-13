@@ -217,7 +217,7 @@ h3.title /* Comment title */,
     margin: 0;
 }
 
-#sidebar-left .block .title, #sidebar-right .block  .title, .region-vertical .block  .title,
+#sidebar-left .block .title, #sidebar-right .block  .title, .region-vertical .block  .title, .region-bottom .block  .title,
 .accordion_blocks_container .ui-accordion-header {
     background: linear-gradient( -90deg, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0 ) );
     background: -webkit-gradient( linear, left top, left bottom, from(rgba( 255, 255, 255, 0.1 )), to(rgba( 255, 255, 255, 0 )) );
@@ -331,13 +331,26 @@ h3.title /* Comment title */,
     clear: both;
     margin: 1em 0;
     text-align: center;
+
   }
 
   .pager a, .pager strong.pager-current
   {
-    padding: 0.5em;
+    padding: 0.7em 1em;
+    font-size: 117%;
+    background: #FCFAF4;
+    border: 1px solid #5D380E;
+    border-radius: 0.5em;
+    -q-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
   }
-
+  .pager a:hover {
+    text-decoration: none;
+    background-color: #ECFFE4;
+    border-color: #111;
+  }
+    
   .feed-icons /* The links to the RSS or Atom feeds for the current list of content */
   {
     margin: 1em 0;
@@ -727,7 +740,12 @@ h3.title /* Comment title */,
   .block .content /* Block's content wrapper */
   {
   }
-
+.region-bottom .block .content {
+  text-align: center;
+}
+.region-bottom .block .content img {
+  margin: auto;
+}
   #block-aggregator-category-1 /* Block for the latest news items in the first category */
   {
   }
@@ -838,7 +856,13 @@ h3.title /* Comment title */,
   .more-link /* Aggregator, blog, and forum more link */
   {
     text-align: right;
+    font-size: 125%;
+    
   }
+
+.more-link a {
+    padding: .5em;
+}
 
   #user-login-form /* Drupal's default login form */
   {

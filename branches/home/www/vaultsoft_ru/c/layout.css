@@ -262,6 +262,43 @@ input[type="submit"] {
     margin: 0;
     padding: 0;
   }
+
+/*.region-bottom {
+  float: left;
+}*/
+
+
+#content-bottom-wrapper {
+  overflow: hidden;
+  clear: both;
+}
+#content-bottom-left {
+  width:50%;
+  float: left;
+}
+#content-bottom-left.with-content_bottom {
+  width: 25%;
+}
+
+#content-bottom-right {
+  width:50%;
+  float: right;
+}
+#content-bottom-right.with-content_bottom {
+  width: 25%;
+}
+#content-bottom.with-region-content_bottom_left {
+  margin-left: 25%;
+}
+#content-bottom.with-region-content_bottom_right {
+  margin-right: 25%;
+}
+.clear {
+  clear: both;
+}
+.region-bottom .content {
+  clear: inherit;
+}
 #breadcrumb {
   overflow: hidden;
 }
