@@ -76,7 +76,9 @@ regions[left]           = left sidebar
 regions[right]          = right sidebar
 regions[navbar]         = navigation bar
 regions[content_top]    = content top
+regions[content_bottom_left] = content bottom left
 regions[content_bottom] = content bottom
+regions[content_bottom_right] = content bottom right
 regions[footer]         = footer
 regions[closure_region] = closure
 

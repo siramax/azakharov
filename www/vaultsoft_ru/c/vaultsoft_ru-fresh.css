@@ -7,10 +7,12 @@
  *   #664117 - brown
  *   #d2a668 - light brown
  *   #FCFAF4 - light light pink
+ *   #ECFFE4 - light light green
  * fg:
  *   #111 - almost black
  *   #dcb073 / #fdc417 - light brown / yellow
  *   #504B35 - wet asphalt
+ #5D380E
  */
 
 /*  This file used for 
@@ -153,7 +155,7 @@ h1,h2,h3,h4,h5 {
 }
 /* TODO remain only for scripting */
 #content-top .block {
-    display: none;
+/*    display: none;*/
 }
 
 #breadcrumb {
@@ -245,4 +247,23 @@ div.geshifilter {
 
   margin: 0px;
   color: lightgreen;
+}
+
+.decrement {
+  counter-reset: item;
+}
+.decrement > li {
+  list-style-type: none; 
+  counter-increment: item -1;
+  position: relative;
+}
+.decrement > li > h3 {
+  display: inline;
+}
+.decrement > li:before {
+  display: marker;
+  content: counter(item) ". ";
+  text-align: right;
+  font-weight: bold;
+  width: 2em;
 }

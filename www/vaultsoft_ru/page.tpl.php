@@ -151,13 +151,31 @@
         <?php if ($feed_icons): ?>
           <div class = "feed-icons"><?php print $feed_icons; ?></div>
         <?php endif; ?>
-
-        <?php if ($content_bottom): ?>
-          <div id = "content-bottom" class = "region region-content_bottom">
-            <?php print $content_bottom; ?>
-          </div> <!-- /#content-bottom -->
-        <?php endif; ?>
         
+        <div id = 'content-bottom-wrapper' class = 'region-wrapper'>
+          <?php if ($content_bottom_left): ?>
+            <div id = "content-bottom-left" class = "region region-bottom region-content_bottom_left <?php 
+              if (!empty($content_bottom)) echo "with-content_bottom "; ?>">
+              <?php print $content_bottom_left; ?>
+            </div> <!-- /#content-bottom-left -->
+          <?php endif; ?>
+                    
+          <?php if ($content_bottom_right): ?>
+            <div id = "content-bottom-right" class = "region region-bottom region-content_bottom_right <?php 
+              if (!empty($content_bottom)) echo "with-content_bottom "; ?>">
+              <?php print $content_bottom_right; ?>
+            </div> <!-- /#content-bottom-right -->
+          <?php endif; ?>
+          
+          <?php if ($content_bottom): ?>
+            <div id = "content-bottom" class = "region region-bottom region-content_bottom <?php
+              if (!empty($content_bottom_left)) echo "with-region-content_bottom_left "; 
+              if (!empty($content_bottom_right)) echo "with-region-content_bottom_right "; ?>">
+              <?php print $content_bottom; ?>
+            </div> <!-- /#content-bottom -->
+          <?php endif; ?>
+          <div class = 'clear'></div>
+        </div>
         <?php if ($footer_message): ?>
           <div id = "footer-message"><?php print $footer_message; ?></div>
         <?php endif; ?>
