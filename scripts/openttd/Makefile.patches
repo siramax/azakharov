@@ -165,15 +165,15 @@ patchpack-versions:
 # * alone (patching and building patches alone one-by-one from list),
 # * increment (patching and build-check one, then add next one, and so on
 ifeq (${MODE},patchpack)
-patching: $(addsuffix .patch.log, $(PATCHES) ) patchpack-versions
+patching: $(addsuffix .patch.log, $(PATCHES)) patchpack-versions
 	@echo "==> Patchpack patches DONE."
 
 else ifeq (${MODE},alone)
-patching: $(addprefix trunk-prepare ,$(addsuffix .patch.check, $(PATCHES) ))
+patching: $(addprefix trunk-prepare ,$(addsuffix .patch.check, $(filter-out post-patches%,$(PATCHES)) ))
 	@echo "==> Alone checking all patches DONE."
 
 else
-patching: $(addprefix increment ,$(addsuffix .patch.check, $(PATCHES) ))
+patching: $(addprefix increment ,$(addsuffix .patch.check, $(filter-out post-patches%,$(PATCHES)) ))
 	@echo "==> Increment checking all patches DONE."
 
 endif
