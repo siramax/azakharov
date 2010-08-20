@@ -1,2 +1,0 @@
-
-print ( PrintNumber( 100 ) )
