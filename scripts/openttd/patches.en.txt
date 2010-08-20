@@ -41,5 +41,6 @@ clipboard               [b]Copy / Paste infrastructure[/b] - press Ctrl + C / Ct
 minimap-screenshot      [b]Minimap Screenshot[/b] adds a console command `minimap`.
 split-refit             [b]Split refit window[/b] - makes it more convenient choice of transport model.
 daily-scripts           [b]Invoke daily, monthly and yearly scripts[/b] - you can write your scripts for daily, monthly and yearly invokation: [list][*]scripts/on_newday.scr[*]scripts/on_newmonth.scr[*]scripts/on_newyear.scr[/list]
+build-and-refit         [b]Auto refit when build[/b]
 
 
