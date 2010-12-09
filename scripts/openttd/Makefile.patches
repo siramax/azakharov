@@ -2,7 +2,7 @@
 # Checking and applying patches against trunk or specified sources
 # @author Andrey Zakharov /2010/
 #
-.PHONY : all clean trunk-prepare tp patching-building trunk-clean trunk-update clean run
+.PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run
 
 .NOTPARALLEL :
 
@@ -31,7 +31,7 @@ DOS2UNIXPATH ?= sed 's\#\\\\\#/\#g'
 HTTP_TO ?= 30
 DNS_TO ?= 2
 DONE = @echo "==> $@ DONE"
-FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROWSER) &)
+FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROWSER) &) && ( grep "FAILED --" $< | $(BROWSER) )
 #
 # Utils
 #

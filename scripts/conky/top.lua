@@ -299,7 +299,7 @@ calculate_top = function ( sets )
         rings[ i ] = {}
 
         val = conky_parse( string.format( '${%s %d}', prep, i ) )
-        --val = string.format( "%f", (iMax-i) * 5.1 )
+        --val = string.format( "%f", (iMax-i) * 21 )
 
         if ( val and #val ) then
             val = tonumber( val )
