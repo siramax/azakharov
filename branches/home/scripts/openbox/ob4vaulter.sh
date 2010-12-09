@@ -193,7 +193,7 @@ case "$1" in
         ob_subpipe_menu Desktop "$txtDesktop" "$SELF desktop"
         #use open box built-in menu
         ob_subpipe_menu client-list-combined-menu "❖ "
-        ob_subpipe_menu ssh "$txtSSH" "$HOME/scripts/openbox/ssh.sh"
+        #ob_subpipe_menu ssh "$txtSSH" "$HOME/scripts/openbox/ssh.sh"
         ob_subpipe_menu Tools "$txtTools" "$SELF tools"
         ob_subpipe_menu time `date` "$SELF cal"
         ob_menu_item 0 "$txtWallpaper" "$HOME/scripts/set.random.wallpaper.sh ~/pics/wallpapers remote"
@@ -208,7 +208,7 @@ case "$1" in
         # TODO bookmarks (google?)
         ob_subpipe_menu mainmenu "$txtMainMenu" "$OBMENUGEN --pipe"
 
-        ob_menu_item 0 "CS 1.6 /todo move to desktop/" "x-terminal-emulator -e \"~/bin/scripts.sh\""
+        ob_menu_item 0 "CS 1.6 /todo move to desktop/" "x-terminal-emulator -e \"~/scripts/cs.sh\""
         ob_menu_item 0 "Sleeeeep" "powersave --suspend-to-ram"
         ob_menu_sep
         ob_menu_item 0 "$txtEditThisMenu" "kate $SELF"

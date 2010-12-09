@@ -1,5 +1,6 @@
 patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
+moreheightlevels            http://www.tt-forums.net/download/file.php?id=134123
 station-build-gui_v6.2      http://www.tt-forums.net/download/file.php?id=126796 http://www.tt-forums.net/viewtopic.php?t=41222
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
 cargo_dist                  http://fickzoo.com/fonsinchen/patches/current/trunk-cargodist.diff http://www.tt-forums.net/viewtopic.php?t=41992
@@ -82,3 +83,5 @@ transp-roads-rails-slopes     http://www.tt-forums.net/download/file.php?id=1311
 group-by-property           http://www.tt-forums.net/download/file.php?id=117633 http://www.tt-forums.net/viewtopic.php?f=33&t=45224
 menu_jumping                http://www.tt-forums.net/download/file.php?id=89787 http://www.tt-forums.net/viewtopic.php?f=33&t=36925
 show-station-spread         http://www.tt-forums.net/download/file.php?id=57790 http://www.tt-forums.net/viewtopic.php?f=33&t=27806
+low-level-opt               http://www.tt-forums.net/download/file.php?id=133993    http://www.tt-forums.net/viewtopic.php?f=33&t=49830
+stationcache                http://www.tt-forums.net/download/file.php?id=133994    http://www.tt-forums.net/viewtopic.php?f=33&t=49830
