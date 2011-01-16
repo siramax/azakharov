@@ -1,7 +1,18 @@
 #
 # Checking and applying patches against trunk or specified sources
-# @author Andrey Zakharov /2010/
+# @author Andrey Zakharov /2010-2011/ http://vaultsoft.info
 #
+
+# Usage:
+#  show patchpack patches list
+#   make list
+#  try to patch all patches
+#   make
+#  to check one by one set of patches
+#   PATCHES="patch1 patch2" MODE=alone PARAM='' make
+#  to make patchpack
+#   PARAM='' make clean trunk-prepare all
+
 .PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run
 
 .NOTPARALLEL :
@@ -32,12 +43,13 @@ HTTP_TO ?= 30
 DNS_TO ?= 2
 DONE = @echo "==> $@ DONE"
 FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROWSER) &) && ( grep "FAILED --" $< | $(BROWSER) )
+Q ?= @
 #
 # Utils
 #
 
 # revision
-VERSION := 0.3
+VERSION := 0.4
 # TODO as file REVISION.txt
 
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
@@ -104,29 +116,30 @@ trunk-prepare  : trunk-sweep trunk-revert trunk-clean trunk-update #alias
 	$(DONE)
 
 trunk-revert : 
-	( cd $(TRUNK) && svn -R revert . )
+	$(Q)( cd $(TRUNK) && svn -R revert . )
+	@echo [SRC] $(TRUNKREV) reverted
 
 #sweep our mess
 trunk-sweep:
-	( find $(TRUNK) -name \*rej -or -name \*orig -or -name \.~\*bak | xargs rm --force --verbose -- )
-	@echo $(TRUNKREV) was sweeped
+	$(Q)( find $(TRUNK) -name \*rej -or -name \*orig -or -name \.~\*bak | xargs rm --force --verbose -- )
+	@echo [SRC] $(TRUNKREV) sweeped
 
 trunk-clean :
-	( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
+	$(Q)( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
 #deep svn new files from patches clean
-	( cd $(TRUNK) && svn stat | $(DOS2UNIXPATH)  |  grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf -- )
-	@echo $(REV)
+	$(Q)( cd $(TRUNK) && svn stat | $(DOS2UNIXPATH)  |  grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf -- )
+	@echo [SRC] $(TRUNKREV) cleaned
 
 trunk-update : 
-	( cd $(TRUNK) && svn update )
+	$(Q)( cd $(TRUNK) && svn update )
 #    RVER=$(svnversion -n)
 
 # generate project files
 trunk-generate:
-	( cd $(TRUNK) && sh projects/generate )
+	$(Q)( cd $(TRUNK) && sh projects/generate )
 
 clean : 
-	( rm *.log || true )
+	$(Q)( rm *.log || true )
 	$(DONE)
 
 distclean : 
@@ -138,7 +151,7 @@ sweep : $(addsuffix .sweep, $(PATCHES) )
 
 %.sweep :
 	@echo "==> Sweeping $*..."
-	( rm ${PATCHDIR}/$*.patch || true )
+	$(Q)( rm ${PATCHDIR}/$*.patch || true )
 	$(DONE)
 
 run :
@@ -148,10 +161,10 @@ reset: clean trunk-prepare
 	$(DONE)
 
 list :
-	@( awk '/^\w/ { print $$1 }' ${PATCHMAP} | tail -n+2|sort)
+	$(Q)( awk '/^\w/ { print $$1 }' ${PATCHMAP} | tail -n+2|sort)
 
 plan:
-	@( echo $(PATCHES) )
+	$(Q)( echo $(PATCHES) )
 
 # end of easy part
 
@@ -205,12 +218,12 @@ increment :
 #
 %.patch.log : ${PATCHDIR}/%.patch
 	@echo -n "==> Patchin $*..."
-	@( test -f $< )
+	$(Q)( test -f $< )
 ifeq ($(findstring --dry-run,${PARAM}),)
-	@( patch $(PARAM) --forward --force --fuzz=3 --directory="${TRUNK}" --strip=${find_ignorable_prefix} --input="$<" > $@ ) || \
+	$(Q)( patch $(PARAM) --forward --force --fuzz=3 --directory="${TRUNK}" --strip=${find_ignorable_prefix} --input="$<" > $@ ) || \
 		$(FAILREPORT) && false )
 else
-	@( patch $(PARAM) --forward --force --fuzz=3 --directory="${TRUNK}" --strip=${find_ignorable_prefix} --input="$<" )
+	$(Q)( patch $(PARAM) --forward --force --fuzz=3 --directory="${TRUNK}" --strip=${find_ignorable_prefix} --input="$<" )
 endif
 	@echo "OK"
 
@@ -222,7 +235,7 @@ ifeq ($(findstring --dry-run,${PARAM}),)
 #ifeq ($(findstring forceclean,${PARAM}),)
 #	( $(MAKE) -C $(TRUNK) clean )
 # also this is hack to pre-reconfigure by "make" not $(MAKE) which can be mingw32-make.exe
-	( make $(MFLAGS) -C $(TRUNK) all >$@ )
+	$(Q)( make $(MFLAGS) -C $(TRUNK) all >$@ )
 else
 	@echo "!!! Skipping /$(PARAM)/. To perform real build exec:"
 	@echo "                  $ PARAM=\"\" $(MAKE) all"
@@ -240,7 +253,7 @@ ${PATCHDIR}/%.patch :
 	@echo "==> Refreshing $@..." 
 	@( awk '/^$*/ { print $$2 }' ${PATCHMAP} )
 	wget --output-document="$@" \
-		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) -- \
+		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) --no-check-certificate -- \
 		"$(shell awk '/^$*[ ]+/ { print $$2 }' ${PATCHMAP})"
 
 
