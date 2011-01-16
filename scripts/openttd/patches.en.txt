@@ -1,4 +1,4 @@
-station-build-gui_v6.2  [b]Improved Build Station GUI[/b]. With Industry Renewal Station Set - cool.
+station-build-gui       [b]Improved Build Station GUI[/b]. With Industry Renewal Station Set - very cool.
 rating_town_label       [b]Colour rating in town label[/b].
 openttd-cargodist-sprinkles    patches with [b][url=http://www.tt-forums.net/viewtopic.php?t=41992]CargoDist[/url][/b]
 cargodist               [b]Cargo Distribution[/b] - Now passengers and cargo have destinations
@@ -42,5 +42,9 @@ minimap-screenshot      [b]Minimap Screenshot[/b] adds a console command `minima
 split-refit             [b]Split refit window[/b] - makes it more convenient choice of transport model.
 daily-scripts           [b]Invoke daily, monthly and yearly scripts[/b] - you can write your scripts for daily, monthly and yearly invokation: [list][*]scripts/on_newday.scr[*]scripts/on_newmonth.scr[*]scripts/on_newyear.scr[/list]
 build-and-refit         [b]Auto refit when build[/b]
-
-
+trip-history            [b]Trip History[/b] This patch is designed to show information about the last 10 trips that a vehicle has made.
+fastest-bridge          This patch allows to hold Ctrl while dragging a bridge, which instantly builds the fastest available bridge, without showing the bridge selection window.
+realistic-loans-system  This patch makes the handling of loans and the interest payed for them a bit more realistic. It makes your maximum loan dependent on company value and makes the interest rate you pay depending on how much of your credit line you have utilized.
+group-by-property       This patch adds a drop down to the "create new group" button in the vehicle window. See the screenshot below. Using one of the entries allows you to create Vehicle Groups based on common properties of vehicles.
+group-info              When selecting a group, it will show for the group the same stats as for the vehicules, but for the whole group :[list][*]Profit this year : sum of all profits of all vehicules in the group for this year [*]Profit last year : sum of all profits of all vehicules in the group for last year [*]Profit button : work like the vehicule profit button, but for the all group[/list]
+low-level-opt           Patch with some low-level optimizations, especially for linux/gcc configuration.
