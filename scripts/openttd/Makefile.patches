@@ -12,6 +12,10 @@
 #   PATCHES="patch1 patch2" MODE=alone PARAM='' make
 #  to make patchpack
 #   PARAM='' make clean trunk-prepare all
+# TODO - post-patch preparing
+# $ rsync -av --exclude bin --exclude obj --exclude .svn --exclude bundle $(TRUNK) $(TRUNK).patched/
+# EDITING
+# $ diff -wur -x bin -x objs -x .svn $(TRUNK).patched/ $(TRUNK)
 
 .PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run
 
@@ -69,6 +73,7 @@ original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
 find_ignorable_prefix = $$(\
 	for f in `awk '/^---(.*)$$/ { print $$2 }' $<`; do \
 	  i=0; f2c="$$f"; \
+	  if [ "x$$f2c" == "x/dev/null" ]; then continue; fi; \
 	  if [ -r "${TRUNK}/$$f2c" ]; then echo $$i; exit 0; fi; \
 	  while [ -n "$$f2c" ]; do \
 	      i=`expr $$i + 1`; \

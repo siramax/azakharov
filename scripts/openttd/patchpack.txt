@@ -1,8 +1,9 @@
 cd IB town_growth_need_goods harder-game town-cargo-factor 
-departure-boards
+departure-boards progwaypoints
 daylen
 leasing-with-build-and-refit
-station-build-gui industry-stationnames rating_town_label stuck_trains watch_gui_6 russian-town-names whistle clipboard
-automated-timetables-and-separation airport-upgrade airport-close cmd-train-console adv-orders minimap-screenshot 
+adv-orders leave-orders
+station-build-gui industry-stationnames rating_town_label stuck_trains watch_gui_6 russian-town-names whistle clipboard VehicelsInTunnels group-info group-by-property
+automated-timetables-and-separation airport-upgrade airport-close cmd-train-console minimap-screenshot trip-history station-cover
 reload-ai winstate vehicle-name-length daily-autosave
-extra-large-maps daily-scripts low-level-opt no-home-dir vs-hacks post-patches
+extra-large-maps daily-scripts low-level-opt vs-hacks post-patches
