@@ -1,6 +1,5 @@
 patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
-station-build-gui           http://www.tt-forums.net/download/file.php?id=137169 http://www.tt-forums.net/viewtopic.php?t=41222
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
 cd                          https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21901.diff http://www.tt-forums.net/viewtopic.php?t=41992
 https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21740.diff 
@@ -111,6 +110,6 @@ stop-sharing                http://bugs.openttd.org/task/3711/getfile/6104/stop-
 more-diesel-smoke           http://www.tt-forums.net/download/file.php?id=132402    http://www.tt-forums.net/viewtopic.php?t=19896
 fastest-bridge              http://www.tt-forums.net/download/file.php?id=92209 http://www.tt-forums.net/viewtopic.php?f=33&t=36964
 panorama                    http://www.tt-forums.net/download/file.php?id=132100
-
+station-build-gui           http://www.tt-forums.net/download/file.php?id=137169 http://www.tt-forums.net/viewtopic.php?t=41222
 
 

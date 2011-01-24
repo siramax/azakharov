@@ -3,7 +3,7 @@ departure-boards progwaypoints
 daylen
 leasing-with-build-and-refit
 adv-orders leave-orders
-station-build-gui industry-stationnames rating_town_label stuck_trains watch_gui_6 russian-town-names whistle clipboard VehicelsInTunnels group-info group-by-property
+industry-stationnames rating_town_label stuck_trains watch_gui_6 russian-town-names whistle clipboard VehicelsInTunnels group-info group-by-property
 automated-timetables-and-separation airport-upgrade airport-close cmd-train-console minimap-screenshot trip-history station-cover
 reload-ai winstate vehicle-name-length daily-autosave
 extra-large-maps daily-scripts low-level-opt vs-hacks post-patches
