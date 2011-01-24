@@ -12,10 +12,7 @@
 #   PATCHES="patch1 patch2" MODE=alone PARAM='' make
 #  to make patchpack
 #   PARAM='' make clean trunk-prepare all
-# TODO - post-patch preparing
-# $ rsync -av --exclude bin --exclude obj --exclude .svn --exclude bundle $(TRUNK) $(TRUNK).patched/
-# EDITING
-# $ diff -wur -x bin -x objs -x .svn $(TRUNK).patched/ $(TRUNK)
+
 
 .PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run
 
@@ -142,6 +139,13 @@ trunk-update :
 # generate project files
 trunk-generate:
 	$(Q)( cd $(TRUNK) && sh projects/generate )
+
+trunk-prepare-post-patches:
+	mkdir -p $(TRUNK).patched
+	rsync -av --exclude bin --exclude obj --exclude .svn --exclude bundle $(TRUNK)/ $(TRUNK).patched/
+
+trunk-make-post-patches:
+	cd $(TRUNK)/../ && diff -wur -x .dep.inc -x bin -x objs -x .svn $(TRUNK).patched/ $(TRUNK)/
 
 clean : 
 	$(Q)( rm *.log || true )
