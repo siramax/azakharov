@@ -12,6 +12,7 @@
 #   PATCHES="patch1 patch2" MODE=alone PARAM='' make
 #  to make patchpack
 #   PARAM='' make clean trunk-prepare all
+#  make clean trunk-prepare && make PARAM='' all; make PARAM='' all
 
 
 .PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run
@@ -45,6 +46,8 @@ DNS_TO ?= 2
 DONE = @echo "==> $@ DONE"
 FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROWSER) &) && ( grep "FAILED --" $< | $(BROWSER) )
 Q ?= @
+TRUNKTARGETREV ?= -rHEAD
+
 #
 # Utils
 #
@@ -133,19 +136,19 @@ trunk-clean :
 	@echo [SRC] $(TRUNKREV) cleaned
 
 trunk-update : 
-	$(Q)( cd $(TRUNK) && svn update )
+	$(Q)( cd $(TRUNK) && svn update $(TRUNKTARGETREV))
 #    RVER=$(svnversion -n)
 
 # generate project files
 trunk-generate:
 	$(Q)( cd $(TRUNK) && sh projects/generate )
 
-trunk-prepare-post-patches:
+post-patches-prepare:
 	mkdir -p $(TRUNK).patched
-	rsync -av --exclude bin --exclude obj --exclude .svn --exclude bundle $(TRUNK)/ $(TRUNK).patched/
+	rsync -av --exclude=/bin --exclude=/docs --exclude=/objs --exclude=.svn --exclude=/bundle --exclude=/bundles --exclude='**.orig' --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ $(TRUNK).patched/
 
-trunk-make-post-patches:
-	cd $(TRUNK)/../ && diff -wur -x .dep.inc -x bin -x objs -x .svn $(TRUNK).patched/ $(TRUNK)/
+post-patches-make:
+	diff -wur -x .dep.inc -x bin -x objs -x .svn -x bundle -x bundles -x *.orig $(TRUNK).patched/ --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ | grep -v Только
 
 clean : 
 	$(Q)( rm *.log || true )
