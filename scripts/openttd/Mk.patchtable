@@ -75,6 +75,8 @@ progsig                     http://www.tt-forums.net/download/file.php?id=127924
 improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
 economy-history             http://www.tt-forums.net/download/file.php?id=37217     http://www.tt-forums.net/viewtopic.php?f=33&t=21079
 better-graphs               http://www.tt-forums.net/download/file.php?id=93336 http://www.tt-forums.net/viewtopic.php?f=33&t=31984
+townrating-indicator        -
+info-speed-wagons           http://bugs.openttd.org/task/1199/getfile/5783/max-speed-info-in-train-details-info-tab_hg-41a7a4722f00.patch http://bugs.openttd.org/task/1199
 
 ############
 # Obsolete
