@@ -48,3 +48,4 @@ realistic-loans-system  This patch makes the handling of loans and the interest 
 group-by-property       This patch adds a drop down to the "create new group" button in the vehicle window. See the screenshot below. Using one of the entries allows you to create Vehicle Groups based on common properties of vehicles.
 group-info              When selecting a group, it will show for the group the same stats as for the vehicules, but for the whole group :[list][*]Profit this year : sum of all profits of all vehicules in the group for this year [*]Profit last year : sum of all profits of all vehicules in the group for last year [*]Profit button : work like the vehicule profit button, but for the all group[/list]
 low-level-opt           Patch with some low-level optimizations, especially for linux/gcc configuration.
+improved-loans
