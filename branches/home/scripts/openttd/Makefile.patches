@@ -103,6 +103,9 @@ ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 
 # for quick hack, we do not require %.build.log 
 %.save : ${PATCHDIR}/%.patch.${REV} #alias
+	$(Q)( mkdir -p ${PATCHDIR}/${VERSION}/ ) # mkdir ./patches/0.4
+	$(Q)( mv ${PATCHDIR}/$*.patch.${REV} ${PATCHDIR}/${VERSION}/ ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
+	$(Q)( ln -s ${PATCHDIR}/${VERSION}/$*.patch.${REV} ${PATCHDIR}/$*.patch ) # sym link it
 	$(DONE)
 #report here of diffs with previois patch
 
@@ -305,7 +308,20 @@ descr-start:
 %.descr :
 	@echo -n "	[*]"
 	@awk '/^$*\>/ { $$1=""; printf "%s", $$0 }' patches.$(LANG).txt
-	@awk '/^$*\>/ { if ($$3!="") printf " ([url=%s]%s[/url])", $$3, $$1 }' ${PATCHMAP}
+	$(Q)( awk '/^$*\>/ { \
+		if ( $$3 != "" ) { \
+			if ( $$3 ~ /^http/ ) link = $$3; \
+			else text = $$3; \
+		} \
+		if ( $$4 != "" ) { \
+			if ( $$4 ~ /^http/ ) link = $$4; \
+			else text = $$4; \
+		} \
+		if ( link != "" ) \
+			printf " ([url=%s]%s [i]%s[/i][/url])", link, $$1, text; \
+		else \
+			printf " (%s [i]%s[/i])", $$1, text; \
+	}' ${PATCHMAP} )
 	@echo
 
 	@( if [ "$*" == "leasing-with-build-and-refit" ]; then \
