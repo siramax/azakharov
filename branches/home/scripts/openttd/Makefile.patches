@@ -105,7 +105,7 @@ ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 %.save : ${PATCHDIR}/%.patch.${REV} #alias
 	$(Q)( mkdir -p ${PATCHDIR}/${VERSION}/ ) # mkdir ./patches/0.4
 	$(Q)( mv ${PATCHDIR}/$*.patch.${REV} ${PATCHDIR}/${VERSION}/ ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
-	$(Q)( ln -s ${PATCHDIR}/${VERSION}/$*.patch.${REV} ${PATCHDIR}/$*.patch ) # sym link it
+	$(Q)( ln --symbolic --force ${PATCHDIR}/${VERSION}/$*.patch.${REV} ${PATCHDIR}/$*.patch ) # sym link it
 	$(DONE)
 #report here of diffs with previois patch
 
