@@ -39,7 +39,7 @@ get_hardware_max = function( aiface )
     local iface = aiface or sets.iface or 'eth0'
     
 --getting max HARDWARE now (powersave? offline?)
--- bas design here - some logic is inside awk 
+-- bad design here - some logic is inside awk 
     local tf = io.popen( [=[iwlist wlan0 rate| awk 'BEGIN {FS="[ :]+"} /Current/ {byps = $5 / 8; print byps,$6}']=], 'r' )
     local max = tf:read( '*a' )--all
     --some parse to get in BYTES
