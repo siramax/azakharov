@@ -1,0 +1,42 @@
+#!/bin/sh
+# My screen capture utility
+# Currently used scrot
+# I used ksnapshot and Shutter, now will try to make direct chain
+# shot - edit - upload (via gwenview?)
+
+# Recommended key-binds
+#  PrnScr - screen window #, opens FM with selected result
+#  WIN + PrnScr - screen window habr
+#  C + PrnScr - screen
+#  WIN + C + PrnScr - screen habr
+SCR_DIR=${SCR_DIR:-~/pics/shots}
+SCR_LOG=${SCR_LOG:-$SCR_DIR/screens.log}
+cd $SCR_DIR
+
+if [ x"$1" != x"window" ]; then # take entire screen
+  SCR=$(scrot --exec 'echo $f')
+else
+  SCR=$(scrot --focused --exec 'echo $f') # --delay 1
+fi
+
+if [ -n "$SCR" ]; then
+
+  if [ -n "$2" ]; then # do upload
+
+    if [ x"$2" = x"habr" ]; then # upload to habreffect
+      curl -F "upload=yes" -F "file=@$SCR_DIR/$SCR" -L http://habreffect.ru/upload.php  | grep -e "Прямая ссылка" |  awk -F"\"" '{print $6}' | sed 's#habreffect.ru/files#habreffect.ru#' | tee -ai "$SCR_LOG" | xsel -b -i ;
+
+    elif [ x"$2" = x"radical" ]; then
+      curl -F "upload=yes" -F "filename=@$SCR_DIR/$SCR" http://www.radikal.ru/action.aspx | grep "id=\"url4f\"" | awk -F"\"" '{print $6}' | tee -ai "$SCR_LOG" | xsel -b -i ;
+    fi
+  
+    tail -n 1 "$SCR_LOG" |  xargs -I _ x-www-browser _ ;
+    notify-send "Загрузка скриншота" "Скриншот был успешно загружен" -i /usr/share/icons/gnome/scalable/emblems/emblem-default.svg -t 5000 ;
+    rm $SCR;
+
+  else #do not upload
+    echo $SCR_DIR/$SCR | xsel --clipboard --input
+    # or
+    konqueror --select "$SCR_DIR/$SCR" &
+  fi
+fi
