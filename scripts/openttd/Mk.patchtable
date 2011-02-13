@@ -1,17 +1,18 @@
 patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
 rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
-cd                          https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21905.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
-https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21740.diff 
+cd                          https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r22044.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
+  https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21740.diff https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21905.diff 
 IB                          http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518
-harder-game                 http://www.tt-forums.net/download/file.php?id=120185 http://www.tt-forums.net/viewtopic.php?t=45642
-departure-boards            http://www.tt-forums.net/download/file.php?id=139540 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
+harder-game                 http://www.tt-forums.net/download/file.php?id=120185 bigos http://www.tt-forums.net/viewtopic.php?t=45642
+departure-boards            http://www.tt-forums.net/download/file.php?id=140877 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
+                 http://www.tt-forums.net/download/file.php?id=139540  
 stuck_trains                http://www.tt-forums.net/download/file.php?id=126757 Eddi http://www.tt-forums.net/viewtopic.php?t=47095
                             http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
 whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
-airport-close               http://www.tt-forums.net/download/file.php?id=134911 http://www.tt-forums.net/viewtopic.php?f=33&t=33418
-airport-upgrade             http://www.tt-forums.net/download/file.php?id=138570
-watch_gui_6                 http://www.tt-forums.net/download/file.php?id=127606 http://www.tt-forums.net/viewtopic.php?t=45221
+airport-close               http://www.tt-forums.net/download/file.php?id=134911 cirdan http://www.tt-forums.net/viewtopic.php?t=33418
+airport-upgrade             http://www.tt-forums.net/download/file.php?id=138570 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
+watch_gui_6                 http://www.tt-forums.net/download/file.php?id=127606 Muxy http://www.tt-forums.net/viewtopic.php?t=45221
 # http://www.tt-forums.net/download/file.php?id=126291
 close_tools_middle_v1       http://www.tt-forums.net/download/file.php?id=116056
 russian-town-names          http://www.tt-forums.net/download/file.php?id=126930 http://www.tt-forums.net/viewtopic.php?t=33344

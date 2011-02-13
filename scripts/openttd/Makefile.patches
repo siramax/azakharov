@@ -15,7 +15,7 @@
 #  make clean trunk-prepare && make PARAM='' all; make PARAM='' all
 
 
-.PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run
+.PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run pp
 
 .NOTPARALLEL :
 
@@ -93,6 +93,11 @@ all : $(PACKNAME).patch.check ${PATCHDIR}/$(PACKNAME).patch.${REV}
 $(TRUNK)/Makefile:
 	( cd $(TRUNK); ./configure $(CONFIGURE_PARAMS) > /dev/null )
 
+pp:
+	$(Q)( make clean trunk-prepare )
+#	IB, progwaypoint, improved-loans failed on saveload export BROWSER=cat; 
+	$(Q)( $(MAKE) all; $(MAKE) all; $(MAKE) all; $(MAKE) all; $(MAKE) all )
+	
 # 
 # Making auto patch file
 # Do patch from current trunk
