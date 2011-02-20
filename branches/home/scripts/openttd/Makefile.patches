@@ -53,7 +53,7 @@ TRUNKTARGETREV ?= -rHEAD
 #
 
 # revision
-VERSION := 0.4
+VERSION := 0.5
 # TODO as file REVISION.txt
 
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')

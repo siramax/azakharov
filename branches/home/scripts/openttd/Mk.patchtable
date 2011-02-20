@@ -77,7 +77,8 @@ economy-history             http://www.tt-forums.net/download/file.php?id=37217 
 better-graphs               http://www.tt-forums.net/download/file.php?id=93336 http://www.tt-forums.net/viewtopic.php?f=33&t=31984
 townrating-indicator        -
 info-speed-wagons           http://bugs.openttd.org/task/1199/getfile/5783/max-speed-info-in-train-details-info-tab_hg-41a7a4722f00.patch http://bugs.openttd.org/task/1199
-ez                          http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/ez.diff http://wiki.openttd.org/32bpp_Extra_Zoom_Levels
+ez                          http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/ez.diff GeekToo,Szvengar http://wiki.openttd.org/32bpp_Extra_Zoom_Levels
+lookupcolour_from_blit_to_gfx http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/lookupcolour_from_blit_to_gfx.diff http://www.tt-forums.net/viewtopic.php?f=36&t=35794&start=700
 ############
 # Obsolete
 daypatch                    http://www.tt-forums.net/download/file.php?id=108045    http://www.tt-forums.net/viewtopic.php?t=31657 /Sep 12, 2008/
