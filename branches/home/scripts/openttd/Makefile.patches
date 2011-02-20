@@ -96,21 +96,22 @@ $(TRUNK)/Makefile:
 pp:
 	$(Q)( make clean trunk-prepare )
 #	IB, progwaypoint, improved-loans failed on saveload export BROWSER=cat; 
-	$(Q)( $(MAKE) all; $(MAKE) all; $(MAKE) all; $(MAKE) all; $(MAKE) all )
+	$(Q)( $(MAKE) all; $(MAKE) all; $(MAKE) all; $(MAKE) all )
 	
 # 
 # Making auto patch file
 # Do patch from current trunk
 # $(PACKNAME).patch.${REV} will be caught by this
 ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
-	( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
-	( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
+	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
+	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
 
 # for quick hack, we do not require %.build.log 
 %.save : ${PATCHDIR}/%.patch.${REV} #alias
 	$(Q)( mkdir -p ${PATCHDIR}/${VERSION}/ ) # mkdir ./patches/0.4
-	$(Q)( mv ${PATCHDIR}/$*.patch.${REV} ${PATCHDIR}/${VERSION}/ ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
-	$(Q)( ln --symbolic --force ${PATCHDIR}/${VERSION}/$*.patch.${REV} ${PATCHDIR}/$*.patch ) # sym link it
+	$(Q)( mv ${PATCHDIR}/$*.patch.${REV} ${PATCHDIR}/${VERSION}/$*.${REV}.${TRUNKREV}.patch ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
+	$(Q)( ln --symbolic --force ${PATCHDIR}/${VERSION}/$*.${REV}.${TRUNKREV}.patch ${PATCHDIR}/$*.patch ) # sym link it
+	$(Q)( ls -la ${PATCHDIR}/$*.patch )
 	$(DONE)
 #report here of diffs with previois patch
 
@@ -339,7 +340,7 @@ descr-start:
 	fi )
 	@( if [ "$*" == "harder-game" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost town-cargo-factor); \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost); \
 		echo "		[/list]"; \
 	fi )
 	@( if [ "$*" == "adv-orders" ]; then \
