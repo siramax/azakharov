@@ -13,7 +13,7 @@ whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
 airport-close               http://www.tt-forums.net/download/file.php?id=134911 cirdan http://www.tt-forums.net/viewtopic.php?t=33418
 airport-upgrade             http://www.tt-forums.net/download/file.php?id=138570 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
 watch_gui_6                 http://www.tt-forums.net/download/file.php?id=127606 Muxy http://www.tt-forums.net/viewtopic.php?t=45221
-# http://www.tt-forums.net/download/file.php?id=126291
+ http://www.tt-forums.net/download/file.php?id=126291
 close_tools_middle_v1       http://www.tt-forums.net/download/file.php?id=116056
 russian-town-names          http://www.tt-forums.net/download/file.php?id=126930 http://www.tt-forums.net/viewtopic.php?t=33344
 cmd-train-console           http://www.tt-forums.net/download/file.php?id=127682
@@ -22,7 +22,9 @@ zoning                      http://www.tt-forums.net/download/file.php?id=131263
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
 more-cond-orders            http://www.tt-forums.net/download/file.php?id=109179
 town-cargo-factor           http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor-01-noslv.patch SpComb
-town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=89652 http://www.tt-forums.net/viewtopic.php?t=37158
+town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=141094 Gedemon,ChillCore http://www.tt-forums.net/viewtopic.php?t=37158
+                            http://www.tt-forums.net/download/file.php?id=89652
+town-growth                 town_growth_need_goods + town-cargo-factor
 reload-ai                   http://www.tt-forums.net/download/file.php?id=127668 http://bugs.openttd.org/task/2837
 infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122924&sid=98ed8ef9eb3bc7ed87e829b2a9d1b744 http://www.tt-forums.net/viewtopic.php?t=46811
 winstate                    http://bugs.openttd.org/task/3900/getfile/6223/ak2-patch-winstate-r20016.zip http://bugs.openttd.org/task/3900
@@ -68,17 +70,14 @@ show-station-spread         http://www.tt-forums.net/download/file.php?id=57790 
 low-level-opt               http://www.tt-forums.net/download/file.php?id=133993    http://www.tt-forums.net/viewtopic.php?f=33&t=49830 kamil.nowosad
 stationcache                http://www.tt-forums.net/download/file.php?id=133994    http://www.tt-forums.net/viewtopic.php?f=33&t=49830
 realistic-loans-system      http://www.tt-forums.net/download/file.php?id=100785 http://www.tt-forums.net/viewtopic.php?f=33&t=36184
-
 trip-history                http://www.tt-forums.net/download/file.php?id=75788 http://www.tt-forums.net/viewtopic.php?f=33&t=33411
-
 progsig                     http://www.tt-forums.net/download/file.php?id=127924
-
 improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
 economy-history             http://www.tt-forums.net/download/file.php?id=37217     http://www.tt-forums.net/viewtopic.php?f=33&t=21079
 better-graphs               http://www.tt-forums.net/download/file.php?id=93336 http://www.tt-forums.net/viewtopic.php?f=33&t=31984
 townrating-indicator        -
 info-speed-wagons           http://bugs.openttd.org/task/1199/getfile/5783/max-speed-info-in-train-details-info-tab_hg-41a7a4722f00.patch http://bugs.openttd.org/task/1199
-
+ez                          http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/ez.diff http://wiki.openttd.org/32bpp_Extra_Zoom_Levels
 ############
 # Obsolete
 daypatch                    http://www.tt-forums.net/download/file.php?id=108045    http://www.tt-forums.net/viewtopic.php?t=31657 /Sep 12, 2008/
