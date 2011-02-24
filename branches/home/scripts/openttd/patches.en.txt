@@ -1,16 +1,24 @@
 station-build-gui       [b]Improved Build Station GUI[/b]. With Industry Renewal Station Set - very cool.
 rating_town_label       [b]Colour rating in town label[/b].
 openttd-cargodist-sprinkles    patches with [b][url=http://www.tt-forums.net/viewtopic.php?t=41992]CargoDist[/url][/b]
-cargodist               [b]Cargo Distribution[/b] - Now passengers and cargo have destinations
+cd                      [b]Cargo Distribution[/b] - Now passengers and cargo have destinations
 IB                      [b]Improved Breakdowns[/b].
+departure-boards        Departure Boards
+town-growth             More town growth and cargo generation tweaks
 harder-game             Bigos set [b]makes game harder[/b]
 stuck_trains            [b]Stucked trains[/b] on minimap
 whistle                 Trains whistle when bridge and tunnels approaching.
-airport-upgrade-v6-1.0.0   [b]Airport upgrade[/b]
+progwaypoints           [b]Programmable Waypoints[/b] with penalties
+improved-loans          Loans depends on company's history and value
+VehicelsInTunnels       Transparent tunnels
+airport-upgrade         [b]Airport upgrade[/b]
 watch_gui_6             [b]Watch company[/b] last action
 russian-town-names      [b]Russian town names[/b]
 vs.russian              [b]Russian translate[/b]
-VTI_console             For new commands refer to  [url=http://wiki.openttd.org/Vehicle_console_commands]here[/url], [url=http://wiki.openttd.org/Town_console_commands]there[/url] and [url=http://wiki.openttd.org/index.php/Industry_console_commands]here[/url]
+station-cover           Shows station cover by CTRL+click on it
+ez                      [b]Extra Zoom for 32bpp[/b] better look
+default-settings        Settings by default are hard to play with
+cmd-train-console       For new commands refer to  [url=http://wiki.openttd.org/Vehicle_console_commands]here[/url], [url=http://wiki.openttd.org/Town_console_commands]there[/url] and [url=http://wiki.openttd.org/index.php/Industry_console_commands]here[/url]
 zoning                  [b]Zonning[/b] buggy with NewGRFs
 more-cond-orders        [b]More conditional orders[/b]
 town_growth_need_goods  [b]Town growth based on passenger/mails/goods[/b] A small patch that slow down town growth if there aren't enough passengers, mails and goods transported relatively to it's size.
