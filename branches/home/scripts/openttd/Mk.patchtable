@@ -1,53 +1,58 @@
 patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
-rating_town_label           http://www.tt-forums.net/download/file.php?id=122183
-cd                          https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r22044.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
+rating_town_label           http://www.tt-forums.net/download/file.php?id=145019 Terkhen http://www.tt-forums.net/viewtopic.php?f=33&t=42598
+cd                          https://raw.github.com/fonsinchen/openttd-cargodist/patches/cd_r22604.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
   https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21740.diff https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21905.diff 
-IB                          http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518
-harder-game                 http://www.tt-forums.net/download/file.php?id=120185 bigos http://www.tt-forums.net/viewtopic.php?t=45642
-departure-boards            http://www.tt-forums.net/download/file.php?id=140877 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
+
+smallmap_zoom               https://raw.github.com/fonsinchen/openttd-cargodist/patches/smallmap-zoom-in_r22604.diff fonso
+IB                          http://www.tt-forums.net/download/file.php?id=141374 Bigos http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518
+harder-game                 http://www.tt-forums.net/download/file.php?id=120185 Bigos http://www.tt-forums.net/viewtopic.php?t=45642
+departure-boards            http://www.tt-forums.net/download/file.php?id=144340 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
                  http://www.tt-forums.net/download/file.php?id=139540  
 stuck_trains                http://www.tt-forums.net/download/file.php?id=126757 Eddi http://www.tt-forums.net/viewtopic.php?t=47095
                             http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
 whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
-airport-close               http://www.tt-forums.net/download/file.php?id=134911 cirdan http://www.tt-forums.net/viewtopic.php?t=33418
-airport-upgrade             http://www.tt-forums.net/download/file.php?id=138570 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
+airport-close               http://www.tt-forums.net/download/file.php?id=145016 cirdan http://www.tt-forums.net/viewtopic.php?t=33418
+airport-upgrade             http://www.tt-forums.net/download/file.php?id=145017 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
 watch_gui_6                 http://www.tt-forums.net/download/file.php?id=127606 Muxy http://www.tt-forums.net/viewtopic.php?t=45221
  http://www.tt-forums.net/download/file.php?id=126291
 close_tools_middle_v1       http://www.tt-forums.net/download/file.php?id=116056
 russian-town-names          http://www.tt-forums.net/download/file.php?id=126930 http://www.tt-forums.net/viewtopic.php?t=33344
-cmd-train-console           http://www.tt-forums.net/download/file.php?id=127682
-signaltunnel                http://www.tt-forums.net/download/file.php?id=126249
+cmd-train-console           http://www.tt-forums.net/download/file.php?id=127682 Bilbo http://www.tt-forums.net/viewtopic.php?f=33&t=32964
+signaltunnel                http://www.tt-forums.net/download/file.php?id=144799 HackaLittleBit http://www.tt-forums.net/viewtopic.php?f=33&t=41260 
 zoning                      http://www.tt-forums.net/download/file.php?id=131263 
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
-more-cond-orders            http://www.tt-forums.net/download/file.php?id=109179
-town-cargo-factor           http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor-01-noslv.patch SpComb
+more-cond-orders            http://www.tt-forums.net/download/file.php?id=131848 Hirundo http://www.tt-forums.net/viewtopic.php?f=33&t=38317
+town-cargo-factor           http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor-01-noslv.patch SpComb http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor.txt	
 town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=141094 Gedemon,ChillCore http://www.tt-forums.net/viewtopic.php?t=37158
-                            http://www.tt-forums.net/download/file.php?id=89652
 town-growth                 town_growth_need_goods + town-cargo-factor
-reload-ai                   http://www.tt-forums.net/download/file.php?id=127668 http://bugs.openttd.org/task/2837
+reload-ai                   http://www.tt-forums.net/download/file.php?id=127668 Bilbo http://bugs.openttd.org/task/2837
 infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122924&sid=98ed8ef9eb3bc7ed87e829b2a9d1b744 http://www.tt-forums.net/viewtopic.php?t=46811
-winstate                    http://bugs.openttd.org/task/3900/getfile/6223/ak2-patch-winstate-r20016.zip http://bugs.openttd.org/task/3900
+winstate                    http://bugs.openttd.org/task/3900/getfile/6223/ak2-patch-winstate-r20016.zip Alexander(avk) http://bugs.openttd.org/task/3900
 addional_orders             http://new.tt-forums.net/download/file.php?id=50435
 towncost                    http://www.tt-forums.net/download/file.php?id=76518 http://www.tt-forums.net/viewtopic.php?t=32942
-daylen                      http://www.tt-forums.net/download/file.php?id=131893    pavel1269 http://www.tt-forums.net/viewtopic.php?f=33&t=42432
+daylen                      http://www.tt-forums.net/download/file.php?id=142282 pavel1269 http://www.tt-forums.net/viewtopic.php?f=33&t=42432
 leasing                     http://www.tt-forums.net/download/file.php?id=132263 http://www.tt-forums.net/viewtopic.php?f=33&t=49389
 daily-autosave              http://qmsk.net/~terom/openttd/patches/daily-autosave-00-trunk.patch
 vehicle-name-length         http://qmsk.net/~terom/openttd/patches/vehicle-name-length-00-trunk.patch
-automated-timetables-and-separation     http://www.tt-forums.net/download/file.php?id=126671
+automated-timetables-and-separation     http://www.tt-forums.net/download/file.php?id=126671 Gathers,MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=46391
 extra-large-maps            http://www.tt-forums.net/download/file.php?id=135162    http://www.tt-forums.net/viewtopic.php?f=33&t=33137
-clipboard                   http://www.tt-forums.net/download/file.php?id=132261 http://www.tt-forums.net/viewtopic.php?f=33&t=45488
-build-and-refit             http://www.tt-forums.net/download/file.php?id=133581    http://www.tt-forums.net/viewtopic.php?f=33&t=35805
-minimap-screenshot          http://www.tt-forums.net/download/file.php?id=122869    http://www.tt-forums.net/viewtopic.php?f=33&t=42845
+clipboard                   http://www.tt-forums.net/download/file.php?id=144384 adf88 http://www.tt-forums.net/viewtopic.php?f=33&t=45488
+build-and-refit             http://www.tt-forums.net/download/file.php?id=133738 133581    http://www.tt-forums.net/viewtopic.php?f=33&t=35805
+minimap-screenshot          http://www.tt-forums.net/download/file.php?id=122869 Rolie http://www.tt-forums.net/viewtopic.php?f=33&t=42845
 daily-scripts               http://www.tt-forums.net/download/file.php?id=132984 http://www.tt-forums.net/viewtopic.php?f=33&t=49595
-industry-stationnames       http://www.tt-forums.net/download/file.php?id=138215 http://www.tt-forums.net/viewtopic.php?f=33&t=35613 
-                            http://www.tt-forums.net/download/file.php?id=88489
-station-cover               - http://www.tt-forums.net/viewtopic.php?f=33&t=44835
+industry-stationnames       http://www.tt-forums.net/download/file.php?id=145018 Roujin http://www.tt-forums.net/viewtopic.php?f=33&t=35613
+station-cover               - gehene http://www.tt-forums.net/viewtopic.php?f=33&t=44835
 progwaypoints               http://www.tt-forums.net/download/file.php?id=84439 http://www.tt-forums.net/viewtopic.php?f=33&t=35543
-leave-orders                http://www.tt-forums.net/download/file.php?id=135163 http://www.tt-forums.net/viewtopic.php?f=33&t=50001
+leave-orders                http://www.tt-forums.net/download/file.php?id=135163 doener http://www.tt-forums.net/viewtopic.php?f=33&t=50001
+townrating-indicator        http://www.tt-forums.net/download/file.php?id=146418 Progman http://www.tt-forums.net/viewtopic.php?t=33897
+group-info                  http://www.tt-forums.net/download/file.php?id=145020 MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=33148
+group-by-property           http://www.tt-forums.net/download/file.php?id=117633 sulai http://www.tt-forums.net/viewtopic.php?f=33&t=45224
+trip-history                http://www.tt-forums.net/download/file.php?id=75788 Molp,Vaulter http://www.tt-forums.net/viewtopic.php?f=33&t=33411
 
 ############    
 # Experimental
+zoom64                      http://www.tt-forums.net/download/file.php?id=145922 MJP http://www.tt-forums.net/viewtopic.php?f=33&t=53394
 pathfinder-penalty-rv       http://www.tt-forums.net/download/file.php?id=121071 http://www.tt-forums.net/viewtopic.php?f=33&t=45040
 split-refit                 http://www.tt-forums.net/download/file.php?id=128088    http://www.tt-forums.net/viewtopic.php?f=33&t=48220
 VehicelsInTunnels           http://dev.openttdcoop.org/projects/clientpatches/repository/raw/VehicelsInTunnels.diff
@@ -63,19 +68,16 @@ copypaste                   http://www.tt-forums.net/download/file.php?id=127691
 copypaste.grf               http://www.tt-forums.net/download.php?id=50279
 better_graphs               http://www.tt-forums.net/download/file.php?id=93336
 transp-roads-rails-slopes     http://www.tt-forums.net/download/file.php?id=131160 http://www.tt-forums.net/viewtopic.php?f=33&t=49151
-group-info                  http://www.tt-forums.net/download/file.php?id=137432    http://www.tt-forums.net/viewtopic.php?f=33&t=33148
-group-by-property           http://www.tt-forums.net/download/file.php?id=117633 http://www.tt-forums.net/viewtopic.php?f=33&t=45224
 menu_jumping                http://www.tt-forums.net/download/file.php?id=89787 http://www.tt-forums.net/viewtopic.php?f=33&t=36925
 show-station-spread         http://www.tt-forums.net/download/file.php?id=57790 http://www.tt-forums.net/viewtopic.php?f=33&t=27806
 low-level-opt               http://www.tt-forums.net/download/file.php?id=133993    http://www.tt-forums.net/viewtopic.php?f=33&t=49830 kamil.nowosad
 stationcache                http://www.tt-forums.net/download/file.php?id=133994    http://www.tt-forums.net/viewtopic.php?f=33&t=49830
 realistic-loans-system      http://www.tt-forums.net/download/file.php?id=100785 http://www.tt-forums.net/viewtopic.php?f=33&t=36184
-trip-history                http://www.tt-forums.net/download/file.php?id=75788 http://www.tt-forums.net/viewtopic.php?f=33&t=33411
 progsig                     http://www.tt-forums.net/download/file.php?id=127924
 improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
 economy-history             http://www.tt-forums.net/download/file.php?id=37217     http://www.tt-forums.net/viewtopic.php?f=33&t=21079
 better-graphs               http://www.tt-forums.net/download/file.php?id=93336 http://www.tt-forums.net/viewtopic.php?f=33&t=31984
-townrating-indicator        -
+
 info-speed-wagons           http://bugs.openttd.org/task/1199/getfile/5783/max-speed-info-in-train-details-info-tab_hg-41a7a4722f00.patch http://bugs.openttd.org/task/1199
 ez                          http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/ez.diff GeekToo,Szvengar http://wiki.openttd.org/32bpp_Extra_Zoom_Levels
 lookupcolour_from_blit_to_gfx http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/lookupcolour_from_blit_to_gfx.diff http://www.tt-forums.net/viewtopic.php?f=36&t=35794&start=700

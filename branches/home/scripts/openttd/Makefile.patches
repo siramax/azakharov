@@ -53,7 +53,7 @@ TRUNKTARGETREV ?= -rHEAD
 #
 
 # revision
-VERSION := 0.5
+VERSION := 0.6
 # TODO as file REVISION.txt
 
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
@@ -109,8 +109,8 @@ ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 # for quick hack, we do not require %.build.log 
 %.save : ${PATCHDIR}/%.patch.${REV} #alias
 	$(Q)( mkdir -p ${PATCHDIR}/${VERSION}/ ) # mkdir ./patches/0.4
-	$(Q)( mv ${PATCHDIR}/$*.patch.${REV} ${PATCHDIR}/${VERSION}/$*.${REV}.${TRUNKREV}.patch ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
-	$(Q)( ln --symbolic --force ${PATCHDIR}/${VERSION}/$*.${REV}.${TRUNKREV}.patch ${PATCHDIR}/$*.patch ) # sym link it
+	$(Q)( mv --force ${PATCHDIR}/$*.patch.${REV} ${PATCHDIR}/${VERSION}/$*.${REV}.${TRUNKREV}.patch ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
+	$(Q)( cd ${PATCHDIR}; ln --symbolic --force ${VERSION}/$*.${REV}.${TRUNKREV}.patch $*.patch ) # sym link it
 	$(Q)( ls -la ${PATCHDIR}/$*.patch )
 	$(DONE)
 #report here of diffs with previois patch
