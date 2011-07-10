@@ -104,11 +104,17 @@ pp:
 # $(PACKNAME).patch.${REV} will be caught by this
 ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
+	$(Q)( cd $(TRUNK) && svn revert src/saveload/saveload.cpp ) 
+	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
+
+${PATCHDIR}/%.patch.${TRUNKREV} : trunk-sweep trunk-generate
+	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
 	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
 
 # for quick hack, we do not require %.build.log 
-%.save : ${PATCHDIR}/%.patch.${REV} #alias
+%.save : ${PATCHDIR}/%.patch.${TRUNKREV} ${PATCHDIR}/%.patch.${REV} #alias
 	$(Q)( mkdir -p ${PATCHDIR}/${VERSION}/ ) # mkdir ./patches/0.4
+	$(Q)( mv --interactive ${PATCHDIR}/$*.patch.${TRUNKREV} ${PATCHDIR}/${VERSION}/$*.${TRUNKREV}.patch ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
 	$(Q)( mv --force ${PATCHDIR}/$*.patch.${REV} ${PATCHDIR}/${VERSION}/$*.${REV}.${TRUNKREV}.patch ) # mv p.patch.0.4.110 patches/0.4/p.patch.0.4.110
 	$(Q)( cd ${PATCHDIR}; ln --symbolic --force ${VERSION}/$*.${REV}.${TRUNKREV}.patch $*.patch ) # sym link it
 	$(Q)( ls -la ${PATCHDIR}/$*.patch )
