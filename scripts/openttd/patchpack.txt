@@ -1,13 +1,13 @@
-cd cd.rus IB harder-game town-growth
+cd cd.rus IB harder-game town-growth signaltunnel
 departure-boards departure-boards.rus progwaypoints
 daylen improved-loans
 leasing-with-build-and-refit
-adv-orders leave-orders
+more-cond-orders leave-orders
 industry-stationnames rating_town_label townrating-indicator stuck_trains watch_gui_6 russian-town-names whistle clipboard VehicelsInTunnels group-info group-by-property
 automated-timetables-and-separation airport-upgrade airport-close cmd-train-console minimap-screenshot trip-history station-cover
 reload-ai winstate vehicle-name-length daily-autosave
 extra-large-maps daily-scripts low-level-opt
-ez lookupcolour_from_blit_to_gfx
+lookupcolour_from_blit_to_gfx
 vs-hacks
 default-settings
 post-patches
