@@ -104,7 +104,7 @@ pp:
 # $(PACKNAME).patch.${REV} will be caught by this
 ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
-	$(Q)( cd $(TRUNK) && svn revert src/saveload/saveload.cpp ) 
+	$(Q)([ x"$*" != x"$(PACKNAME)" ]) && ( cd $(TRUNK) && svn revert src/saveload/saveload.cpp ) || true
 	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
 
 ${PATCHDIR}/%.patch.${TRUNKREV} : trunk-sweep trunk-generate
@@ -142,13 +142,13 @@ trunk-revert :
 #sweep our mess
 trunk-sweep:
 	$(Q)( find $(TRUNK) -name \*rej -or -name \*orig -or -name \.~\*bak | xargs rm --force --verbose -- )
-	@echo [SRC] $(TRUNKREV) sweeped
+	@echo [SRC] $(TRUNKREV) swept
 
 trunk-clean :
 	$(Q)( if [ -f $(TRUNK)/Makefile ]; then $(MAKE) -f Makefile -C $(TRUNK) clean >/dev/null; fi )
 #deep svn new files from patches clean
 	$(Q)( cd $(TRUNK) && svn stat | $(DOS2UNIXPATH)  |  grep ^? | grep -v 'nbproject\|Makefile-trunk.mk\|bin/' | xargs rm -rf -- )
-	@echo [SRC] $(TRUNKREV) cleaned
+	@echo [SRC] $(TRUNKREV) clean
 
 trunk-update : 
 	$(Q)( cd $(TRUNK) && svn update $(TRUNKTARGETREV))
@@ -183,6 +183,10 @@ sweep : $(addsuffix .sweep, $(PATCHES) )
 
 run :
 	$(MAKE) run -C $(TRUNK)
+
+run-srv:
+	$(TRUNK)/bin/openttd -D -f
+	$(TRUNK)/bin/openttd -n 127.0.0.1:3979
 
 reset: clean trunk-prepare
 	$(DONE)
