@@ -24,7 +24,7 @@ zoning                      http://www.tt-forums.net/download/file.php?id=131263
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
 more-cond-orders            http://www.tt-forums.net/download/file.php?id=131848 Hirundo http://www.tt-forums.net/viewtopic.php?f=33&t=38317
 town-cargo-factor           http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor-01-noslv.patch SpComb http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor.txt	
-town_growth_need_goods      http://www.tt-forums.net/download/file.php?id=141094 Gedemon,ChillCore http://www.tt-forums.net/viewtopic.php?t=37158
+town-growth-needs-goods     http://www.tt-forums.net/download/file.php?id=141094 Gedemon,ChillCore http://www.tt-forums.net/viewtopic.php?t=37158
 town-growth                 town_growth_need_goods + town-cargo-factor
 reload-ai                   http://www.tt-forums.net/download/file.php?id=127668 Bilbo http://bugs.openttd.org/task/2837
 infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122924&sid=98ed8ef9eb3bc7ed87e829b2a9d1b744 http://www.tt-forums.net/viewtopic.php?t=46811
@@ -49,11 +49,13 @@ townrating-indicator        http://www.tt-forums.net/download/file.php?id=146418
 group-info                  http://www.tt-forums.net/download/file.php?id=145020 MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=33148
 group-by-property           http://www.tt-forums.net/download/file.php?id=117633 sulai http://www.tt-forums.net/viewtopic.php?f=33&t=45224
 trip-history                http://www.tt-forums.net/download/file.php?id=75788 Molp,Vaulter http://www.tt-forums.net/viewtopic.php?f=33&t=33411
-
+station-loaders             - Vaulter
+atc                         http://www.tt-forums.net/download/file.php?id=138989 urdh http://www.tt-forums.net/viewtopic.php?f=33&t=52085
+tracking-viewport
+gui-tweaks
 ############    
 # Experimental
 zoom64                      http://www.tt-forums.net/download/file.php?id=145922 MJP http://www.tt-forums.net/viewtopic.php?f=33&t=53394
-atc                         http://www.tt-forums.net/download/file.php?id=138989 urdh http://www.tt-forums.net/viewtopic.php?f=33&t=52085
 pathfinder-penalty-rv       http://www.tt-forums.net/download/file.php?id=121071 http://www.tt-forums.net/viewtopic.php?f=33&t=45040
 split-refit                 http://www.tt-forums.net/download/file.php?id=128088    http://www.tt-forums.net/viewtopic.php?f=33&t=48220
 VehicelsInTunnels           http://dev.openttdcoop.org/projects/clientpatches/repository/raw/VehicelsInTunnels.diff
