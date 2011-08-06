@@ -53,11 +53,13 @@ station-loaders             - Vaulter
 atc                         http://www.tt-forums.net/download/file.php?id=138989 urdh http://www.tt-forums.net/viewtopic.php?f=33&t=52085
 tracking-viewport
 gui-tweaks
+zoom64                      http://www.tt-forums.net/download/file.php?id=145922 MJP http://www.tt-forums.net/viewtopic.php?f=33&t=53394
+station-cover               http://www.tt-forums.net/download/file.php?id=147606 gehene http://www.tt-forums.net/viewtopic.php?f=33&t=44835
+improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
+diagonal_terraform          
 ############    
 # Experimental
-zoom64                      http://www.tt-forums.net/download/file.php?id=145922 MJP http://www.tt-forums.net/viewtopic.php?f=33&t=53394
 pathfinder-penalty-rv       http://www.tt-forums.net/download/file.php?id=121071 http://www.tt-forums.net/viewtopic.php?f=33&t=45040
-split-refit                 http://www.tt-forums.net/download/file.php?id=128088    http://www.tt-forums.net/viewtopic.php?f=33&t=48220
 VehicelsInTunnels           http://dev.openttdcoop.org/projects/clientpatches/repository/raw/VehicelsInTunnels.diff
 max-grfs                    http://www.tt-forums.net/download/file.php?id=132938 http://www.tt-forums.net/viewtopic.php?f=31&t=37435
 grassOnTracks               http://www.tt-forums.net/download/file.php?id=124535
@@ -69,7 +71,6 @@ cargo_autosep_moreheights   http://www.tt-forums.net/download/file.php?id=125861
 copypaste                   http://www.tt-forums.net/download/file.php?id=127691
 # Dependency of copypaste:
 copypaste.grf               http://www.tt-forums.net/download.php?id=50279
-better_graphs               http://www.tt-forums.net/download/file.php?id=93336
 transp-roads-rails-slopes     http://www.tt-forums.net/download/file.php?id=131160 http://www.tt-forums.net/viewtopic.php?f=33&t=49151
 menu_jumping                http://www.tt-forums.net/download/file.php?id=89787 http://www.tt-forums.net/viewtopic.php?f=33&t=36925
 show-station-spread         http://www.tt-forums.net/download/file.php?id=57790 http://www.tt-forums.net/viewtopic.php?f=33&t=27806
@@ -77,10 +78,8 @@ low-level-opt               http://www.tt-forums.net/download/file.php?id=133993
 stationcache                http://www.tt-forums.net/download/file.php?id=133994    http://www.tt-forums.net/viewtopic.php?f=33&t=49830
 realistic-loans-system      http://www.tt-forums.net/download/file.php?id=100785 http://www.tt-forums.net/viewtopic.php?f=33&t=36184
 progsig                     http://www.tt-forums.net/download/file.php?id=127924
-improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
 economy-history             http://www.tt-forums.net/download/file.php?id=37217     http://www.tt-forums.net/viewtopic.php?f=33&t=21079
 better-graphs               http://www.tt-forums.net/download/file.php?id=93336 http://www.tt-forums.net/viewtopic.php?f=33&t=31984
-
 info-speed-wagons           http://bugs.openttd.org/task/1199/getfile/5783/max-speed-info-in-train-details-info-tab_hg-41a7a4722f00.patch http://bugs.openttd.org/task/1199
 ez                          http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/ez.diff GeekToo,Szvengar http://wiki.openttd.org/32bpp_Extra_Zoom_Levels
 lookupcolour_from_blit_to_gfx http://dev.openttdcoop.org/projects/32bpp-ez-patches/repository/raw/lookupcolour_from_blit_to_gfx.diff http://www.tt-forums.net/viewtopic.php?f=36&t=35794&start=700
@@ -119,5 +118,5 @@ more-diesel-smoke           http://www.tt-forums.net/download/file.php?id=132402
 fastest-bridge              http://www.tt-forums.net/download/file.php?id=92209 http://www.tt-forums.net/viewtopic.php?f=33&t=36964
 panorama                    http://www.tt-forums.net/download/file.php?id=132100
 station-build-gui           http://www.tt-forums.net/download/file.php?id=137169 http://www.tt-forums.net/viewtopic.php?t=41222
-
+split-refit                 http://www.tt-forums.net/download/file.php?id=128088    http://www.tt-forums.net/viewtopic.php?f=33&t=48220
 
