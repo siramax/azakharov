@@ -4,7 +4,8 @@ departure-boards departure-boards.rus progwaypoints
 daylen improved-loans
 leasing-with-build-and-refit
 more-cond-orders leave-orders
-industry-stationnames rating_town_label townrating-indicator stuck_trains watch_gui_7 russian-town-names whistle tunnel_vehicles group-info group-by-property
+industry-stationnames rating_town_label townrating-indicator stuck_trains watch_gui_7 russian-town-names whistle
+tunnel_vehicles group-info group-by-property
 automated-timetables-and-separation airport-upgrade airport-close cmd-train-console minimap-screenshot trip-history
 reload-ai winstate daily-autosave
 extra-large-maps daily-scripts
@@ -13,6 +14,7 @@ trafficlights
 station-loaders
 clipboard
 gui-tweaks
+station-cover 
 tracking-viewport
 zoom64 cd-zoom64
 atc
