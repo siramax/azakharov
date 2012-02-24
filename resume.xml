@@ -8,8 +8,8 @@
       <FirstName>Andrey</FirstName>
       <FamilyName>Zakharov</FamilyName>
       <Photo width='85pt'>Andrey.jpg</Photo>
-      <Address>Russia, Volgograd</Address>
-      <Phone type='cell'>+7(905)339 76 60</Phone>
+      <Address>Russia, Saint Petersburg</Address>
+      <Phone type='cell'>+7(965)072 45 87</Phone>
       <Email>aazaharov81@gmail.com</Email>
       <Extra type='skype'>andrey-zaharov</Extra>
     </Personal>
@@ -18,8 +18,8 @@
       <FirstName>Андрей</FirstName>
       <FamilyName>Захаров</FamilyName>
       <Photo width='85pt'>Andrey.jpg</Photo>
-      <Address>Россия, г.Волгоград</Address>
-      <Phone type='cell'>+7(905)339 76 60</Phone>
+      <Address>Россия, г.Санкт-Петербург</Address>
+      <Phone type='cell'>+7(965)072 45 87</Phone>
       <Email>aazaharov81@gmail.com</Email>
       <Extra type='skype'>andrey-zaharov</Extra>
     </Personal>
@@ -34,6 +34,7 @@ opportunity for advancement.
   <Strengths>
     <Entry>Professional Internet based software development experience using various Internet technologies.</Entry>
     <Entry>Expert in working with various operating systems.</Entry>
+	<Entry>Familiar with modern high-load solutions.</Entry>
 	<Entry>Exceptional Technical Skill.</Entry>
 	<Entry>Highly skilled in customer service.</Entry>
 	<Entry>Good deliver output in less time without losing efficiency.</Entry>
@@ -59,15 +60,70 @@ opportunity for advancement.
   
   <Experience>
     <Vocational>
+		
       <Entry Job = 'Senior Software Engineer'>
-        <Period From = "Jul 2008" To = "present" />
+        <Period From = "Sep 2010" To = "now" />
+        <Job>Senior Software Engineer</Job>
+        <Employer>
+          <Name>Sperasoft Inc.</Name>
+          <City>Saint Petersburg</City>
+          <Description>International outsourcing company</Description>
+		  <Customer>BioWare</Customer>
+        </Employer><!-- ; internal company portal; web-based reporting application. -->
+        <Description>
+			Working on high-load game site (Drupal, Apache Solr), integration with 3rd party search engine, developing game data import flow from various data sources.
+			Developing and supporting set of internal tools for testing, inviting, monitoring, etc. 
+			Consulting, prototyping and developing corporal internet sites. 
+			Plan, control and evaluate the operations of information systems. 
+			Recruit and supervise computer engineers and programmers. 
+		</Description>
+		
+		<Achievement lang = "ru">Учавствовал в запуске игры <a href="http://www.swtor.com/">SWTOR</a></Achievement>
+        <Achievement lang = "en">Actively participated in <a href="http://www.swtor.com/">SWTOR</a> game launch </Achievement>
+		
+		<Achievement lang = "ru">Оптимизировал скорость работы интерфейса системы внутреннего мониторинга серверов</Achievement>
+        <Achievement lang = "en">Optimized UI responsibility of servers monitoring internal system</Achievement>
+		
+        <Achievement lang = "ru">Доработал и внедрил модули интеграции различных типов данных высоконагруженного сайта с поисковым серверов Apache Solr</Achievement>
+        <Achievement lang = "en">Finalized and introduced integration modules of high-load site data with Apache Solr search engine </Achievement>
+
+        <Techs>Drupal, JavaScript, Java, C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat, PHP, HTML, CSS.</Techs>
+      </Entry>
+	  
+	<Entry Job = 'Senior Software Engineer'>
+        <Period From = "May 2010" To = "Sep 2010" />
         <Job>Senior Software Engineer</Job>
         <Employer>
           <Name>Sperasoft Inc.</Name>
           <City>Volgograd branch</City>
           <Description>International outsourcing company</Description>
         </Employer>
-        <Description>Working as member of a team developing and maintaining: distributed system of data collection and metric controls of company systems; internal company portal; web-based reporting application. Automate, optimize and promote corporate sites. Plan, control and evaluate the operations of information systems. Develop and implement policies and procedures for electronic data processing and computer systems operations and development. Meet with clients to discuss system requirements, specifications, costs and time lines. Recruit and supervise computer engineers and programmers.</Description>
+        <Description>
+			Automate, optimize and promote corporate sites.
+			Plan, control and evaluate the operations of information systems. 
+			Recruit and supervise computer engineers and programmers. 
+		</Description>
+
+        <Achievement lang = "ru">Перенес статичный сайт на CMS Drupal</Achievement>
+        <Achievement lang = "en">Convert static corporate site into dynamic full-featured extensible site on CMS Drupal</Achievement>
+        <Techs>Drupal, JavaScript, PHP, HTML, CSS.</Techs>
+      </Entry>
+	  
+	  <Entry Job = 'Senior Software Engineer'>
+        <Period From = "Jul 2008" To = "May 2010" />
+        <Job>Senior Software Engineer</Job>
+        <Employer>
+          <Name>Sperasoft Inc.</Name>
+          <City>Volgograd branch</City>
+          <Description>International outsourcing company</Description>
+		  <Customer>Sony Online Entertaiment</Customer>
+        </Employer>
+        <Description>
+			Worked as member of a team developing and maintaining: distributed high-load system of data collection and metric controls of company systems.
+			Develop and implement policies and procedures for electronic data processing and computer systems operations and development. 
+			Meet with clients to discuss system requirements, specifications, costs and time lines.
+		</Description>
+		
         <Achievement lang = "ru">Улучшил скорость SOAP запросов web приложения к серверу</Achievement>
         <Achievement lang = "en">Improved speed of SOAP data exchange between web application and server</Achievement>
         
@@ -79,11 +135,8 @@ opportunity for advancement.
 		
         <Achievement lang = "ru">Разработал скрипт (bash) установки, конфигурации и управления ПО</Achievement>
         <Achievement lang = "en">Develop deployment, configuration and handling script (bash) of software instances</Achievement>
-		
-        <Achievement lang = "ru">Перенес статичный сайт на CMS Drupal</Achievement>
-        <Achievement lang = "en">Convert static corporate site into dynamic full-featured extensible site on CMS Drupal</Achievement>
-        <Techs>C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat, Drupal, PHP, Javascript, HTML, CSS.</Techs>
-      </Entry>
+		<Techs>C++, Boost, CppUnit, gSOAP, libxml, OpenSSL, GCC, bash, Java EE, JSP, RichFaces, ICEFaces, MySQL, Tomcat, JavaScript</Techs>
+		</Entry>
       <Entry Job = 'Freelancer'>
         <Period From = "Aug 2007" To = "Jul 2008" />
         <Job>Freelancer</Job>
@@ -219,8 +272,8 @@ opportunity for advancement.
     <Group type = 'Tools'>
       <Entry type = 'Technologies'>.NET, J2EE, EJB, COM/DCOM/COM+, OLE/ActiveX, AJAX</Entry>
       <Entry type = 'OS'>MS Windows, Linux (Debian), QNX, FreeBSD, MSDOS, Apple DOS 3.3</Entry>
-      <Entry type = 'DBMS'>MySQL, PostgreSQL, MS SQL, SQLite, MS Access</Entry>
-      <Entry type = 'Related Software'>MS Office, MS Visio, MS Project, SSH, Bash, Kile</Entry>
+      <Entry type = 'DBMS'>MySQL, PostgreSQL, MS SQL, SQLite, MS Access, Oracle</Entry>
+      <Entry type = 'Related Software'>MS Office, MS Visio, MS Project, SSH, Bash, Kile, soapUI</Entry>
       <Entry type = 'Development'>MS Visual Studio, Netbeans IDE, Eclipse IDE, code reviewer, JIRA, GDB, Borland Delphi</Entry>
       <Entry type = 'SCM'>CVS, SVN, Perforce, git</Entry>
     </Group>
@@ -232,7 +285,7 @@ opportunity for advancement.
       <Entry type = 'C#'>.NET 2.0, WinForms</Entry>
       <Entry type = 'SQL'>MySQL, SQLite, T-SQL</Entry>
       <Entry type = 'Visual Basic'>VBA, MS Word, MS Excel, MS Access, MS Outlook</Entry>
-      <Entry type = 'Markup'>XHTML, CSS, XML, XSL</Entry>
+      <Entry type = 'Markup'>HTML5, XHTML, CSS3, XML, XSL</Entry>
       <!--Entry type = 'GNU'>BASH, SSH, sed, awk, \LaTeXe</Entry-->
       <Entry type = 'Scripting'>BASH, Perl, Lua, Python, Groovy, sed, awk, \LaTeXe</Entry>
       <Entry type = 'Exotic'>Architecture and assembler MOStech 6502 (Apple II, etc.)</Entry>
@@ -298,7 +351,6 @@ opportunity for advancement.
   
   <Links>
     <Portfolio>
-
             <Entry type = ""
                 xlink:title = "See it in porfolio" 
                 xlink:role = "locator" 
@@ -306,16 +358,27 @@ opportunity for advancement.
                 xlink:actuate = "onRequest" 
                 xlink:show = "new" >http://vaultsoft.ru/portfolio</Entry>
 
-
 		</Portfolio>
-		<Brainbench>
-			<Entry type = "transcript"
+		<Profiles>
+			<Entry type = "LinkedIn"
+                xlink:title = "LinkedIn profile" 
+                xlink:role = "locator" 
+                xlink:href ="http://www.linkedin.com/pub/andrey-zakharov/21/99a/56a" 
+                xlink:actuate = "onRequest" 
+                xlink:show = "new" >http://www.linkedin.com/pub/andrey-zakharov/21/99a/56a</Entry>
+			<Entry type = "Brainbench"
                 xlink:title = "Brainbench Public Transcript" 
                 xlink:role = "locator" 
                 xlink:href ="http://www.brainbench.com/transcript.jsp?pid=8883643" 
                 xlink:actuate = "onRequest" 
                 xlink:show = "new" >http://www.brainbench.com/transcript.jsp?pid=8883643</Entry>
-		</Brainbench>
+			<Entry type = "Drupal.org"
+                xlink:title = "" 
+                xlink:role = "locator" 
+                xlink:href ="http://drupal.org/user/222552" 
+                xlink:actuate = "onRequest" 
+                xlink:show = "new" >http://drupal.org/user/222552</Entry>
+		</Profiles>
 	</Links>
 </Document>
 
