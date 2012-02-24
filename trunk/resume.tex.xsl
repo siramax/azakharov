@@ -18,6 +18,7 @@
 %\usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 %\usepackage[russian]{babel}
+\definecolor{addresscolor}{rgb}{0.35,0.35,0.35}
 
 \usepackage[scale=0.9]{geometry}
 \usepackage{url}
@@ -29,7 +30,7 @@
   \end{document}
   </xsl:template>
   <!-- Meta -->
-  <xsl:template match="Period">\raggedleft{<xsl:value-of select = "@From" />\,---\hbox to 1em {}}\\
+  <xsl:template match="Period">\raggedleft{<xsl:value-of select = "@From" />\,---\hbox to .8em {}}\\
   \raggedright{<xsl:value-of select = "@To" />}</xsl:template>
   
   <xsl:template match = '/Document/Meta'><xsl:apply-templates select = "*[@lang=$lang]" /></xsl:template>
@@ -71,7 +72,7 @@
   
   
   <xsl:template match = '//Experience//Entry'>\cventry{<xsl:apply-templates select = 'Period' />}{<xsl:value-of select = '@Job' />}{<xsl:value-of select = 'Employer/Name' />}%
-    {<xsl:value-of select = 'Employer/City' />}{<xsl:copy-of select = 'Employer/Description' />}{<xsl:apply-templates select = 'Description' />\newline{}
+    {<xsl:value-of select = 'Employer/City' />}{<xsl:copy-of select = 'Employer/Description' />}{<xsl:if test = 'Employer/Customer'>Customer: <xsl:value-of select = 'Employer/Customer' /></xsl:if>\\<xsl:apply-templates select = 'Description' />\newline{}
     <xsl:apply-templates select="Achievement[@lang=$lang]" />}<xsl:comment>\newline{}
     Key technologies and languages: <xsl:value-of select = 'Techs' /></xsl:comment></xsl:template>
     
