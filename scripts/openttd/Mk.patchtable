@@ -1,8 +1,11 @@
 patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
+yacd                        http://www.icosahedron.de/openttd/yacd/yacd_v2_3_r22532.patch Michi_cc http://www.tt-forums.net/viewtopic.php?f=33&t=54253 
+	http://www.tt-forums.net/download/file.php?id=154280 
 rating_town_label           http://www.tt-forums.net/download/file.php?id=145019 Terkhen http://www.tt-forums.net/viewtopic.php?f=33&t=42598
-cd                          https://raw.github.com/fonsinchen/openttd-cargodist/patches/cd_r22604.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
+cd                          https://github.com/fonsinchen/openttd-cargodist/compare/master...cd.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
   https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21740.diff https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21905.diff 
+  https://raw.github.com/fonsinchen/openttd-cargodist/patches/cd_r22604.diff 
 
 smallmap_zoom               https://raw.github.com/fonsinchen/openttd-cargodist/patches/smallmap-zoom-in_r22604.diff fonso
 IB                          http://www.tt-forums.net/download/file.php?id=141374 Bigos http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518

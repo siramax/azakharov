@@ -1,4 +1,4 @@
-cd cd.rus
+cd
 IB harder-game town-growth-needs-goods signaltunnel
 departure-boards departure-boards.rus progwaypoints
 daylen improved-loans
