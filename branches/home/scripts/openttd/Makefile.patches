@@ -53,7 +53,7 @@ TRUNKTARGETREV ?= -rHEAD
 #
 
 # revision
-VERSION := 0.6
+VERSION := 0.7
 # TODO as file REVISION.txt
 
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
@@ -73,7 +73,7 @@ original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
 find_ignorable_prefix = $$(\
 	for f in `awk '/^---(.*)$$/ { print $$2 }' $<`; do \
 	  i=0; f2c="$$f"; \
-	  if [ "x$$f2c" == "x/dev/null" ]; then continue; fi; \
+	  if [ "x$$f2c" = "x/dev/null" ]; then continue; fi; \
 	  if [ -r "${TRUNK}/$$f2c" ]; then echo $$i; exit 0; fi; \
 	  while [ -n "$$f2c" ]; do \
 	      i=`expr $$i + 1`; \
@@ -340,20 +340,20 @@ descr-start:
 	}' ${PATCHMAP} )
 	@echo
 
-	@( if [ "$*" == "leasing-with-build-and-refit" ]; then \
+	@( if [ "$*" = "leasing-with-build-and-refit" ]; then \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, leasing build-and-refit ); \
 	fi )
-	@( if [ "$*" == "openttd-cargodist-sprinkles" ]; then \
+	@( if [ "$*" = "openttd-cargodist-sprinkles" ]; then \
 		echo "		[list=1]"; \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, cargo_dist variable-daylength Daily-autosave Vehicle-name-length ); \
 		echo "		[/list]"; \
 	fi )
-	@( if [ "$*" == "harder-game" ]; then \
+	@( if [ "$*" = "harder-game" ]; then \
 		echo "		[list=1]"; \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost); \
 		echo "		[/list]"; \
 	fi )
-	@( if [ "$*" == "adv-orders" ]; then \
+	@( if [ "$*" = "adv-orders" ]; then \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, more-cond-orders stop-sharing  ); \
 	fi )
 		
