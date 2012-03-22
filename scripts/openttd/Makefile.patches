@@ -47,6 +47,7 @@ DONE = @echo "==> $@ DONE"
 FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROWSER) &) && ( grep "FAILED --" $< | $(BROWSER) )
 Q ?= @
 TRUNKTARGETREV ?= -rHEAD
+REVERT_FIRST_CHUNK_IN = src/saveload/saveload.cpp
 
 #
 # Utils
@@ -85,6 +86,14 @@ find_ignorable_prefix = $$(\
 	done; )
 # do it better by GNU make itself TODO
 
+revert_savegame_version = (\
+	cd "$(TRUNK)" && \
+	if svn diff $(REVERT_FIRST_CHUNK_IN) | grep SAVEGAME_VERSION >/dev/null; then \
+		svn diff $(REVERT_FIRST_CHUNK_IN) |\
+			awk '/@@/ { c++; if (c == 2) exit  } { print $$0 }' |\
+			patch --reverse --force $(REVERT_FIRST_CHUNK_IN); \
+	fi; )
+
 # start of easy part
 all : $(PACKNAME).patch.check ${PATCHDIR}/$(PACKNAME).patch.${REV}
 	@echo "==> $@ DONE"
@@ -104,12 +113,12 @@ pp:
 # $(PACKNAME).patch.${REV} will be caught by this
 ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
-	$(Q)([ x"$*" != x"$(PACKNAME)" ]) && ( cd $(TRUNK) && svn revert src/saveload/saveload.cpp ) || true
-	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
+	$(Q)([ x"$*" != x"$(PACKNAME)" ]) && ${revert_savegame_version} || true
+	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space --show-c-function' diff > "$@" )
 
 ${PATCHDIR}/%.patch.${TRUNKREV} : trunk-sweep trunk-generate
 	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
-	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space' diff > "$@" )
+	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space --show-c-function' diff > "$@" )
 
 # for quick hack, we do not require %.build.log 
 %.save : ${PATCHDIR}/%.patch.${TRUNKREV} ${PATCHDIR}/%.patch.${REV} #alias
@@ -156,7 +165,7 @@ trunk-update :
 
 # generate project files
 trunk-generate:
-	$(Q)( cd $(TRUNK) && sh projects/generate )
+	$(Q)( cd $(TRUNK) && if [ -x projects/generate ]; then projects/generate; else /bin/bash projects/generate; fi )
 
 post-patches-prepare:
 	mkdir -p $(TRUNK).patched
@@ -285,7 +294,7 @@ ${PATCHDIR}/%.patch :
 	@( awk '/^$*/ { print $$2 }' ${PATCHMAP} )
 	wget --output-document="$@" \
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) --no-check-certificate -- \
-		"$(shell awk '/^$*[ ]+/ { print $$2 }' ${PATCHMAP})"
+		"$(shell awk '/^$*[ \t\n]+/ { print $$2 }' ${PATCHMAP})"
 
 
 SRCDIR := $(shell dirname ${TRUNK})

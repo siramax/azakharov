@@ -1,7 +1,8 @@
 patch_name                  url                                                                         home page
 ---------------------------------------------------------------------------------------------------------------------------------------
 yacd                        http://www.icosahedron.de/openttd/yacd/yacd_v2_3_r22532.patch Michi_cc http://www.tt-forums.net/viewtopic.php?f=33&t=54253 
-	http://www.tt-forums.net/download/file.php?id=154280 
+	http://www.tt-forums.net/download/file.php?id=154280
+yaim                        http://www.tt-forums.net/download/file.php?id=152854 Michi_cc http://www.tt-forums.net/viewtopic.php?f=33&t=57293
 rating_town_label           http://www.tt-forums.net/download/file.php?id=145019 Terkhen http://www.tt-forums.net/viewtopic.php?f=33&t=42598
 cd                          https://github.com/fonsinchen/openttd-cargodist/compare/master...cd.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
   https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21740.diff https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21905.diff 
@@ -10,7 +11,7 @@ cd                          https://github.com/fonsinchen/openttd-cargodist/comp
 smallmap_zoom               https://raw.github.com/fonsinchen/openttd-cargodist/patches/smallmap-zoom-in_r22604.diff fonso
 IB                          http://www.tt-forums.net/download/file.php?id=141374 Bigos http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518
 harder-game                 http://www.tt-forums.net/download/file.php?id=120185 Bigos http://www.tt-forums.net/viewtopic.php?t=45642
-departure-boards            http://www.tt-forums.net/download/file.php?id=144340 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
+departure-boards            http://www.tt-forums.net/download/file.php?id=156199 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
                  http://www.tt-forums.net/download/file.php?id=139540  
 stuck_trains                http://www.tt-forums.net/download/file.php?id=126757 Eddi http://www.tt-forums.net/viewtopic.php?t=47095
                             http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
