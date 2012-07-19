@@ -201,7 +201,7 @@ reset: clean trunk-prepare
 	$(DONE)
 
 list :
-	$(Q)( awk '/^\w/ { print $$1 }' ${PATCHMAP} | tail -n+2|sort)
+	$(Q)( awk '/^[a-zA-Z]/ { print $$1 }' ${PATCHMAP} | tail -n+2|sort)
 
 plan:
 	$(Q)( echo $(PATCHES) )
