@@ -17,7 +17,7 @@ stuck_trains                http://www.tt-forums.net/download/file.php?id=150449
                             http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
 whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
 airport-close               http://www.tt-forums.net/download/file.php?id=145016 cirdan http://www.tt-forums.net/viewtopic.php?t=33418
-airport-upgrade             http://www.tt-forums.net/download/file.php?id=145017 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
+airport-upgrade             http://www.tt-forums.net/download/file.php?id=161433 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
 watch_gui_6                 http://www.tt-forums.net/download/file.php?id=127606 Muxy http://www.tt-forums.net/viewtopic.php?t=45221
  http://www.tt-forums.net/download/file.php?id=126291
 close_tools_middle_v1       http://www.tt-forums.net/download/file.php?id=116056
@@ -40,8 +40,12 @@ leasing                     http://www.tt-forums.net/download/file.php?id=158563
 daily-autosave              http://qmsk.net/~terom/openttd/patches/daily-autosave-00-trunk.patch
 vehicle-name-length         http://qmsk.net/~terom/openttd/patches/vehicle-name-length-00-trunk.patch
 automated-timetables-and-separation     http://www.tt-forums.net/download/file.php?id=126671 Gathers,MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=46391
+ats							http://www.tt-forums.net/download/file.php?id=162066 Gathers,MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=46391
+
 extra-large-maps            http://www.tt-forums.net/download/file.php?id=135162    http://www.tt-forums.net/viewtopic.php?f=33&t=33137
-clipboard                   http://www.tt-forums.net/download/file.php?id=144384 adf88 http://www.tt-forums.net/viewtopic.php?f=33&t=45488
+ openttd: /home/vaulter/src/openttd/src/tile_map.h:76: TileType GetTileType(TileIndex): Assertion `tile < MapSize()' failed.
+
+clipboard                   http://www.tt-forums.net/download/file.php?id=152203 adf88 http://www.tt-forums.net/viewtopic.php?f=33&t=45488
 build-and-refit             http://www.tt-forums.net/download/file.php?id=133738 133581    http://www.tt-forums.net/viewtopic.php?f=33&t=35805
 minimap-screenshot          http://www.tt-forums.net/download/file.php?id=122869 Rolie http://www.tt-forums.net/viewtopic.php?f=33&t=42845
 daily-scripts               http://www.tt-forums.net/download/file.php?id=132984 http://www.tt-forums.net/viewtopic.php?f=33&t=49595
@@ -52,7 +56,7 @@ leave-orders                http://www.tt-forums.net/download/file.php?id=135163
 townrating-indicator        http://www.tt-forums.net/download/file.php?id=146418 Progman http://www.tt-forums.net/viewtopic.php?t=33897
 group-info                  http://www.tt-forums.net/download/file.php?id=145020 MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=33148
 group-by-property           http://www.tt-forums.net/download/file.php?id=117633 sulai http://www.tt-forums.net/viewtopic.php?f=33&t=45224
-trip-history                http://www.tt-forums.net/download/file.php?id=75788 Molp,Vaulter http://www.tt-forums.net/viewtopic.php?f=33&t=33411
+trip-history                http://www.tt-forums.net/download/file.php?id=75788 Molp,Vaulter http://www.tt-forums.net/viewtopic.php?f=33&t=33411 
 station-loaders             - Vaulter
 atc                         http://www.tt-forums.net/download/file.php?id=138989 urdh http://www.tt-forums.net/viewtopic.php?f=33&t=52085
 tracking-viewport

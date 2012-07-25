@@ -169,10 +169,10 @@ trunk-generate:
 
 post-patches-prepare:
 	mkdir -p $(TRUNK).patched
-	rsync -av --exclude=/bin --exclude=/docs --exclude=/objs --exclude=.svn --exclude=/bundle --exclude=/bundles --exclude='**.orig' --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ $(TRUNK).patched/
+	rsync -av --exclude=/bin --exclude=/docs --exclude=/objs --exclude=.svn --exclude=/nbproject --exclude=/bundle --exclude=/bundles --exclude='**.orig' --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ $(TRUNK).patched/
 
 post-patches-make:
-	diff -wur -x .dep.inc -x bin -x objs -x .svn -x bundle -x bundles -x *.orig $(TRUNK).patched/ --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ | grep -v Только
+	diff -wur -x .dep.inc -x bin -x objs -x .svn -x nbproject -x bundle -x bundles -x *.orig $(TRUNK).patched/ --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ | grep -v Только
 
 clean : 
 	$(Q)( rm *.log || true )
@@ -332,8 +332,8 @@ descr-start:
 
 %.descr :
 	@echo -n "	[*]"
-	@awk '/^$*\>/ { $$1=""; printf "%s", $$0 }' patches.$(LANG).txt
-	$(Q)( awk '/^$*\>/ { \
+	@awk '/^$*[ \t\n]+/ { $$1=""; printf "%s", $$0 }' patches.$(LANG).txt
+	$(Q)( awk '/^$*[ \t\n]+/ { \
 		if ( $$3 != "" ) { \
 			if ( $$3 ~ /^http/ ) link = $$3; \
 			else text = $$3; \
