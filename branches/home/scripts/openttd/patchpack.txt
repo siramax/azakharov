@@ -1,11 +1,13 @@
 cd
 IB
 harder-game
+town-cargo-factor
 station-loaders
 daylen
 signaltunnel
 improved-loans
 leasing
+build-and-refit
 more-cond-orders
 leave-orders
 progwaypoints
@@ -24,6 +26,7 @@ daily-scripts
 measurement
 gui-tweaks
 tracking-viewport
+polyline_track_tool
 vs-hacks
 post-patches
-
+default-settings

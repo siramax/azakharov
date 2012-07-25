@@ -46,7 +46,7 @@ extra-large-maps            http://www.tt-forums.net/download/file.php?id=135162
  openttd: /home/vaulter/src/openttd/src/tile_map.h:76: TileType GetTileType(TileIndex): Assertion `tile < MapSize()' failed.
 
 clipboard                   http://www.tt-forums.net/download/file.php?id=152203 adf88 http://www.tt-forums.net/viewtopic.php?f=33&t=45488
-build-and-refit             http://www.tt-forums.net/download/file.php?id=133738 133581    http://www.tt-forums.net/viewtopic.php?f=33&t=35805
+build-and-refit             http://www.tt-forums.net/download/file.php?id=133738 gule    http://www.tt-forums.net/viewtopic.php?f=33&t=35805
 minimap-screenshot          http://www.tt-forums.net/download/file.php?id=122869 Rolie http://www.tt-forums.net/viewtopic.php?f=33&t=42845
 daily-scripts               http://www.tt-forums.net/download/file.php?id=132984 http://www.tt-forums.net/viewtopic.php?f=33&t=49595
 industry-stationnames       http://www.tt-forums.net/download/file.php?id=150451 Roujin http://www.tt-forums.net/viewtopic.php?f=33&t=35613
@@ -66,6 +66,9 @@ station-cover               http://www.tt-forums.net/download/file.php?id=147606
 improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
 diagonal_terraform
 polyline_track_tool			http://www.tt-forums.net/download/file.php?id=153852	adf88	http://www.tt-forums.net/viewtopic.php?f=33&t=57080          
+forecast_display			http://openttd-handrake-patchpack.googlecode.com/files/forecast_display-r24093-v0.02a.diff handrake http://www.tt-forums.net/viewtopic.php?f=33&t=59297
+
+
 ############    
 # Experimental
 pathfinder-penalty-rv       http://www.tt-forums.net/download/file.php?id=121071 http://www.tt-forums.net/viewtopic.php?f=33&t=45040
