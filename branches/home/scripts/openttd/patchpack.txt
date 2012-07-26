@@ -27,6 +27,7 @@ measurement
 gui-tweaks
 tracking-viewport
 polyline_track_tool
+trafficlights
 vs-hacks
 post-patches
 default-settings
