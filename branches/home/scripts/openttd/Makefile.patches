@@ -33,7 +33,8 @@ PARAM ?= "--dry-run"
 TRUNK ?= $(HOME)/src/openttd/trunk
 WORKDIR ?= ./
 MODE ?= alone # or patchpack
-BROWSER ?= cat #opens final result
+#opens final result
+BROWSER ?= cat
 PATCHDIR ?= $(shell pwd)
 PATCHMAP ?= $(PATCHDIR)/Mk.patchtable
 PATCHES ?= $(shell cat patchpack.txt)
