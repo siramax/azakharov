@@ -349,8 +349,8 @@ descr-start:
 	}' ${PATCHMAP} )
 	@echo
 
-	@( if [ "$*" = "leasing-with-build-and-refit" ]; then \
-		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, leasing build-and-refit ); \
+	@( if [ "$*" = "grass-on-tracks-stuck-trains" ]; then \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, grass-on-tracks stuck_trains ); \
 	fi )
 	@( if [ "$*" = "openttd-cargodist-sprinkles" ]; then \
 		echo "		[list=1]"; \
