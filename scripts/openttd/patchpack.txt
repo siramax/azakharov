@@ -29,6 +29,7 @@ tracking-viewport
 polyline_track_tool
 trafficlights
 station-cover
+32bpp_anim_aa-blitter
 vs-hacks
 post-patches
 default-settings
