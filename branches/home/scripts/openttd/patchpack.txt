@@ -30,6 +30,7 @@ polyline_track_tool
 trafficlights
 station-cover
 32bpp_anim_aa-blitter
+is2 is2.ru
 vs-hacks
 post-patches
 default-settings
