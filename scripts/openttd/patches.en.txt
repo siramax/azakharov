@@ -1,59 +1,70 @@
-station-build-gui       [b]Improved Build Station GUI[/b]. With Industry Renewal Station Set - very cool.
-rating_town_label       [b]Colour rating in town label[/b].
-openttd-cargodist-sprinkles    patches with [b][url=http://www.tt-forums.net/viewtopic.php?t=41992]CargoDist[/url][/b]
-cd                      [b]Cargo Distribution[/b] - Now passengers and cargo have destinations
-IB                      [b]Improved Breakdowns[/b].
-departure-boards        Departure Boards
-town-growth             More town growth and cargo generation tweaks
-harder-game             Bigos set [b]makes game harder[/b]
-stuck_trains            [b]Stucked trains[/b] on minimap
-whistle                 Trains whistle when bridge and tunnels approaching.
-progwaypoints           [b]Programmable Waypoints[/b] with penalties
-improved-loans          Loans depends on company's history and value
-VehicelsInTunnels       Transparent tunnels
-airport-upgrade         [b]Airport upgrade[/b]
-watch_gui_6             [b]Watch company[/b] last action
-russian-town-names      [b]Russian town names[/b]
-vs.russian              [b]Russian translate[/b]
-station-cover           Shows station cover by CTRL+click on it
-ez                      [b]Extra Zoom for 32bpp[/b] better look
-default-settings        Settings by default are hard to play with
-cmd-train-console       For new commands refer to  [url=http://wiki.openttd.org/Vehicle_console_commands]here[/url], [url=http://wiki.openttd.org/Town_console_commands]there[/url] and [url=http://wiki.openttd.org/index.php/Industry_console_commands]here[/url]
-zoning                  [b]Zonning[/b] buggy with NewGRFs
-more-cond-orders        [b]More conditional orders[/b]
-town_growth_need_goods  [b]Town growth based on passenger/mails/goods[/b] A small patch that slow down town growth if there aren't enough passengers, mails and goods transported relatively to it's size.
-reload-ai               Add console command restart_ai <ID>, which reloads AI without infrastructure loses.
-stop-sharing            This patch use the 'Delete' button, refitted to 'Stop Sharing' when 'End Of Shared Orders' is selected
-winstate                This patch provides [b]ability to save window position and/or size[/b] when window closed and restore it when window is reopened.
-no_home_dir             Settings, save and data are in program folder
-cargo_dist              [b]Passenger and cargo distribution.[/b]
-variable-daylength      Adjust base daylength factor
-town-cargo-factor       [b]Adjust town passenger/cargo rates[/b] Advice to set it -2 :)
-Daily-autosave          [b]Daily autosave[/b] provides "daily" and "weekly" autosave options in addition to the previous monthly ones.
-Vehicle-name-length     Enlarge vehicle name limit from 150 to 250 chars
-timetable-separation    
-infrastructure_maintenance   This setting makes all companies pay X% of the construction cost of all infrastructure per year, with X being configurable between 1 and 100. Alternatively, setting X to zero maintains the old behaviour to maintain full backwards compatibility.       
-building-costs          Bigos [b]Improved Building Costs Patch[/b] Here is small patch which allow you to change cost of few things in game. For now you can multiply price of tunnels, bridges, terraforming (without building on slopes), signals and airports.
+32bpp_anim_aa-blitter   [b]32bpp blitter with antialiasing[/b] - put in openttd.ini "blitter = 32bpp-anim-aa" or start via command line "openttd -b 32bpp-anim-aa"
 additional-taxes        Bigos [b]Additional Tax Patch v0.2[/b] [list][*]at start ~2 year free from tax [*] ~10% of company value per year after your company reach 250 000 pounds[*]~20% of company value per year after your company reach 1 500 000 pounds[*]cash from tax is assign for creation of new industries[/list]
-vehicle-repair-cost     Bigos [b]Vehicle Repair Cost[/b] Cost of repair for each breakdown is 1/1024 vehicle value. 
-towncost                [b]Higher prices for construction near major cities[/b]
-more_diesel_smoke       More smoke or sparks from locomotives
-leasing                 [b]Lease[/b] transport (long-term lease with option to purchase)
-vehicle-name-length     The maximum length of transport in 250 characters
-daily-autosave          Support daily autosave
-automated-timetables-and-separation [b]Automatic scheduling[/b]
-daylen                  [b]Setting the length of the day[/b] 
-extra-large-maps        [b]Very large maps[/b]
-transp-roads-rails-slopes   [b]Transparent roads[/b]
-clipboard               [b]Copy / Paste infrastructure[/b] - press Ctrl + C / Ctrl + V to copy / paste, and Ctrl + (Left | Right | Up | Down) for rotations / reflections.
-minimap-screenshot      [b]Minimap Screenshot[/b] adds a console command `minimap`.
-split-refit             [b]Split refit window[/b] - makes it more convenient choice of transport model.
-daily-scripts           [b]Invoke daily, monthly and yearly scripts[/b] - you can write your scripts for daily, monthly and yearly invokation: [list][*]scripts/on_newday.scr[*]scripts/on_newmonth.scr[*]scripts/on_newyear.scr[/list]
+airport-upgrade         [b]Airport upgrade[/b]
+ats 					[b]Automatic timetables and separation[/b]
+atc						[b]Automatic train control[/b] - trains trapped behind a slower train (up to one signal block or 20 tiles away) will automatically slow down to match the speed of the slower train.
 build-and-refit         [b]Auto refit when build[/b]
-trip-history            [b]Trip History[/b] This patch is designed to show information about the last 10 trips that a vehicle has made.
+building-costs          Bigos [b]Improved Building Costs Patch[/b] Here is small patch which allow you to change cost of few things in game. For now you can multiply price of tunnels, bridges, terraforming (without building on slopes), signals and airports.
+cargo_dist              [b]Passenger and cargo distribution.[/b]
+cd                      [b]Cargo Distribution[/b] - Now passengers and cargo have destinations
+clipboard               [b]Copy / Paste infrastructure[/b] - press Ctrl + C / Ctrl + V to copy / paste, and Ctrl + (Left | Right | Up | Down) for rotations / reflections.
+cmd-train-console       For new commands refer to  [url=http://wiki.openttd.org/Vehicle_console_commands]here[/url], [url=http://wiki.openttd.org/Town_console_commands]there[/url] and [url=http://wiki.openttd.org/index.php/Industry_console_commands]here[/url]
+Daily-autosave          [b]Daily autosave[/b] provides "daily" and "weekly" autosave options in addition to the previous monthly ones.
+daily-autosave          Support daily autosave
+daily-scripts           [b]Invoke daily, monthly and yearly scripts[/b] - you can write your scripts for daily, monthly and yearly invokation: [list][*]scripts/on_newday.scr[*]scripts/on_newmonth.scr[*]scripts/on_newyear.scr[/list]
+daylen                  [b]Setting the length of the day[/b] 
+default-settings        Settings by default are hard to play with
+departure-boards        Departure Boards
+extra-large-maps        [b]Very large maps[/b]
+ez                      [b]Extra Zoom for 32bpp[/b] better look
 fastest-bridge          This patch allows to hold Ctrl while dragging a bridge, which instantly builds the fastest available bridge, without showing the bridge selection window.
-realistic-loans-system  This patch makes the handling of loans and the interest payed for them a bit more realistic. It makes your maximum loan dependent on company value and makes the interest rate you pay depending on how much of your credit line you have utilized.
-group-by-property       This patch adds a drop down to the "create new group" button in the vehicle window. See the screenshot below. Using one of the entries allows you to create Vehicle Groups based on common properties of vehicles.
-group-info              When selecting a group, it will show for the group the same stats as for the vehicules, but for the whole group :[list][*]Profit this year : sum of all profits of all vehicules in the group for this year [*]Profit last year : sum of all profits of all vehicules in the group for last year [*]Profit button : work like the vehicule profit button, but for the all group[/list]
+fix-fences				[b]Fancy fences[/b]
+grass-on-tracks			[b]Grass on unused tracks[/b]
+group-by-property       [b]Group by properties[/b] This patch adds a drop down to the "create new group" button in the vehicle window. See the screenshot below. Using one of the entries allows you to create Vehicle Groups based on common properties of vehicles.
+group-info              [b]Group info[/b] When selecting a group, it will show for the group the same stats as for the vehicules, but for the whole group :[list][*]Profit this year : sum of all profits of all vehicules in the group for this year [*]Profit last year : sum of all profits of all vehicules in the group for last year [*]Profit button : work like the vehicule profit button, but for the all group[/list]
+gui-tweaks				[b]GUI tweaks[/b] Added ALT key modificator for creating new orders - such it will be "unload all and no load"
+harder-game             Bigos set [b]makes game harder[/b]
+IB                      [b]Improved Breakdowns[/b].
+improved-loans          Loans depends on company's history and value
+infrastructure_maintenance   This setting makes all companies pay X% of the construction cost of all infrastructure per year, with X being configurable between 1 and 100. Alternatively, setting X to zero maintains the old behaviour to maintain full backwards compatibility.       
+is2						[b]Infrastructure sharing[/b]
+leasing                 [b]Lease[/b] transport (long-term lease with option to purchase)
 low-level-opt           Patch with some low-level optimizations, especially for linux/gcc configuration.
-improved-loans
+measurement				[b]Measurement tool[/b]
+minimap-screenshot      [b]Minimap Screenshot[/b] adds a console command `minimap`.
+more-cond-orders        [b]More conditional orders[/b]
+more_diesel_smoke       More smoke or sparks from locomotives
+no_home_dir             Settings, save and data are in program folder
+openttd-cargodist-sprinkles    patches with [b][url=http://www.tt-forums.net/viewtopic.php?t=41992]CargoDist[/url][/b]
+polyline_track_tool		[b]Polyline track tool[/b]
+progwaypoints           [b]Programmable Waypoints[/b] with penalties
+rating_town_label       [b]Colour rating in town label[/b].
+realistic-loans-system  This patch makes the handling of loans and the interest payed for them a bit more realistic. It makes your maximum loan dependent on company value and makes the interest rate you pay depending on how much of your credit line you have utilized.
+reload-ai               Add console command restart_ai <ID>, which reloads AI without infrastructure loses.
+russian-town-names      [b]Russian town names[/b]
+split-refit             [b]Split refit window[/b] - makes it more convenient choice of transport model.
+station-build-gui       [b]Improved Build Station GUI[/b]. With Industry Renewal Station Set - very cool.
+station-cover           Shows station cover by CTRL+click on it
+station-loaders 		[b]Station loaders[/b] more distance from industry to station - more trasfer payment
+stop-sharing            This patch use the 'Delete' button, refitted to 'Stop Sharing' when 'End Of Shared Orders' is selected
+stuck_trains            [b]Stucked trains[/b] on minimap
+ats    					[b][/b]
+town-cargo-factor       [b]Adjust town passenger/cargo rates[/b] Advice to set it -2 :)
+towncost                [b]Higher prices for construction near major cities[/b]                                                                 [Пт. авг. 10 11:29:43 MSK 2012]
+town-growth             More town growth and cargo generation tweaks                                                                            [Пт. авг. 10 11:29:55 MSK 2012]
+town_growth_need_goods  [b]Town growth based on passenger/mails/goods[/b] A small patch that slow down town growth if there aren't enough passengers, mails and goods transported relatively to it's size.
+tracking-viewport		[b]Cursor tracking viewport[/b]
+trafficlights			[b]Traffic lights[/b]
+transp-roads-rails-slopes   [b]Transparent roads[/b]
+trip-history            [b]Trip History[/b] This patch is designed to show information about the last 10 trips that a vehicle has made.
+tunnel_vehicles 		[b]Tunnels transparency[/b]
+variable-daylength      Adjust base daylength factor
+VehicelsInTunnels       Transparent tunnels
+Vehicle-name-length     Enlarge vehicle name limit from 150 to 250 chars
+vehicle-name-length     The maximum length of transport in 250 characters
+vehicle-repair-cost     Bigos [b]Vehicle Repair Cost[/b] Cost of repair for each breakdown is 1/1024 vehicle value. 
+vs.russian              [b]Russian translate[/b]
+watch_gui_7             [b]Watch company[/b] last action
+whistle                 [b]Trains whistle[/b] when bridge and tunnels approaching.
+winstate                This patch provides [b]ability to save window position and/or size[/b] when window closed and restore it when window is reopened.
+zoning                  [b]Zonning[/b] buggy with NewGRFs
