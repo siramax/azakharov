@@ -31,6 +31,8 @@ trafficlights
 station-cover
 32bpp_anim_aa-blitter
 is2 is2.ru
+fix-fences
+forecast_display
 vs-hacks
 post-patches
 default-settings

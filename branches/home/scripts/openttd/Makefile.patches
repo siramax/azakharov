@@ -105,8 +105,8 @@ $(TRUNK)/Makefile:
 
 pp:
 	$(Q)( make clean trunk-prepare )
-#	IB, progwaypoint, improved-loans failed on saveload export BROWSER=cat; 
-	$(Q)( BROWSER=cat $(MAKE) all; BROWSER=cat $(MAKE) all; $(MAKE) all )
+#	watch gui, tracking - toolbar_gui.cpp, is2 conflicts on leasing  export BROWSER=cat; 
+	$(Q)( BROWSER=cat $(MAKE) all; BROWSER=cat $(MAKE) all; BROWSER=cat $(MAKE) all; $(MAKE) all )
 	
 # 
 # Making auto patch file
@@ -360,7 +360,7 @@ descr-start:
 	fi )
 	@( if [ "$*" = "harder-game" ]; then \
 		echo "		[list=1]"; \
-		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, towncost infrastructure_maintenance building-costs additional-taxes vehicle-repair-cost); \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, towncost building-costs additional-taxes vehicle-repair-cost); \
 		echo "		[/list]"; \
 	fi )
 	@( if [ "$*" = "adv-orders" ]; then \
