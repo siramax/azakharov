@@ -60,7 +60,6 @@ trip-history            [b]Trip History[/b] This patch is designed to show infor
 tunnel_vehicles 		[b]Tunnels transparency[/b]
 variable-daylength      Adjust base daylength factor
 VehicelsInTunnels       Transparent tunnels
-Vehicle-name-length     Enlarge vehicle name limit from 150 to 250 chars
 vehicle-name-length     The maximum length of transport in 250 characters
 vehicle-repair-cost     Bigos [b]Vehicle Repair Cost[/b] Cost of repair for each breakdown is 1/1024 vehicle value. 
 vs.russian              [b]Russian translate[/b]
