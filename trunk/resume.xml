@@ -60,9 +60,31 @@ opportunity for advancement.
   
   <Experience>
     <Vocational>
+		<Entry Job = 'Lead Software Engineer'>
+        <Period From = "Mar 2012" To = "now" />
+        <Job>Lead Software Engineer</Job>
+        <Employer>
+          <Name>Embria</Name>
+          <City>Saint Petersburg</City>
+          <Description>Internet companies group</Description>
+        </Employer><!-- ; internal company portal; web-based reporting application. -->
+        <Description>
+			Working on high-load backend solutions (C++, FreeBSD) for social networking service, developing replication subsystem between highloaded servers.
+			Developing and supporting set of internal tools for testing, building and supporting entire project.
+			Research standart PHP modules for performance issues and developing optimized solutions.
+			Recruit and supervise computer engineers and programmers. Coaching colleagues about efficient use of set of IT tecnologies.
+		</Description>
 		
+		<Achievement lang = "ru">Улучшил процесс сборки для всего проекта</Achievement>
+        <Achievement lang = "en">Improved building process for entire project (cmake)</Achievement>
+		
+		<Achievement lang = "ru">Разработал библиотеку репликации для встраивания в различные демоны</Achievement>
+        <Achievement lang = "en">Developed replica library for embed into different servers</Achievement>
+	
+        <Techs>C++, Boost, OpenSSL, GCC, bash, CMake, valgrind, gdb.</Techs>
+      </Entry>
       <Entry Job = 'Senior Software Engineer'>
-        <Period From = "Sep 2010" To = "now" />
+        <Period From = "Sep 2010" To = "Mar 2012" />
         <Job>Senior Software Engineer</Job>
         <Employer>
           <Name>Sperasoft Inc.</Name>
