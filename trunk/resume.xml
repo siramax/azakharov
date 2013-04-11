@@ -80,7 +80,10 @@ opportunity for advancement.
 		
 		<Achievement lang = "ru">Разработал библиотеку репликации для встраивания в различные демоны</Achievement>
         <Achievement lang = "en">Developed replica library for embed into different servers</Achievement>
-	
+
+   <Achievement lang = "ru">Внедрил практику continious integration для всего проекта</Achievement>
+   <Achievement lang = "en">Introduce continious integration process for entire project</Achievement>
+   
         <Techs>C++, Boost, OpenSSL, GCC, bash, CMake, valgrind, gdb.</Techs>
       </Entry>
       <Entry Job = 'Senior Software Engineer'>
