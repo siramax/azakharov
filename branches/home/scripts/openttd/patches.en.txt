@@ -50,8 +50,8 @@ stop-sharing            This patch use the 'Delete' button, refitted to 'Stop Sh
 stuck_trains            [b]Stucked trains[/b] on minimap
 ats    					[b][/b]
 town-cargo-factor       [b]Adjust town passenger/cargo rates[/b] Advice to set it -2 :)
-towncost                [b]Higher prices for construction near major cities[/b]                                                                 [Пт. авг. 10 11:29:43 MSK 2012]
-town-growth             More town growth and cargo generation tweaks                                                                            [Пт. авг. 10 11:29:55 MSK 2012]
+towncost                [b]Higher prices for construction near major cities[/b]
+town-growth             More town growth and cargo generation tweaks
 town_growth_need_goods  [b]Town growth based on passenger/mails/goods[/b] A small patch that slow down town growth if there aren't enough passengers, mails and goods transported relatively to it's size.
 tracking-viewport		[b]Cursor tracking viewport[/b]
 trafficlights			[b]Traffic lights[/b]
