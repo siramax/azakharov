@@ -69,11 +69,14 @@ forecast_display			http://openttd-handrake-patchpack.googlecode.com/files/foreca
 trafficlights               http://www.tt-forums.net/download/file.php?id=161331 Roujin http://www.tt-forums.net/viewtopic.php?f=33&t=36261
 is2							http://www.tt-forums.net/download/file.php?id=158991 Hirundo http://www.tt-forums.net/viewtopic.php?f=33&t=42254
 fix-fences					http://www.tt-forums.net/download/file.php?id=162787 LeXa2 http://www.tt-forums.net/viewtopic.php?f=36&t=61584
+measurement 			http://www.tt-forums.net/download/file.php?id=147295 Wolf01 http://www.tt-forums.net/viewtopic.php?f=33&t=49212
+trafficlights			http://www.tt-forums.net/download/file.php?id=144803 Roujin,ChillCore http://www.tt-forums.net/viewtopic.php?f=33&t=36261
+tracking-viewport		http://www.tt-forums.net/download/file.php?id=147387 jawsper http://www.tt-forums.net/viewtopic.php?f=33&t=43473
 ############    
 # Experimental
 32bpp_anim_aa-blitter		http://www.tt-forums.net/download/file.php?id=162709 LeXa2 http://www.tt-forums.net/viewtopic.php?t=62029
 pathfinder-penalty-rv       http://www.tt-forums.net/download/file.php?id=121071 http://www.tt-forums.net/viewtopic.php?f=33&t=45040
-VehicelsInTunnels           http://dev.openttdcoop.org/projects/clientpatches/repository/raw/VehicelsInTunnels.diff
+tunnel_vehicles           http://dev.openttdcoop.org/projects/clientpatches/repository/raw/VehicelsInTunnels.diff
 max-grfs                    http://www.tt-forums.net/download/file.php?id=132938 http://www.tt-forums.net/viewtopic.php?f=31&t=37435
 grassOnTracks               http://www.tt-forums.net/download/file.php?id=144343 boekabart http://www.tt-forums.net/viewtopic.php?f=33&t=32285
 # variable_daylength          http://qmsk.net/~terom/openttd/patches/everything-00-trunk-r18774.patch
