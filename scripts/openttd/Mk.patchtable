@@ -3,20 +3,17 @@ patch_name                  url                                                 
 yacd                        http://www.icosahedron.de/openttd/yacd/yacd_v2_3_r22532.patch Michi_cc http://www.tt-forums.net/viewtopic.php?f=33&t=54253 
 	http://www.tt-forums.net/download/file.php?id=154280
 yaim                        http://www.tt-forums.net/download/file.php?id=152854 Michi_cc http://www.tt-forums.net/viewtopic.php?f=33&t=57293
-rating_town_label           http://www.tt-forums.net/download/file.php?id=150447 Terkhen http://www.tt-forums.net/viewtopic.php?f=33&t=42598
-cd                          https://github.com/fonsinchen/openttd-cargodist/compare/master...cd.diff fonso http://www.tt-forums.net/viewtopic.php?t=41992
-  https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21740.diff https://github.com/fonsinchen/openttd-cargodist/raw/patches/cd_r21905.diff 
-  https://raw.github.com/fonsinchen/openttd-cargodist/patches/cd_r22604.diff 
-
+rating_town_label           http://www.tt-forums.net/download/file.php?id=170957 Terkhen http://www.tt-forums.net/viewtopic.php?f=33&t=42598
+taxes						http://www.tt-forums.net/download/file.php?id=120361 Bigos http://www.tt-forums.net/viewtopic.php?f=33&t=45642
 smallmap_zoom               https://raw.github.com/fonsinchen/openttd-cargodist/patches/smallmap-zoom-in_r22604.diff fonso
-IB                          http://www.tt-forums.net/download/file.php?id=141374 Bigos http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518
+IB                          http://www.tt-forums.net/download/file.php?id=153672 Bigos http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518
 harder-game                 http://www.tt-forums.net/download/file.php?id=120185 Bigos http://www.tt-forums.net/viewtopic.php?t=45642
-departure-boards            http://www.tt-forums.net/download/file.php?id=160300 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
+departure-boards            http://www.tt-forums.net/download/file.php?id=170473 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
                  http://www.tt-forums.net/download/file.php?id=139540  
 stuck_trains                http://www.tt-forums.net/download/file.php?id=150449 Eddi http://www.tt-forums.net/viewtopic.php?t=47095
                             http://www.tt-forums.net/download/file.php?id=123775    http://www.tt-forums.net/viewtopic.php?f=33&t=47095
 whistle                     http://ftp.tt-forums.net/download/file.php?id=113448
-airport-upgrade             http://www.tt-forums.net/download/file.php?id=161433 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
+airport-upgrade             http://www.tt-forums.net/download/file.php?id=170955 cirdan http://www.tt-forums.net/viewtopic.php?t=35867
 watch_gui_7                 http://www.tt-forums.net/download/file.php?id=127606 Muxy http://www.tt-forums.net/viewtopic.php?t=45221
  http://www.tt-forums.net/download/file.php?id=126291
 close_tools_middle_v1       http://www.tt-forums.net/download/file.php?id=116056
@@ -25,7 +22,7 @@ cmd-train-console           http://www.tt-forums.net/download/file.php?id=127682
 signaltunnel                http://www.tt-forums.net/download/file.php?id=157394 HackaLittleBit http://www.tt-forums.net/viewtopic.php?f=33&t=41260 
 zoning                      http://www.tt-forums.net/download/file.php?id=131263 
 innerhighlight.grf          http://www.tt-forums.net/download/file.php?id=131264
-more-cond-orders            http://www.tt-forums.net/download/file.php?id=131848 Hirundo http://www.tt-forums.net/viewtopic.php?f=33&t=38317
+more-cond-orders            http://www.tt-forums.net/download/file.php?id=161911 Hirundo http://www.tt-forums.net/viewtopic.php?f=33&t=38317
 town-cargo-factor           http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor-01-noslv.patch SpComb http://qmsk.net/~terom/openttd/patches/town-cargo/town-cargo-factor.txt	
 town-growth-needs-goods     http://www.tt-forums.net/download/file.php?id=141094 Gedemon,ChillCore http://www.tt-forums.net/viewtopic.php?t=37158
 town-growth                 town_growth_need_goods + town-cargo-factor
@@ -34,43 +31,43 @@ infrastructure_maintenance     http://www.tt-forums.net/download/file.php?id=122
 winstate                    http://bugs.openttd.org/task/3900/getfile/6223/ak2-patch-winstate-r20016.zip Alexander(avk) http://bugs.openttd.org/task/3900
 addional_orders             http://new.tt-forums.net/download/file.php?id=50435
 towncost                    http://www.tt-forums.net/download/file.php?id=76518 http://www.tt-forums.net/viewtopic.php?t=32942
-daylen                      http://www.tt-forums.net/download/file.php?id=142282 pavel1269 http://www.tt-forums.net/viewtopic.php?f=33&t=42432
+daylen                      http://www.tt-forums.net/download/file.php?id=172048 pavel1269 http://www.tt-forums.net/viewtopic.php?f=33&t=42432
 leasing                     http://www.tt-forums.net/download/file.php?id=158563 jemmyw http://www.tt-forums.net/viewtopic.php?f=33&t=49389
 daily-autosave              http://qmsk.net/~terom/openttd/patches/daily-autosave-00-trunk.patch
 vehicle-name-length         http://qmsk.net/~terom/openttd/patches/vehicle-name-length-00-trunk.patch
 automated-timetables-and-separation     http://www.tt-forums.net/download/file.php?id=126671 Gathers,MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=46391
 ats							http://www.tt-forums.net/download/file.php?id=162066 Gathers,MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=46391
-
-extra-large-maps            http://www.tt-forums.net/download/file.php?id=135162    http://www.tt-forums.net/viewtopic.php?f=33&t=33137
+sts							http://www.tt-forums.net/download/file.php?id=157443
+extra-large-maps            http://www.tt-forums.net/download/file.php?id=156399 Bigos  http://www.tt-forums.net/viewtopic.php?f=33&t=33137
  openttd: /home/vaulter/src/openttd/src/tile_map.h:76: TileType GetTileType(TileIndex): Assertion `tile < MapSize()' failed.
 
 clipboard                   http://www.tt-forums.net/download/file.php?id=152203 adf88 http://www.tt-forums.net/viewtopic.php?f=33&t=45488
-build-and-refit             http://www.tt-forums.net/download/file.php?id=133738 gule    http://www.tt-forums.net/viewtopic.php?f=33&t=35805
+build-and-refit             http://www.tt-forums.net/download/file.php?id=170576 gule    http://www.tt-forums.net/viewtopic.php?f=33&t=35805
 minimap-screenshot          http://www.tt-forums.net/download/file.php?id=122869 Rolie http://www.tt-forums.net/viewtopic.php?f=33&t=42845
 daily-scripts               http://www.tt-forums.net/download/file.php?id=132984 http://www.tt-forums.net/viewtopic.php?f=33&t=49595
 industry-stationnames       http://www.tt-forums.net/download/file.php?id=150451 Roujin http://www.tt-forums.net/viewtopic.php?f=33&t=35613
-station-cover               - gehene http://www.tt-forums.net/viewtopic.php?f=33&t=44835
 progwaypoints               http://www.tt-forums.net/download/file.php?id=84439 http://www.tt-forums.net/viewtopic.php?f=33&t=35543
 leave-orders                http://www.tt-forums.net/download/file.php?id=135163 doener http://www.tt-forums.net/viewtopic.php?f=33&t=50001
 townrating-indicator        http://www.tt-forums.net/download/file.php?id=146418 Progman http://www.tt-forums.net/viewtopic.php?t=33897
-group-info                  http://www.tt-forums.net/download/file.php?id=145020 MagicBuzz http://www.tt-forums.net/viewtopic.php?f=33&t=33148
+group-info                  http://www.tt-forums.net/download/file.php?id=172361 MagicBuzz, http://www.tt-forums.net/viewtopic.php?f=33&t=33148
 group-by-property           http://www.tt-forums.net/download/file.php?id=117633 sulai http://www.tt-forums.net/viewtopic.php?f=33&t=45224
-trip-history                http://www.tt-forums.net/download/file.php?id=75788 Molp,Vaulter http://www.tt-forums.net/viewtopic.php?f=33&t=33411 
+trip-history                http://www.tt-forums.net/download/file.php?id=172303 Molp,Vaulter http://www.tt-forums.net/viewtopic.php?f=33&t=33411 
 station-loaders             - Vaulter
 atc                         http://www.tt-forums.net/download/file.php?id=138989 urdh http://www.tt-forums.net/viewtopic.php?f=33&t=52085
-tracking-viewport
 gui-tweaks
 zoom64                      http://www.tt-forums.net/download/file.php?id=162581 MJP http://www.tt-forums.net/viewtopic.php?f=33&t=53394
-station-cover               http://www.tt-forums.net/download/file.php?id=147606 gehene http://www.tt-forums.net/viewtopic.php?f=33&t=44835
+station-cover               http://www.tt-forums.net/download/file.php?id=172302 gehene,Vaulter,ST2 http://www.tt-forums.net/viewtopic.php?f=33&t=44835
 improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
+				$ find . -name \*\.txt | while read f; do cp $f $f.bk && sed '/STR_FINANCES_REPAY_BUTTON/s#{CURRENCY_LONG}#{STRING}#' $f.bk > $f; done
+
+grf_filter - Vaulter -
 diagonal_terraform
-polyline_track_tool			http://www.tt-forums.net/download/file.php?id=153852	adf88	http://www.tt-forums.net/viewtopic.php?f=33&t=57080          
+polyline_track_tool			http://www.tt-forums.net/download/file.php?id=171769	adf88	http://www.tt-forums.net/viewtopic.php?f=33&t=57080          
 forecast_display			http://openttd-handrake-patchpack.googlecode.com/files/forecast_display-r24093-v0.02a.diff handrake http://www.tt-forums.net/viewtopic.php?f=33&t=59297
-trafficlights               http://www.tt-forums.net/download/file.php?id=161331 Roujin http://www.tt-forums.net/viewtopic.php?f=33&t=36261
+trafficlights               http://www.tt-forums.net/download/file.php?id=161331 Roujin,ChillCore http://www.tt-forums.net/viewtopic.php?f=33&t=36261
 is2							http://www.tt-forums.net/download/file.php?id=158991 Hirundo http://www.tt-forums.net/viewtopic.php?f=33&t=42254
 fix-fences					http://www.tt-forums.net/download/file.php?id=162787 LeXa2 http://www.tt-forums.net/viewtopic.php?f=36&t=61584
-measurement 			http://www.tt-forums.net/download/file.php?id=147295 Wolf01 http://www.tt-forums.net/viewtopic.php?f=33&t=49212
-trafficlights			http://www.tt-forums.net/download/file.php?id=144803 Roujin,ChillCore http://www.tt-forums.net/viewtopic.php?f=33&t=36261
+measurement 			http://www.tt-forums.net/download/file.php?id=172304 Wolf01 http://www.tt-forums.net/viewtopic.php?f=33&t=49212
 tracking-viewport		http://www.tt-forums.net/download/file.php?id=147387 jawsper http://www.tt-forums.net/viewtopic.php?f=33&t=43473
 ############    
 # Experimental

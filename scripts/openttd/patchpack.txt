@@ -1,38 +1,42 @@
-cd
 IB
-harder-game
+towncost
+repaircosts
+taxes
 town-cargo-factor
-station-loaders
+extra-large-maps
 daylen
-signaltunnel
 improved-loans
 leasing
-build-and-refit
-more-cond-orders
-leave-orders
 progwaypoints
 ats
 atc
-winstate
+signaltunnel
+build-and-refit
+more-cond-orders
+airport-upgrade
+clipboard
+leave-orders
 departure-boards departure-boards.rus 
 industry-stationnames rating_town_label townrating-indicator
 grass-on-tracks-stuck-trains
 watch_gui_7 russian-town-names whistle
 tunnel_vehicles group-info group-by-property
-airport-upgrade 
 cmd-train-console minimap-screenshot trip-history
-reload-ai daily-autosave
-daily-scripts
+reload-ai 
+daily-autosave daily-scripts
 measurement
 gui-tweaks
 tracking-viewport
 polyline_track_tool
-trafficlights
-station-cover
+trafficlights trafficlights.rus
+station-cover station-cover.ru
 32bpp_anim_aa-blitter
 is2 is2.ru
 fix-fences
 forecast_display
+station-loaders
+grf_filter
 vs-hacks
-post-patches
+
 default-settings
+post-patches
