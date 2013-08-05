@@ -55,7 +55,7 @@ REVERT_FIRST_CHUNK_IN = src/saveload/saveload.cpp
 #
 
 # revision
-VERSION := 0.7
+VERSION := 0.8
 # TODO as file REVISION.txt
 
 #REV := $(shell cd ${TRUNK} && ./findversion.sh | awk '{ sub( /M/,"" , $$1 ); print $$1 }')
@@ -74,7 +74,7 @@ original_patch_name = $(shell echo "$@" | sed 's!_r[0-9]\+.*!.patch!')
 # 3. p++ goto 1
 find_ignorable_prefix = $$(\
 	for f in `awk '/^---(.*)$$/ { print $$2 }' $<`; do \
-	  i=0; f2c="$$f"; \
+	 i=0; f2c="$$f"; \
 	  if [ "x$$f2c" = "x/dev/null" ]; then continue; fi; \
 	  if [ -r "${TRUNK}/$$f2c" ]; then echo $$i; exit 0; fi; \
 	  while [ -n "$$f2c" ]; do \
@@ -105,9 +105,9 @@ $(TRUNK)/Makefile:
 
 pp:
 	$(Q)( make clean trunk-prepare )
-#	watch gui, tracking - toolbar_gui.cpp, is2 conflicts on leasing  export BROWSER=cat; 
-	$(Q)( BROWSER=cat $(MAKE) all; BROWSER=cat $(MAKE) all; BROWSER=cat $(MAKE) all; $(MAKE) all )
-	
+#	is2 conflicts on leasing  export BROWSER=cat; 
+	$(Q)( BROWSER=cat $(MAKE) all; $(MAKE) all )
+
 # 
 # Making auto patch file
 # Do patch from current trunk
@@ -117,7 +117,7 @@ ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 	$(Q)([ x"$*" != x"$(PACKNAME)" ]) && ${revert_savegame_version} || true
 	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space --show-c-function' diff > "$@" )
 
-${PATCHDIR}/%.patch.${TRUNKREV} : trunk-sweep trunk-generate
+${PATCHDIR}/%.patch.${TRUNKREV}: trunk-sweep trunk-generate
 	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
 	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space --show-c-function' diff > "$@" )
 
@@ -332,7 +332,7 @@ descr-start:
 	@echo "[list=1]"
 
 %.descr :
-	@echo -n "	[*]"
+	@echo -n "	[*] "
 	@awk '/^$*[ \t\n]+/ { $$1=""; printf "%s", $$0 }' patches.$(LANG).txt
 	$(Q)( awk '/^$*[ \t\n]+/ { \
 		if ( $$3 != "" ) { \
@@ -366,7 +366,4 @@ descr-start:
 	@( if [ "$*" = "adv-orders" ]; then \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, more-cond-orders stop-sharing  ); \
 	fi )
-		
 
-
-	
