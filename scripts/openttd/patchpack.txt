@@ -18,7 +18,6 @@ clipboard
 leave-orders
 departure-boards departure-boards.rus 
 industry-stationnames rating_town_label townrating-indicator
-grass-on-tracks-stuck-trains
 watch_gui_7 russian-town-names whistle
 tunnel_vehicles group-info group-by-property
 cmd-train-console minimap-screenshot trip-history
@@ -36,6 +35,8 @@ fix-fences
 forecast_display
 station-loaders
 grf_filter
+zoom64
+grass-on-tracks-stuck-trains
 vs-hacks
 
 default-settings

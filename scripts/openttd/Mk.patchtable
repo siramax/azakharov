@@ -6,6 +6,7 @@ yaim                        http://www.tt-forums.net/download/file.php?id=152854
 rating_town_label           http://www.tt-forums.net/download/file.php?id=170957 Terkhen http://www.tt-forums.net/viewtopic.php?f=33&t=42598
 taxes						http://www.tt-forums.net/download/file.php?id=120361 Bigos http://www.tt-forums.net/viewtopic.php?f=33&t=45642
 smallmap_zoom               https://raw.github.com/fonsinchen/openttd-cargodist/patches/smallmap-zoom-in_r22604.diff fonso
+zoom64 https://www.tt-forums.net/download/file.php?id=171724 MJP https://www.tt-forums.net/viewtopic.php?f=33&t=53394
 IB                          http://www.tt-forums.net/download/file.php?id=153672 Bigos http://www.tt-forums.net/download/file.php?id=124966 http://www.tt-forums.net/viewtopic.php?t=39518
 harder-game                 http://www.tt-forums.net/download/file.php?id=120185 Bigos http://www.tt-forums.net/viewtopic.php?t=45642
 departure-boards            http://www.tt-forums.net/download/file.php?id=170473 hthhs http://www.tt-forums.net/viewtopic.php?f=33&t=49956
@@ -55,7 +56,6 @@ trip-history                http://www.tt-forums.net/download/file.php?id=172303
 station-loaders             - Vaulter
 atc                         http://www.tt-forums.net/download/file.php?id=138989 urdh http://www.tt-forums.net/viewtopic.php?f=33&t=52085
 gui-tweaks
-zoom64                      http://www.tt-forums.net/download/file.php?id=162581 MJP http://www.tt-forums.net/viewtopic.php?f=33&t=53394
 station-cover               http://www.tt-forums.net/download/file.php?id=172302 gehene,Vaulter,ST2 http://www.tt-forums.net/viewtopic.php?f=33&t=44835
 improved-loans              http://www.tt-forums.net/download/file.php?id=100785    http://www.tt-forums.net/viewtopic.php?f=33&t=36184
 				$ find . -name \*\.txt | while read f; do cp $f $f.bk && sed '/STR_FINANCES_REPAY_BUTTON/s#{CURRENCY_LONG}#{STRING}#' $f.bk > $f; done

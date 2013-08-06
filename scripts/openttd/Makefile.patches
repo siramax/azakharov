@@ -95,10 +95,16 @@ revert_savegame_version = (\
 			patch --reverse --force $(REVERT_FIRST_CHUNK_IN); \
 	fi; )
 
+make_svn_diff = ( \
+	cd "${TRUNK}" && \
+	svn --diff-cmd diff --extensions '--unified --minimal --speed-large-files --ignore-space-change --ignore-all-space --show-c-function' \
+		diff > "$@" )
+
 # start of easy part
 all : $(PACKNAME).patch.check ${PATCHDIR}/$(PACKNAME).patch.${REV}
+	$(Q)( mv --force ${PATCHDIR}/$(PACKNAME).patch.${REV} ${PATCHDIR}/${VERSION}/$(PACKNAME).${REV}.${TRUNKREV}.patch )
 	@echo "==> $@ DONE"
-	( $(BROWSER) ${PATCHDIR}/$(PACKNAME).patch.${REV} )
+	( $(BROWSER) ${PATCHDIR}/${VERSION}/$(PACKNAME).${REV}.${TRUNKREV}.patch )
 
 $(TRUNK)/Makefile:
 	( cd $(TRUNK); ./configure $(CONFIGURE_PARAMS) > /dev/null )
@@ -115,11 +121,11 @@ pp:
 ${PATCHDIR}/%.patch.${REV} : trunk-sweep trunk-generate
 	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
 	$(Q)([ x"$*" != x"$(PACKNAME)" ]) && ${revert_savegame_version} || true
-	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space --show-c-function' diff > "$@" )
+	$(Q)${make_svn_diff}
 
 ${PATCHDIR}/%.patch.${TRUNKREV}: trunk-sweep trunk-generate
 	$(Q)( cd $(TRUNK) && svn status | $(DOS2UNIXPATH) | grep -v ^\[M\|A\] |grep -v 'nbproject\|Makefile-trunk.mk\|bin/'|  awk '{print $$2}' | xargs svn add || true )
-	$(Q)( cd ${TRUNK} && svn --extensions '--ignore-space-change --ignore-all-space --show-c-function' diff > "$@" )
+	$(Q)${make_svn_diff}
 
 # for quick hack, we do not require %.build.log 
 %.save : ${PATCHDIR}/%.patch.${TRUNKREV} ${PATCHDIR}/%.patch.${REV} #alias
