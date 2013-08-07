@@ -103,6 +103,7 @@ make_svn_diff = ( \
 # start of easy part
 all : $(PACKNAME).patch.check ${PATCHDIR}/$(PACKNAME).patch.${REV}
 	$(Q)( mv --force ${PATCHDIR}/$(PACKNAME).patch.${REV} ${PATCHDIR}/${VERSION}/$(PACKNAME).${REV}.${TRUNKREV}.patch )
+	$(Q)( if arh=`which 7z`; then cd ${PATCHDIR}/${VERSION}/; $$arh a $(PACKNAME).${REV}.${TRUNKREV}.patch.7z $(PACKNAME).${REV}.${TRUNKREV}.patch; fi )
 	@echo "==> $@ DONE"
 	( $(BROWSER) ${PATCHDIR}/${VERSION}/$(PACKNAME).${REV}.${TRUNKREV}.patch )
 
@@ -182,7 +183,7 @@ post-patches:
 	diff -wur -x .dep.inc -x bin -x objs -x .svn -x nbproject -x bundle -x bundles -x *.orig $(TRUNK).patched/ --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ | grep -v -e Только -e Only
 
 clean : 
-	$(Q)( rm *.log || true )
+	$(Q)( rm building *.log || true )
 	$(DONE)
 
 distclean : 
@@ -313,9 +314,8 @@ SRCDIR := $(shell dirname ${TRUNK})
 BUNDLE_DIR =  $(TRUNK)/bundle
 BUNDLES_DIR = $(TRUNK)/bundles
 BUNDLE_NAME = openttd-hardpack-$(REV)
-bundle :
-	@( make $(MFLAGS) -C "$(TRUNK)" bundle )
-	( [ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && \
+BUNDLE_OVERLAP_MACRO = ( \
+	[ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && \
 	  cp -R --force --target-directory="$(TRUNK)/bundle" "$(BUNDLE_OVERLAP)/"* && \
 	  ( if [ -w $(TRUNK)/bundle/openttd.cfg ]; then \
 		sed '/version_string/ s!=.*$$!= HardPack-$(REV)!g' $(TRUNK)/bundle/openttd.cfg > openttd.cfg.tmp; \
@@ -323,11 +323,34 @@ bundle :
 	   fi ) && \
 	  echo '[BUNDLE] Customs copied from "$(BUNDLE_OVERLAP)"' || \
 	true)
+bundle :
+	@( make $(MFLAGS) -C "$(TRUNK)" bundle )
+	$(BUNDLE_OVERLAP_MACRO)
 	@echo '[BUNDLE] Creating $(BUNDLE_NAME).tar.gz'
 	$(Q)mkdir -p "$(BUNDLES_DIR)/.gzip/$(BUNDLE_NAME)"
 	$(Q)cp -R    "$(BUNDLE_DIR)/"* "$(BUNDLES_DIR)/.gzip/$(BUNDLE_NAME)/"
 	$(Q)cd "$(BUNDLES_DIR)/.gzip" && tar -zc$(shell if test -n "$(VERBOSE)"; then echo 'v'; fi)f "$(BUNDLES_DIR)/$(BUNDLE_NAME).tar.gz" "$(BUNDLE_NAME)"
 	$(Q)rm -rf   "$(BUNDLES_DIR)/.gzip"
+	
+bundle-win32:
+	# should be already built to bin/openttd.exe
+	@( make PLATFORM=Win32 $(MFLAGS) -C "$(TRUNK)" -f Makefile.msvc bundle )
+	$(BUNDLE_OVERLAP_MACRO)
+	@echo '[BUNDLE] Creating $(BUNDLE_NAME)-win32.7z'
+	$(Q)mkdir -p "$(BUNDLES_DIR)/.7z/$(BUNDLE_NAME)"
+	$(Q)cp -R    "$(BUNDLE_DIR)/"* "$(BUNDLES_DIR)/.7z/$(BUNDLE_NAME)/"
+	$(Q)cd "$(BUNDLES_DIR)/.7z" && 7z a "$(BUNDLES_DIR)/$(BUNDLE_NAME)-win32.7z" "$(BUNDLE_NAME)"
+	$(Q)rm -rf   "$(BUNDLES_DIR)/.7z"
+
+bundle-x64:
+	# should be already built to bin/openttd.exe
+	@( make PLATFORM=x64 $(MFLAGS) -C "$(TRUNK)" -f Makefile.msvc bundle )
+	$(BUNDLE_OVERLAP_MACRO)
+	@echo '[BUNDLE] Creating $(BUNDLE_NAME)-x64.7z'
+	$(Q)mkdir -p "$(BUNDLES_DIR)/.7z/$(BUNDLE_NAME)"
+	$(Q)cp -R    "$(BUNDLE_DIR)/"* "$(BUNDLES_DIR)/.7z/$(BUNDLE_NAME)/"
+	$(Q)cd "$(BUNDLES_DIR)/.7z" && 7z a "$(BUNDLES_DIR)/$(BUNDLE_NAME)-x64.7z" "$(BUNDLE_NAME)"
+	$(Q)rm -rf   "$(BUNDLES_DIR)/.7z"
 
 #( make $(MAKEFLAGS) -C "$(TRUNK)" bundle_zip )
 
