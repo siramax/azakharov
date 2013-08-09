@@ -15,6 +15,9 @@
 #  make clean trunk-prepare && make PARAM='' all; make PARAM='' all
 
 
+# untranslated strings
+# awk '/^[^# ]/ {print $1}' english.txt | while read str; do grep -c $str russian.txt >/dev/null || echo $str;done
+
 .PHONY : all clean trunk-prepare tp patching-building trunk-sweep trunk-clean trunk-update clean run pp
 
 .NOTPARALLEL :
@@ -299,10 +302,10 @@ endif
 #  here TODO from local saved file by currev-1,currev+1,currev-2,currev+2...
 ${PATCHDIR}/%.patch : 
 	@echo "==> Refreshing $@..." 
-	@( awk '/^$*/ { print $$2 }' ${PATCHMAP} )
+	@( awk '/^$*/ { print $$3 }' ${PATCHMAP} )
 	wget --output-document="$@" \
 		--no-clobber --timeout=$(HTTP_TO) --dns-timeout=$(DNS_TO) --no-check-certificate -- \
-		"$(shell awk '/^$*[ \t\n]+/ { print $$2 }' ${PATCHMAP})"
+		"$(shell awk '/^$*[ \t\n]+/ { print $$3 }' ${PATCHMAP})"
 
 
 SRCDIR := $(shell dirname ${TRUNK})
@@ -357,42 +360,48 @@ bundle-x64:
 descr : descr-start $(addsuffix .descr, $(PATCHES) )
 	@echo "[/list]"
 
+cat-descr: patches.cat.$(LANG).txt
+	@echo "[list]"
+	$(Q)( $(MAKE) -f $(whoami) --no-print-directory \
+		$(addsuffix .cat-descr, $(shell awk '{print $$1}' patches.cat.$(LANG).txt )))
+	@echo "[/list]"
+
+%.cat-descr : patches.cat.$(LANG).txt patchpack.txt
+	@echo -n "	[*] "
+	$(Q)( awk '/^$*[ \t\n]+/ { for(i=2;i<=NF;i++) printf "%s ", $$i }' patches.cat.$(LANG).txt )
+	@echo "		[list=1]"
+	$(Q)( $(MAKE) -f $(whoami) --no-print-directory \
+		$(addsuffix .descr, \
+			$(shell awk '$$2 == "$*" { print $$1 }' $(PATCHMAP) | while read p; do grep -c $$p patchpack.txt >/dev/null && echo $$p; done ) \
+		) \
+	)
+	@echo "		[/list][/*]"
+
 descr-start:
 	@echo "[list=1]"
 
-%.descr :
+%.descr : patches.$(LANG).txt
 	@echo -n "	[*] "
 	@awk '/^$*[ \t\n]+/ { $$1=""; printf "%s", $$0 }' patches.$(LANG).txt
 	$(Q)( awk '/^$*[ \t\n]+/ { \
-		if ( $$3 != "" ) { \
-			if ( $$3 ~ /^http/ ) link = $$3; \
-			else text = $$3; \
-		} \
 		if ( $$4 != "" ) { \
 			if ( $$4 ~ /^http/ ) link = $$4; \
 			else text = $$4; \
+		} \
+		if ( $$5 != "" ) { \
+			if ( $$5 ~ /^http/ ) link = $$5; \
+			else text = $$5; \
 		} \
 		if ( link != "" ) \
 			printf " ([url=%s]%s [i]%s[/i][/url])", link, $$1, text; \
 		else \
 			printf " (%s [i]%s[/i])", $$1, text; \
 	}' ${PATCHMAP} )
-	@echo
+	@echo "[/*]"
 
 	@( if [ "$*" = "grass-on-tracks-stuck-trains" ]; then \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, grass-on-tracks stuck_trains ); \
 	fi )
-	@( if [ "$*" = "openttd-cargodist-sprinkles" ]; then \
-		echo "		[list=1]"; \
-		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, cargo_dist variable-daylength Daily-autosave Vehicle-name-length ); \
-		echo "		[/list]"; \
-	fi )
-	@( if [ "$*" = "harder-game" ]; then \
-		echo "		[list=1]"; \
-		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, towncost building-costs additional-taxes vehicle-repair-cost); \
-		echo "		[/list]"; \
-	fi )
 	@( if [ "$*" = "adv-orders" ]; then \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, more-cond-orders stop-sharing  ); \
 	fi )
-
