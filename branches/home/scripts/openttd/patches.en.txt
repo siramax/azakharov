@@ -49,6 +49,7 @@ station-loaders 		[b]Station loaders[/b] more distance from industry to station 
 stop-sharing            This patch use the 'Delete' button, refitted to 'Stop Sharing' when 'End Of Shared Orders' is selected
 stuck_trains            [b]Stucked trains[/b] on minimap
 ats    					[b][/b]
+taxes					[b]taxes[/b] When enabled, all companies will pay additional taxes. [list][*] at start ~2 year free from tax[*] ~10% of company value per year after your company reach 250 000 pounds[*] ~20% of company value per year after your company reach 1 500 000 pounds[*] cash from tax is assign for creation of new industries[/list]
 town-cargo-factor       [b]Adjust town passenger/cargo rates[/b] Advice to set it -2 :)
 towncost                [b]Higher prices for construction near major cities[/b]
 town-growth             More town growth and cargo generation tweaks
