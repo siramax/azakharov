@@ -319,7 +319,7 @@ BUNDLES_DIR = $(TRUNK)/bundles
 BUNDLE_NAME = openttd-hardpack-$(REV)
 BUNDLE_OVERLAP_MACRO = ( \
 	[ -n "$(BUNDLE_OVERLAP)" -a -d "$(BUNDLE_OVERLAP)" ] && \
-	  cp -R --force --target-directory="$(TRUNK)/bundle" "$(BUNDLE_OVERLAP)/"* && \
+		svn --force export $(BUNDLE_OVERLAP)/ $(TRUNK)/bundle && \
 	  ( if [ -w $(TRUNK)/bundle/openttd.cfg ]; then \
 		sed '/version_string/ s!=.*$$!= HardPack-$(REV)!g' $(TRUNK)/bundle/openttd.cfg > openttd.cfg.tmp; \
 		mv openttd.cfg.tmp $(TRUNK)/bundle/openttd.cfg; \

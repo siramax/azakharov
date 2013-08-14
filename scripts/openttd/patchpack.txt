@@ -38,6 +38,8 @@ grf_filter
 zoom64 zoom64.ru
 zoom64_anim_aa_blitter
 grass-on-tracks-stuck-trains
+auto_adv_camp
+vs.ru
 vs-hacks
 
 default-settings
