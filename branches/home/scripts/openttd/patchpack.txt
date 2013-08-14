@@ -3,7 +3,7 @@ towncost
 repaircosts
 taxes
 town-cargo-factor
-extra-large-maps
+extra-large-maps extra-large-maps.ru
 daylen
 improved-loans
 leasing
@@ -12,7 +12,7 @@ ats
 atc
 signaltunnel
 build-and-refit
-more-cond-orders
+more-cond-orders more-cond-orders.ru
 airport-upgrade
 clipboard
 leave-orders
@@ -26,7 +26,7 @@ daily-autosave daily-scripts
 measurement
 gui-tweaks
 tracking-viewport
-polyline_track_tool
+polyline_track_tool polyline_track_tool.ru
 trafficlights trafficlights.rus
 station-cover station-cover.ru
 32bpp_anim_aa-blitter
