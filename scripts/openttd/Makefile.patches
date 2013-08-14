@@ -185,6 +185,9 @@ post-patches-prepare:
 post-patches:
 	diff -wur -x .dep.inc -x bin -x objs -x .svn -x nbproject -x bundle -x bundles -x *.orig $(TRUNK).patched/ --exclude-from=$(TRUNK)/.hgignore $(TRUNK)/ | grep -v -e Только -e Only
 
+todo:
+	 $(Q)( awk '/^[^# ]/ {print $$1}' $(TRUNK)/src/lang/english.txt | while read str; do grep -c $$str $(TRUNK)/src/lang/russian.txt >/dev/null || echo $$str;done )
+
 clean : 
 	$(Q)( rm building *.log || true )
 	$(DONE)
