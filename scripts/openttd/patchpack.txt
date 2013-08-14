@@ -26,7 +26,7 @@ daily-autosave daily-scripts
 measurement
 gui-tweaks
 tracking-viewport
-polyline_track_tool polyline_track_tool.ru
+
 trafficlights trafficlights.rus
 station-cover station-cover.ru
 32bpp_anim_aa-blitter
