@@ -408,3 +408,9 @@ descr-start:
 	@( if [ "$*" = "adv-orders" ]; then \
 		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, more-cond-orders stop-sharing  ); \
 	fi )
+	@( if [ "$*" = "leasing-with-build-and-refit" ]; then \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, leasing build-and-refit  ); \
+	fi )
+	@( if [ "$*" = "clipboard_polyline" ]; then \
+		$(MAKE) -f $(whoami) --no-print-directory $(addsuffix .descr, clipboard polyline_track_tool ); \
+	fi )
