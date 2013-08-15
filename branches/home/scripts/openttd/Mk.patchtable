@@ -66,7 +66,8 @@ auto_adv_camp				gp http://forums.ttdrussia.net/download/file.php?id=8211 pi1985
 ############    
 # Experimental
 
-
+tip                         ui http://www.tt-forums.net/download/file.php?id=167724 ic111 http://www.tt-forums.net/viewtopic.php?f=33&t=63721
+corner-speed                gp http://www.tt-forums.net/download/file.php?id=172348 bcmpinc http://www.tt-forums.net/viewtopic.php?f=33&t=66938
 pathfinder-penalty-rv       http://www.tt-forums.net/download/file.php?id=121071 http://www.tt-forums.net/viewtopic.php?f=33&t=45040
 tunnel_vehicles           http://dev.openttdcoop.org/projects/clientpatches/repository/raw/VehicelsInTunnels.diff
 max-grfs                    http://www.tt-forums.net/download/file.php?id=132938 http://www.tt-forums.net/viewtopic.php?f=31&t=37435
