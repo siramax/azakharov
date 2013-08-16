@@ -52,6 +52,7 @@ FAILREPORT = ( ($(BROWSER) $< $@ &) && (find $(TRUNK) -name *.rej | xargs $(BROW
 Q ?= @
 TRUNKTARGETREV ?= -rHEAD
 REVERT_FIRST_CHUNK_IN = src/saveload/saveload.cpp
+TRUNK_EXPORT ?= ""
 
 #
 # Utils
@@ -177,6 +178,9 @@ trunk-update :
 # generate project files
 trunk-generate:
 	$(Q)( cd $(TRUNK) && if [ -x projects/generate ]; then projects/generate; else /bin/bash projects/generate; fi )
+
+trunk-export:
+	$(Q)( cd $(TRUNK) && for e in $(TRUNK_EXPORT); do svn --force export . $$e; done )
 
 post-patches-prepare:
 	mkdir -p $(TRUNK).patched
@@ -375,7 +379,7 @@ cat-descr: patches.cat.$(LANG).txt
 	@echo "		[list=1]"
 	$(Q)( $(MAKE) -f $(whoami) --no-print-directory \
 		$(addsuffix .descr, \
-			$(shell awk '$$2 == "$*" { print $$1 }' $(PATCHMAP) | while read p; do grep -c $$p patchpack.txt >/dev/null && echo $$p; done ) \
+			$(shell awk '$$2 == "$*" { print $$1 }' $(PATCHMAP) | while read p; do grep -w -c $$p patchpack.txt >/dev/null && echo $$p; done ) \
 		) \
 	)
 	@echo "		[/list][/*]"
