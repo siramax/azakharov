@@ -3,12 +3,13 @@ additional-taxes        Bigos [b]Additional Tax Patch v0.2[/b] [list][*]at start
 airport-upgrade         [b]Airport upgrade[/b]
 ats 					[b]Automatic timetables and separation[/b]
 atc						[b]Automatic train control[/b] - trains trapped behind a slower train (up to one signal block or 20 tiles away) will automatically slow down to match the speed of the slower train.
+auto_adv_camp           [b]Auto advertising campaign[/b] ctrl+click on type of adv camp in town authority window
 build-and-refit         [b]Auto refit when build[/b]
 building-costs          Bigos [b]Improved Building Costs Patch[/b] Here is small patch which allow you to change cost of few things in game. For now you can multiply price of tunnels, bridges, terraforming (without building on slopes), signals and airports.
 cargo_dist              [b]Passenger and cargo distribution.[/b]
 cd                      [b]Cargo Distribution[/b] - Now passengers and cargo have destinations
 clipboard               [b]Copy / Paste infrastructure[/b] - press Ctrl + C / Ctrl + V to copy / paste, and Ctrl + (Left | Right | Up | Down) for rotations / reflections.
-cmd-train-console       For new commands refer to  [url=http://wiki.openttd.org/Vehicle_console_commands]here[/url], [url=http://wiki.openttd.org/Town_console_commands]there[/url] and [url=http://wiki.openttd.org/index.php/Industry_console_commands]here[/url]
+cmd-train-console       [b]More console commands[/b] For new commands refer to  [url=http://wiki.openttd.org/Vehicle_console_commands]here[/url], [url=http://wiki.openttd.org/Town_console_commands]there[/url] and [url=http://wiki.openttd.org/index.php/Industry_console_commands]here[/url]
 Daily-autosave          [b]Daily autosave[/b] provides "daily" and "weekly" autosave options in addition to the previous monthly ones.
 daily-autosave          Support daily autosave
 daily-scripts           [b]Invoke daily, monthly and yearly scripts[/b] - you can write your scripts for daily, monthly and yearly invokation: [list][*]scripts/on_newday.scr[*]scripts/on_newmonth.scr[*]scripts/on_newyear.scr[/list]
@@ -20,6 +21,7 @@ ez                      [b]Extra Zoom for 32bpp[/b] better look
 fastest-bridge          This patch allows to hold Ctrl while dragging a bridge, which instantly builds the fastest available bridge, without showing the bridge selection window.
 fix-fences				[b]Fancy fences[/b]
 grass-on-tracks			[b]Grass on unused tracks[/b]
+grf_filter              [b]Filter NewGRF[/b] files in build vehicle window
 group-by-property       [b]Group by properties[/b] This patch adds a drop down to the "create new group" button in the vehicle window. See the screenshot below. Using one of the entries allows you to create Vehicle Groups based on common properties of vehicles.
 group-info              [b]Group info[/b] When selecting a group, it will show for the group the same stats as for the vehicules, but for the whole group :[list][*]Profit this year : sum of all profits of all vehicules in the group for this year [*]Profit last year : sum of all profits of all vehicules in the group for last year [*]Profit button : work like the vehicule profit button, but for the all group[/list]
 gui-tweaks				[b]GUI tweaks[/b] Added ALT key modificator for creating new orders - such it will be "unload all and no load"
