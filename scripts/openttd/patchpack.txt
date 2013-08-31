@@ -10,7 +10,7 @@ leasing-with-build-and-refit
 progwaypoints
 ats
 atc
-signaltunnel
+signaltunnel signaltunnel.ru
 more-cond-orders more-cond-orders.ru
 airport-upgrade
 clipboard_polyline polyline_track_tool.ru clipboard.ru
