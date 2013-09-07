@@ -180,7 +180,7 @@ trunk-generate:
 	$(Q)( cd $(TRUNK) && if [ -x projects/generate ]; then projects/generate; else /bin/bash projects/generate; fi )
 
 trunk-export:
-	$(Q)( cd $(TRUNK) && for e in $(TRUNK_EXPORT); do svn --force export . $$e; done )
+	$(Q)( cd $(TRUNK) && for e in $(TRUNK_EXPORT); do svn --ignore-keywords --force export . $$e; done )
 
 post-patches-prepare:
 	mkdir -p $(TRUNK).patched
