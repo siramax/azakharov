@@ -1,4 +1,4 @@
-IB
+ IB
 towncost
 repaircosts
 taxes
@@ -38,6 +38,7 @@ zoom64 zoom64.ru
 zoom64_anim_aa_blitter
 grass-on-tracks-stuck-trains
 auto_adv_camp
+min_town_distance
 vs.ru
 vs-hacks
 

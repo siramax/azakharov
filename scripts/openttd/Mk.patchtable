@@ -63,9 +63,10 @@ tracking-viewport		ui http://www.tt-forums.net/download/file.php?id=147387 jawsp
 32bpp_anim_aa-blitter		ui http://www.tt-forums.net/download/file.php?id=162709 LeXa2 http://www.tt-forums.net/viewtopic.php?t=62029
 repaircosts                 hd - Bilbo,pi1985,Vaulter http://www.tt-forums.net/viewtopic.php?f=33&t=45642
 auto_adv_camp				gp http://forums.ttdrussia.net/download/file.php?id=8211 pi1985 http://forums.ttdrussia.net/viewtopic.php?p=46120#p46120
+min_town_distance			gp http://www.tt-forums.net/download/file.php?id=173743 wleader http://www.tt-forums.net/viewtopic.php?f=33&t=33625
 ############    
 # Experimental
-
+newgrf_limit				ui http://www.tt-forums.net/download/file.php?id=132938 Muzzly http://www.tt-forums.net/viewtopic.php?f=31&t=37435&start=0#p894743
 tip                         ui http://www.tt-forums.net/download/file.php?id=167724 ic111 http://www.tt-forums.net/viewtopic.php?f=33&t=63721
 corner-speed                gp http://www.tt-forums.net/download/file.php?id=172348 bcmpinc http://www.tt-forums.net/viewtopic.php?f=33&t=66938
 pathfinder-penalty-rv       http://www.tt-forums.net/download/file.php?id=121071 http://www.tt-forums.net/viewtopic.php?f=33&t=45040
