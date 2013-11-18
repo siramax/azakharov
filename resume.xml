@@ -69,7 +69,7 @@ opportunity for advancement.
 	          <Description>Large holding, developing software to automate the management of the company, tax accounting and reporting.</Description>
 	        </Employer><!-- ; internal company portal; web-based reporting application. -->
 	        <Description>
-				Porting back-end part of software to Linux. Improving support of internationalization.
+				Porting large scale application back-end to Linux. Developing international support in back-end. Testing and supporting back-end application.
 			</Description>
 	   
 	        <Techs>C++, Boost, MSVC, GCC, Python.</Techs>
