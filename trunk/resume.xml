@@ -61,7 +61,22 @@ opportunity for advancement.
   <Experience>
     <Vocational>
 		<Entry Job = 'Lead Software Engineer'>
-        <Period From = "Mar 2012" To = "now" />
+	        <Period From = "Sep 2013" To = "Now" />
+	        <Job>Lead Software Engineer</Job>
+	        <Employer>
+	          <Name>Tensor</Name>
+	          <City>Saint Petersburg</City>
+	          <Description>Large holding, developing software to automate the management of the company, tax accounting and reporting.</Description>
+	        </Employer><!-- ; internal company portal; web-based reporting application. -->
+	        <Description>
+				Porting back-end part of software to Linux. Improving support of internationalization.
+			</Description>
+	   
+	        <Techs>C++, Boost, MSVC, GCC, Python.</Techs>
+      	</Entry>
+
+		<Entry Job = 'Lead Software Engineer'>
+        <Period From = "Mar 2012" To = "May 2013" />
         <Job>Lead Software Engineer</Job>
         <Employer>
           <Name>Embria</Name>
