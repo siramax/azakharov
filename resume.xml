@@ -3,7 +3,7 @@
 <Document 
   xmlns:xlink="http://www.w3.org/1999/xlink" >
   <Meta>
-    <Title lang = "en"></Title>
+    <Title lang = "en">Andrey Zakharov</Title>
     <Personal lang = "en">
       <FirstName>Andrey</FirstName>
       <FamilyName>Zakharov</FamilyName>
@@ -34,11 +34,11 @@ opportunity for advancement.
   <Strengths>
     <Entry>Professional Internet based software development experience using various Internet technologies.</Entry>
     <Entry>Expert in working with various operating systems.</Entry>
-	<Entry>Familiar with modern high-load solutions.</Entry>
-	<Entry>Exceptional Technical Skill.</Entry>
-	<Entry>Highly skilled in customer service.</Entry>
-	<Entry>Good deliver output in less time without losing efficiency.</Entry>
-	<Entry>Efficient Communication Skill.</Entry>
+    <Entry>Familiar with modern high-load solutions.</Entry>
+    <Entry>Exceptional Technical Skill.</Entry>
+    <Entry>Highly skilled in customer service.</Entry>
+    <Entry>Good deliver output in less time without losing efficiency.</Entry>
+    <Entry>Efficient Communication Skill.</Entry>
   </Strengths>
   
   <Education>
@@ -330,7 +330,7 @@ opportunity for advancement.
       <Entry type = 'Scripting'>BASH, Perl, Lua, Python, Groovy, sed, awk, \LaTeXe</Entry>
       <Entry type = 'Exotic'>Architecture and assembler MOStech 6502 (Apple II, etc.)</Entry>
     </Group>
-    <!-- <Group type = 'Practical'>
+    <Group type = 'Practical'>
       <Entry>Development system software for *NIX systems</Entry>
       <Entry>Development sites <small>(News portals, Internet shops, corporate portals)</small></Entry>
       <Entry>Administration *NIX systems (Apache, Mysql, security, SSH)</Entry>
@@ -346,7 +346,7 @@ opportunity for advancement.
       <Entry>Optimization of SQL queries</Entry>
       <Entry>The introduction of applications and automated systems</Entry>
       <Entry>Administration *NIX systems, optimization</Entry>
-    </Group> -->
+    </Group>
 
   </Skills>
   
@@ -390,7 +390,7 @@ opportunity for advancement.
   </Bibliography>
   
   <Links>
-    <Portfolio>
+    <!--Portfolio>
             <Entry type = ""
                 xlink:title = "See it in porfolio" 
                 xlink:role = "locator" 
@@ -398,7 +398,7 @@ opportunity for advancement.
                 xlink:actuate = "onRequest" 
                 xlink:show = "new" >http://vaultsoft.ru/portfolio</Entry>
 
-		</Portfolio>
+		</Portfolio-->
 		<Profiles>
 			<Entry type = "LinkedIn"
                 xlink:title = "LinkedIn profile" 

@@ -17,29 +17,31 @@
   
   <xsl:template match = "/">
 <html>
-  <head> <xsl:apply-templates select = '/Document/Meta/Title' /> 
-  <style type = 'text/css'>
-    body, table { font-family: times; font-size: 10pt }
-    td { vertical-align: top }
-    #personal { overflow: hidden }
-    .address, .phone, .mobile, .email, .skype { float: right; margin-right:100pt; clear: right; }
-    .picture { float: right;   clear: right; margin-bottom: -55pt; border: 1px solid; padding: 2px; }
-    .firstname { font-size: 120% }
-    .familyname { font-size: 150% }
-    h1 { font-size: 140%; padding-left: 5em; border-bottom: 1px solid }
-    h2 { font-size: 120%; padding-left: 8em; }
-    table.subsection td { padding-top: 0.5em; }
-    table.subsection td.period,
-    table.subsection td.type,
-    table.languages td.name { padding-right: 2em; }
-    table.subsection td.period { white-space: nowrap }
-    table.subsection span.techs { font-style: italic; }
-    table strong { font-size: 115%; }
-    <!-- theme -->
-    .picture { border-color: lime }
-    h1 { color: lime; border-color: lime  }
-    h2 { color: lime; }
-  </style>
+  <head> 
+    <xsl:apply-templates select = '/Document/Meta/Title' />
+    <link href='http://fonts.googleapis.com/css?family=Judson' rel='stylesheet' type='text/css' />
+    <style type = 'text/css'>
+      body, table { font-family: "Judson", "Times", serif; font-size: 12pt; color: #333; }
+      td { vertical-align: top }
+      #personal { overflow: hidden }
+      .address, .phone, .mobile, .email, .skype { float: right; margin-right:100pt; clear: right; }
+      .picture { float: right;   clear: right; margin-bottom: -55pt; border: 1px solid; padding: 2px; }
+      .firstname { font-size: 120% }
+      .familyname { font-size: 150% }
+      h1 { font-size: 140%; padding-left: 5em; border-bottom: 1px dotted }
+      h2 { font-size: 120%; padding-left: 8em; }
+      table.subsection td { padding-top: 0.5em; }
+      table.subsection td.period,
+      table.subsection td.type,
+      table.languages td.name { padding-right: 2em; }
+      table.subsection td.period { white-space: nowrap }
+      table.subsection span.techs { font-style: italic; }
+      table strong { font-size: 115%; }
+      <!-- theme -->
+      .picture { border-color: lime }
+      h1 { color: #040; border-color: #093; /*text-shadow: 2px 2px 12px #444;*/ }
+      h2 { color: #040; }
+    </style>
   </head>
   <body>
   	<xsl:apply-templates select = '/Document/Meta' />
@@ -140,19 +142,36 @@
     </xsl:choose>
     <td class='entry'><xsl:value-of select = '.' /></td></tr></xsl:template>
     
-    <xsl:template match = '/Document/Bibliography'><h1>Publications</h1>
+  <xsl:template match = '/Document/Bibliography'><h1>Publications</h1>
       <table cellpadding = "1" cellspacing = "0" border = "0">
         <xsl:apply-templates />
-      </table></xsl:template>
+  </table></xsl:template>
 
-    <xsl:template match = '/Document/Bibliography/Entry'>
-      <tr>
-        <td><xsl:value-of select = '@Author' />, </td>
-        <td>
-          <a><xsl:attribute name = "href"><xsl:value-of select = '@Url' /></xsl:attribute><xsl:value-of select = '@Title' /></a>, 
-        </td>
-        <td><xsl:value-of select = '@Year' /></td>
-      </tr>
-    </xsl:template>
+  <xsl:template match = '/Document/Bibliography/Entry'>
+    <tr>
+      <td><xsl:value-of select = '@Author' />, </td>
+      <td>
+        <a><xsl:attribute name = "href"><xsl:value-of select = '@Url' /></xsl:attribute><xsl:value-of select = '@Title' /></a>, 
+      </td>
+      <td><xsl:value-of select = '@Year' /></td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match = '/Document/Links/Profiles'><ul class = "ProfileLinks"><xsl:apply-templates /></ul></xsl:template>
+  <xsl:template match = '/Document/Links/Profiles/Entry'>
+    <li>
+      <a>
+        <xsl:attribute name = "href">
+          <xsl:value-of select = '@xlink:href' />
+        </xsl:attribute>
+        <strong><xsl:value-of select = '@type' /></strong>
+        [
+          <xsl:value-of select="@xlink:href" />
+        ]
+      </a>
+    </li>
+  </xsl:template>
+
+
   
 </xsl:stylesheet>
