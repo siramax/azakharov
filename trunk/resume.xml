@@ -32,9 +32,9 @@ opportunity for advancement.
   </Objective>
   
   <Strengths>
-    <Entry>Professional Internet based software development experience using various Internet technologies.</Entry>
-    <Entry>Expert in working with various operating systems.</Entry>
     <Entry>Familiar with modern high-load solutions.</Entry>
+    <Entry>Expert in working with various operating systems.</Entry>
+    <Entry>Professional Internet based software development experience using various Internet technologies.</Entry>
     <Entry>Exceptional Technical Skill.</Entry>
     <Entry>Highly skilled in customer service.</Entry>
     <Entry>Good deliver output in less time without losing efficiency.</Entry>
@@ -60,20 +60,38 @@ opportunity for advancement.
   
   <Experience>
     <Vocational>
-		<Entry Job = 'Lead Software Engineer'>
-	        <Period From = "Sep 2013" To = "Now" />
-	        <Job>Lead Software Engineer</Job>
-	        <Employer>
-	          <Name>Tensor</Name>
-	          <City>Saint Petersburg</City>
-	          <Description>Large holding, developing software to automate the management of the company, tax accounting and reporting.</Description>
-	        </Employer><!-- ; internal company portal; web-based reporting application. -->
-	        <Description>
-				Porting large scale application back-end to Linux. Developing international support in back-end. Testing and supporting back-end application.
-			</Description>
-	   
-	        <Techs>C++, Boost, MSVC, GCC, Python.</Techs>
-      	</Entry>
+        
+        <Entry Job = 'Senior Software Engineer'>
+            <Period From = "Jan 2014" To = "Now" />
+            <Job>Senior Software Engineer</Job>
+            <Employer>
+                <Name>Oracle</Name>
+                <City>Saint Petersburg</City>
+                <Description>
+                    Oracle Corporation is a U.S. based multinational computer technology corporation headquartered in Redwood City, California, United States. 
+                    The company specializes in developing and marketing computer hardware systems and enterprise software products – 
+                    particularly its own brands of database management systems. Oracle is the second-largest software maker by revenue, after Microsoft.
+                </Description>
+            </Employer>
+            <Description>
+                Testing JVM Hotspot. Developing new tests for new features, fixing testbase.
+            </Description>
+            <Techs>Java, C++, various internals tools</Techs>
+        </Entry>
+        
+        <Entry Job = 'Lead Software Engineer'>
+            <Period From = "Sep 2013" To = "Dec 2013" />
+            <Job>Lead Software Engineer</Job>
+            <Employer>
+                <Name>Tensor</Name>
+                <City>Saint Petersburg</City>
+                <Description>Large holding, developing software to automate the management of the company, tax accounting and reporting.</Description>
+            </Employer>
+            <Description>
+                Porting large scale application back-end to Linux. Developing international support in back-end. Testing and supporting back-end application.
+            </Description>
+            <Techs>C++, Boost, MSVC, GCC, Python.</Techs>
+        </Entry>
 
 		<Entry Job = 'Lead Software Engineer'>
         <Period From = "Mar 2012" To = "May 2013" />
@@ -398,28 +416,28 @@ opportunity for advancement.
                 xlink:actuate = "onRequest" 
                 xlink:show = "new" >http://vaultsoft.ru/portfolio</Entry>
 
-		</Portfolio-->
-		<Profiles>
-			<Entry type = "LinkedIn"
-                xlink:title = "LinkedIn profile" 
-                xlink:role = "locator" 
-                xlink:href ="http://www.linkedin.com/pub/andrey-zakharov/21/99a/56a" 
-                xlink:actuate = "onRequest" 
-                xlink:show = "new" >http://www.linkedin.com/pub/andrey-zakharov/21/99a/56a</Entry>
-			<Entry type = "Brainbench"
-                xlink:title = "Brainbench Public Transcript" 
-                xlink:role = "locator" 
-                xlink:href ="http://www.brainbench.com/transcript.jsp?pid=8883643" 
-                xlink:actuate = "onRequest" 
-                xlink:show = "new" >http://www.brainbench.com/transcript.jsp?pid=8883643</Entry>
-			<Entry type = "Drupal.org"
-                xlink:title = "" 
-                xlink:role = "locator" 
-                xlink:href ="http://drupal.org/user/222552" 
-                xlink:actuate = "onRequest" 
-                xlink:show = "new" >http://drupal.org/user/222552</Entry>
-		</Profiles>
-	</Links>
+        </Portfolio-->
+        <Profiles>
+            <Entry type = "LinkedIn"
+                   xlink:title = "LinkedIn profile" 
+                   xlink:role = "locator" 
+                   xlink:href ="http://www.linkedin.com/pub/andrey-zakharov/21/99a/56a" 
+                   xlink:actuate = "onRequest" 
+                   xlink:show = "new" >http://www.linkedin.com/pub/andrey-zakharov/21/99a/56a</Entry>
+            <Entry type = "Brainbench"
+                   xlink:title = "Brainbench Public Transcript" 
+                   xlink:role = "locator" 
+                   xlink:href ="http://www.brainbench.com/transcript.jsp?pid=8883643" 
+                   xlink:actuate = "onRequest" 
+                   xlink:show = "new" >http://www.brainbench.com/transcript.jsp?pid=8883643</Entry>
+            <Entry type = "Drupal.org"
+                   xlink:title = "" 
+                   xlink:role = "locator" 
+                   xlink:href ="http://drupal.org/user/222552" 
+                   xlink:actuate = "onRequest" 
+                   xlink:show = "new" >http://drupal.org/user/222552</Entry>
+        </Profiles>
+    </Links>
 </Document>
 
 
