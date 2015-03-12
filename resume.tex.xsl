@@ -19,6 +19,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[russian]{babel}
 \definecolor{addresscolor}{rgb}{0.35,0.35,0.35}
+%\usepackage{lmodern}
 
 \usepackage[scale=0.9]{geometry}
 \usepackage{url}
@@ -35,7 +36,7 @@
   
   <xsl:template match = '/Document/Meta'><xsl:apply-templates select = "*[@lang=$lang]" /></xsl:template>
   <xsl:template match = '/Document/Meta/Personal'><xsl:apply-templates /></xsl:template>
-  <xsl:template match = '//Meta/Title'>\title{\today <xsl:value-of select = '.' />}</xsl:template>
+  <xsl:template match = '//Meta/Title'>\title{\today}</xsl:template>
   <xsl:template match = '//Personal/FirstName'>\firstname{<xsl:value-of select = '.' />}</xsl:template>
   <xsl:template match = '//Personal/FamilyName'>\familyname{<xsl:value-of select = '.' />}</xsl:template>
   <xsl:template match = '//Personal/Address'>\address{\color{black}<xsl:value-of select = '.' />\color{addresscolor}}{}</xsl:template>
@@ -79,7 +80,7 @@
   <!-- <xsl:template match = '/Document/Languages'>
     \pagebreak\section{<xsl:value-of select = 'name()' />}<xsl:apply-templates /></xsl:template> -->
   <xsl:template match = '//Language'>\cvlanguage{<xsl:value-of select = '@name' />}%
-    {<xsl:value-of select = '@skill' />}{<xsl:value-of select = '.' />}</xsl:template>
+    {<xsl:value-of select = '@skill' />}{<xsl:value-of select = '.' />\hfill}</xsl:template>
     
   <xsl:template match = '/Document/Skills'>\section{Skills}<xsl:apply-templates /></xsl:template>
   <xsl:template match = '/Document/Skills/Group'>\subsection{<xsl:value-of select = '@type' />}<xsl:apply-templates /></xsl:template>

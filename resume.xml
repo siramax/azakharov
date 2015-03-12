@@ -11,7 +11,7 @@
       <Address>Russia, Saint Petersburg</Address>
       <Phone type='cell'>+7(965)072 45 87</Phone>
       <Email>aazaharov81@gmail.com</Email>
-      <Extra type='skype'>andrey-zaharov</Extra>
+      <Extra type='skype'>vaulter2010</Extra>
     </Personal>
 
     <Personal lang = "ru">
@@ -21,7 +21,7 @@
       <Address>Россия, г.Санкт-Петербург</Address>
       <Phone type='cell'>+7(965)072 45 87</Phone>
       <Email>aazaharov81@gmail.com</Email>
-      <Extra type='skype'>andrey-zaharov</Extra>
+      <Extra type='skype'>vaulter2010</Extra>
     </Personal>
   </Meta>
   
@@ -74,8 +74,13 @@ opportunity for advancement.
                 </Description>
             </Employer>
             <Description>
-                Testing JVM Hotspot. Developing new tests for new features, fixing testbase.
-            </Description>
+	      As a member of the software engineering division (VM team, GC specialization), I assist in defining and developing software for tasks associated with the developing, debugging or designing of software applications or operating systems. Provide technical leadership to other software developers. Specify, design and implement modest changes to existing software architecture to meet changing needs.
+	    </Description>  
+
+	    <Achievement lang = "en">analyze test results, automate processes and write code to test code for JVM.</Achievement>
+	    <Achievement lang = "en">writing robust, reliable, repeatable and maintainable tests that find issues early and cover the area of the component under testing JVM.</Achievement>
+	    <Achievement lang = "en">build frameworks and tools used for testing JVM. </Achievement>
+            
             <Techs>Java, C++, various internals tools</Techs>
         </Entry>
         
@@ -323,7 +328,7 @@ opportunity for advancement.
   
   <Languages>
     <Language name = 'Russian' skill = 'Mother tongue' />
-    <Language name = 'English' skill = 'Working'>Technical --- fine</Language>
+    <Language name = 'English' skill = 'Spoken and written'>Technical --- fine</Language>
   </Languages>
   
   <Skills>
